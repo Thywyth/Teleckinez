@@ -128,3 +128,15 @@ def test_load_devices_from_file(tmp_path: Path) -> None:
 def test_normalize_name() -> None:
     assert normalize_name("  П’ять   Хвилин ") == "п'ять хвилин"
     assert normalize_name("Дев`ять") == "дев'ять"
+
+
+def test_repo_devices_yaml() -> None:
+    cfg = load_devices(CONFIG_DIR / "devices.yaml")
+    assert len(cfg.rooms) == 8
+    assert 25 <= len(cfg.devices) <= 32
+    assert {d.room for d in cfg.devices} == set(cfg.rooms)  # no empty rooms
+    for room_id, room in cfg.rooms.items():
+        assert room.uk and room.en and room.loc.uk and room.loc.en, room_id
+    for dev in cfg.devices:
+        assert dev.names.uk and dev.names.en, dev.id
+        assert dev.title.uk and dev.title.en, dev.id

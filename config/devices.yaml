@@ -1,0 +1,242 @@
+# Teleckinez: simulated smart home (docs/specs/devices.md).
+# 8 rooms, 30 devices. Names are synonyms the user can say (uk/en, with case
+# forms); matching is case-insensitive and tolerant to small STT errors.
+# Optional per device: title (for responses), plural (grammar), critical,
+# heartbeat_s, sim (simulator-only: initial state, speed).
+
+language_default: uk
+
+rooms:
+  living_room:
+    uk: [вітальня, вітальні, вітальню, вітальнею, зал, залі, залу]
+    en: [living room, lounge]
+    loc: {uk: у вітальні, en: in the living room}
+  bedroom:
+    uk: [спальня, спальні, спальню, спальнею]
+    en: [bedroom]
+    loc: {uk: у спальні, en: in the bedroom}
+  kitchen:
+    uk: [кухня, кухні, кухню, кухнею]
+    en: [kitchen]
+    loc: {uk: на кухні, en: in the kitchen}
+  bathroom:
+    uk: [ванна, ванній, ванну, ванна кімната, ванній кімнаті, санвузол, санвузлі]
+    en: [bathroom]
+    loc: {uk: у ванній, en: in the bathroom}
+  hallway:
+    uk: [коридор, коридорі, передпокій, передпокої]
+    en: [hallway, corridor, hall]
+    loc: {uk: у коридорі, en: in the hallway}
+  kids_room:
+    uk: [дитяча, дитячій, дитячу, дитяча кімната, дитячій кімнаті]
+    en: [kids room, kid's room, children's room, nursery]
+    loc: {uk: у дитячій, en: in the kids room}
+  garage:
+    uk: [гараж, гаражі, гаражу]
+    en: [garage]
+    loc: {uk: у гаражі, en: in the garage}
+  yard:
+    uk: [подвір'я, подвір'ї, двір, дворі, надворі, вулиця, вулиці]
+    en: [yard, outside, outdoors, garden]
+    loc: {uk: на подвір'ї, en: in the yard}
+
+groups:
+  all_lights:
+    uk: [все світло, усе світло, всі світильники, усі світильники, всі лампи, усі лампи]
+    en: [all lights, all the lights, every light]
+  all_curtains:
+    uk: [всі штори, усі штори]
+    en: [all curtains, all the curtains, all blinds]
+
+devices:
+  # ---------------------------------------------------------------- living room
+  - id: light.living_main
+    type: light
+    room: living_room
+    names: {uk: [світло, люстра, люстру], en: [light, lights, chandelier]}
+    title: {uk: Світло у вітальні, en: Living room light}
+    groups: [all_lights]
+  - id: light.living_floor
+    type: rgb_light
+    room: living_room
+    names: {uk: [торшер, підсвітка, підсвітку, кольорове світло], en: [floor lamp, accent light]}
+    title: {uk: Торшер у вітальні, en: Living room floor lamp}
+    groups: [all_lights]
+  - id: curtains.living_room
+    type: curtains
+    room: living_room
+    names: {uk: [штори, штору, фіранки, жалюзі], en: [curtains, blinds]}
+    title: {uk: Штори у вітальні, en: Living room curtains}
+    plural: true
+    groups: [all_curtains]
+    sim: {speed: 25}
+  - id: tv.living_room
+    type: tv
+    room: living_room
+    names: {uk: [телевізор, телик, тв], en: [tv, television]}
+    title: {uk: Телевізор у вітальні, en: Living room TV}
+  - id: ac.living_room
+    type: air_conditioner
+    room: living_room
+    names: {uk: [кондиціонер, кондей], en: [air conditioner, ac, conditioner]}
+    title: {uk: Кондиціонер у вітальні, en: Living room air conditioner}
+  - id: vacuum.home
+    type: robot_vacuum
+    room: living_room
+    names: {uk: [пилосос, робот-пилосос, робот пилосос], en: [vacuum, robot vacuum, vacuum cleaner]}
+    title: {uk: Робот-пилосос, en: Robot vacuum}
+  - id: sensor.living_climate
+    type: climate_sensor
+    room: living_room
+    names: {uk: [датчик клімату у вітальні, термометр], en: [living room sensor, thermometer]}
+    title: {uk: Датчик у вітальні, en: Living room sensor}
+
+  # -------------------------------------------------------------------- bedroom
+  - id: light.bedroom_main
+    type: light
+    room: bedroom
+    names: {uk: [світло, люстра, люстру], en: [light, lights]}
+    title: {uk: Світло у спальні, en: Bedroom light}
+    groups: [all_lights]
+  - id: light.bedroom_lamp
+    type: rgb_light
+    room: bedroom
+    names: {uk: [нічник, лампа, лампу, бра], en: [night light, lamp, bedside lamp]}
+    title: {uk: Нічник у спальні, en: Bedroom night light}
+    groups: [all_lights]
+  - id: curtains.bedroom
+    type: curtains
+    room: bedroom
+    names: {uk: [штори, штору, фіранки, жалюзі], en: [curtains, blinds]}
+    title: {uk: Штори у спальні, en: Bedroom curtains}
+    plural: true
+    groups: [all_curtains]
+    sim: {speed: 25}
+  - id: humidifier.bedroom
+    type: humidifier
+    room: bedroom
+    names: {uk: [зволожувач, зволожувач повітря], en: [humidifier]}
+    title: {uk: Зволожувач у спальні, en: Bedroom humidifier}
+  - id: sensor.bedroom_climate
+    type: climate_sensor
+    room: bedroom
+    names: {uk: [датчик клімату у спальні], en: [bedroom sensor]}
+    title: {uk: Датчик у спальні, en: Bedroom sensor}
+
+  # -------------------------------------------------------------------- kitchen
+  - id: light.kitchen_main
+    type: light
+    room: kitchen
+    names: {uk: [світло, люстра, люстру, лампа, лампу], en: [light, lights, lamp]}
+    title: {uk: Світло на кухні, en: Kitchen light}
+    groups: [all_lights]
+  - id: kettle.kitchen
+    type: kettle
+    room: kitchen
+    names: {uk: [чайник, чайничок], en: [kettle]}
+    title: {uk: Чайник, en: Kettle}
+  - id: socket.kitchen_coffee
+    type: socket
+    room: kitchen
+    names: {uk: [кавоварка, кавоварку, кавоварці, розетка, розетку], en: [coffee maker, socket, plug]}
+    title: {uk: Кавоварка, en: Coffee maker}
+  - id: fan.kitchen_hood
+    type: fan
+    room: kitchen
+    names: {uk: [витяжка, витяжку, вентилятор], en: [hood, extractor, fan]}
+    title: {uk: Витяжка на кухні, en: Kitchen hood}
+  - id: sensor.kitchen_climate
+    type: climate_sensor
+    room: kitchen
+    names: {uk: [датчик клімату на кухні], en: [kitchen sensor]}
+    title: {uk: Датчик на кухні, en: Kitchen sensor}
+
+  # ------------------------------------------------------------------- bathroom
+  - id: light.bathroom
+    type: light
+    room: bathroom
+    names: {uk: [світло, лампа, лампу], en: [light, lights, lamp]}
+    title: {uk: Світло у ванній, en: Bathroom light}
+    groups: [all_lights]
+  - id: boiler.bathroom
+    type: boiler
+    room: bathroom
+    names: {uk: [бойлер, водонагрівач, гаряча вода, гарячу воду], en: [boiler, water heater, hot water]}
+    title: {uk: Бойлер, en: Water heater}
+  - id: fan.bathroom
+    type: fan
+    room: bathroom
+    names: {uk: [вентилятор, витяжка, витяжку], en: [fan, extractor]}
+    title: {uk: Вентилятор у ванній, en: Bathroom fan}
+
+  # -------------------------------------------------------------------- hallway
+  - id: light.hallway
+    type: light
+    room: hallway
+    names: {uk: [світло, лампа, лампу], en: [light, lights, lamp]}
+    title: {uk: Світло у коридорі, en: Hallway light}
+    groups: [all_lights]
+  - id: lock.front_door
+    type: door_lock
+    room: hallway
+    names: {uk: [замок, вхідні двері, двері, вхідний замок], en: [lock, front door, door]}
+    title: {uk: Замок вхідних дверей, en: Front door lock}
+    critical: true
+  - id: thermostat.home
+    type: thermostat
+    room: hallway
+    names: {uk: [термостат, опалення, батареї], en: [thermostat, heating]}
+    title: {uk: Опалення, en: Heating}
+  - id: sensor.hallway_motion
+    type: motion_sensor
+    room: hallway
+    names: {uk: [датчик руху], en: [motion sensor]}
+    title: {uk: Датчик руху в коридорі, en: Hallway motion sensor}
+
+  # ------------------------------------------------------------------ kids room
+  - id: light.kids_room
+    type: light
+    room: kids_room
+    names: {uk: [світло, люстра, люстру], en: [light, lights]}
+    title: {uk: Світло у дитячій, en: Kids room light}
+    groups: [all_lights]
+  - id: light.kids_nightlight
+    type: rgb_light
+    room: kids_room
+    names: {uk: [нічник, лампа, лампу], en: [night light, lamp]}
+    title: {uk: Нічник у дитячій, en: Kids room night light}
+    groups: [all_lights]
+
+  # --------------------------------------------------------------------- garage
+  - id: light.garage
+    type: light
+    room: garage
+    names: {uk: [світло, лампа, лампу], en: [light, lights, lamp]}
+    title: {uk: Світло в гаражі, en: Garage light}
+    groups: [all_lights]
+  - id: gate.garage
+    type: garage_gate
+    room: garage
+    names: {uk: [ворота, гаражні ворота, браму], en: [gate, garage door, garage gate]}
+    title: {uk: Гаражні ворота, en: Garage gate}
+    plural: true
+    critical: true
+    sim: {speed: 12.5}
+  - id: socket.garage_charger
+    type: socket
+    room: garage
+    names: {uk: [зарядка, зарядку, розетка, розетку], en: [charger, socket, plug]}
+    title: {uk: Зарядка в гаражі, en: Garage charger}
+
+  # ----------------------------------------------------------------------- yard
+  - id: light.yard
+    type: light
+    room: yard
+    names: {uk: [світло, ліхтарі, ліхтар, освітлення], en: [light, lights, lamps]}
+    title: {uk: Світло на подвір'ї, en: Yard lights}
+    groups: [all_lights]
+  - id: sensor.yard_climate
+    type: climate_sensor
+    room: yard
+    names: {uk: [вуличний датчик, датчик на вулиці], en: [outdoor sensor]}
+    title: {uk: Вуличний датчик, en: Outdoor sensor}
