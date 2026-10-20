@@ -72,6 +72,7 @@ class CommandRecord:
     attempts: int = 0
     error: str | None = None
     already: bool = False  # the device was already in the desired state
+    state_timeout_s: float | None = None  # expected execution time after ACCEPTED
     t_created: float = 0.0
     t_published: float | None = None  # first publish
     t_ack: float | None = None

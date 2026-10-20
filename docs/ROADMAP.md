@@ -48,7 +48,7 @@
 - [x] 1.6 `simulator/` — SimDevice, фізика типів, ідемпотентність, LWT, heartbeat
 - [x] 1.7 `devices/twin.py` + `health.py` — reported/desired, online/stale/offline
 - [x] 1.8 `dispatch/tracker.py` — автомат станів команди (таблиця переходів); юніт-тести всіх переходів
-- [ ] 1.9 `dispatch/dispatcher.py` — публікація, таймаути, повтори, групові команди, supersede
+- [x] 1.9 `dispatch/dispatcher.py` — публікація, таймаути, повтори, групові команди, supersede
 - [ ] 1.10 `nlu/` RuleParser (перша версія) + `TargetResolver`
 - [ ] 1.11 `dispatch/response.py` — шаблони відповідей uk/en
 - [ ] 1.12 `storage/` — SQLite-схема і репозиторії

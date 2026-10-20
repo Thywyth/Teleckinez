@@ -40,6 +40,9 @@ class DeviceGateway:
     def add_listener(self, listener: Listener) -> None:
         self._listeners.append(listener)
 
+    def is_connected(self) -> bool:
+        return self.mqtt.connected.is_set()
+
     async def send(
         self, device_id: str, cmd_id: str, desired: dict[str, Any], ttl_s: float
     ) -> None:
