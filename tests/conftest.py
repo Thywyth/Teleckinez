@@ -31,3 +31,42 @@ def mqtt_broker() -> tuple[str, int]:
     if not _port_open(MQTT_HOST, MQTT_PORT):
         pytest.skip(f"no MQTT broker on {MQTT_HOST}:{MQTT_PORT} (docker compose up -d mosquitto)")
     return MQTT_HOST, MQTT_PORT
+
+
+@pytest.fixture(scope="session")
+def registry():
+    from teleckinez.core.config import CONFIG_DIR, load_devices
+    from teleckinez.devices.registry import DeviceRegistry
+
+    return DeviceRegistry(load_devices(CONFIG_DIR / "devices.yaml"))
+
+
+async def clear_retained(host: str, port: int, prefix: str) -> None:
+    """Remove retained messages under `prefix/` so tests do not leak into each other."""
+    import aiomqtt
+
+    topics: set[str] = set()
+    async with aiomqtt.Client(host, port) as client:
+        await client.subscribe(f"{prefix}/#")
+        try:
+            async with asyncio.timeout(0.3):
+                async for message in client.messages:
+                    if message.retain and message.payload:
+                        topics.add(message.topic.value)
+        except TimeoutError:
+            pass
+        for topic in topics:
+            await client.publish(topic, b"", qos=1, retain=True)
+
+
+@pytest.fixture
+async def mqtt_settings(mqtt_broker):
+    """MqttSettings pointing at the test broker with a unique topic prefix."""
+    import uuid
+
+    from teleckinez.core.config import MqttSettings
+
+    host, port = mqtt_broker
+    settings = MqttSettings(host=host, port=port, prefix=f"tkz-test/{uuid.uuid4().hex[:8]}")
+    yield settings
+    await clear_retained(host, port, settings.prefix)

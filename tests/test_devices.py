@@ -1,17 +1,12 @@
 import pytest
 
-from teleckinez.core.config import CONFIG_DIR, DevicesConfig, load_devices
+from teleckinez.core.config import DevicesConfig
 from teleckinez.devices.capabilities import UnsupportedAction, ValueOutOfRange
 from teleckinez.devices.registry import DeviceRegistry, UnknownDeviceType
 from teleckinez.devices.types import DEVICE_TYPES
 
 T = DEVICE_TYPES
 TIMEOUTS = {"default": 3.0, "light": 2.0, "garage_gate": 12.0}
-
-
-@pytest.fixture(scope="module")
-def registry() -> DeviceRegistry:
-    return DeviceRegistry(load_devices(CONFIG_DIR / "devices.yaml"))
 
 
 # ---------------------------------------------------------------- desired state
