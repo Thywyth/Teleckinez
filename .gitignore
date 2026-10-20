@@ -13,3 +13,4 @@ benchmarks/datasets/voice/*.wav
 benchmarks/datasets/noise/
 .vscode/
 .idea/
+data/
