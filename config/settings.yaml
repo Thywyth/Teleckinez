@@ -29,6 +29,15 @@ health:
   stale_factor: 3           # stale after 3 x heartbeat without any message
   check_interval_s: 1.0
 
+notifications:             # the assistant speaks up on its own (dispatcher.md §5)
+  enabled: true
+  offline: true             # "Замок вхідних дверей не на зв'язку"
+  stale: true               # no heartbeat for 3 x heartbeat
+  recovered: true           # "... знову на зв'язку" after a reported problem
+  drift_critical: true      # a lock / gate changed state without a command
+  cooldown_s: 60            # per device: a flapping device does not talk every second
+  startup_grace_s: 10       # silence while retained messages arrive after start
+
 nlu:
   mode: rule                # rule | llm | hybrid
   fuzzy_threshold: 85       # rapidfuzz score 0..100 for synonym matching

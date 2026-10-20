@@ -30,6 +30,14 @@ class Device:
     def plural(self) -> bool:
         return self.config.plural
 
+    def is_plural(self, lang: str = "uk") -> bool:
+        """Grammatical number of the title: `plural` in YAML describes Ukrainian ("ворота"),
+        English follows the title itself ("Garage gate" vs "Living room curtains")."""
+        if lang == "uk":
+            return self.config.plural
+        last = self.title(lang).split()[-1].lower()
+        return last.endswith("s") and not last.endswith("ss")
+
     @property
     def groups(self) -> list[str]:
         return self.config.groups

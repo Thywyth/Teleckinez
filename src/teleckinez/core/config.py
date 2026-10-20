@@ -63,6 +63,18 @@ class HealthSettings(_Model):
     check_interval_s: float = 1.0
 
 
+class NotificationSettings(_Model):
+    """Spoken notifications about device health (dispatcher.md §5)."""
+
+    enabled: bool = True
+    offline: bool = True  # "Замок вхідних дверей не на зв'язку"
+    stale: bool = True  # no heartbeat for stale_factor x heartbeat_s
+    recovered: bool = True  # "... знову на зв'язку" after a reported problem
+    drift_critical: bool = True  # a critical device changed state without a command
+    cooldown_s: float = Field(60.0, ge=0)  # per device and kind: no spam from a flapping device
+    startup_grace_s: float = Field(10.0, ge=0)  # retained messages arrive right after start
+
+
 class NluSettings(_Model):
     mode: Literal["rule", "llm", "hybrid"] = "rule"
     fuzzy_threshold: int = Field(85, ge=50, le=100)
@@ -102,6 +114,7 @@ class Settings(_Model):
     mqtt: MqttSettings = MqttSettings()
     dispatcher: DispatcherSettings = DispatcherSettings()
     health: HealthSettings = HealthSettings()
+    notifications: NotificationSettings = NotificationSettings()
     nlu: NluSettings = NluSettings()
     voice: VoiceSettings = VoiceSettings()
     web: WebSettings = WebSettings()

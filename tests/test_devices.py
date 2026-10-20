@@ -158,3 +158,10 @@ def test_unknown_type_rejected() -> None:
 def test_every_device_type_in_catalogue_is_used(registry: DeviceRegistry) -> None:
     used = {d.type.name for d in registry}
     assert used >= set(DEVICE_TYPES) - {"door_sensor"}
+
+
+def test_grammatical_number_per_language(registry: DeviceRegistry) -> None:
+    gate, curtains = registry.get("gate.garage"), registry.get("curtains.bedroom")
+    assert gate.is_plural("uk") and not gate.is_plural("en")  # "ворота" / "gate"
+    assert curtains.is_plural("uk") and curtains.is_plural("en")
+    assert not registry.get("lock.front_door").is_plural("en")

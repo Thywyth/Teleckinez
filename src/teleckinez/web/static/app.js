@@ -454,6 +454,10 @@ function renderHistory() {
     return;
   }
   box.replaceChildren(...voice.history.map((h) => {
+    if (h.notification) {
+      return el("div", { class: "exchange notification" },
+        el("span", { class: "who" }, "сповіщення"), el("div", {}, h.notification));
+    }
     const conf = h.confidence != null ? `впевненість ${Math.round(h.confidence * 100)} %` : null;
     const meta = [h.engine === "text" ? "текстом" : h.engine, conf].filter(Boolean).join(" · ");
     return el("div", { class: "exchange" },
@@ -500,6 +504,12 @@ state.listeners.push(({ type, data }) => {
     case "IntentParsed": { const h = exchange(data.session_id); if (h) h.intent = data.intent; break; }
     case "IntentFailed": { const h = exchange(data.session_id); if (h) h.failed = data.reason; break; }
     case "SpeakRequested": {
+      if (data.kind === "notification") {
+        voice.history.unshift({ notification: data.text, progress: [] });
+        voice.history = voice.history.slice(0, 8);
+        toast(`🔔 ${data.text}`, "bad");
+        break;
+      }
       const h = exchange(data.session_id);
       if (h) { if (data.final) h.response = data.text; else h.progress.push(data.text); }
       setPipeline("speaking");
@@ -626,6 +636,14 @@ const SETTINGS_FORM = [
   ["Доступність пристроїв", "застосовується одразу", [
     ["health", "heartbeat_s", "Період heartbeat за замовчуванням, с", "number", { step: 1, min: 1 }],
     ["health", "stale_factor", "«Мовчить» після N × heartbeat", "number", { step: 0.5, min: 1 }],
+  ]],
+  ["Сповіщення", "асистент сам повідомляє про проблеми; застосовується одразу", [
+    ["notifications", "enabled", "Сповіщення увімкнено", "bool"],
+    ["notifications", "offline", "Пристрій не в мережі", "bool"],
+    ["notifications", "stale", "Пристрій мовчить (немає heartbeat)", "bool"],
+    ["notifications", "recovered", "Пристрій знову на зв'язку", "bool"],
+    ["notifications", "drift_critical", "Критичний пристрій змінився без команди", "bool"],
+    ["notifications", "cooldown_s", "Не повторювати для пристрою частіше, с", "number", { step: 5, min: 0 }],
   ]],
   ["Розбір команд і відповіді", "застосовується одразу", [
     ["nlu", "mode", "Режим NLU", "select", { options: { rule: "правила + fuzzy", llm: "LLM (етап 4)", hybrid: "гібрид (етап 4)" }, disabled: ["llm", "hybrid"] }],

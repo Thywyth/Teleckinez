@@ -16,6 +16,7 @@ from teleckinez.devices.health import HealthMonitor
 from teleckinez.devices.registry import DeviceRegistry
 from teleckinez.devices.twin import TwinStore
 from teleckinez.dispatch.dispatcher import Dispatcher
+from teleckinez.dispatch.notifier import Notifier
 from teleckinez.dispatch.response import ResponseComposer
 from teleckinez.dispatch.tracker import CommandTracker
 from teleckinez.nlu.resolver import TargetResolver
@@ -82,6 +83,13 @@ class App:
             self.composer,
             settings.dispatcher,
         )
+        self.notifier = Notifier(
+            self.registry,
+            self.composer,
+            self.bus,
+            settings.notifications,
+            language=lambda: self.settings.language,
+        )
         self.storage: Storage | None = None
         if use_storage:
             self.storage = Storage(connect(settings.storage.path))
@@ -95,7 +103,7 @@ class App:
 
     # Sections applied at once; voice ones are stored for the voice pipeline; the rest
     # (mqtt, web, storage, simulator) only take effect after a restart.
-    HOT_SECTIONS = ("dispatcher", "nlu", "health", "voice")
+    HOT_SECTIONS = ("dispatcher", "nlu", "health", "notifications", "voice")
     RESTART_SECTIONS = ("mqtt", "web", "storage", "simulator")
 
     def apply_settings(self, patch: dict) -> dict[str, list[str]]:

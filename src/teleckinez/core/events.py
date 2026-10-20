@@ -132,6 +132,7 @@ class SpeakRequested(Event):
     text: str
     lang: str = "uk"
     final: bool = True  # False for progress messages ("Відкриваю...")
+    kind: str = "response"  # response | progress | notification (said without a request)
 
 
 @dataclass(frozen=True, kw_only=True)

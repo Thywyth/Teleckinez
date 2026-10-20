@@ -77,7 +77,7 @@ devices:
   - id: curtains.living_room
     ...
     title: {uk: Штори у вітальні, en: Living room curtains}  # за замовч.: перша назва + loc
-    plural: true          # граматичне число для «штори не відповідають»
+    plural: true          # укр. граматичне число: «штори не відповідають» (англ. — за назвою)
     heartbeat_s: 10       # період heartbeat (за замовч. з settings)
 ```
 

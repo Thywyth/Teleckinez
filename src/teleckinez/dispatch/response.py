@@ -53,6 +53,10 @@ TEXTS: dict[str, dict[str, str]] = {
         "state_offline": "{title} не в мережі, дані {age}. Останній відомий стан: {state}",
         "state_stale": "{text}. Увага: дані можуть бути застарілими ({age})",
         "state_old": "{text} (дані {age})",
+        "notify_offline": "{title} не на зв'язку",
+        "notify_stale": "{title}: немає сигналу, дані можуть бути застарілими",
+        "notify_back": "{title} знову на зв'язку",
+        "notify_drift": "Увага: {title} {what} без команди",
         "and": " та ",
     },
     "en": {
@@ -84,6 +88,10 @@ TEXTS: dict[str, dict[str, str]] = {
         "state_offline": "{title} {be} offline, data from {age}. Last known state: {state}",
         "state_stale": "{text}. Warning: the data may be stale ({age})",
         "state_old": "{text} (as of {age})",
+        "notify_offline": "{title} {be} offline",
+        "notify_stale": "{title}: no signal, the data may be stale",
+        "notify_back": "{title} {be} back online",
+        "notify_drift": "Attention: {title} changed without a command: {what}",
         "and": " and ",
     },
 }
@@ -283,10 +291,11 @@ class ResponseComposer:
 
     def _single(self, r: CommandRecord, lang: str) -> str:
         device = self.registry.get(r.device_id)
+        plural = device.is_plural(lang)
         kw = {
             "title": device.title(lang),
-            "be": "are" if device.plural else "is",
-            "v": "ють" if device.plural else "є",
+            "be": "are" if plural else "is",
+            "v": "ють" if plural else "є",
         }
         if r.status is S.COMPLETED:
             what = self._describe_desired(r.desired, lang)
@@ -338,7 +347,7 @@ class ResponseComposer:
                 lang,
                 "state_offline",
                 title=title,
-                be="are" if device.plural else "is",
+                be="are" if device.is_plural(lang) else "is",
                 age=age_text(age, lang),
                 state=described,
             )

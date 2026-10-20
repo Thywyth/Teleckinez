@@ -88,7 +88,9 @@ async def run_repl(app: App, *, show_commands: bool = True) -> None:
     print("  /help — довідка, /exit — вихід.\n")
 
     def on_speak(event: SpeakRequested) -> None:
-        if not event.final:
+        if event.kind == "notification":
+            print(f"\n[сповіщення] {event.text}")
+        elif not event.final:
             print(f"асистент> {event.text}")
 
     def on_finished(event: CommandFinished) -> None:
