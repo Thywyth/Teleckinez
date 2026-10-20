@@ -180,6 +180,64 @@ h2 { font-size: 15px; margin: 0; }
 .big-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .big-value small { font-size: 13px; color: var(--muted); font-weight: 600; }
 
+/* -------------------------------------------------------------- voice panel */
+.voice { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 74px; align-self: start; }
+.panel-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 16px; display: flex; flex-direction: column; gap: 12px;
+}
+.pipeline { display: grid; grid-template-columns: 46px 1fr; gap: 4px 12px; align-items: center; }
+.pipeline .steps { grid-column: 1 / -1; display: flex; gap: 4px; padding: 0; margin: 6px 0 0; list-style: none; }
+.pipeline .steps li {
+  flex: 1; text-align: center; font-size: 11px; padding: 3px 0; border-radius: 6px;
+  background: var(--surface-2); color: var(--muted);
+}
+.pipeline .steps li.on { background: var(--accent); color: #fff; }
+.pipeline-title { font-weight: 700; font-size: 17px; }
+.pipeline-sub { font-size: 12px; color: var(--muted); }
+.pulse { width: 46px; height: 46px; border-radius: 50%; background: var(--surface-2); position: relative; }
+.pulse::after { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: var(--muted); }
+.state-listening .pulse { background: var(--bad-soft); animation: ring 1.2s ease-out infinite; }
+.state-listening .pulse::after { background: var(--bad); }
+.state-recognizing .pulse::after,
+.state-processing .pulse::after { background: var(--warn); animation: blink .8s infinite alternate; }
+.state-speaking .pulse { background: var(--ok-soft); }
+.state-speaking .pulse::after { background: var(--ok); animation: blink .5s infinite alternate; }
+@keyframes ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bad) 45%, transparent); }
+  100% { box-shadow: 0 0 0 16px transparent; }
+}
+@keyframes blink { to { opacity: .35; } }
+
+.ptt {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px; border-radius: 14px; border: 0; cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), #8f6bff); color: #fff;
+  font-weight: 700; font-size: 16px; user-select: none; touch-action: none;
+}
+.ptt.held { transform: scale(.98); filter: brightness(1.1); box-shadow: 0 0 0 4px var(--accent-soft); }
+.ptt:disabled { background: var(--surface-2); color: var(--muted); cursor: not-allowed; }
+.ptt-icon { font-size: 20px; }
+.hint { font-size: 12px; color: var(--muted); margin: -4px 0 0; }
+.text-form { display: flex; gap: 6px; }
+.text-form input {
+  flex: 1; min-width: 0; padding: 8px 12px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface-2);
+}
+.text-form input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+.history { display: flex; flex-direction: column; gap: 12px; max-height: 52vh; overflow: auto; }
+.exchange { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.exchange:last-child { border-bottom: 0; padding-bottom: 0; }
+.who { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.said { font-weight: 600; }
+.meta { font-size: 11px; color: var(--muted); font-weight: 400; }
+.intent { display: flex; flex-wrap: wrap; gap: 4px; }
+.intent.failed { font-size: 12px; color: var(--bad); }
+.ichip { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.reply { background: var(--surface-2); border-radius: 10px; padding: 8px 10px; }
+.reply.progress { font-size: 13px; color: var(--muted); background: none; padding: 0 2px; }
+
 /* ------------------------------------------------------------------- toasts */
 .toasts { position: fixed; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
 .toast {
@@ -193,5 +251,7 @@ h2 { font-size: 15px; margin: 0; }
 
 @media (max-width: 1100px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
+  .voice { order: -1; position: static; }
+  .history { max-height: 30vh; }
   .brand-sub { display: none; }
 }

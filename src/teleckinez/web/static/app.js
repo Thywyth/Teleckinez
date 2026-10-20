@@ -73,6 +73,7 @@ async function refresh() {
   state.status = status;
   renderDashboard();
   renderStatus();
+  renderVoicePanel();
 }
 
 function renderStatus() {
@@ -343,6 +344,152 @@ document.addEventListener("focusout", (e) => {
     const id = [...state.devices.keys()].find((k) => cardId(k) === holder.id);
     if (id) updateCard(id);
   }
+});
+
+/// ---------------------------------------------------------------- voice panel
+const PIPELINE = {
+  idle: ["Очікування", "скажіть «Телекінез» або натисніть кнопку"],
+  listening: ["Слухаю…", "говоріть"],
+  recognizing: ["Розпізнаю…", "перетворюю мову на текст"],
+  processing: ["Обробляю…", "розбір наміру і виконання команди"],
+  speaking: ["Відповідаю…", ""],
+};
+const REASONS_UK = {
+  not_understood: "не зрозумів", low_confidence: "низька впевненість", unknown_device: "невідомий пристрій",
+  ambiguous_target: "неоднозначно: назвіть кімнату", ambiguous_device: "неоднозначно: кілька пристроїв",
+  not_in_room: "немає в цій кімнаті", unsupported_action: "дія не підтримується",
+};
+const voice = { state: "idle", history: [], idleTimer: null };
+
+function setPipeline(next) {
+  voice.state = next;
+  clearTimeout(voice.idleTimer);
+  if (next === "speaking" && !state.status.voice_available) {
+    voice.idleTimer = setTimeout(() => setPipeline("idle"), 1200); // text mode: no TTS playback
+  }
+  renderPipeline();
+}
+
+function renderVoicePanel() {
+  const panel = $("#voice-panel");
+  const pttDisabled = !state.status.voice_available;
+  const ptt = el("button", {
+    class: "ptt", id: "ptt", disabled: pttDisabled,
+    title: pttDisabled ? "Голосовий конвеєр не запущено (етап 2 ROADMAP)" : "Тримайте, поки говорите",
+  }, el("span", { class: "ptt-icon" }, "🎙"), el("span", {}, "Натисни й говори"));
+  const press = (pressed) => {
+    if (ptt.disabled || ptt.classList.contains("held") === pressed) return;
+    ptt.classList.toggle("held", pressed);
+    api("/api/voice/ptt", { method: "POST", body: { pressed } }).catch((e) => toast(e.message, "bad"));
+  };
+  ptt.addEventListener("pointerdown", () => press(true));
+  ptt.addEventListener("pointerup", () => press(false));
+  ptt.addEventListener("pointerleave", () => press(false));
+
+  const input = el("input", {
+    type: "text", id: "text-input", autocomplete: "off",
+    placeholder: "Напишіть команду, напр. «увімкни світло на кухні»",
+  });
+  const form = el("form", {
+    class: "text-form",
+    onsubmit: async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+      try { await api("/api/text-command", { method: "POST", body: { text } }); }
+      catch (err) { toast(`Помилка: ${err.message}`, "bad"); }
+    },
+  }, input, el("button", { class: "btn primary", type: "submit" }, "Надіслати"));
+
+  const hint = pttDisabled
+    ? el("p", { class: "hint" }, "Голосовий режим ще не підключено — працює текстовий ввід, той самий шлях, що й голос.")
+    : null;
+  panel.replaceChildren(
+    el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }), ptt, hint, form),
+    el("div", { class: "panel-card" }, el("h2", {}, "Останні запити"), el("div", { id: "history", class: "history" })),
+  );
+  renderPipeline();
+  renderHistory();
+}
+
+function renderPipeline() {
+  const box = $("#pipeline");
+  if (!box) return;
+  const [title, sub] = PIPELINE[voice.state];
+  const steps = ["listening", "recognizing", "processing", "speaking"];
+  box.className = `pipeline state-${voice.state}`;
+  box.replaceChildren(
+    el("div", { class: "pulse" }),
+    el("div", {}, el("div", { class: "pipeline-title" }, title), el("div", { class: "pipeline-sub" }, sub)),
+    el("ol", { class: "steps" }, steps.map((s) =>
+      el("li", { class: s === voice.state ? "on" : "" }, PIPELINE[s][0].replace("…", "")))),
+  );
+}
+
+function renderHistory() {
+  const box = $("#history");
+  if (!box) return;
+  if (!voice.history.length) {
+    box.replaceChildren(el("p", { class: "muted" }, "Ще нічого не сказано."));
+    return;
+  }
+  box.replaceChildren(...voice.history.map((h) => {
+    const conf = h.confidence != null ? `впевненість ${Math.round(h.confidence * 100)} %` : null;
+    const meta = [h.engine === "text" ? "текстом" : h.engine, conf].filter(Boolean).join(" · ");
+    return el("div", { class: "exchange" },
+      el("div", { class: "said" }, el("span", { class: "who" }, "ви"), h.text, el("div", { class: "meta" }, meta)),
+      h.intent ? el("div", { class: "intent" }, intentChips(h.intent)) : null,
+      h.failed ? el("div", { class: "intent failed" }, REASONS_UK[h.failed] || h.failed) : null,
+      h.progress.map((p) => el("div", { class: "reply progress" }, p)),
+      h.response
+        ? el("div", { class: "reply" }, el("span", { class: "who" }, "асистент"), h.response)
+        : el("div", { class: "reply muted" }, "…"),
+    );
+  }));
+}
+
+function intentChips(i) {
+  const room = i.room && (state.rooms.find((r) => r.id === i.room)?.name || i.room);
+  const chips = [
+    i.kind === "query" ? "запит стану" : `дія: ${i.action || "за замовчуванням"}`,
+    i.device_name && `пристрій: ${i.device_name}`,
+    !i.device_name && i.device_type && `тип: ${TYPE_UK[i.device_type] || i.device_type}`,
+    room && `кімната: ${room}`,
+    i.group && `група: ${i.group === "all" ? "усі" : i.group}`,
+    Object.keys(i.params || {}).length && `параметри: ${JSON.stringify(i.params)}`,
+    `${i.parser} · ${Math.round(i.confidence * 100)} %`,
+  ].filter(Boolean);
+  return chips.map((c) => el("span", { class: "ichip" }, c));
+}
+
+const exchange = (sessionId) => voice.history.find((h) => h.session === sessionId);
+
+state.listeners.push(({ type, data }) => {
+  switch (type) {
+    case "WakeDetected":
+    case "ListeningStarted": setPipeline("listening"); break;
+    case "SpeechEnded": setPipeline("recognizing"); break;
+    case "TranscriptReady":
+      voice.history.unshift({
+        session: data.session_id, text: data.text, engine: data.engine,
+        confidence: data.engine === "text" ? null : data.confidence, progress: [],
+      });
+      voice.history = voice.history.slice(0, 8);
+      setPipeline("processing");
+      break;
+    case "IntentParsed": { const h = exchange(data.session_id); if (h) h.intent = data.intent; break; }
+    case "IntentFailed": { const h = exchange(data.session_id); if (h) h.failed = data.reason; break; }
+    case "SpeakRequested": {
+      const h = exchange(data.session_id);
+      if (h) { if (data.final) h.response = data.text; else h.progress.push(data.text); }
+      setPipeline("speaking");
+      break;
+    }
+    case "SpeakFinished": setPipeline("idle"); break;
+    default: return;
+  }
+  renderHistory();
 });
 
 // ----------------------------------------------------------------------- tabs

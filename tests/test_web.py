@@ -168,3 +168,17 @@ async def test_static_frontend_is_served(client) -> None:
     for asset in ("/static/app.js", "/static/style.css"):
         assert (await client.get(asset)).status_code == 200
     assert "cdn" not in index.text.lower()  # works offline (web.md)
+
+
+def test_frontend_javascript_parses() -> None:
+    """Catches syntax errors in app.js before a browser does (needs Node.js, else skipped)."""
+    import shutil
+    import subprocess
+    from pathlib import Path
+
+    node = shutil.which("node")
+    if node is None:
+        pytest.skip("node not installed")
+    script = Path(__file__).resolve().parents[1] / "src/teleckinez/web/static/app.js"
+    result = subprocess.run([node, "--check", str(script)], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
