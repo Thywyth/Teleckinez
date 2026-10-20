@@ -9,6 +9,8 @@ mqtt:
   prefix: tkz               # topic prefix: tkz/dev/{id}/state ...
   keepalive_s: 10
   client_id: teleckinez-assistant
+  tasmota_root: ""          # Tasmota FullTopic prefix ("" = default cmnd/stat/tele)
+  z2m_base_topic: zigbee2mqtt
   # username: teleckinez    # password: env TKZ_MQTT_PASSWORD
 
 dispatcher:

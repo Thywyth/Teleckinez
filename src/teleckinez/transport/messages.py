@@ -10,6 +10,7 @@ class StateReport:
     state: dict[str, Any]
     ts: float | None = None
     seq: int | None = None
+    partial: bool = False  # only changed attributes (Tasmota RESULT): merge, do not replace
 
 
 @dataclass(frozen=True)

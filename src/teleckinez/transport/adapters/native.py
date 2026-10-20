@@ -53,6 +53,7 @@ class Topics:
 
 class NativeAdapter:
     name = "native"
+    heartbeat = True
 
     def __init__(self, prefix: str = "tkz") -> None:
         self.topics = Topics(prefix)
@@ -67,7 +68,11 @@ class NativeAdapter:
         body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode()
         return self.topics.device(device_id, "cmd"), body
 
-    def decode(self, topic: str, payload: bytes) -> DeviceMessage | None:
+    def decode(self, topic: str, payload: bytes) -> list[DeviceMessage]:
+        message = self._decode(topic, payload)
+        return [] if message is None else [message]
+
+    def _decode(self, topic: str, payload: bytes) -> DeviceMessage | None:
         parsed = self.topics.parse(topic)
         if parsed is None or not payload:  # empty payload = cleared retained message
             return None

@@ -7,6 +7,7 @@ from teleckinez.transport.messages import DeviceMessage
 
 class DeviceAdapter(Protocol):
     name: str
+    heartbeat: bool  # devices re-send their state periodically (False: never mark them stale)
 
     def subscriptions(self) -> list[str]:
         """Topic filters that carry state/ack/availability/meta for this protocol."""
@@ -18,6 +19,6 @@ class DeviceAdapter(Protocol):
         """Topic and payload that make the device apply `desired`."""
         ...
 
-    def decode(self, topic: str, payload: bytes) -> DeviceMessage | None:
-        """Normalize an incoming message; None if it is not ours or malformed."""
+    def decode(self, topic: str, payload: bytes) -> list[DeviceMessage]:
+        """Normalize an incoming message (one may mean ack + state); [] if not ours."""
         ...

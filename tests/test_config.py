@@ -140,3 +140,14 @@ def test_repo_devices_yaml() -> None:
     for dev in cfg.devices:
         assert dev.names.uk and dev.names.en, dev.id
         assert dev.title.uk and dev.title.en, dev.id
+
+
+def test_repo_devices_use_all_three_protocols() -> None:
+    cfg = load_devices(CONFIG_DIR / "devices.yaml")
+    protocols = {d.id: d.protocol for d in cfg.devices if d.protocol != "native"}
+    assert protocols == {
+        "curtains.bedroom": "zigbee2mqtt",
+        "light.kids_nightlight": "zigbee2mqtt",
+        "light.garage": "tasmota",
+        "socket.garage_charger": "tasmota",
+    }

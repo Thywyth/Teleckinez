@@ -2,7 +2,8 @@
 # 8 rooms, 31 devices. Names are synonyms the user can say (uk/en, with case
 # forms); matching is case-insensitive and tolerant to small STT errors.
 # Optional per device: title (for responses), plural (grammar), critical,
-# heartbeat_s, sim (simulator-only: initial state, speed).
+# heartbeat_s, sim (simulator-only: initial state, speed), protocol + address
+# (native by default; a few devices speak Tasmota / Zigbee2MQTT, protocol.md §4).
 
 language_default: uk
 
@@ -111,6 +112,8 @@ devices:
     title: {uk: Штори у спальні, en: Bedroom curtains}
     plural: true
     groups: [all_curtains]
+    protocol: zigbee2mqtt     # Zigbee cover through Zigbee2MQTT
+    address: bedroom_curtains
     sim: {speed: 25}
   - id: humidifier.bedroom
     type: humidifier
@@ -206,6 +209,8 @@ devices:
     names: {uk: [нічник, лампа, лампу], en: [night light, lamp]}
     title: {uk: Нічник у дитячій, en: Kids room night light}
     groups: [all_lights]
+    protocol: zigbee2mqtt     # Zigbee RGB bulb
+    address: kids_nightlight
 
   # --------------------------------------------------------------------- garage
   - id: light.garage
@@ -214,6 +219,8 @@ devices:
     names: {uk: [світло, лампа, лампу], en: [light, lights, lamp]}
     title: {uk: Світло в гаражі, en: Garage light}
     groups: [all_lights]
+    protocol: tasmota         # ESP8266 dimmer with Tasmota firmware
+    address: garage_light
   - id: gate.garage
     type: garage_gate
     room: garage
@@ -227,6 +234,8 @@ devices:
     room: garage
     names: {uk: [зарядка, зарядку, розетка, розетку], en: [charger, socket, plug]}
     title: {uk: Зарядка в гаражі, en: Garage charger}
+    protocol: tasmota         # Sonoff-style smart plug
+    address: garage_charger
 
   # ----------------------------------------------------------------------- yard
   - id: light.yard

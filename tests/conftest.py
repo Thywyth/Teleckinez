@@ -67,7 +67,11 @@ async def mqtt_settings(mqtt_broker):
     from teleckinez.core.config import MqttSettings
 
     host, port = mqtt_broker
-    settings = MqttSettings(host=host, port=port, prefix=f"tkz-test/{uuid.uuid4().hex[:8]}")
+    prefix = f"tkz-test/{uuid.uuid4().hex[:8]}"
+    # Tasmota / Zigbee2MQTT topics live under the test prefix too, so tests stay isolated.
+    settings = MqttSettings(
+        host=host, port=port, prefix=prefix, tasmota_root=prefix, z2m_base_topic=f"{prefix}/z2m"
+    )
     yield settings
     await clear_retained(host, port, settings.prefix)
 

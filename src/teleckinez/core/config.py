@@ -36,6 +36,8 @@ class MqttSettings(_Model):
     username: str | None = None
     # Never stored in YAML: read from the TKZ_MQTT_PASSWORD environment variable (.env).
     password: str | None = Field(default=None, exclude=True)
+    tasmota_root: str = ""  # Tasmota FullTopic prefix before %prefix%/%topic%/ ("" = default)
+    z2m_base_topic: str = "zigbee2mqtt"  # Zigbee2MQTT `base_topic`
 
 
 class DispatcherSettings(_Model):
@@ -166,6 +168,7 @@ class DeviceConfig(_Model):
     names: Names
     groups: list[str] = []
     protocol: Literal["native", "tasmota", "zigbee2mqtt"] = "native"
+    address: str | None = None  # Tasmota %topic% / Z2M friendly_name; default: id with "_"
     critical: bool = False
     title: LocalizedText = LocalizedText()
     plural: bool = False

@@ -14,6 +14,7 @@ import aiomqtt
 
 from simulator.faults import FaultCommand, FaultSet, drift_change
 from simulator.physics import Physics, make_physics
+from simulator.protocols import SimProtocol
 from teleckinez.devices.capabilities import CapabilityError, UnsupportedAction
 from teleckinez.devices.registry import Device
 from teleckinez.transport.adapters.native import Topics
@@ -42,8 +43,10 @@ class SimDevice:
         heartbeat_s: float = 10.0,
         latency_ms: tuple[int, int] = (20, 80),
         seed: int | None = None,
+        protocol: SimProtocol | None = None,
     ) -> None:
         self.device = device
+        self.proto = protocol or SimProtocol(device, topics)  # native / Tasmota / Zigbee2MQTT
         self.host, self.port = host, port
         self.topics = topics
         self.heartbeat_s = device.config.heartbeat_s or heartbeat_s
@@ -81,14 +84,16 @@ class SimDevice:
         """Connect, announce, serve commands; reconnect if the broker goes away."""
         while True:
             await self._powered.wait()  # `offline` fault: stay disconnected until cleared
-            will = aiomqtt.Will(self.topic("availability"), b"offline", qos=1, retain=True)
+            will_topic, will_payload, will_retain = self.proto.will()
+            will = aiomqtt.Will(will_topic, will_payload, qos=1, retain=will_retain)
             try:
                 async with aiomqtt.Client(
                     self.host, self.port, identifier=self.client_id, keepalive=10, will=will
                 ) as client:
                     self._client = client
                     await self._announce()
-                    await client.subscribe(self.topic("cmd"), qos=1)
+                    for command_topic in self.proto.command_topics():
+                        await client.subscribe(command_topic, qos=1)
                     self.connected.set()
                     async with asyncio.TaskGroup() as tg:
                         tg.create_task(self._heartbeat())
@@ -109,8 +114,9 @@ class SimDevice:
     async def shutdown(self) -> None:
         """Graceful power-off: say `offline` explicitly (no LWT needed)."""
         if self._client is not None:
+            topic, payload, retain = self.proto.offline()
             with contextlib.suppress(aiomqtt.MqttError):
-                await self._client.publish(self.topic("availability"), b"offline", 1, True)
+                await self._client.publish(topic, payload, qos=1, retain=retain)
 
     async def _announce(self) -> None:
         assert self._client is not None
@@ -121,21 +127,23 @@ class SimDevice:
             "capabilities": self.device.type.meta(),
             "heartbeat_s": self.heartbeat_s,
         }
-        await self._client.publish(self.topic("meta"), _dumps(meta), qos=1, retain=True)
-        await self._client.publish(self.topic("availability"), b"online", qos=1, retain=True)
+        for topic, payload, retain in self.proto.announce(meta):
+            await self._client.publish(topic, payload, qos=1, retain=retain)
         await self.publish_state()
 
-    async def publish_state(self) -> None:
+    async def publish_state(self, reason: str = "change") -> None:
         if self._client is None or self.faults.silent:
             return
         self.seq += 1
-        payload = {**self.state, "ts": round(time.time(), 3), "seq": self.seq}
-        await self._client.publish(self.topic("state"), _dumps(payload), qos=1, retain=True)
+        for topic, payload, retain in self.proto.state(self.state, self.seq, reason):
+            await self._client.publish(topic, payload, qos=1, retain=retain)
 
     async def _heartbeat(self) -> None:
+        if not self.proto.heartbeat:
+            return  # Zigbee2MQTT devices only report changes
         while True:
             await asyncio.sleep(self.heartbeat_s)
-            await self.publish_state()
+            await self.publish_state("heartbeat")
 
     async def _ticker(self) -> None:
         last = time.monotonic()
@@ -149,13 +157,14 @@ class SimDevice:
     async def _serve(self, client: aiomqtt.Client) -> None:
         async for message in client.messages:
             payload = message.payload if isinstance(message.payload, bytes) else b""
-            await self.handle_command(payload)
+            await self.handle_command(payload, message.topic.value)
 
     # ----------------------------------------------------------------- commands
 
     async def _ack(self, ack: dict[str, Any]) -> None:
         if self._client is not None:
-            await self._client.publish(self.topic("ack"), _dumps(ack), qos=1)
+            for topic, payload, retain in self.proto.ack(ack):
+                await self._client.publish(topic, payload, qos=1, retain=retain)
 
     def desired_for(self, action: str, params: dict[str, Any]) -> dict[str, Any]:
         """Validate a command against the device capabilities."""
@@ -171,13 +180,12 @@ class SimDevice:
             desired[key] = dtype.cap(key).coerce(value)
         return desired
 
-    async def handle_command(self, payload: bytes) -> None:
-        try:
-            cmd = json.loads(payload)
-            cmd_id = str(cmd["cmd_id"])
-        except (ValueError, KeyError, TypeError):
-            log.warning("%s: malformed command %r", self.id, payload[:200])
+    async def handle_command(self, payload: bytes, topic: str = "") -> None:
+        cmd = self.proto.parse(topic, payload, self.state)
+        if cmd is None:
+            log.warning("%s: malformed command %r on %s", self.id, payload[:200], topic)
             return
+        cmd_id = cmd.cmd_id
 
         if self.faults.silent or self.faults.drops(self.rng):
             log.info("%s: command %s lost (fault)", self.id, cmd_id)
@@ -190,14 +198,14 @@ class SimDevice:
         if cmd_id in self._seen:  # retry of a command we already executed: ack again only
             await self._ack(self._seen[cmd_id])
             return
-        ts, ttl = cmd.get("ts"), cmd.get("ttl_s")
+        ts, ttl = cmd.ts, cmd.ttl_s
         if isinstance(ts, int | float) and isinstance(ttl, int | float) and time.time() > ts + ttl:
             log.info("%s: command %s expired, ignored", self.id, cmd_id)
             return
 
         desired: dict[str, Any] = {}
         try:
-            desired = self.desired_for(str(cmd.get("action", "set")), dict(cmd.get("params") or {}))
+            desired = self.desired_for(cmd.action, cmd.params)
         except CapabilityError as exc:
             ack = {"cmd_id": cmd_id, "status": "rejected", "error": exc.code}
         else:

@@ -9,6 +9,7 @@ import aiomqtt
 
 from simulator.device import SimDevice
 from simulator.faults import FaultCommand, FaultError, parse_fault
+from simulator.protocols import make_protocol
 from teleckinez.core.config import Settings
 from teleckinez.devices.registry import DeviceRegistry
 from teleckinez.transport.adapters.native import Topics
@@ -36,6 +37,12 @@ class SimHome:
                 heartbeat_s=settings.health.heartbeat_s,
                 latency_ms=settings.simulator.latency_ms,
                 seed=None if seed is None else seed + i,
+                protocol=make_protocol(
+                    dev,
+                    self.topics,
+                    tasmota_root=settings.mqtt.tasmota_root,
+                    z2m_base=settings.mqtt.z2m_base_topic,
+                ),
             )
             for i, dev in enumerate(registry)
             if only is None or dev.id in only

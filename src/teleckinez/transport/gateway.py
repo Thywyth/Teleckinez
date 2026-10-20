@@ -53,13 +53,13 @@ class DeviceGateway:
 
     def _make_handler(self, adapter: DeviceAdapter) -> Callable[[str, bytes], None]:
         def handle(topic: str, payload: bytes) -> None:
-            message = adapter.decode(topic, payload)
-            if message is None:
-                return
-            if message.device_id not in self.registry:
-                log.debug("message from unknown device %s ignored", message.device_id)
-                return
-            for listener in self._listeners:
-                listener(message)
+            for message in adapter.decode(topic, payload):
+                if message.device_id not in self.registry:
+                    log.debug("message from unknown device %s ignored", message.device_id)
+                    continue
+                if self.registry.get(message.device_id).config.protocol != adapter.name:
+                    continue  # e.g. a native topic for a device configured as Tasmota
+                for listener in self._listeners:
+                    listener(message)
 
         return handle

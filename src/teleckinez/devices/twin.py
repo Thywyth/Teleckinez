@@ -24,7 +24,7 @@ Clock = Callable[[], float]
 @dataclass
 class DigitalTwin:
     device: Device
-    heartbeat_s: float
+    heartbeat_s: float | None  # None: the device never re-sends its state (Zigbee2MQTT)
     reported: dict[str, Any] = field(default_factory=dict)
     reported_ts: float | None = None  # device timestamp of the last state
     seq: int | None = None
@@ -65,11 +65,15 @@ class TwinStore:
         *,
         default_heartbeat_s: float = 10.0,
         clock: Clock = time.time,
+        no_heartbeat: set[str] | frozenset[str] = frozenset(),
     ) -> None:
         self.bus = bus
         self.clock = clock
         self._twins = {
-            dev.id: DigitalTwin(dev, dev.config.heartbeat_s or default_heartbeat_s)
+            dev.id: DigitalTwin(
+                dev,
+                None if dev.id in no_heartbeat else dev.config.heartbeat_s or default_heartbeat_s,
+            )
             for dev in registry
         }
 
@@ -109,7 +113,7 @@ class TwinStore:
         twin.reported_ts = report.ts
         changed = {k: v for k, v in report.state.items() if twin.reported.get(k, ...) != v}
         first = not twin.reported
-        twin.reported = dict(report.state)
+        twin.reported = {**twin.reported, **report.state} if report.partial else dict(report.state)
         if not changed:
             return
         writable = {c.name for c in twin.device.type.writable}

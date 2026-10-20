@@ -22,11 +22,30 @@ from teleckinez.dispatch.tracker import CommandTracker
 from teleckinez.nlu.resolver import TargetResolver
 from teleckinez.nlu.rule_parser import RuleParser
 from teleckinez.storage import EventRecorder, Storage, connect
-from teleckinez.transport.adapters.native import NativeAdapter, Topics
+from teleckinez.transport.adapters import (
+    DeviceAdapter,
+    NativeAdapter,
+    TasmotaAdapter,
+    Zigbee2MqttAdapter,
+)
+from teleckinez.transport.adapters.native import Topics
 from teleckinez.transport.gateway import DeviceGateway
 from teleckinez.transport.mqtt_client import MqttClient
 
 log = logging.getLogger(__name__)
+
+
+def build_adapters(registry: DeviceRegistry, settings: Settings) -> dict[str, DeviceAdapter]:
+    """One adapter per firmware protocol used in devices.yaml (protocol.md §4)."""
+
+    def of(protocol: str) -> list:
+        return [d for d in registry if d.config.protocol == protocol]
+
+    return {
+        "native": NativeAdapter(settings.mqtt.prefix),
+        "tasmota": TasmotaAdapter(of("tasmota"), root=settings.mqtt.tasmota_root),
+        "zigbee2mqtt": Zigbee2MqttAdapter(of("zigbee2mqtt"), settings.mqtt.z2m_base_topic),
+    }
 
 
 def _deep_merge(base: dict, patch: dict) -> dict:
@@ -46,8 +65,12 @@ class App:
         self.settings = settings
         self.bus = EventBus()
         self.registry = DeviceRegistry(devices)
+        adapters = build_adapters(self.registry, settings)
         self.twins = TwinStore(
-            self.registry, self.bus, default_heartbeat_s=settings.health.heartbeat_s
+            self.registry,
+            self.bus,
+            default_heartbeat_s=settings.health.heartbeat_s,
+            no_heartbeat={d.id for d in self.registry if not adapters[d.config.protocol].heartbeat},
         )
         self.health = HealthMonitor(
             self.twins,
@@ -57,9 +80,7 @@ class App:
         self.tracker = CommandTracker(self.bus)
         topics = Topics(settings.mqtt.prefix)
         self.mqtt = MqttClient(settings.mqtt, availability_topic=topics.assistant_availability)
-        self.gateway = DeviceGateway(
-            self.mqtt, self.registry, {"native": NativeAdapter(settings.mqtt.prefix)}
-        )
+        self.gateway = DeviceGateway(self.mqtt, self.registry, adapters)
         self.dispatcher = Dispatcher(
             self.registry, self.twins, self.tracker, self.gateway, self.bus, settings.dispatcher
         )

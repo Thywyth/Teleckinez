@@ -91,6 +91,35 @@ payload і навпаки нормалізує стан:
 документацією Tasmota / Zigbee2MQTT / ESPHome перед реалізацією і послатися
 на неї у записці.
 
+### Реалізація етапу 4 (звірено з документацією 20.10.2026)
+
+Джерела: Tasmota — https://tasmota.github.io/docs/MQTT/ і
+https://tasmota.github.io/docs/Commands/ (розділ Light); Zigbee2MQTT —
+https://www.zigbee2mqtt.io/guide/usage/mqtt_topics_and_messages.html,
+.../guide/configuration/device-availability.html, .../guide/usage/exposes.html.
+
+Адреса пристрою у прошивці — нове поле `address` у devices.yaml (Tasmota
+`%topic%`, Z2M `friendly_name`); за замовчуванням — id з `_` замість `.`.
+
+| | Tasmota | Zigbee2MQTT |
+|---|---|---|
+| Типи | `light`, `rgb_light`, `socket` | `light`, `rgb_light`, `curtains`, `door_lock` |
+| Команда | `cmnd/{t}/Backlog` = `Power ON; Dimmer 40; Color #FF0000` (одна дія — `cmnd/{t}/POWER` = `ON`) | `zigbee2mqtt/{n}/set` = `{"state":"ON","brightness":102,"color":{"x":..,"y":..}}`; штори `{"position":50}`; замок `{"state":"LOCK"}` |
+| Відповідь / стан | `stat/{t}/RESULT` `{"POWER":"ON","Dimmer":40,"Color":"FF0000"}`; періодично `tele/{t}/STATE` (TelePeriod, за замовч. 300 с) | `zigbee2mqtt/{n}` — повний стан JSON після зміни (heartbeat немає) |
+| Доступність | `tele/{t}/LWT` = `Online` / `Offline` (retained) | `zigbee2mqtt/{n}/availability` = `{"state":"online"}` (retained; старий формат `online` теж приймаємо) |
+| Перетворення | `Dimmer` 0..100 = `brightness`; `Color` hex ↔ найближчий колір каталогу | `brightness` 0..254 ↔ 1..100 %; колір через CIE xy (sRGB → XYZ → xy) і найближчий колір каталогу |
+
+**Підтвердження.** Ці прошивки не мають `cmd_id` і окремого ack. Адаптер
+пам'ятає надіслану команду і вважає першу відповідь пристрою після неї
+(`stat/.../RESULT` для Tasmota, повідомлення стану для Z2M) підтвердженням
+прийому (ack `accepted`). Остаточний успіх, як і для `native`, — збіг стану з
+desired. Повтор із тим самим `cmd_id` безпечний, бо команда абсолютна
+(`Power ON`, `position 50`), а не відносна.
+
+**Health.** Пристрої Z2M не надсилають heartbeat, тому для них стан `stale`
+не обчислюється (доступність визначає сам Zigbee2MQTT); для Tasmota heartbeat
+— це `tele/STATE` з періодом `heartbeat_s` (у симуляторі — як у `native`).
+
 ### sim/faults (лише симулятор, devices.md §4)
 ```json
 {"device_id": "lock.front_door", "fault": "offline"}

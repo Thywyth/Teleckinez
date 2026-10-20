@@ -28,7 +28,11 @@ class HealthMonitor:
         now = self.twins.clock()
         stale = []
         for twin in self.twins:
-            if twin.availability is not Availability.ONLINE or twin.last_seen is None:
+            if (
+                twin.availability is not Availability.ONLINE
+                or twin.last_seen is None
+                or twin.heartbeat_s is None  # no heartbeat to miss (Zigbee2MQTT)
+            ):
                 continue
             if now - twin.last_seen > self.stale_factor * twin.heartbeat_s:
                 self.twins.set_availability(twin.id, Availability.STALE)

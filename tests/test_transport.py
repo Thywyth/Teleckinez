@@ -41,16 +41,16 @@ def test_encode_command() -> None:
 
 def test_decode_messages() -> None:
     a = NativeAdapter("tkz")
-    assert a.decode("tkz/dev/l.k/state", b'{"on": true, "ts": 1.5, "seq": 7}') == StateReport(
-        "l.k", {"on": True}, 1.5, 7
-    )
-    assert a.decode("tkz/dev/l.k/ack", b'{"cmd_id": "c", "status": "rejected", "error": "x"}') == (
+    assert a.decode("tkz/dev/l.k/state", b'{"on": true, "ts": 1.5, "seq": 7}') == [
+        StateReport("l.k", {"on": True}, 1.5, 7)
+    ]
+    assert a.decode("tkz/dev/l.k/ack", b'{"cmd_id": "c", "status": "rejected", "error": "x"}') == [
         AckReport("l.k", "c", "rejected", "x", None)
-    )
-    assert a.decode("tkz/dev/l.k/availability", b"offline") == AvailabilityReport("l.k", False)
-    assert a.decode("tkz/dev/l.k/meta", b'{"type": "light"}') == MetaReport(
-        "l.k", {"type": "light"}
-    )
+    ]
+    assert a.decode("tkz/dev/l.k/availability", b"offline") == [AvailabilityReport("l.k", False)]
+    assert a.decode("tkz/dev/l.k/meta", b'{"type": "light"}') == [
+        MetaReport("l.k", {"type": "light"})
+    ]
 
 
 @pytest.mark.parametrize(
@@ -65,7 +65,7 @@ def test_decode_messages() -> None:
     ],
 )
 def test_decode_ignores_garbage(topic: str, payload: bytes) -> None:
-    assert NativeAdapter("tkz").decode(topic, payload) is None
+    assert NativeAdapter("tkz").decode(topic, payload) == []
 
 
 # --------------------------------------------------------------- with a broker
@@ -81,7 +81,10 @@ async def test_gateway_roundtrip_with_fake_device(mqtt_settings, registry) -> No
     topics = Topics(mqtt_settings.prefix)
     received: list = []
     mqtt = MqttClient(mqtt_settings, availability_topic=topics.assistant_availability)
-    gateway = DeviceGateway(mqtt, registry, {"native": NativeAdapter(mqtt_settings.prefix)})
+    from teleckinez.app import build_adapters
+    from teleckinez.core.config import Settings
+
+    gateway = DeviceGateway(mqtt, registry, build_adapters(registry, Settings(mqtt=mqtt_settings)))
     two = asyncio.Event()
 
     def listen(message) -> None:
