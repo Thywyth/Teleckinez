@@ -40,7 +40,7 @@
 
 ## Етап 1. Ядро: пристрої, MQTT, диспетчер — без голосу (P0)
 
-- [ ] 1.1 `core/events.py` — EventBus + типи подій; тести
+- [x] 1.1 `core/events.py` — EventBus + типи подій; тести
 - [ ] 1.2 `core/config.py` — pydantic-моделі `settings.yaml`, `devices.yaml`; валідація; тести
 - [ ] 1.3 `config/devices.yaml` — 8 кімнат, ~25–30 пристроїв, синоніми uk/en
 - [ ] 1.4 `devices/` — типи пристроїв і capabilities, `converged()`; registry з пошуком
