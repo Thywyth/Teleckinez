@@ -130,6 +130,7 @@ class CommandTracker:
         self._active.setdefault(device_id, []).append(record)
         self.bus.publish(
             CommandCreated(
+                ts=now,
                 session_id=session_id,
                 cmd_id=record.cmd_id,
                 device_id=device_id,
@@ -161,6 +162,7 @@ class CommandTracker:
             record.t_ack = now
         self.bus.publish(
             CommandStatusChanged(
+                ts=now,
                 session_id=record.session_id,
                 cmd_id=record.cmd_id,
                 device_id=record.device_id,
@@ -177,6 +179,7 @@ class CommandTracker:
                 active.remove(record)
             self.bus.publish(
                 CommandFinished(
+                    ts=now,
                     session_id=record.session_id,
                     cmd_id=record.cmd_id,
                     device_id=record.device_id,

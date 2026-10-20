@@ -125,3 +125,11 @@ stateDiagram-v2
 | `availability_log` | device_id, ts, status |
 
 Журнал використовується веб-панеллю (історія) і бенчмарками (затримки).
+
+**Уточнення етапу 1:** додаткові колонки `commands.desired_json` (бажаний
+стан, якого домагався диспетчер), `voice_sessions.intent_json` і
+`voice_sessions.response` (для експериментів E2/E3). Записує `EventRecorder`
+— підписник EventBus, тож модулі не залежать від БД. sqlite3 зі стандартної
+бібліотеки в режимі WAL, `synchronous=NORMAL`: вставка — частки мілісекунди,
+тому запис синхронний у циклі подій, без окремого потоку. Версія схеми —
+`PRAGMA user_version`.
