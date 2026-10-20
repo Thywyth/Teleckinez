@@ -43,7 +43,7 @@
 - [x] 1.1 `core/events.py` — EventBus + типи подій; тести
 - [x] 1.2 `core/config.py` — pydantic-моделі `settings.yaml`, `devices.yaml`; валідація; тести
 - [x] 1.3 `config/devices.yaml` — 8 кімнат, ~25–30 пристроїв, синоніми uk/en
-- [ ] 1.4 `devices/` — типи пристроїв і capabilities, `converged()`; registry з пошуком
+- [x] 1.4 `devices/` — типи пристроїв і capabilities, `converged()`; registry з пошуком
 - [ ] 1.5 `transport/mqtt_client.py` + `adapters/native.py` (за protocol.md)
 - [ ] 1.6 `simulator/` — SimDevice, фізика типів, ідемпотентність, LWT, heartbeat
 - [ ] 1.7 `devices/twin.py` + `health.py` — reported/desired, online/stale/offline

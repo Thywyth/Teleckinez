@@ -1,5 +1,5 @@
 # Teleckinez: simulated smart home (docs/specs/devices.md).
-# 8 rooms, 30 devices. Names are synonyms the user can say (uk/en, with case
+# 8 rooms, 31 devices. Names are synonyms the user can say (uk/en, with case
 # forms); matching is case-insensitive and tolerant to small STT errors.
 # Optional per device: title (for responses), plural (grammar), critical,
 # heartbeat_s, sim (simulator-only: initial state, speed).
