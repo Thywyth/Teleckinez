@@ -121,6 +121,13 @@ class DeviceAvailabilityChanged(Event):
 
 
 @dataclass(frozen=True, kw_only=True)
+class SimFaultsChanged(Event):
+    """Faults currently injected in the simulator (from tkz/sim/faults/state)."""
+
+    faults: dict[str, dict[str, Any]]
+
+
+@dataclass(frozen=True, kw_only=True)
 class SpeakRequested(Event):
     text: str
     lang: str = "uk"

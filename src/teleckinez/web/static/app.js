@@ -67,13 +67,20 @@ function setChip(sel, text, kind) {
 }
 
 async function refresh() {
-  const [data, status] = await Promise.all([api("/api/devices"), api("/api/status")]);
+  const [data, status, faults] = await Promise.all([
+    api("/api/devices"), api("/api/status"), api("/api/sim/faults").catch(() => ({ faults: {} })),
+  ]);
+  faultsState.faults = faults.faults || {};
   state.rooms = data.rooms;
   state.devices = new Map(data.devices.map((d) => [d.id, d]));
   state.status = status;
   renderDashboard();
   renderStatus();
   renderVoicePanel();
+  // views that list devices may have been opened (restored tab) before the data arrived
+  const active = document.querySelector(".view.active")?.id;
+  if (active === "view-faults") renderFaults();
+  if (active === "view-journal") { renderJournalShell(); renderJournal(); }
 }
 
 function renderStatus() {
@@ -223,6 +230,8 @@ function buildCard(d) {
     el("div", {}, el("div", { class: "card-title" }, d.title), el("div", { class: "card-sub" }, describeAge(d))),
     el("i", { class: `dot ${d.availability}`, title: AVAIL[d.availability] })));
   card.append(el("div", { class: "state-line" }, ...stateLine(d, r, pending)));
+  const badges = faultBadges(d.id);
+  if (badges.length) card.append(el("div", { class: "fault-line" }, badges));
   const controls = buildControls(d, r);
   if (controls) card.append(controls);
   if (d.lastError) card.append(el("div", { class: "card-error" }, `Остання команда: ${d.lastError}`));
@@ -745,18 +754,97 @@ $("#theme-toggle").addEventListener("click", () => {
   storage("tkz-theme", next);
 });
 
-function renderFaultsPlaceholder() {
-  $("#view-faults").replaceChildren(
-    el("div", { class: "toolbar" }, el("h1", {}, "Збої (симулятор)")),
-    el("div", { class: "empty-state" },
-      el("h2", {}, "Ін'єкція збоїв ще не підключена"),
-      el("p", {}, "Керування збоями (offline, freeze, stuck, slow, reject, drop rate) з'явиться разом із "
-        + "модулем simulator/faults.py — пункт 4.1 ROADMAP. Поки що збій «не в мережі» можна побачити, "
-        + "зупинивши симулятор (Ctrl+C у його терміналі)."),
-    ),
+
+// --------------------------------------------------------------------- faults
+const FAULTS_UK = {
+  offline: ["Не в мережі", "обрив зв'язку без disconnect → брокер шле LWT"],
+  freeze: ["Завис", "з'єднання є, але ні ack, ні heartbeat"],
+  drop_rate: ["Втрачає команди", "частка p команд губиться (повтор рятує)"],
+  stuck: ["Не виконує", "ack приходить, стан не змінюється"],
+  slow: ["Повільний", "затримка ms перед відповіддю"],
+  reject: ["Відхиляє", "ack rejected з помилкою"],
+};
+const faultsState = { faults: {} };
+
+function faultBadges(deviceId) {
+  const active = faultsState.faults[deviceId] || {};
+  return Object.keys(active).map((f) => el("span", { class: "fault-badge", title: FAULTS_UK[f]?.[1] || f },
+    `⚠ ${FAULTS_UK[f]?.[0] || f}`));
+}
+
+async function sendFault(deviceId, fault, params = {}, enabled = true) {
+  try {
+    await api("/api/sim/faults", { method: "POST", body: { device_id: deviceId, fault, params, enabled } });
+  } catch (err) {
+    toast(`Збій не застосовано: ${err.message}`, "bad");
+  }
+}
+
+function faultControl(d) {
+  const active = faultsState.faults[d.id] || {};
+  const select = el("select", { class: "btn" },
+    el("option", { value: "" }, "без збою"),
+    Object.entries(FAULTS_UK).map(([k, [label]]) => el("option", { value: k, selected: k in active }, label)));
+  const param = el("input", { class: "field small", type: "number", placeholder: "параметр" });
+  const syncParam = () => {
+    const f = select.value;
+    param.hidden = !["drop_rate", "slow"].includes(f);
+    param.step = f === "drop_rate" ? "0.1" : "100";
+    param.min = "0";
+    param.max = f === "drop_rate" ? "1" : "";
+    param.placeholder = f === "drop_rate" ? "p, 0..1" : "ms";
+    param.value = f === "drop_rate" ? active.drop_rate?.p ?? 0.5 : f === "slow" ? active.slow?.ms ?? 3000 : "";
+  };
+  select.addEventListener("change", syncParam);
+  syncParam();
+  const apply = el("button", { class: "btn primary", onclick: () => {
+    const f = select.value;
+    if (!f) return sendFault(d.id, "clear");
+    const params = f === "drop_rate" ? { p: Number(param.value) } : f === "slow" ? { ms: Number(param.value) } : {};
+    return sendFault(d.id, f, params);
+  } }, "Застосувати");
+  const drift = el("button", { class: "btn", title: "Стан зміниться сам, ніби хтось натиснув вимикач",
+    onclick: () => sendFault(d.id, "drift") }, "Drift");
+  return el("tr", { class: Object.keys(active).length ? "has-fault" : "" },
+    el("td", {}, el("div", {}, d.title), el("div", { class: "card-sub" }, d.id)),
+    el("td", {}, el("i", { class: `dot ${d.availability}` }), " ", AVAIL[d.availability] || d.availability),
+    el("td", {}, faultBadges(d.id).length ? faultBadges(d.id) : el("span", { class: "muted" }, "—")),
+    el("td", {}, el("div", { class: "fault-controls" }, select, param, apply, drift)));
+}
+
+function renderFaults() {
+  const view = $("#view-faults");
+  const devices = [...state.devices.values()];
+  const count = Object.keys(faultsState.faults).length;
+  view.replaceChildren(
+    el("div", { class: "toolbar" }, el("h1", {}, "Збої (симулятор)"),
+      el("div", { class: "filters" },
+        el("span", { class: "muted" }, count ? `активних збоїв: ${count}` : "збоїв немає"),
+        el("button", { class: "btn", disabled: !count, onclick: () => sendFault("*", "clear") }, "Скинути всі"))),
+    el("p", { class: "muted intro" }, "Збої вмикаються в симуляторі через MQTT (tkz/sim/faults). "
+      + "Дайте команду пристрою зі збоєм — на дашборді й у журналі видно, як асистент його виявляє."),
+    el("div", { class: "table-wrap" }, el("table", { class: "journal faults" },
+      el("thead", {}, el("tr", {}, ["Пристрій", "Доступність", "Активні збої", "Керування"].map((h) => el("th", {}, h)))),
+      el("tbody", {}, devices.map(faultControl)))),
   );
 }
-renderFaultsPlaceholder();
+
+async function loadFaults() {
+  try {
+    faultsState.faults = (await api("/api/sim/faults")).faults || {};
+  } catch { faultsState.faults = {}; }
+  renderFaults();
+}
+
+state.listeners.push(({ type, data }) => {
+  if (type === "SimFaultsChanged") {
+    faultsState.faults = data.faults || {};
+    for (const id of state.devices.keys()) updateCard(id);
+    if ($("#view-faults").classList.contains("active")) renderFaults();
+  } else if (type === "DeviceAvailabilityChanged" && $("#view-faults").classList.contains("active")) {
+    renderFaults();
+  }
+});
 
 // ----------------------------------------------------------------------- tabs
 function showView(name) {
@@ -764,6 +852,7 @@ function showView(name) {
   document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${name}`));
   storage("tkz-view", name);
   if (name === "journal") { renderJournalShell(); loadJournal(); }
+  if (name === "faults") loadFaults();
   if (name === "settings") loadSettings().catch((e) => toast(e.message, "bad"));
 }
 document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showView(t.dataset.view)));

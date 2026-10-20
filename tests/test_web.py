@@ -222,3 +222,43 @@ def test_frontend_javascript_parses() -> None:
     script = Path(__file__).resolve().parents[1] / "src/teleckinez/web/static/app.js"
     result = subprocess.run([node, "--check", str(script)], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
+
+
+async def test_sim_faults_api(client, core) -> None:
+    sent: list = []
+
+    async def fake_send(device_id, fault, params, enabled):
+        sent.append((device_id, fault, params, enabled))
+
+    r = await client.post(
+        "/api/sim/faults", json={"device_id": "lock.front_door", "fault": "offline"}
+    )
+    assert r.status_code == 503  # broker not connected in this test
+    core.send_fault = fake_send
+    r = await client.post(
+        "/api/sim/faults",
+        json={"device_id": "light.kitchen_main", "fault": "slow", "params": {"ms": 500}},
+    )
+    assert r.json() == {"sent": True}
+    assert sent == [("light.kitchen_main", "slow", {"ms": 500}, True)]
+    assert (
+        await client.post("/api/sim/faults", json={"device_id": "*", "fault": "boom"})
+    ).status_code == 422
+    assert (
+        await client.post("/api/sim/faults", json={"device_id": "x.y", "fault": "stuck"})
+    ).status_code == 404
+
+
+async def test_sim_fault_state_is_mirrored(client, core) -> None:
+    from teleckinez.core.events import SimFaultsChanged
+
+    events: list = []
+    core.bus.subscribe(events.append, SimFaultsChanged)
+    core._on_sim_faults("tkz/sim/faults/state", b'{"light.kitchen_main": {"stuck": {}}}')
+    assert events[-1].faults == {"light.kitchen_main": {"stuck": {}}}
+    body = (await client.get("/api/sim/faults")).json()
+    assert (
+        body["faults"] == {"light.kitchen_main": {"stuck": {}}} and "offline" in body["available"]
+    )
+    core._on_sim_faults("tkz/sim/faults/state", b"")  # cleared retained message
+    assert core.sim_faults == {}

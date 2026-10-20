@@ -298,6 +298,18 @@ table.journal { width: 100%; border-collapse: collapse; font-size: 13px; }
 .toast.bad { border-left-color: var(--bad); }
 @keyframes toast-in { from { transform: translateY(8px); opacity: 0; } }
 
+/* ------------------------------------------------------------------- faults */
+.fault-line { display: flex; gap: 4px; flex-wrap: wrap; }
+.fault-badge {
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: var(--bad-soft); color: var(--bad); white-space: nowrap;
+}
+.faults td { vertical-align: middle; }
+.faults tr.has-fault td { background: color-mix(in srgb, var(--bad-soft) 45%, transparent); }
+.fault-controls { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.field.small { width: 90px; }
+.intro { margin: -6px 0 12px; font-size: 13px; }
+
 /* --------------------------------------------------------------- dark theme */
 :root[data-theme="dark"] {
   --bg: #0f141c;
@@ -345,6 +357,12 @@ body, .topbar, .card, .panel-card, .stat, .table-wrap, .settings fieldset {
 @media (max-width: 1100px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
   .voice { order: -1; position: static; }
+  .topbar { flex-wrap: wrap; gap: 8px 14px; padding: 8px 12px; }
+  .brand { min-width: 0; }
+  .tabs { order: 3; flex-basis: 100%; overflow-x: auto; }
+  .status-chips { margin-left: auto; flex-wrap: wrap; }
+  .layout { padding: 12px; gap: 12px; }
+  .setting { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .history { max-height: 30vh; }
   .brand-sub { display: none; }
 }

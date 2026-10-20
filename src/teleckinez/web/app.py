@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field, ValidationError
 from teleckinez import __version__
 from teleckinez.assistant import new_session_id
 from teleckinez.core.models import Availability, DeviceCommand
+from teleckinez.transport.mqtt_client import MqttNotConnected
 from teleckinez.web.serialize import device_to_dict, event_to_dict, record_to_dict, room_name
 
 if TYPE_CHECKING:
@@ -41,6 +42,16 @@ class TextBody(BaseModel):
 
 class PttBody(BaseModel):
     pressed: bool
+
+
+SIM_FAULTS = ("offline", "freeze", "drop_rate", "stuck", "slow", "reject", "drift", "clear")
+
+
+class FaultBody(BaseModel):
+    device_id: str = Field(min_length=1)  # or "*" for every device
+    fault: str
+    params: dict[str, Any] = {}
+    enabled: bool = True
 
 
 def create_app(core: "App") -> FastAPI:
@@ -114,6 +125,23 @@ def create_app(core: "App") -> FastAPI:
             return core.storage.commands.recent(limit, device_id)
         records = [r for r in core.tracker.recent(500) if not device_id or r.device_id == device_id]
         return [record_to_dict(r) for r in records[:limit]]
+
+    @api.get("/api/sim/faults")
+    async def get_faults() -> dict[str, Any]:
+        return {"faults": core.sim_faults, "available": list(SIM_FAULTS)}
+
+    @api.post("/api/sim/faults")
+    async def post_fault(body: FaultBody) -> dict[str, Any]:
+        """Inject a fault in the simulator (devices.md §4); the result arrives via /ws."""
+        if body.fault not in SIM_FAULTS:
+            raise HTTPException(422, f"unknown fault {body.fault!r}")
+        if body.device_id != "*" and body.device_id not in core.registry:
+            raise HTTPException(404, f"unknown device {body.device_id}")
+        try:
+            await core.send_fault(body.device_id, body.fault, body.params, body.enabled)
+        except MqttNotConnected as exc:
+            raise HTTPException(503, f"немає зв\x27язку з брокером: {exc}") from None
+        return {"sent": True}
 
     @api.get("/api/settings")
     async def get_settings() -> dict[str, Any]:

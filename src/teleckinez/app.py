@@ -6,11 +6,12 @@ modules themselves only know interfaces and the event bus.
 
 import asyncio
 import contextlib
+import json
 import logging
 
 from teleckinez.assistant import Assistant
 from teleckinez.core.config import DevicesConfig, Settings
-from teleckinez.core.events import EventBus
+from teleckinez.core.events import EventBus, SimFaultsChanged
 from teleckinez.devices.health import HealthMonitor
 from teleckinez.devices.registry import DeviceRegistry
 from teleckinez.devices.twin import TwinStore
@@ -86,6 +87,10 @@ class App:
             self.storage = Storage(connect(settings.storage.path))
             EventRecorder(self.storage, self.bus)
         self.voice = None  # voice pipeline (stage 2); the web panel checks for it
+        # Faults injected in the simulator, mirrored for the web panel (devices.md §4).
+        self.topics = topics
+        self.sim_faults: dict[str, dict] = {}
+        self.mqtt.subscribe(topics.sim_faults_state, self._on_sim_faults)
         self._tasks: list[asyncio.Task] = []
 
     # Sections applied at once; voice ones are stored for the voice pipeline; the rest
@@ -125,6 +130,20 @@ class App:
         self.health.stale_factor = self.settings.health.stale_factor
         self.health.check_interval_s = self.settings.health.check_interval_s
         return {"applied": applied, "restart_required": restart}
+
+    def _on_sim_faults(self, topic: str, payload: bytes) -> None:
+        try:
+            faults = json.loads(payload) if payload else {}
+        except ValueError:
+            log.warning("bad fault state on %s", topic)
+            return
+        self.sim_faults = faults if isinstance(faults, dict) else {}
+        self.bus.publish(SimFaultsChanged(faults=self.sim_faults))
+
+    async def send_fault(self, device_id: str, fault: str, params: dict, enabled: bool) -> None:
+        """Ask the simulator to inject / clear a fault (raises MqttNotConnected)."""
+        message = {"device_id": device_id, "fault": fault, "params": params, "enabled": enabled}
+        await self.mqtt.publish(self.topics.sim_faults, message, qos=1)
 
     async def serve_web(self) -> None:
         """Run the web panel (uvicorn) in this event loop until cancelled."""

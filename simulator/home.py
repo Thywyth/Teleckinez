@@ -105,7 +105,11 @@ class SimHome:
         mqtt = self.settings.mqtt
         while True:
             try:
-                async with aiomqtt.Client(mqtt.host, mqtt.port, identifier=identifier) as client:
+                # If the simulator crashes, the broker clears the retained fault state for us.
+                will = aiomqtt.Will(self.topics.sim_faults_state, b"", qos=1, retain=True)
+                async with aiomqtt.Client(
+                    mqtt.host, mqtt.port, identifier=identifier, will=will
+                ) as client:
                     self._control = client
                     await client.subscribe(self.topics.sim_faults, qos=1)
                     await self._publish_fault_state()
