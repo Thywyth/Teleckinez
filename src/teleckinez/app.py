@@ -73,7 +73,7 @@ class App:
             min_confidence=settings.nlu.min_confidence,
         )
         self.resolver = TargetResolver(self.registry)
-        self.composer = ResponseComposer(self.registry, self.twins)
+        self.composer = ResponseComposer(self.registry, self.twins, fresh_s=settings.health.fresh_s)
         self.assistant = Assistant(
             self.bus,
             self.parser,
@@ -137,6 +137,7 @@ class App:
         self.parser.min_confidence = self.settings.nlu.min_confidence
         self.health.stale_factor = self.settings.health.stale_factor
         self.health.check_interval_s = self.settings.health.check_interval_s
+        self.composer.fresh_s = self.settings.health.fresh_s
         return {"applied": applied, "restart_required": restart}
 
     def _on_sim_faults(self, topic: str, payload: bytes) -> None:

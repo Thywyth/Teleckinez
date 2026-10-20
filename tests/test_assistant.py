@@ -131,3 +131,65 @@ async def test_attribute_selects_device_in_room(env) -> None:
     assert await assistant.ask("яскравість на кухні 40 відсотків") == (
         "Світло на кухні: яскравість 40 %."
     )
+
+
+# ------------------------------------------------------- state queries (4.3)
+
+
+@pytest.mark.parametrize(
+    ("text", "answer"),
+    [
+        ("чи зачинені двері", "Так, замок вхідних дверей зачинено."),
+        ("чи увімкнене світло на кухні?", "Ні, світло на кухні вимкнено."),
+        ("чи відкриті штори у вітальні", "Ні, штори у вітальні закрито."),
+        ("чи працює пилосос", "Ні, робот-пилосос на базі, заряд 100 %."),
+        ("is the front door locked?", "Yes. The front door lock is locked."),
+        ("what is on?", "Nothing is on."),
+        ("що увімкнено?", "Нічого не увімкнено."),
+    ],
+)
+async def test_yes_no_and_listing_queries(env, text: str, answer: str) -> None:
+    assistant, _, _ = env
+    assert await assistant.ask(text) == answer
+
+
+async def test_group_and_room_state_queries(env) -> None:
+    assistant, _, _ = env
+    await assistant.ask("увімкни світло на кухні")
+    await assistant.ask("увімкни телевізор")
+    assert await assistant.ask("чи все світло вимкнено?") == "Ні, увімкнено: світло на кухні."
+    assert await assistant.ask("що увімкнено?") == (
+        "Увімкнено: телевізор у вітальні та світло на кухні."
+    )
+    assert await assistant.ask("що увімкнено на кухні?") == "Увімкнено: світло на кухні."
+    await assistant.ask("вимкни все світло")
+    assert await assistant.ask("чи все світло вимкнено?") == "Так, усе вимкнено."
+
+
+async def test_state_query_does_not_guess_for_offline_or_stale_devices(env) -> None:
+    from teleckinez.core.models import Availability
+
+    assistant, home, _ = env
+    home.twins.set_availability("lock.front_door", Availability.OFFLINE)
+    answer = await assistant.ask("чи зачинені двері")
+    assert answer.startswith("Не можу сказати напевно: замок вхідних дверей не в мережі")
+    home.twins.set_availability("light.kitchen_main", Availability.STALE)
+    answer = await assistant.ask("чи все світло вимкнено?")
+    assert answer == "Так, усе вимкнено. Немає свіжих даних від: світло на кухні."
+
+
+async def test_home_temperature_lists_rooms_only(env) -> None:
+    assistant, _, _ = env
+    answer = await assistant.ask("яка температура?")
+    assert "Чайник" not in answer and "Кондиціонер" not in answer
+    assert answer.count("температура") == 5  # 4 climate sensors + the thermostat
+
+
+async def test_fresh_threshold_comes_from_settings(env) -> None:
+    assistant, home, _ = env
+    composer = assistant.composer
+    twin = home.twins.get("sensor.bedroom_climate")
+    twin.last_seen = composer.clock() - 20
+    assert "(дані" not in await assistant.ask("яка температура у спальні")
+    composer.fresh_s = 10
+    assert "(дані 20 с тому)" in await assistant.ask("яка температура у спальні")

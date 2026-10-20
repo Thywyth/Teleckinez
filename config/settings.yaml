@@ -28,6 +28,7 @@ health:
   heartbeat_s: 10           # default device heartbeat (state is re-published this often)
   stale_factor: 3           # stale after 3 x heartbeat without any message
   check_interval_s: 1.0
+  fresh_s: 30               # answers mention the age of older data ("дані 2 хв тому")
 
 notifications:             # the assistant speaks up on its own (dispatcher.md §5)
   enabled: true

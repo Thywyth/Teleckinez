@@ -153,8 +153,9 @@ def build_index(registry: DeviceRegistry) -> PhraseIndex:
         idx.add(p, Entry("query", True), fuzzy=False)
     for p in lexicon.ALL_WORDS:
         idx.add(p, Entry("all", True), fuzzy=False)
-    for p in lexicon.STATE_ADJECTIVES:
-        idx.add(p, Entry("state_adj", p))
+    for expect, words in lexicon.STATE_WORDS.items():
+        for p in words:
+            idx.add(p, Entry("state_adj", expect), fuzzy=False)
     return idx
 
 
@@ -223,9 +224,14 @@ class RuleParser:
         )
         params = self._params(matches, tokens)
         if is_query:
-            kind, action = "query", None
+            expect = value("state_adj") or lexicon.ACTION_EXPECT.get(action or "")
+            kind, action, params = "query", None, {}
             if attr := value("attr"):
-                params = {"attribute": attr}
+                params["attribute"] = attr
+            if expect:
+                params["expect"] = (
+                    expect  # yes/no ("чи зачинені двері?") or listing ("що увімкнено?")
+                )
         else:
             kind = "command"
             if value("step"):
@@ -240,9 +246,9 @@ class RuleParser:
                 action = "set"
 
         has_target = any((device_name, device_type, group, room))
-        if not has_target or (kind == "command" and not (action or device_name or device_type)):
+        if kind == "command" and not (has_target and (action or device_name or device_type)):
             return ParseResult(None, "not_understood", matches)
-        if kind == "query" and not any((device_name, device_type, group, room, value("attr"))):
+        if kind == "query" and not (has_target or params):
             return ParseResult(None, "not_understood", matches)
 
         scores = [m.score for c, m in slots.items() if c in KEY_SLOTS]

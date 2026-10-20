@@ -101,7 +101,8 @@ TYPE_WORDS: dict[str, list[str]] = {
 }  # fmt: skip
 
 QUERY_WORDS = [
-    "яка", "який", "яке", "які", "чи", "скільки", "як там", "що з", "що там", "стан", "статус",
+    "яка", "який", "яке", "які", "чи", "скільки", "як там", "що з", "що там", "що", "стан",
+    "статус",
     "what", "what's", "whats", "is", "are", "how", "how much", "status", "state",
 ]  # fmt: skip
 
@@ -120,12 +121,22 @@ ALL_WORDS = [
     "everything",
 ]
 
-# Adjectives that ask about a state: "чи зачинені двері?" -> query locked
-STATE_ADJECTIVES = [
-    "зачинені", "зачинено", "зачинений", "відчинені", "відчинено", "закриті", "закрито",
-    "відкриті", "відкрито", "увімкнене", "увімкнено", "увімкнений", "вимкнене", "вимкнено",
-    "locked", "unlocked", "open", "closed",
-]  # fmt: skip
+# Words that ask about a state: "чи зачинені двері?", "що увімкнено?" -> expected state
+STATE_WORDS: dict[str, list[str]] = {
+    "closed": ["зачинені", "зачинено", "зачинений", "зачинена", "закриті", "закрито", "закритий",
+               "закрита", "замкнені", "замкнено", "locked", "closed", "shut"],
+    "open": ["відчинені", "відчинено", "відчинений", "відчинена", "відкриті", "відкрито",
+             "відкритий", "відкрита", "unlocked"],
+    "on": ["увімкнене", "увімкнено", "увімкнений", "увімкнена", "увімкнені", "включене", "включено",
+           "включений", "горить", "працює", "працюють"],
+    "off": ["вимкнене", "вимкнено", "вимкнений", "вимкнена", "вимкнені", "виключене", "виключено"],
+}  # fmt: skip
+STATE_ADJECTIVES = [w for words in STATE_WORDS.values() for w in words]
+# In a question the verb names the state: "is the kitchen light on?", "is the door locked?"
+ACTION_EXPECT = {
+    "turn_on": "on", "turn_off": "off", "open": "open", "close": "closed",
+    "lock": "closed", "unlock": "open",
+}  # fmt: skip
 
 # Ignored when nothing else matched (prepositions, articles, politeness).
 STOPWORDS = {

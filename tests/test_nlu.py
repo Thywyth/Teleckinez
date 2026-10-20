@@ -216,3 +216,26 @@ def test_intent_metadata(nlu) -> None:
     assert intent.lang == "uk" and intent.parser == "rule"
     assert intent.raw_text == "Увімкни світло на кухні"
     assert intent.confidence == 1.0
+
+
+@pytest.mark.parametrize(
+    ("text", "expect", "has_device"),
+    [
+        ("чи зачинені двері", "closed", True),
+        ("чи увімкнене світло на кухні", "on", True),
+        ("is the kitchen light on?", "on", True),
+        ("is the front door locked", "closed", True),
+        ("що увімкнено?", "on", False),
+        ("що відкрито", "open", False),
+    ],
+)
+def test_state_questions(nlu, text: str, expect: str, has_device: bool) -> None:
+    intent, res = nlu(text)
+    assert intent.kind == "query" and intent.params.get("expect") == expect
+    assert res.details["listing"] is not has_device
+
+
+def test_query_with_attribute_only(nlu) -> None:
+    intent, res = nlu("яка температура?")  # no room: used to be "not understood"
+    assert intent.params == {"attribute": "target_temp"}
+    assert {d.type.name for d in res.devices} == {"climate_sensor", "thermostat"}

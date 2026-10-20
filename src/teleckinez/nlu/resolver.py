@@ -36,6 +36,16 @@ QUERY_FAMILIES = {
 }
 
 
+HOME_FAMILIES = {"target_temp": ("temperature", "current_temp")}
+# Which attributes can answer "is it on / open?"
+EXPECT_ATTRS = {"on": ("on", "status"), "off": ("on", "status"), "open": ("locked", "position"),
+                "closed": ("locked", "position")}  # fmt: skip
+
+
+def can_answer(device: Device, expect: str) -> bool:
+    return any(device.type.has(a) for a in EXPECT_ATTRS[expect])
+
+
 @dataclass
 class Resolution:
     kind: str  # command | query
@@ -113,8 +123,13 @@ class TargetResolver:
                         details={"room": room, "devices": [d.id for d in devices]},
                     )
         elif kind == "query" and "attribute" in intent.params:
-            family = QUERY_FAMILIES.get(intent.params["attribute"], (intent.params["attribute"],))
+            attribute = intent.params["attribute"]
+            # the whole home: "яка температура?" means rooms, not the kettle or the AC setting
+            family = HOME_FAMILIES.get(attribute) or QUERY_FAMILIES.get(attribute, (attribute,))
             devices = [d for d in reg if any(d.type.has(a) for a in family)]
+            fan_out = True
+        elif kind == "query" and "expect" in intent.params:  # "що увімкнено?" in the whole home
+            devices = [d for d in reg if can_answer(d, intent.params["expect"])]
             fan_out = True
         else:
             return [], Resolution(kind, error="unknown_device")
@@ -134,6 +149,16 @@ class TargetResolver:
 
     def _query(self, intent: Intent, devices: list[Device]) -> Resolution:
         attribute = intent.params.get("attribute")
+        expect = intent.params.get("expect")
+        if expect:
+            devices = [d for d in devices if can_answer(d, expect)]
+            if not devices:
+                return Resolution("query", error="unsupported_action", details={"expect": expect})
+            # no device named -> list matching devices; otherwise answer yes / no
+            listing = not (intent.device_name or intent.device_type or intent.group)
+            return Resolution(
+                "query", devices=devices, details={"expect": expect, "listing": listing}
+            )
         if attribute:
             family = QUERY_FAMILIES.get(attribute, (attribute,))
             devices = [d for d in devices if any(d.type.has(a) for a in family)]

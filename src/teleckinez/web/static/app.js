@@ -636,6 +636,7 @@ const SETTINGS_FORM = [
   ["Доступність пристроїв", "застосовується одразу", [
     ["health", "heartbeat_s", "Період heartbeat за замовчуванням, с", "number", { step: 1, min: 1 }],
     ["health", "stale_factor", "«Мовчить» після N × heartbeat", "number", { step: 0.5, min: 1 }],
+    ["health", "fresh_s", "Вказувати вік даних, старших за, с", "number", { step: 5, min: 0 }],
   ]],
   ["Сповіщення", "асистент сам повідомляє про проблеми; застосовується одразу", [
     ["notifications", "enabled", "Сповіщення увімкнено", "bool"],

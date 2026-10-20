@@ -17,7 +17,33 @@ from teleckinez.devices.twin import TwinStore
 from teleckinez.dispatch.tracker import CommandRecord
 
 MAX_LISTED = 3  # failures / rooms named one by one before "і ще N"
-FRESH_S = 30.0  # older data is reported with its age
+FRESH_S = 30.0  # default: older data is reported with its age (settings: health.fresh_s)
+EXPECT_WORDS = {  # state names for yes/no and listing answers
+    "uk": {"on": "увімкнено", "off": "вимкнено", "open": "відкрито", "closed": "закрито"},
+    "en": {"on": "on", "off": "off", "open": "open", "closed": "closed"},
+}
+OPPOSITE = {"on": "off", "off": "on", "open": "closed", "closed": "open"}
+
+
+def state_matches(state: dict[str, Any], expect: str) -> bool | None:
+    """Does a reported state satisfy "on" / "off" / "open" / "closed"? None = unknown."""
+    if expect in ("on", "off"):
+        if "on" in state:
+            value = bool(state["on"])
+        elif "status" in state:
+            value = state["status"] == "cleaning"
+        else:
+            return None
+        return value if expect == "on" else not value
+    if "locked" in state:
+        is_open = not state["locked"]
+    elif "position" in state:
+        is_open = state["position"] > 0
+    else:
+        return None
+    return is_open if expect == "open" else not is_open
+
+
 IMPLY_ON = {"brightness", "color", "volume", "speed", "level", "mode", "target_temp"}
 
 TEXTS: dict[str, dict[str, str]] = {
@@ -57,6 +83,14 @@ TEXTS: dict[str, dict[str, str]] = {
         "notify_stale": "{title}: немає сигналу, дані можуть бути застарілими",
         "notify_back": "{title} знову на зв'язку",
         "notify_drift": "Увага: {title} {what} без команди",
+        "yes": "Так, {text}",
+        "no": "Ні, {text}",
+        "unknown": "Не можу сказати напевно: {text}",
+        "all_yes": "Так, усе {state}",
+        "some_no": "Ні, {state}: {titles}",
+        "listing": "{state}: {titles}",
+        "listing_none": "Нічого не {state}",
+        "uncertain": "Немає свіжих даних від: {titles}",
         "and": " та ",
     },
     "en": {
@@ -92,6 +126,14 @@ TEXTS: dict[str, dict[str, str]] = {
         "notify_stale": "{title}: no signal, the data may be stale",
         "notify_back": "{title} {be} back online",
         "notify_drift": "Attention: {title} changed without a command: {what}",
+        "yes": "Yes. {text}",
+        "no": "No. {text}",
+        "unknown": "I can't say for sure. {text}",
+        "all_yes": "Yes, everything is {state}",
+        "some_no": "No, {state}: {titles}",
+        "listing": "{state}: {titles}",
+        "listing_none": "Nothing is {state}",
+        "uncertain": "No fresh data from: {titles}",
         "and": " and ",
     },
 }
@@ -236,11 +278,16 @@ def is_state_phrase(what: str, lang: str) -> bool:
 
 class ResponseComposer:
     def __init__(
-        self, registry: DeviceRegistry, twins: TwinStore, clock: Callable[[], float] = time.time
+        self,
+        registry: DeviceRegistry,
+        twins: TwinStore,
+        clock: Callable[[], float] = time.time,
+        fresh_s: float = FRESH_S,
     ) -> None:
         self.registry = registry
         self.twins = twins
         self.clock = clock
+        self.fresh_s = fresh_s
 
     @staticmethod
     def t(lang: str, key: str, **kw: Any) -> str:
@@ -329,7 +376,10 @@ class ResponseComposer:
         self, devices: Sequence[Device], lang: str = "uk", attribute: str | None = None
     ) -> str:
         now = self.clock()
-        return " ".join(sentence(self._describe_device(d, now, lang, attribute)) for d in devices)
+        texts = [self._describe_device(d, now, lang, attribute) for d in devices]
+        # a device with nothing to say (an AC that is off asked for temperature) is skipped
+        texts = [t for t in texts if not t.endswith(": ")] or texts[:1]
+        return " ".join(sentence(t) for t in texts)
 
     def _describe_device(self, device: Device, now: float, lang: str, attribute: str | None) -> str:
         twin = self.twins.get(device.id)
@@ -354,8 +404,73 @@ class ResponseComposer:
         text = f"{title}: {described}"
         if twin.availability is Availability.STALE:
             return self.t(lang, "state_stale", text=text, age=age_text(age, lang))
-        if age > FRESH_S:
+        if age > self.fresh_s:
             return self.t(lang, "state_old", text=text, age=age_text(age, lang))
+        return text
+
+    def state_answer(
+        self, devices: Sequence[Device], expect: str, lang: str = "uk", listing: bool = False
+    ) -> str:
+        """Yes/no ("чи зачинені двері?") or a list ("що увімкнено?") from the digital twins."""
+        now = self.clock()
+        known, uncertain = [], []
+        for device in devices:
+            twin = self.twins.get(device.id)
+            result = state_matches(twin.reported, expect) if twin.reported else None
+            fresh = twin.availability is Availability.ONLINE
+            (known if result is not None and fresh else uncertain).append((device, result))
+        words = EXPECT_WORDS[lang]
+        names = lambda items: join([lower_first(d.title(lang)) for d, _ in items], lang)  # noqa: E731
+
+        if len(devices) == 1 and not listing:
+            device = devices[0]
+            text = self._state_sentence(device, now, lang)
+            result = (known or uncertain)[0][1]
+            if not known or result is None:
+                return sentence(
+                    self.t(lang, "unknown", text=lower_first(text) if lang == "uk" else text)
+                )
+            return sentence(
+                self.t(
+                    lang,
+                    "yes" if result else "no",
+                    text=lower_first(text) if lang == "uk" else text,
+                )
+            )
+
+        parts = []
+        if listing:
+            hits = [(d, r) for d, r in known if r]
+            if hits:
+                parts.append(
+                    self.t(lang, "listing", state=words[expect].capitalize(), titles=names(hits))
+                )
+            else:
+                parts.append(self.t(lang, "listing_none", state=words[expect]))
+        else:
+            misses = [(d, r) for d, r in known if not r]
+            if misses:
+                parts.append(
+                    self.t(lang, "some_no", state=words[OPPOSITE[expect]], titles=names(misses))
+                )
+            elif known:
+                parts.append(self.t(lang, "all_yes", state=words[expect]))
+        if uncertain:
+            parts.append(self.t(lang, "uncertain", titles=names(uncertain)))
+        return " ".join(sentence(p) for p in parts)
+
+    def _state_sentence(self, device: Device, now: float, lang: str) -> str:
+        """'Замок вхідних дверей зачинено' instead of 'Замок вхідних дверей: зачинено'."""
+        text = self._describe_device(device, now, lang, None)
+        title = device.title(lang)
+        head = f"{title}: "
+        if text.startswith(head) and is_state_phrase(text[len(head) :], lang):
+            rest = text[len(head) :]
+            if lang == "en":
+                return (
+                    f"The {lower_first(title)} {'are' if device.is_plural(lang) else 'is'} {rest}"
+                )
+            return f"{title} {rest}"
         return text
 
     @staticmethod

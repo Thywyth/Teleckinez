@@ -61,6 +61,7 @@ class HealthSettings(_Model):
     heartbeat_s: float = 10.0  # used when neither meta nor devices.yaml give one
     stale_factor: float = 3.0  # stale after stale_factor * heartbeat_s without messages
     check_interval_s: float = 1.0
+    fresh_s: float = Field(30.0, ge=0)  # older data is reported with its age ("дані 2 хв тому")
 
 
 class NotificationSettings(_Model):

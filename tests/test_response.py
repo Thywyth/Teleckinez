@@ -204,3 +204,14 @@ def test_number_and_age_formatting() -> None:
     assert age_text(5, "uk") == "5 с тому"
     assert age_text(125, "en") == "2 min ago"
     assert age_text(7300, "uk") == "2 год тому"
+
+
+def test_state_matches() -> None:
+    from teleckinez.dispatch.response import state_matches
+
+    assert state_matches({"on": True}, "on") is True
+    assert state_matches({"on": True}, "off") is False
+    assert state_matches({"status": "cleaning"}, "on") is True
+    assert state_matches({"locked": True}, "closed") is True
+    assert state_matches({"position": 40, "moving": False}, "open") is True
+    assert state_matches({"temperature": 20}, "on") is None

@@ -144,8 +144,15 @@ class Assistant:
 
         self.bus.publish(IntentParsed(session_id=session_id, intent=intent))
         if resolution.kind == "query":
-            attribute = resolution.details.get("attribute")
-            text = self.composer.query_result(resolution.devices, lang, attribute)
+            details = resolution.details
+            if details.get("expect"):
+                text = self.composer.state_answer(
+                    resolution.devices, details["expect"], lang, listing=details["listing"]
+                )
+            else:
+                text = self.composer.query_result(
+                    resolution.devices, lang, details.get("attribute")
+                )
             self._speak(session_id, text, lang)
             return
 
