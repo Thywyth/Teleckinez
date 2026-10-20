@@ -62,6 +62,11 @@ class SimDevice:
     def id(self) -> str:
         return self.device.id
 
+    @property
+    def client_id(self) -> str:
+        """Unique per topic prefix: a test home never kicks the real simulator off the broker."""
+        return f"sim-{self.topics.prefix.replace('/', '_')}-{self.id}"
+
     def topic(self, kind: str) -> str:
         return self.topics.device(self.id, kind)
 
@@ -73,7 +78,7 @@ class SimDevice:
             will = aiomqtt.Will(self.topic("availability"), b"offline", qos=1, retain=True)
             try:
                 async with aiomqtt.Client(
-                    self.host, self.port, identifier=f"sim-{self.id}", keepalive=10, will=will
+                    self.host, self.port, identifier=self.client_id, keepalive=10, will=will
                 ) as client:
                     self._client = client
                     await self._announce()

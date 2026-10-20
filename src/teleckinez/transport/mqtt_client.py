@@ -4,6 +4,7 @@ import asyncio
 import contextlib
 import json
 import logging
+import uuid
 from collections.abc import Callable
 from typing import Any
 
@@ -46,7 +47,9 @@ class MqttClient:
         reconnect_s: tuple[float, float] = (0.5, 10.0),
     ) -> None:
         self.settings = settings
-        self.client_id = client_id or settings.client_id
+        # Random suffix: two assistants (REPL + tests, later web) must not share a client id,
+        # or the broker disconnects one of them whenever the other connects.
+        self.client_id = client_id or f"{settings.client_id}-{uuid.uuid4().hex[:6]}"
         self.availability_topic = availability_topic
         self._reconnect_s = reconnect_s
         self._handlers: list[tuple[str, MessageHandler]] = []

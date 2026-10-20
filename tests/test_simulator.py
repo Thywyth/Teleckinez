@@ -196,3 +196,20 @@ def test_sensors_stay_in_range_and_motion_toggles() -> None:
     motion = {"motion": False}
     m = MotionSensor(motion, {"period_s": 2, "hold_s": 1}, random.Random(0))
     assert any(m.tick(1.0) for _ in range(50))
+
+
+def test_client_ids_are_unique_per_prefix(registry) -> None:
+    from simulator.device import SimDevice
+
+    dev = registry.get("light.kitchen_main")
+    a = SimDevice(dev, host="h", port=1, topics=Topics("tkz"))
+    b = SimDevice(dev, host="h", port=1, topics=Topics("tkz-test/abc"))
+    assert a.client_id == "sim-tkz-light.kitchen_main"
+    assert a.client_id != b.client_id
+
+
+def test_assistant_client_ids_differ() -> None:
+    from teleckinez.core.config import MqttSettings
+    from teleckinez.transport.mqtt_client import MqttClient
+
+    assert MqttClient(MqttSettings()).client_id != MqttClient(MqttSettings()).client_id
