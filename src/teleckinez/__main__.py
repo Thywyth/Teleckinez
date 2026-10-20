@@ -18,6 +18,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--devices", default=None, help="devices.yaml (default: config/)")
     parser.add_argument("--no-db", action="store_true", help="do not write the SQLite log")
     parser.add_argument("--quiet", action="store_true", help="hide command lifecycle lines")
+    parser.add_argument("--no-web", action="store_true", help="do not start the web panel")
     parser.add_argument("-v", "--verbose", action="store_true", help="debug logging")
     args = parser.parse_args(argv)
 
@@ -30,21 +31,24 @@ def main(argv: list[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
 
-    if not args.text:
+    if not args.text and args.no_web:
         print(
-            "Голосовий конвеєр і веб-панель з'являться на етапах 2-3 (docs/ROADMAP.md).\n"
-            "Зараз доступний текстовий режим:  python -m teleckinez --text"
+            "Голосовий конвеєр з'явиться на етапі 2 (docs/ROADMAP.md). Запустіть веб-панель\n"
+            "(python -m teleckinez) або текстовий режим (python -m teleckinez --text)."
         )
         return 2
 
     from teleckinez.app import App
-    from teleckinez.repl import main_text
+    from teleckinez.repl import main_text, main_web
     from teleckinez.transport.mqtt_client import MqttNotConnected
 
     app = App(load_settings(args.settings), load_devices(args.devices), use_storage=not args.no_db)
     try:
         with contextlib.suppress(KeyboardInterrupt):
-            aio.run(main_text(app, show_commands=not args.quiet))
+            if args.text:
+                aio.run(main_text(app, show_commands=not args.quiet, web=not args.no_web))
+            else:
+                aio.run(main_web(app))
     except MqttNotConnected as exc:
         print(f"Помилка: {exc}", file=sys.stderr)
         return 1

@@ -75,7 +75,25 @@ class App:
         if use_storage:
             self.storage = Storage(connect(settings.storage.path))
             EventRecorder(self.storage, self.bus)
+        self.voice = None  # voice pipeline (stage 2); the web panel checks for it
         self._tasks: list[asyncio.Task] = []
+
+    async def serve_web(self) -> None:
+        """Run the web panel (uvicorn) in this event loop until cancelled."""
+        import uvicorn
+
+        from teleckinez.web.app import create_app
+
+        config = uvicorn.Config(
+            create_app(self),
+            host=self.settings.web.host,
+            port=self.settings.web.port,
+            log_level="warning",
+            lifespan="off",
+        )
+        server = uvicorn.Server(config)
+        server.install_signal_handlers = lambda: None  # Ctrl+C is handled by our main
+        await server.serve()
 
     async def start(self, settle_s: float = 0.5) -> None:
         """Connect to the broker and wait briefly for retained device states."""

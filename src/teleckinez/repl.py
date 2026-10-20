@@ -117,7 +117,32 @@ async def run_repl(app: App, *, show_commands: bool = True) -> None:
         print(f"асистент> {answer}\n")
 
 
-async def main_text(app: App, show_commands: bool = True) -> None:
+def _web_url(app: App) -> str:
+    host = app.settings.web.host
+    shown = "localhost" if host in ("127.0.0.1", "0.0.0.0") else host
+    return f"http://{shown}:{app.settings.web.port}"
+
+
+async def main_text(app: App, show_commands: bool = True, web: bool = True) -> None:
     async with app:
-        with contextlib.suppress(KeyboardInterrupt, asyncio.CancelledError):
-            await run_repl(app, show_commands=show_commands)
+        web_task = asyncio.create_task(app.serve_web()) if web else None
+        if web_task:
+            print(f"Веб-панель: {_web_url(app)}")
+        try:
+            with contextlib.suppress(KeyboardInterrupt, asyncio.CancelledError):
+                await run_repl(app, show_commands=show_commands)
+        finally:
+            if web_task:
+                web_task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await web_task
+
+
+async def main_web(app: App) -> None:
+    """Assistant + web panel (the voice pipeline joins here in stage 2)."""
+    async with app:
+        online = sum(t.availability is Availability.ONLINE for t in app.twins)
+        print(f"Teleckinez: пристроїв online {online}/{len(app.registry)}.")
+        print(f"Веб-панель: {_web_url(app)}   (Ctrl+C — зупинити)")
+        with contextlib.suppress(asyncio.CancelledError):
+            await app.serve_web()
