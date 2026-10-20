@@ -107,7 +107,7 @@ class MqttClient:
         will = None
         if self.availability_topic:
             will = aiomqtt.Will(self.availability_topic, b"offline", qos=1, retain=True)
-        return aiomqtt.Client(
+        client = aiomqtt.Client(
             self.settings.host,
             self.settings.port,
             identifier=self.client_id,
@@ -116,6 +116,10 @@ class MqttClient:
             keepalive=self.settings.keepalive_s,
             will=will,
         )
+        # A group command ("вимкни все світло") publishes dozens of QoS 1 messages at
+        # once; aiomqtt warns above 10 in flight, which is normal here.
+        client.pending_calls_threshold = 200
+        return client
 
     async def _subscribe_one(self, topic_filter: str) -> None:
         assert self._client is not None

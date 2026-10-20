@@ -104,8 +104,8 @@ class TargetResolver:
             devices = reg.find(room=room)
             fan_out = fan_out or kind == "query"
             if kind == "command":
-                action = intent.action
-                devices = [d for d in devices if action and d.type.supports(action)]
+                # "яскравість на кухні 40 %": only devices that have such an attribute
+                devices = [d for d in devices if self._command_for(intent, d) is not None]
                 if len(devices) > 1 and not fan_out:
                     return [], Resolution(
                         kind,
