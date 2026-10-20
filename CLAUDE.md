@@ -100,7 +100,9 @@ py -3.13 -m venv .venv
 .venv\Scripts\activate
 pip install -e ".[dev,voice,cuda,broker]"   # cuda — лише для NVIDIA GPU (faster-whisper)
 python scripts/check_deps.py       # перевірка, що все імпортується
-python scripts/download_models.py
+python scripts/download_models.py          # ~0.8 ГБ у models/ (--all: + великі моделі)
+python scripts/download_models.py --verify # завантажити кожну модель і прогнати один раз
+python scripts/audio_check.py              # мікрофон/динамік: запис 3 с, рівень, відтворення
 
 # брокер
 docker compose up -d mosquitto       # основний (Mosquitto у Docker), порт 1883

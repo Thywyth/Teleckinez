@@ -42,6 +42,10 @@ Silero VAD (вже є у faster-whisper) — розглянути, якщо webr
 | **Vosk** | `vosk-model-small-uk-v3-small` / `vosk-model-uk-v3`; `vosk-model-small-en-us-0.15` | вільний словник **або граматика** (фрази зібрані з devices.yaml + lexicon) | дуже швидкий, CPU; з граматикою — висока точність на командах |
 | **faster-whisper** | `small` / `medium` (CTranslate2, CUDA float16; CPU int8 як fallback) | `language="uk"`/`"en"`/авто, `initial_prompt` зі словами з devices.yaml | точніший на вільній мові, повільніший |
 
+- **Шляхи до моделей Vosk на Windows:** Kaldi не відкриває абсолютний шлях
+  з не-ASCII символами (наш шлях містить «Курсоваробота») → модель
+  завантажуємо через `teleckinez.voice.paths.ascii_safe_path()` (відносний
+  шлях або короткий 8.3-шлях). Перевірено на етапі 0.
 - Мова: `uk`, `en` або `auto`. Для Vosk `auto` = два розпізнавачі паралельно
   і вибір за confidence; для Whisper — вбудоване визначення мови.
 - Текстовий режим (`--text`, поле в веб-панелі) повністю оминає STT — для
@@ -56,6 +60,14 @@ Silero VAD (вже є у faster-whisper) — розглянути, якщо webr
 | **Piper** (за замовч.) | `uk_UA-ukrainian_tts-medium`, `en_US-lessac-medium` | локальна нейромережа (ONNX), швидкий на CPU |
 | **SAPI** (`pyttsx3`) | системні голоси Windows | fallback; українського голосу може не бути → тоді лише en |
 | **text-only** | — | відповідь лише текстом у веб-панелі/консолі |
+
+Особливості, виявлені на етапі 0 (перевірка `scripts/download_models.py --verify`):
+- голос `uk_UA-ukrainian_tts-medium` символьний (`phoneme_type: text`), у
+  його словнику лише малі літери → перед синтезом текст переводимо в нижній
+  регістр, інакше великі літери просто пропускаються;
+- espeak-ng (фонемізація для `en_US-lessac-medium`) не відкриває теку даних
+  за шляхом з кирилицею і завершує процес → `PiperVoice.load(...,
+  espeak_data_dir=ascii_safe_path(ESPEAK_DATA_DIR))`.
 
 Користувач вибирає режим: голос + текст / лише текст. Текст відповіді
 завжди йде у веб-панель.

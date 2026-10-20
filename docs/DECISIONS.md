@@ -100,3 +100,10 @@
   faster-whisper працює на CPU (int8).
 - openWakeWord на Windows — лише через onnxruntime (tflite-runtime для
   Windows немає), що й передбачено у voice.md.
+- **Шляхи з кирилицею.** Нативні бібліотеки Vosk (Kaldi) і espeak-ng (у
+  Piper) не відкривають файли за не-ASCII шляхом на Windows. Замість
+  перенесення проєкту з теки «Курсоваробота» передаємо їм ASCII-шлях
+  (`teleckinez.voice.paths.ascii_safe_path`: відносний або 8.3). Моделі
+  перевіряються командою `python scripts/download_models.py --verify`
+  (20.10.2026: Vosk uk/en, faster-whisper small на CUDA float16, Piper uk/en,
+  openWakeWord — усі працюють).
