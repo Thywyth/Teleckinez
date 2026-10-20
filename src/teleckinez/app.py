@@ -27,6 +27,16 @@ from teleckinez.transport.mqtt_client import MqttClient
 log = logging.getLogger(__name__)
 
 
+def _deep_merge(base: dict, patch: dict) -> dict:
+    out = dict(base)
+    for key, value in patch.items():
+        if isinstance(value, dict) and isinstance(out.get(key), dict):
+            out[key] = _deep_merge(out[key], value)
+        else:
+            out[key] = value
+    return out
+
+
 class App:
     def __init__(
         self, settings: Settings, devices: DevicesConfig, *, use_storage: bool = True
@@ -77,6 +87,44 @@ class App:
             EventRecorder(self.storage, self.bus)
         self.voice = None  # voice pipeline (stage 2); the web panel checks for it
         self._tasks: list[asyncio.Task] = []
+
+    # Sections applied at once; voice ones are stored for the voice pipeline; the rest
+    # (mqtt, web, storage, simulator) only take effect after a restart.
+    HOT_SECTIONS = ("dispatcher", "nlu", "health", "voice")
+    RESTART_SECTIONS = ("mqtt", "web", "storage", "simulator")
+
+    def apply_settings(self, patch: dict) -> dict[str, list[str]]:
+        """Validate a partial settings update and apply what can be applied without restart.
+
+        Raises pydantic.ValidationError on invalid values; nothing is changed then.
+        """
+        current = self.settings.model_dump(mode="json")
+        merged = _deep_merge(current, patch)
+        new = Settings.model_validate(merged)  # validates everything before touching anything
+        applied, restart = [], []
+        if new.language != self.settings.language:
+            self.settings.language = new.language
+            applied.append("language")
+        for section in (*self.HOT_SECTIONS, *self.RESTART_SECTIONS):
+            old_model, new_model = getattr(self.settings, section), getattr(new, section)
+            for field in type(new_model).model_fields:
+                if field == "password":
+                    continue
+                old_value, new_value = getattr(old_model, field), getattr(new_model, field)
+                if old_value == new_value:
+                    continue
+                name = f"{section}.{field}"
+                if section in self.RESTART_SECTIONS:
+                    restart.append(name)
+                    continue
+                setattr(old_model, field, new_value)  # the same object the components hold
+                applied.append(name)
+        # components that copied values at construction time
+        self.parser.fuzzy_threshold = self.settings.nlu.fuzzy_threshold
+        self.parser.min_confidence = self.settings.nlu.min_confidence
+        self.health.stale_factor = self.settings.health.stale_factor
+        self.health.check_interval_s = self.settings.health.check_interval_s
+        return {"applied": applied, "restart_required": restart}
 
     async def serve_web(self) -> None:
         """Run the web panel (uvicorn) in this event loop until cancelled."""

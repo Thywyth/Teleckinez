@@ -265,6 +265,28 @@ table.journal { width: 100%; border-collapse: collapse; font-size: 13px; }
 .badge.failed { background: var(--bad-soft); color: var(--bad); }
 .badge.running { background: var(--warn-soft); color: var(--warn); }
 
+/* ----------------------------------------------------------------- settings */
+.settings { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.settings fieldset {
+  margin: 0; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow); padding: 6px 16px 10px;
+}
+.settings legend { font-weight: 700; padding: 0 6px; display: flex; align-items: baseline; gap: 8px; }
+.settings legend .note { font-weight: 400; font-size: 12px; color: var(--muted); }
+.setting {
+  display: grid; grid-template-columns: minmax(0, 1fr) 260px; align-items: center; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+}
+.setting:last-child { border-bottom: 0; }
+.setting > label { font-size: 14px; }
+.setting select, .setting .field { width: 100%; }
+.field {
+  padding: 6px 10px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface-2);
+}
+.field:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+.ro { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.settings .actions { display: flex; gap: 8px; align-items: center; }
+
 /* ------------------------------------------------------------------- toasts */
 .toasts { position: fixed; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
 .toast {

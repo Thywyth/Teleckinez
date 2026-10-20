@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 
 from teleckinez import __version__
 from teleckinez.assistant import new_session_id
@@ -47,7 +47,9 @@ def create_app(core: "App") -> FastAPI:
     # All endpoints are `async def`: they run on the event loop thread, like the rest of
     # the assistant (sqlite3 connections and twins are not meant for worker threads).
     api = FastAPI(title="Teleckinez", version=__version__, docs_url="/api/docs")
-    lang = core.settings.language
+
+    def lang() -> str:  # can change at runtime via PUT /api/settings
+        return core.settings.language
 
     # ------------------------------------------------------------------ status
 
@@ -60,7 +62,7 @@ def create_app(core: "App") -> FastAPI:
             "devices": len(twins),
             "online": sum(t.availability is Availability.ONLINE for t in twins),
             "voice_available": core.voice is not None,
-            "language": lang,
+            "language": lang(),
         }
 
     # ----------------------------------------------------------------- devices
@@ -70,8 +72,8 @@ def create_app(core: "App") -> FastAPI:
         now = core.twins.clock()
         reg = core.registry
         return {
-            "rooms": [{"id": r, "name": room_name(reg, r, lang)} for r in reg.rooms],
-            "devices": [device_to_dict(d, core.twins.get(d.id), now, lang) for d in reg],
+            "rooms": [{"id": r, "name": room_name(reg, r, lang())} for r in reg.rooms],
+            "devices": [device_to_dict(d, core.twins.get(d.id), now, lang()) for d in reg],
         }
 
     @api.post("/api/devices/{device_id}/command")
@@ -86,7 +88,7 @@ def create_app(core: "App") -> FastAPI:
         record = group.records[0]
         out = record_to_dict(record)
         if record.is_terminal:
-            out["response"] = core.composer.command_result(group.records, lang)
+            out["response"] = core.composer.command_result(group.records, lang())
         return out
 
     # ------------------------------------------------------------- assistant
@@ -115,7 +117,25 @@ def create_app(core: "App") -> FastAPI:
 
     @api.get("/api/settings")
     async def get_settings() -> dict[str, Any]:
-        return core.settings.model_dump(mode="json")
+        return {
+            "settings": core.settings.model_dump(mode="json"),
+            "hot": ["language", *core.HOT_SECTIONS],
+            "restart": list(core.RESTART_SECTIONS),
+            "voice_available": core.voice is not None,
+        }
+
+    @api.put("/api/settings")
+    async def put_settings(patch: dict[str, Any]) -> dict[str, Any]:
+        """Partial update {section: {field: value}}; applied at once where possible."""
+        mode = (patch.get("nlu") or {}).get("mode")
+        if mode not in (None, "rule"):
+            raise HTTPException(422, "режими llm / hybrid з'являться на етапі 4 (ROADMAP 4.4)")
+        try:
+            result = core.apply_settings(patch)
+        except ValidationError as exc:
+            errors = [f"{'.'.join(map(str, e['loc']))}: {e['msg']}" for e in exc.errors()]
+            raise HTTPException(422, "; ".join(errors)) from None
+        return {**result, "settings": core.settings.model_dump(mode="json")}
 
     # --------------------------------------------------------------- websocket
 

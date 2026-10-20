@@ -592,12 +592,134 @@ state.listeners.push(({ type }) => {
   journal.timer = setTimeout(loadJournal, 250); // a group command produces many events at once
 });
 
+// ------------------------------------------------------------------- settings
+// [section, field, label, kind, options/hint]; kind: select | number | bool | list | range
+const SETTINGS_FORM = [
+  ["Контроль виконання", "застосовується одразу", [
+    ["dispatcher", "ack_timeout_s", "Таймаут підтвердження (ack), с", "number", { step: 0.1, min: 0.1 }],
+    ["dispatcher", "max_attempts", "Спроб відправки", "number", { step: 1, min: 1 }],
+    ["dispatcher", "retry_backoff_s", "Паузи перед повторами, с", "list", { hint: "через кому, напр. 0.5, 1" }],
+    ["dispatcher", "cmd_ttl_s", "Термін дії команди (TTL), с", "number", { step: 0.5, min: 0.5 }],
+    ["dispatcher", "state_margin_s", "Запас часу для рухомих пристроїв, с", "number", { step: 0.5, min: 0 }],
+    ["dispatcher", "progress_messages", "Проміжні повідомлення («Відкриваю…»)", "bool"],
+    ["dispatcher", "progress_min_s", "Вважати дію довгою від, с", "number", { step: 0.5, min: 0 }],
+  ]],
+  ["Доступність пристроїв", "застосовується одразу", [
+    ["health", "heartbeat_s", "Період heartbeat за замовчуванням, с", "number", { step: 1, min: 1 }],
+    ["health", "stale_factor", "«Мовчить» після N × heartbeat", "number", { step: 0.5, min: 1 }],
+  ]],
+  ["Розбір команд і відповіді", "застосовується одразу", [
+    ["nlu", "mode", "Режим NLU", "select", { options: { rule: "правила + fuzzy", llm: "LLM (етап 4)", hybrid: "гібрид (етап 4)" }, disabled: ["llm", "hybrid"] }],
+    ["nlu", "fuzzy_threshold", "Поріг нечіткого збігу", "range", { min: 50, max: 100, step: 1 }],
+    ["nlu", "min_confidence", "Мінімальна впевненість", "range", { min: 0, max: 1, step: 0.05 }],
+    ["", "language", "Мова відповідей панелі", "select", { options: { uk: "українська", en: "English" } }],
+  ]],
+  ["Голос", "збережеться; діє, коли запущено голосовий конвеєр", [
+    ["voice", "trigger", "Тригер", "select", { options: { vosk_kws: "слово «Телекінез» (Vosk)", openwakeword: "hey jarvis (openWakeWord)", push_to_talk: "кнопка (push-to-talk)" } }],
+    ["voice", "stt", "Розпізнавання мовлення", "select", { options: { vosk: "Vosk", whisper: "faster-whisper" } }],
+    ["voice", "stt_lang", "Мова розпізнавання", "select", { options: { uk: "українська", en: "English", auto: "авто" } }],
+    ["voice", "tts", "Відповідь", "select", { options: { piper: "голос + текст (Piper)", sapi: "голос + текст (Windows)", text: "лише текст" } }],
+    ["voice", "vad_end_silence_ms", "Кінець фрази після тиші, мс", "number", { step: 10, min: 90 }],
+    ["voice", "max_utterance_s", "Найдовша фраза, с", "number", { step: 1, min: 1 }],
+  ]],
+  ["Інфраструктура", "лише для перегляду: зміни потребують перезапуску (config/settings.yaml)", [
+    ["mqtt", "host", "MQTT-брокер", "readonly"],
+    ["mqtt", "port", "Порт MQTT", "readonly"],
+    ["mqtt", "prefix", "Префікс топіків", "readonly"],
+    ["web", "port", "Порт веб-панелі", "readonly"],
+    ["storage", "path", "База даних", "readonly"],
+  ]],
+];
+
+const settingsState = { values: null };
+const getValue = (section, field) => (section ? settingsState.values[section][field] : settingsState.values[field]);
+
+async function loadSettings() {
+  const body = await api("/api/settings");
+  settingsState.values = body.settings;
+  renderSettings();
+}
+
+function settingInput(section, field, kind, opts = {}) {
+  const value = getValue(section, field);
+  const name = section ? `${section}.${field}` : field;
+  if (kind === "readonly") return el("code", { class: "ro" }, String(value));
+  if (kind === "bool") {
+    const input = el("input", { type: "checkbox", name });
+    input.checked = !!value;
+    return el("label", { class: "switch" }, input, el("span"));
+  }
+  if (kind === "select") {
+    return el("select", { class: "btn", name }, Object.entries(opts.options).map(([k, v]) =>
+      el("option", { value: k, selected: value === k, disabled: (opts.disabled || []).includes(k) }, v)));
+  }
+  if (kind === "range") {
+    const out = el("output", {}, String(value));
+    const input = el("input", { type: "range", name, min: opts.min, max: opts.max, step: opts.step, value,
+      oninput: (e) => { out.textContent = e.target.value; } });
+    return el("span", { class: "range" }, input, out);
+  }
+  if (kind === "list") {
+    return el("input", { class: "field", name, value: value.join(", "), title: opts.hint || "" });
+  }
+  return el("input", { class: "field", type: "number", name, value, step: opts.step, min: opts.min });
+}
+
+function renderSettings() {
+  const view = $("#view-settings");
+  const form = el("form", { class: "settings", novalidate: true, onsubmit: saveSettings }); // the server validates
+  for (const [title, note, fields] of SETTINGS_FORM) {
+    form.append(el("fieldset", {},
+      el("legend", {}, title, el("span", { class: "note" }, note)),
+      fields.map(([section, field, label, kind, opts]) =>
+        el("div", { class: "setting" }, el("label", {}, label), settingInput(section, field, kind, opts)))));
+  }
+  form.append(el("div", { class: "actions" },
+    el("button", { class: "btn primary", type: "submit" }, "Застосувати"),
+    el("button", { class: "btn", type: "button", onclick: loadSettings }, "Скасувати зміни"),
+    el("span", { class: "muted" }, "Зміни діють до перезапуску асистента.")));
+  view.replaceChildren(el("div", { class: "toolbar" }, el("h1", {}, "Налаштування")), form);
+}
+
+async function saveSettings(e) {
+  e.preventDefault();
+  const patch = {};
+  for (const [, , fields] of SETTINGS_FORM) {
+    for (const [section, field, , kind] of fields) {
+      if (kind === "readonly") continue;
+      const input = e.target.elements[section ? `${section}.${field}` : field];
+      let value;
+      if (kind === "bool") value = input.checked;
+      else if (kind === "list") value = input.value.split(",").map((x) => Number(x.trim())).filter((x) => !Number.isNaN(x));
+      else if (kind === "number" || kind === "range") value = Number(input.value);
+      else value = input.value;
+      if (JSON.stringify(value) === JSON.stringify(getValue(section, field))) continue;
+      if (section) (patch[section] ||= {})[field] = value;
+      else patch[field] = value;
+    }
+  }
+  if (!Object.keys(patch).length) { toast("Змін немає."); return; }
+  try {
+    const result = await api("/api/settings", { method: "PUT", body: patch });
+    settingsState.values = result.settings;
+    renderSettings();
+    const labels = Object.fromEntries(SETTINGS_FORM.flatMap(([, , fs]) => fs.map(([s, f, l]) => [s ? `${s}.${f}` : f, l])));
+    const names = (list) => list.map((n) => `«${labels[n] || n}»`).join(", ");
+    const later = result.restart_required.length ? ` Після перезапуску: ${names(result.restart_required)}.` : "";
+    toast(`Застосовано: ${names(result.applied) || "нічого"}.${later}`, "ok");
+    if (patch.language) refresh();
+  } catch (err) {
+    toast(`Не застосовано: ${err.message}`, "bad");
+  }
+}
+
 // ----------------------------------------------------------------------- tabs
 function showView(name) {
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.view === name));
   document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${name}`));
   try { localStorage.setItem("tkz-view", name); } catch { /* private mode */ }
   if (name === "journal") { renderJournalShell(); loadJournal(); }
+  if (name === "settings") loadSettings().catch((e) => toast(e.message, "bad"));
 }
 document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showView(t.dataset.view)));
 

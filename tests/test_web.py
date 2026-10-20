@@ -124,10 +124,50 @@ async def test_ptt_without_voice_pipeline(client) -> None:
     assert r.status_code == 503
 
 
-async def test_settings_and_index(client) -> None:
-    settings = (await client.get("/api/settings")).json()
-    assert settings["dispatcher"]["ack_timeout_s"] == 0.2
-    assert "password" not in settings["mqtt"]
+async def test_get_settings(client) -> None:
+    body = (await client.get("/api/settings")).json()
+    assert body["settings"]["dispatcher"]["ack_timeout_s"] == 0.2
+    assert "password" not in body["settings"]["mqtt"]
+    assert "dispatcher" in body["hot"] and "mqtt" in body["restart"]
+
+
+async def test_put_settings_applies_hot_values(client, core) -> None:
+    r = await client.put(
+        "/api/settings",
+        json={
+            "dispatcher": {"ack_timeout_s": 1.5, "max_attempts": 2},
+            "nlu": {"min_confidence": 0.7},
+            "health": {"stale_factor": 4},
+            "language": "en",
+            "web": {"port": 9000},
+        },
+    )
+    body = r.json()
+    assert r.status_code == 200
+    assert set(body["applied"]) == {
+        "dispatcher.ack_timeout_s", "dispatcher.max_attempts", "nlu.min_confidence",
+        "health.stale_factor", "language",
+    }  # fmt: skip
+    assert body["restart_required"] == ["web.port"]
+    # the very objects the components use were updated
+    assert core.dispatcher.settings.ack_timeout_s == 1.5
+    assert core.assistant.settings.max_attempts == 2
+    assert core.parser.min_confidence == 0.7 and core.health.stale_factor == 4
+    assert core.settings.web.port == 8000  # not applied without restart
+    r = await client.post("/api/text-command", json={"text": "розкажи анекдот"})
+    assert r.json()["response"] == "Вибачте, я не зрозумів команду."  # uk text -> uk answer
+    devices = (await client.get("/api/devices")).json()
+    assert devices["rooms"][0]["name"] == "Living room"
+
+
+async def test_put_settings_rejects_invalid_and_changes_nothing(client, core) -> None:
+    r = await client.put(
+        "/api/settings", json={"dispatcher": {"ack_timeout_s": 1.0, "max_attempts": 0}}
+    )
+    assert r.status_code == 422 and "max_attempts" in r.json()["detail"]
+    assert core.settings.dispatcher.ack_timeout_s == 0.2
+    r = await client.put("/api/settings", json={"nlu": {"mode": "hybrid"}})
+    assert r.status_code == 422 and "етапі 4" in r.json()["detail"]
 
 
 def test_websocket_streams_bus_events(core) -> None:
