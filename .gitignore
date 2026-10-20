@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.env
+models/
+build/
+*.db
+*.db-journal
+benchmarks/datasets/voice/*.wav
+benchmarks/datasets/noise/
+.vscode/
+.idea/
