@@ -46,7 +46,7 @@
 - [x] 1.4 `devices/` — типи пристроїв і capabilities, `converged()`; registry з пошуком
 - [x] 1.5 `transport/mqtt_client.py` + `adapters/native.py` (за protocol.md)
 - [x] 1.6 `simulator/` — SimDevice, фізика типів, ідемпотентність, LWT, heartbeat
-- [ ] 1.7 `devices/twin.py` + `health.py` — reported/desired, online/stale/offline
+- [x] 1.7 `devices/twin.py` + `health.py` — reported/desired, online/stale/offline
 - [ ] 1.8 `dispatch/tracker.py` — автомат станів команди (таблиця переходів); юніт-тести всіх переходів
 - [ ] 1.9 `dispatch/dispatcher.py` — публікація, таймаути, повтори, групові команди, supersede
 - [ ] 1.10 `nlu/` RuleParser (перша версія) + `TargetResolver`
