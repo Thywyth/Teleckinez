@@ -160,3 +160,11 @@ def test_event_serialization() -> None:
         },
     }
     assert jsonable(Intent(kind="query", params={"a": (1, 2)}))["params"] == {"a": [1, 2]}
+
+
+async def test_static_frontend_is_served(client) -> None:
+    index = await client.get("/")
+    assert index.status_code == 200 and "Teleckinez" in index.text
+    for asset in ("/static/app.js", "/static/style.css"):
+        assert (await client.get(asset)).status_code == 200
+    assert "cdn" not in index.text.lower()  # works offline (web.md)

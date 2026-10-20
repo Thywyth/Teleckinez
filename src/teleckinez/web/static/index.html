@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teleckinez</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%234f7cff'/%3E%3Cpath d='M10 13h12M16 13v10' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">T</span>
+      <div>
+        <div class="brand-name">Teleckinez</div>
+        <div class="brand-sub">голосовий асистент · контроль виконання</div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="dashboard" role="tab">Пристрої</button>
+      <button class="tab" data-view="journal" role="tab">Журнал</button>
+      <button class="tab" data-view="faults" role="tab">Збої</button>
+      <button class="tab" data-view="settings" role="tab">Налаштування</button>
+    </nav>
+    <div class="status-chips">
+      <span class="chip" id="chip-ws" title="З'єднання веб-панелі з асистентом">панель</span>
+      <span class="chip" id="chip-broker" title="MQTT-брокер">брокер</span>
+      <span class="chip" id="chip-online" title="Пристрої на зв'язку">0/0</span>
+      <button class="icon-btn" id="theme-toggle" title="Світла / темна тема" aria-label="Тема">◐</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main>
+      <section class="view active" id="view-dashboard">
+        <div class="toolbar">
+          <h1>Пристрої</h1>
+          <div class="legend">
+            <span><i class="dot online"></i>на зв'язку</span>
+            <span><i class="dot stale"></i>мовчить</span>
+            <span><i class="dot offline"></i>не в мережі</span>
+          </div>
+        </div>
+        <div id="rooms" class="rooms"><p class="muted">Завантаження…</p></div>
+      </section>
+      <section class="view" id="view-journal"></section>
+      <section class="view" id="view-faults"></section>
+      <section class="view" id="view-settings"></section>
+    </main>
+    <aside class="voice" id="voice-panel"></aside>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
