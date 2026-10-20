@@ -73,6 +73,12 @@
 ### ADR-010. Брокер Mosquitto у Docker
 - Еталонна реалізація MQTT від Eclipse, мінімальна конфігурація. Fallback —
   вбудований брокер на Python (перевірити на етапі 0).
+- **Перевірено 20.10.2026:** образ `eclipse-mosquitto:2`, конфіг
+  `config/mosquitto/mosquitto.conf` (анонімний доступ — лише для локального
+  демо, persistence для retained-станів). Fallback — `amqtt` 0.12.1 на
+  Python 3.13, проходить ті самі інтеграційні тести (QoS 1, retain, LWT).
+  Mosquitto лишається основним: він швидший і стабільніший під ~30
+  з'єднаннями симулятора; amqtt — запасний варіант для машини без Docker.
 
 ### ADR-011. Python 3.13
 - Встановлений у системі. Якщо vosk / piper / openwakeword не мають колесиків

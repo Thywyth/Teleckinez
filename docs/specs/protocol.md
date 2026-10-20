@@ -4,9 +4,11 @@
 
 - Mosquitto 2.x у Docker (`docker-compose.yml`, порт 1883; 9001 — websockets,
   опційно). Конфіг — `config/mosquitto/mosquitto.conf`.
-- Fallback без Docker: вбудований брокер `amqtt` (`python -m teleckinez.broker`)
-  — перевірити сумісність з Python 3.13 на етапі 0; якщо не працює —
-  інструкція з встановлення Mosquitto для Windows.
+- Fallback без Docker: вбудований брокер `amqtt` (`python -m teleckinez.broker`,
+  extra `broker`). Перевірено на Python 3.13 / amqtt 0.12.1: QoS 1, retained,
+  Last Will працюють (ті самі тести `tests/test_broker.py`, що й для Mosquitto).
+- Клієнти на Windows працюють у `SelectorEventLoop` (aiomqtt/paho потребують
+  `add_reader`, якого немає в `ProactorEventLoop` за замовчуванням).
 - Безпека (для записки, у демо — опційно): логін/пароль на клієнта, ACL
   (пристрій пише лише у свої топіки), TLS на 8883.
 

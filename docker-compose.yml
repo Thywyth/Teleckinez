@@ -1,0 +1,23 @@
+# MQTT broker for Teleckinez (see docs/specs/protocol.md).
+# Start:  docker compose up -d mosquitto
+# Logs:   docker compose logs -f mosquitto
+# Stop:   docker compose down
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: teleckinez-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"   # MQTT
+      - "9001:9001"   # MQTT over WebSockets (optional)
+    volumes:
+      - ./config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/broker/uptime", "-C", "1", "-W", "3"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  mosquitto-data:

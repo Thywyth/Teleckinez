@@ -45,6 +45,10 @@ cuda = [
 llm = [
     "ollama>=0.4",
 ]
+# Embedded fallback MQTT broker (python -m teleckinez.broker) when Docker is unavailable.
+broker = [
+    "amqtt>=0.12",
+]
 
 [project.scripts]
 teleckinez = "teleckinez.__main__:main"

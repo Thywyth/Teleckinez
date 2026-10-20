@@ -98,12 +98,13 @@
 # одноразово
 py -3.13 -m venv .venv
 .venv\Scripts\activate
-pip install -e ".[dev,voice,cuda]"   # cuda — лише для NVIDIA GPU (faster-whisper)
+pip install -e ".[dev,voice,cuda,broker]"   # cuda — лише для NVIDIA GPU (faster-whisper)
 python scripts/check_deps.py       # перевірка, що все імпортується
 python scripts/download_models.py
 
 # брокер
-docker compose up -d mosquitto
+docker compose up -d mosquitto       # основний (Mosquitto у Docker), порт 1883
+python -m teleckinez.broker          # запасний без Docker (pip install -e ".[broker]")
 
 # запуск (у різних терміналах)
 python -m simulator              # симулятор пристроїв
