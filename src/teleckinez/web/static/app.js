@@ -153,6 +153,10 @@ const COLORS = {
   white: "#f5f5f0", warm: "#ffd9a0", red: "#ff4d4d", orange: "#ff9a3c", yellow: "#ffe14d",
   green: "#47d16c", cyan: "#4dd8e6", blue: "#4d7dff", purple: "#a35cff", pink: "#ff7ac6",
 };
+const COLOR_UK = {
+  white: "білий", warm: "теплий", red: "червоний", orange: "помаранчевий", yellow: "жовтий",
+  green: "зелений", cyan: "блакитний", blue: "синій", purple: "фіолетовий", pink: "рожевий",
+};
 const MODES = { cool: "охолодження", heat: "обігрів", fan: "вентиляція", dry: "осушення", auto: "авто" };
 const VACUUM = { docked: "на базі", cleaning: "прибирає", returning: "повертається" };
 const TYPE_UK = {
@@ -204,9 +208,13 @@ function buildCard(d) {
   const r = d.reported || {};
   const pending = (state.pending.get(d.id)?.size || 0) > 0;
   const on = r.on === true || r.status === "cleaning" || (r.position > 0 && r.position !== undefined);
+  const glow = (d.type === "light" || d.type === "rgb_light") && r.on
+    ? (d.type === "rgb_light" ? COLORS[r.color] || COLORS.warm : COLORS.warm) : null;
   const card = el("article", {
-    class: ["card", on ? "is-on" : "", pending ? "pending" : "", d.availability === "offline" ? "offline" : ""].join(" "),
+    class: ["card", `type-${d.type}`, on ? "is-on" : "", glow ? "glow" : "", pending ? "pending" : "",
+      d.availability === "offline" ? "offline" : ""].join(" "),
     title: `${d.id} · ${AVAIL[d.availability] || d.availability}`,
+    style: glow ? `--glow:${glow}; --glow-strength:${r.brightness ?? 100}%` : null,
   });
   const icon = d.type === "door_lock" ? (r.locked === false ? "🔓" : "🔒") : ICONS[d.type] || "🔧";
   card.append(el("div", { class: "card-head" },
@@ -233,7 +241,7 @@ function stateLine(d, r, pending) {
   if ("on" in r) parts.push(r.on ? "увімкнено" : "вимкнено");
   if (r.on !== false) {
     if ("brightness" in r) parts.push(`${r.brightness} %`);
-    if ("color" in r && d.type === "rgb_light") parts.push(r.color);
+    if ("color" in r && d.type === "rgb_light") parts.push(COLOR_UK[r.color] || r.color);
     if ("mode" in r) parts.push(MODES[r.mode] || r.mode);
     if ("speed" in r) parts.push(`швидкість ${r.speed}`);
     if ("level" in r) parts.push(`рівень ${r.level}`);
@@ -246,6 +254,7 @@ function stateLine(d, r, pending) {
   if ("current_temp" in r) parts.push(`у приміщенні ${fmt(r.current_temp)} °C${r.heating ? ", гріє" : ""}`);
   if ("water_temp" in r) parts.push(`вода ${fmt(r.water_temp)} °C`);
   if ("motion" in r) parts.push(r.motion ? "є рух" : "руху немає");
+  if ("temperature" in r) parts.push("температура · вологість");
   const line = [el("b", {}, parts.join(" · ") || "—")];
   if (pending && d.desired) line.push(" → ", el("span", {}, `очікую: ${describeDesired(d.desired)}`));
   return line;
@@ -713,11 +722,46 @@ async function saveSettings(e) {
   }
 }
 
+// ---------------------------------------------------------------- theme, view
+function storage(key, value) {
+  try {
+    if (value === undefined) return localStorage.getItem(key);
+    localStorage.setItem(key, value);
+  } catch { /* private mode / blocked storage: the panel works without it */ }
+  return null;
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  $("#theme-toggle").textContent = theme === "dark" ? "☀" : "☾";
+  $("#theme-toggle").title = theme === "dark" ? "Світла тема" : "Темна тема";
+}
+const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+applyTheme(storage("tkz-theme") || (systemDark ? "dark" : "light"));
+$("#theme-toggle").addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
+  storage("tkz-theme", next);
+});
+
+function renderFaultsPlaceholder() {
+  $("#view-faults").replaceChildren(
+    el("div", { class: "toolbar" }, el("h1", {}, "Збої (симулятор)")),
+    el("div", { class: "empty-state" },
+      el("h2", {}, "Ін'єкція збоїв ще не підключена"),
+      el("p", {}, "Керування збоями (offline, freeze, stuck, slow, reject, drop rate) з'явиться разом із "
+        + "модулем simulator/faults.py — пункт 4.1 ROADMAP. Поки що збій «не в мережі» можна побачити, "
+        + "зупинивши симулятор (Ctrl+C у його терміналі)."),
+    ),
+  );
+}
+renderFaultsPlaceholder();
+
 // ----------------------------------------------------------------------- tabs
 function showView(name) {
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.view === name));
   document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${name}`));
-  try { localStorage.setItem("tkz-view", name); } catch { /* private mode */ }
+  storage("tkz-view", name);
   if (name === "journal") { renderJournalShell(); loadJournal(); }
   if (name === "settings") loadSettings().catch((e) => toast(e.message, "bad"));
 }
@@ -726,4 +770,6 @@ document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () 
 // ages tick locally between heartbeats
 setInterval(() => { for (const d of state.devices.values()) if (d.age_s != null) d.age_s += 1; }, 1000);
 
+const lastView = storage("tkz-view");
+if (lastView && $(`#view-${lastView}`)) showView(lastView);
 connect();
