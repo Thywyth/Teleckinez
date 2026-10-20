@@ -111,7 +111,7 @@ class Assistant:
 
     async def _pipeline(self, text: str, session_id: str) -> None:
         lang = detect_lang(text)
-        result = self.parser.parse(text)
+        result = await self.parser.aparse(text)
         if not result.ok:
             reason = result.reason or "not_understood"
             self.bus.publish(

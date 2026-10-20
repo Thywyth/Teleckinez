@@ -155,9 +155,6 @@ def create_app(core: "App") -> FastAPI:
     @api.put("/api/settings")
     async def put_settings(patch: dict[str, Any]) -> dict[str, Any]:
         """Partial update {section: {field: value}}; applied at once where possible."""
-        mode = (patch.get("nlu") or {}).get("mode")
-        if mode not in (None, "rule"):
-            raise HTTPException(422, "режими llm / hybrid з'являться на етапі 4 (ROADMAP 4.4)")
         try:
             result = core.apply_settings(patch)
         except ValidationError as exc:

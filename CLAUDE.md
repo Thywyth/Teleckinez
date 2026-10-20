@@ -60,7 +60,8 @@
 
 - Windows 11, PowerShell/Git Bash, 16 ГБ RAM, Ryzen 7 6800H, RTX 3060 Laptop.
 - Встановлено: Python 3.13, Git, Docker Desktop, Node.js, Java, LibreOffice.
-- Немає: pandoc (ставимо через `pypandoc_binary`), ffmpeg, Ollama, gh CLI.
+- Немає: pandoc (ставимо через `pypandoc_binary`), ffmpeg, gh CLI.
+- Ollama 0.40.6 встановлено 20.10.2026 (winget), модель `qwen2.5:3b`.
 - Автор знайомий з Python/Docker/git на базовому рівні → **команди запуску
   пиши повністю, з поясненням**, нічого «очевидного» не пропускай.
 
@@ -103,6 +104,8 @@ python scripts/check_deps.py       # перевірка, що все імпор�
 python scripts/download_models.py          # ~0.8 ГБ у models/ (--all: + великі моделі)
 python scripts/download_models.py --verify # завантажити кожну модель і прогнати один раз
 python scripts/audio_check.py              # мікрофон/динамік: запис 3 с, рівень, відтворення
+winget install Ollama.Ollama               # локальна LLM для nlu.mode llm / hybrid (опційно)
+ollama pull qwen2.5:3b                     # модель для LlmParser (~2 ГБ)
 
 # брокер
 docker compose up -d mosquitto       # основний (Mosquitto у Docker), порт 1883
@@ -116,5 +119,6 @@ python -m teleckinez --text      # без мікрофона, команди з 
 # перевірки
 pytest                           # інтеграційні тести потребують брокера, без нього — skip
 pytest -m "not integration"      # лише юніт-тести
+pytest -m "not llm"              # без тестів, що звертаються до справжньої Ollama
 ruff check . && ruff format .
 ```

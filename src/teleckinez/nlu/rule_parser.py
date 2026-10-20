@@ -29,9 +29,9 @@ KEY_SLOTS = ("room", "name", "type", "group", "action", "step", "attr", "query")
 
 
 class IntentParser(Protocol):
-    """Strategy interface: rule-based now, LLM-based later (stage 4)."""
+    """Strategy interface: RuleParser, LlmParser, or ModeParser choosing between them."""
 
-    def parse(self, text: str) -> "ParseResult": ...
+    async def aparse(self, text: str) -> "ParseResult": ...
 
 
 @dataclass(frozen=True)
@@ -55,8 +55,11 @@ class Match:
 @dataclass
 class ParseResult:
     intent: Intent | None
-    reason: str | None = None  # not_understood | low_confidence
+    reason: str | None = None  # not_understood | low_confidence | llm_error
     matches: list[Match] = field(default_factory=list)
+    # Share of meaningful words the rules recognized. "приглуши трохи торшер" is 1/3:
+    # the rules only saw "торшер" and would toggle it - hybrid mode asks the LLM then.
+    coverage: float = 1.0
 
     @property
     def ok(self) -> bool:
@@ -177,6 +180,9 @@ class RuleParser:
             name: {d.type.name for d in devs} for name, devs in registry.names().items()
         }
 
+    async def aparse(self, text: str) -> "ParseResult":
+        return self.parse(text)
+
     def scan(self, tokens: list[str]) -> list[Match]:
         matches, i = [], 0
         while i < len(tokens):
@@ -197,6 +203,7 @@ class RuleParser:
         tokens = tokenize(text)
         lang = detect_lang(text)
         matches = self.scan(tokens)
+        coverage = self._coverage(tokens, matches)
         slots: dict[str, Match] = {}
         for m in matches:
             for entry in m.entries:
@@ -247,9 +254,9 @@ class RuleParser:
 
         has_target = any((device_name, device_type, group, room))
         if kind == "command" and not (has_target and (action or device_name or device_type)):
-            return ParseResult(None, "not_understood", matches)
+            return ParseResult(None, "not_understood", matches, coverage)
         if kind == "query" and not (has_target or params):
-            return ParseResult(None, "not_understood", matches)
+            return ParseResult(None, "not_understood", matches, coverage)
 
         scores = [m.score for c, m in slots.items() if c in KEY_SLOTS]
         confidence = round(sum(scores) / len(scores), 3) if scores else 0.0
@@ -267,8 +274,16 @@ class RuleParser:
             parser=self.name,
         )
         if confidence < self.min_confidence:
-            return ParseResult(None, "low_confidence", matches)
-        return ParseResult(intent, None, matches)
+            return ParseResult(None, "low_confidence", matches, coverage)
+        return ParseResult(intent, None, matches, coverage)
+
+    @staticmethod
+    def _coverage(tokens: list[str], matches: list[Match]) -> float:
+        covered = {i for m in matches for i in range(m.start, m.end)}
+        meaningful = [i for i, t in enumerate(tokens) if t not in lexicon.STOPWORDS]
+        if not meaningful:
+            return 1.0
+        return round(sum(1 for i in meaningful if i in covered) / len(meaningful), 3)
 
     @staticmethod
     def _params(matches: list[Match], tokens: list[str]) -> dict[str, Any]:

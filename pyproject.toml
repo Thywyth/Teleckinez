@@ -73,4 +73,5 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 markers = [
     "integration: needs a running MQTT broker",
+    "llm: needs a local Ollama server with the configured model",
 ]

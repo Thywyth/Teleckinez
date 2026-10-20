@@ -152,7 +152,7 @@ async def test_put_settings_applies_hot_values(client, core) -> None:
     # the very objects the components use were updated
     assert core.dispatcher.settings.ack_timeout_s == 1.5
     assert core.assistant.settings.max_attempts == 2
-    assert core.parser.min_confidence == 0.7 and core.health.stale_factor == 4
+    assert core.rules.min_confidence == 0.7 and core.health.stale_factor == 4
     assert core.settings.web.port == 8000  # not applied without restart
     r = await client.post("/api/text-command", json={"text": "розкажи анекдот"})
     assert r.json()["response"] == "Вибачте, я не зрозумів команду."  # uk text -> uk answer
@@ -166,8 +166,10 @@ async def test_put_settings_rejects_invalid_and_changes_nothing(client, core) ->
     )
     assert r.status_code == 422 and "max_attempts" in r.json()["detail"]
     assert core.settings.dispatcher.ack_timeout_s == 0.2
+    r = await client.put("/api/settings", json={"nlu": {"mode": "magic"}})
+    assert r.status_code == 422
     r = await client.put("/api/settings", json={"nlu": {"mode": "hybrid"}})
-    assert r.status_code == 422 and "етапі 4" in r.json()["detail"]
+    assert r.status_code == 200 and core.parser.mode == "hybrid"
 
 
 def test_websocket_streams_bus_events(core) -> None:

@@ -82,6 +82,12 @@ class NluSettings(_Model):
     mode: Literal["rule", "llm", "hybrid"] = "rule"
     fuzzy_threshold: int = Field(85, ge=50, le=100)
     min_confidence: float = Field(0.6, ge=0, le=1)
+    # Local LLM through Ollama (nlu.md §3); used in llm / hybrid modes only
+    llm_model: str = "qwen2.5:3b"
+    ollama_host: str = "http://127.0.0.1:11434"
+    llm_timeout_s: float = Field(10.0, gt=0)
+    llm_keep_alive: str = "10m"  # how long Ollama keeps the model in (GPU) memory
+    hybrid_threshold: float = Field(0.8, ge=0, le=1)  # hybrid: below this the LLM decides
 
 
 class VoiceSettings(_Model):

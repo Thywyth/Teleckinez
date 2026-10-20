@@ -647,7 +647,9 @@ const SETTINGS_FORM = [
     ["notifications", "cooldown_s", "Не повторювати для пристрою частіше, с", "number", { step: 5, min: 0 }],
   ]],
   ["Розбір команд і відповіді", "застосовується одразу", [
-    ["nlu", "mode", "Режим NLU", "select", { options: { rule: "правила + fuzzy", llm: "LLM (етап 4)", hybrid: "гібрид (етап 4)" }, disabled: ["llm", "hybrid"] }],
+    ["nlu", "mode", "Режим NLU", "select", { options: { rule: "правила + fuzzy", llm: "LLM (Ollama)", hybrid: "гібрид: правила, потім LLM" } }],
+    ["nlu", "llm_model", "Модель Ollama", "text"],
+    ["nlu", "hybrid_threshold", "Гібрид: LLM, якщо впевненість правил нижча", "range", { min: 0, max: 1, step: 0.05 }],
     ["nlu", "fuzzy_threshold", "Поріг нечіткого збігу", "range", { min: 50, max: 100, step: 1 }],
     ["nlu", "min_confidence", "Мінімальна впевненість", "range", { min: 0, max: 1, step: 0.05 }],
     ["", "language", "Мова відповідей панелі", "select", { options: { uk: "українська", en: "English" } }],
@@ -700,6 +702,7 @@ function settingInput(section, field, kind, opts = {}) {
   if (kind === "list") {
     return el("input", { class: "field", name, value: value.join(", "), title: opts.hint || "" });
   }
+  if (kind === "text") return el("input", { class: "field", name, value });
   return el("input", { class: "field", type: "number", name, value, step: opts.step, min: opts.min });
 }
 

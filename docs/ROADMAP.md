@@ -84,7 +84,7 @@
 - [x] 4.1 `simulator/faults.py` — усі збої з devices.md §4 (P1)
 - [x] 4.2 Голосові сповіщення про offline/збої (P1)
 - [x] 4.3 Запити стану з урахуванням свіжості даних (P1)
-- [ ] 4.4 LlmParser через Ollama + режим hybrid (P2)
+- [x] 4.4 LlmParser через Ollama + режим hybrid (P2)
 - [x] 4.5 Адаптери `tasmota` / `zigbee2mqtt` + режим симулятора під них (P2)
 - [ ] 4.6 Розпізнавання мовця і ролі (P3)
 

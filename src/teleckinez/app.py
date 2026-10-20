@@ -19,6 +19,7 @@ from teleckinez.dispatch.dispatcher import Dispatcher
 from teleckinez.dispatch.notifier import Notifier
 from teleckinez.dispatch.response import ResponseComposer
 from teleckinez.dispatch.tracker import CommandTracker
+from teleckinez.nlu.llm_parser import LlmParser, ModeParser
 from teleckinez.nlu.resolver import TargetResolver
 from teleckinez.nlu.rule_parser import RuleParser
 from teleckinez.storage import EventRecorder, Storage, connect
@@ -86,12 +87,16 @@ class App:
         )
         self.gateway.add_listener(self.twins.on_message)
         self.gateway.add_listener(self.dispatcher.on_device_message)
-        if settings.nlu.mode != "rule":
-            log.warning("NLU mode %r is not implemented yet, using 'rule'", settings.nlu.mode)
-        self.parser = RuleParser(
+        self.rules = RuleParser(
             self.registry,
             fuzzy_threshold=settings.nlu.fuzzy_threshold,
             min_confidence=settings.nlu.min_confidence,
+        )
+        self.parser = ModeParser(
+            self.rules,
+            self._make_llm() if settings.nlu.mode != "rule" else None,  # built when needed
+            settings.nlu.mode,
+            settings.nlu.hybrid_threshold,
         )
         self.resolver = TargetResolver(self.registry)
         self.composer = ResponseComposer(self.registry, self.twins, fresh_s=settings.health.fresh_s)
@@ -154,8 +159,15 @@ class App:
                 setattr(old_model, field, new_value)  # the same object the components hold
                 applied.append(name)
         # components that copied values at construction time
-        self.parser.fuzzy_threshold = self.settings.nlu.fuzzy_threshold
-        self.parser.min_confidence = self.settings.nlu.min_confidence
+        nlu = self.settings.nlu
+        self.rules.fuzzy_threshold = nlu.fuzzy_threshold
+        self.rules.min_confidence = nlu.min_confidence
+        self.parser.mode = nlu.mode
+        self.parser.hybrid_threshold = nlu.hybrid_threshold
+        llm_changed = any(n.startswith(("nlu.llm_", "nlu.ollama_")) for n in applied)
+        if nlu.mode != "rule" and (self.parser.llm is None or llm_changed):
+            self.parser.llm = self._make_llm()
+            self._warm_up_llm()
         self.health.stale_factor = self.settings.health.stale_factor
         self.health.check_interval_s = self.settings.health.check_interval_s
         self.composer.fresh_s = self.settings.health.fresh_s
@@ -174,6 +186,24 @@ class App:
         """Ask the simulator to inject / clear a fault (raises MqttNotConnected)."""
         message = {"device_id": device_id, "fault": fault, "params": params, "enabled": enabled}
         await self.mqtt.publish(self.topics.sim_faults, message, qos=1)
+
+    def _warm_up_llm(self) -> None:
+        if self.parser.llm is not None and self.parser.mode != "rule":
+            self._tasks.append(asyncio.create_task(self.parser.llm.warmup(), name="llm-warmup"))
+
+    def _make_llm(self) -> LlmParser | None:
+        nlu = self.settings.nlu
+        try:
+            return LlmParser(
+                self.registry,
+                model=nlu.llm_model,
+                host=nlu.ollama_host,
+                timeout_s=nlu.llm_timeout_s,
+                keep_alive=nlu.llm_keep_alive,
+            )
+        except ImportError:  # the `llm` extra (ollama package) is not installed
+            log.warning("ollama package missing: pip install -e .[llm]; using rules only")
+            return None
 
     async def serve_web(self) -> None:
         """Run the web panel (uvicorn) in this event loop until cancelled."""
@@ -196,6 +226,7 @@ class App:
         """Connect to the broker and wait briefly for retained device states."""
         await self.mqtt.start()
         self._tasks.append(asyncio.create_task(self.health.run(), name="health"))
+        self._warm_up_llm()
         await asyncio.sleep(settle_s)
 
     async def stop(self) -> None:
