@@ -55,8 +55,7 @@ async def clear_retained(host: str, port: int, prefix: str) -> None:
                         topics.add(message.topic.value)
         except TimeoutError:
             pass
-        for topic in topics:
-            await client.publish(topic, b"", qos=1, retain=True)
+        await asyncio.gather(*(client.publish(t, b"", qos=1, retain=True) for t in topics))
 
 
 @pytest.fixture

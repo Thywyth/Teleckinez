@@ -114,6 +114,7 @@ python -m teleckinez             # асистент + веб-панель (http:
 python -m teleckinez --text      # без мікрофона, команди з клавіатури
 
 # перевірки
-pytest
+pytest                           # інтеграційні тести потребують брокера, без нього — skip
+pytest -m "not integration"      # лише юніт-тести
 ruff check . && ruff format .
 ```
