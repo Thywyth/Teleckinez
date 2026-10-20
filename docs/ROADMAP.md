@@ -32,7 +32,7 @@
 
 ## Етап 0. Підготовка середовища (P0)
 
-- [ ] 0.1 git init, `.gitignore`, `pyproject.toml` (src-layout, extras `dev`, `voice`, `llm`), ruff, pytest
+- [x] 0.1 git init, `.gitignore`, `pyproject.toml` (src-layout, extras `dev`, `voice`, `llm`), ruff, pytest
 - [ ] 0.2 Перевірити встановлення ключових залежностей на Python 3.13 (vosk, faster-whisper, piper-tts, openwakeword, webrtcvad-wheels, sounddevice, aiomqtt); результат → ADR-011
 - [ ] 0.3 `docker-compose.yml` з Mosquitto + `config/mosquitto/mosquitto.conf`; перевірка fallback-брокера
 - [ ] 0.4 `scripts/download_models.py` (Vosk uk/en, Whisper small, Piper uk/en, openWakeWord) з перевіркою наявності

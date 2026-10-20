@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "teleckinez"
+version = "0.1.0"
+description = "Offline voice assistant that dispatches commands to IoT devices over MQTT and verifies their execution"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Thywyth" }]
+dependencies = [
+    "aiomqtt>=2.3",
+    "pydantic>=2.9",
+    "pyyaml>=6.0",
+    "rapidfuzz>=3.10",
+    "python-ulid>=3.0",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.7",
+]
+voice = [
+    "numpy>=1.26",
+    "sounddevice>=0.5",
+    "webrtcvad-wheels>=2.0.14",
+    "vosk>=0.3.45",
+    "faster-whisper>=1.1",
+    "piper-tts>=1.2",
+    "openwakeword>=0.6",
+    "pyttsx3>=2.98",
+    "pynput>=1.7",
+]
+llm = [
+    "ollama>=0.4",
+]
+
+[project.scripts]
+teleckinez = "teleckinez.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/teleckinez", "simulator"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "."]
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "ASYNC", "RUF"]
+# Ukrainian text in strings/docs contains Cyrillic letters that look like Latin ones.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: needs a running MQTT broker",
+]
