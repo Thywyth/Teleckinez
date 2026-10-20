@@ -119,6 +119,7 @@ const ERROR_UK = {
   value_out_of_range: "значення поза межами", unsupported_action: "дія не підтримується",
   broker_unavailable: "немає зв'язку з брокером", no_ack: "немає підтвердження",
   state_not_reached: "стан не досягнуто", device_offline: "не в мережі",
+  device_error: "внутрішня помилка пристрою",
 };
 function statusText(status, error) {
   const base = STATUS_UK[status] || status;

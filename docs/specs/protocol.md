@@ -25,6 +25,7 @@
 | `tkz/dev/{id}/cmd` | → пристрій | 1 | ні | команда |
 | `tkz/dev/{id}/ack` | пристрій → | 1 | ні | підтвердження прийому/відмови |
 | `tkz/sim/faults` | панель → симулятор | 1 | ні | керування ін'єкцією збоїв (лише симулятор) |
+| `tkz/sim/faults/state` | симулятор → | 1 | так | активні збої `{device_id: {fault: params}}` (доповнення етапу 4) |
 | `tkz/assistant/availability` | асистент → | 1 | так | LWT самого асистента |
 
 ## 3. Формати повідомлень (JSON, UTF-8)
@@ -89,3 +90,15 @@ payload і навпаки нормалізує стан:
 (`protocol: tasmota` у devices.yaml). Точні формати звірити з офіційною
 документацією Tasmota / Zigbee2MQTT / ESPHome перед реалізацією і послатися
 на неї у записці.
+
+### sim/faults (лише симулятор, devices.md §4)
+```json
+{"device_id": "lock.front_door", "fault": "offline"}
+{"device_id": "light.kitchen_main", "fault": "drop_rate", "params": {"p": 0.5}}
+{"device_id": "light.kitchen_main", "fault": "slow", "enabled": false}
+{"device_id": "*", "fault": "clear"}
+```
+`fault`: `offline | freeze | drop_rate | stuck | slow | reject | drift | clear`;
+`drift` — разова подія, решта діють до `enabled: false` або `clear`. Збій
+`offline` імітується обривом TCP без пакета DISCONNECT (`socket.shutdown`),
+тому брокер чесно розсилає LWT, як для реального пристрою, що втратив живлення.

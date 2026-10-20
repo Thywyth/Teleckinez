@@ -37,6 +37,11 @@ class Topics:
     def sim_faults(self) -> str:
         return f"{self.prefix}/sim/faults"
 
+    @property
+    def sim_faults_state(self) -> str:
+        """Retained JSON of currently active faults (simulator -> panel)."""
+        return f"{self.prefix}/sim/faults/state"
+
     def parse(self, topic: str) -> tuple[str, str] | None:
         """'tkz/dev/light.k/state' -> ('light.k', 'state')."""
         parts = topic.split("/")

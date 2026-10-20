@@ -110,11 +110,13 @@ ERRORS = {
         "value_out_of_range": "таке значення не підтримується",
         "unsupported_action": "ця дія не підтримується",
         "busy": "пристрій зайнятий",
+        "device_error": "внутрішня помилка пристрою",
     },
     "en": {
         "value_out_of_range": "the value is out of range",
         "unsupported_action": "this action is not supported",
         "busy": "the device is busy",
+        "device_error": "internal device error",
     },
 }
 COLOR_NAMES = {
