@@ -60,7 +60,7 @@
 ## Етап 2. Голосовий конвеєр (P0)
 
 - [x] 2.1 `voice/audio_io.py` — потоки вводу/виводу, half-duplex
-- [ ] 2.2 `voice/vad.py` + UtteranceRecorder
+- [x] 2.2 `voice/vad.py` + UtteranceRecorder
 - [ ] 2.3 STT-інтерфейс + Vosk (вільний режим і граматика з `nlu/grammar.py`)
 - [ ] 2.4 STT faster-whisper (CUDA, fallback CPU int8)
 - [ ] 2.5 Тригери: push-to-talk (клавіша) і wake word Vosk-KWS

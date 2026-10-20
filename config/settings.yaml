@@ -39,6 +39,14 @@ voice:
   stt: vosk                 # vosk | whisper
   stt_lang: uk              # uk | en | auto
   tts: piper                # piper | sapi | text
+  input_device: null        # microphone: index or name (python scripts/audio_check.py --list)
+  output_device: null       # speaker / headphones; null = Windows default
+  vad_aggressiveness: 2     # webrtcvad 0..3, higher = stricter about what is speech
+  vad_start_frames: 3       # 3 x 30 ms of speech = the phrase started
+  vad_end_silence_ms: 700   # this much silence = the phrase ended
+  vad_pre_roll_ms: 300      # audio kept from before the detected start
+  max_utterance_s: 8        # hard limit of one phrase
+  no_speech_timeout_s: 5    # nobody spoke after the trigger -> back to idle
 
 web:
   host: 127.0.0.1

@@ -74,6 +74,14 @@ class VoiceSettings(_Model):
     stt: Literal["vosk", "whisper"] = "vosk"
     stt_lang: Literal["uk", "en", "auto"] = "uk"
     tts: Literal["piper", "sapi", "text"] = "piper"
+    input_device: int | str | None = None  # sounddevice index/name; None = system default
+    output_device: int | str | None = None
+    vad_aggressiveness: int = Field(2, ge=0, le=3)
+    vad_start_frames: int = Field(3, ge=1)  # voiced 30 ms frames in a row = speech started
+    vad_end_silence_ms: int = Field(700, ge=90)
+    vad_pre_roll_ms: int = Field(300, ge=0)
+    max_utterance_s: float = Field(8.0, gt=0)
+    no_speech_timeout_s: float = Field(5.0, gt=0)
 
 
 class WebSettings(_Model):

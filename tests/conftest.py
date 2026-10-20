@@ -2,6 +2,7 @@ import asyncio
 import os
 import socket
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -69,3 +70,42 @@ async def mqtt_settings(mqtt_broker):
     settings = MqttSettings(host=host, port=port, prefix=f"tkz-test/{uuid.uuid4().hex[:8]}")
     yield settings
     await clear_retained(host, port, settings.prefix)
+
+
+MODELS = Path(__file__).resolve().parents[1] / "models"
+PIPER_VOICES = {
+    "uk": MODELS / "piper/uk_UA-ukrainian_tts-medium/uk_UA-ukrainian_tts-medium.onnx",
+    "en": MODELS / "piper/en_US-lessac-medium/en_US-lessac-medium.onnx",
+}
+
+
+@pytest.fixture(scope="session")
+def speech():
+    """speech(text, lang) -> 16 kHz int16 numpy audio synthesized by Piper (cached)."""
+    if not all(p.is_file() for p in PIPER_VOICES.values()):
+        pytest.skip("Piper voices missing (python scripts/download_models.py)")
+    import numpy as np
+    from piper import PiperVoice
+    from piper.voice import ESPEAK_DATA_DIR
+
+    from teleckinez.voice.audio_io import SAMPLE_RATE, resample
+    from teleckinez.voice.paths import ascii_safe_path
+
+    voices = {
+        lang: PiperVoice.load(path, espeak_data_dir=ascii_safe_path(ESPEAK_DATA_DIR))
+        for lang, path in PIPER_VOICES.items()
+    }
+    cache: dict = {}
+
+    def synth(text: str, lang: str = "uk"):
+        if (text, lang) not in cache:
+            voice = voices[lang]
+            chunks = [
+                c.audio_int16_array
+                for c in voice.synthesize(text.lower() if lang == "uk" else text)
+            ]
+            audio = np.concatenate(chunks)
+            cache[(text, lang)] = resample(audio, voice.config.sample_rate, SAMPLE_RATE)
+        return cache[(text, lang)]
+
+    return synth
