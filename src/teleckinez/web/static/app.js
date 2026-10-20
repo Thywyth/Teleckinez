@@ -492,11 +492,112 @@ state.listeners.push(({ type, data }) => {
   renderHistory();
 });
 
+// -------------------------------------------------------------------- journal
+const journal = { rows: [], device: "", outcome: "", timer: null, loaded: false };
+const OUTCOME = {
+  "": "усі",
+  ok: "виконані",
+  failed: "збої",
+  running: "у процесі",
+};
+const RUNNING = new Set(["created", "published", "retrying", "accepted"]);
+
+function renderJournalShell() {
+  const view = $("#view-journal");
+  const devSelect = el("select", { class: "btn", onchange: (e) => { journal.device = e.target.value; loadJournal(); } },
+    el("option", { value: "" }, "усі пристрої"),
+    [...state.devices.values()].map((d) => el("option", { value: d.id, selected: journal.device === d.id }, d.title)));
+  const outSelect = el("select", { class: "btn", onchange: (e) => { journal.outcome = e.target.value; renderJournal(); } },
+    Object.entries(OUTCOME).map(([k, v]) => el("option", { value: k, selected: journal.outcome === k }, v)));
+  view.replaceChildren(
+    el("div", { class: "toolbar" }, el("h1", {}, "Журнал команд"),
+      el("div", { class: "filters" }, devSelect, outSelect,
+        el("button", { class: "btn", onclick: loadJournal }, "Оновити"))),
+    el("div", { id: "journal-stats", class: "stats" }),
+    el("div", { class: "table-wrap" }, el("table", { class: "journal" },
+      el("thead", {}, el("tr", {},
+        ["Час", "Пристрій", "Команда", "Статус", "Спроби", "→ publish", "→ ack", "Разом", "Помилка"].map((h) => el("th", {}, h)))),
+      el("tbody", { id: "journal-body" }))),
+  );
+}
+
+async function loadJournal() {
+  const query = new URLSearchParams({ limit: "200" });
+  if (journal.device) query.set("device_id", journal.device);
+  try {
+    journal.rows = await api(`/api/commands?${query}`);
+    journal.loaded = true;
+    renderJournal();
+  } catch (err) {
+    toast(`Журнал: ${err.message}`, "bad");
+  }
+}
+
+const ms = (a, b) => (a != null && b != null ? Math.round((b - a) * 1000) : null);
+const clock = (ts) => new Date(ts * 1000).toLocaleTimeString("uk-UA", { hour12: false });
+const median = (xs) => {
+  if (!xs.length) return null;
+  const s = [...xs].sort((a, b) => a - b);
+  return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+};
+
+function rowOutcome(r) {
+  if (RUNNING.has(r.status)) return "running";
+  return r.status === "completed" ? "ok" : "failed";
+}
+
+function renderJournal() {
+  const body = $("#journal-body");
+  if (!body) return;
+  const rows = journal.rows.filter((r) => !journal.outcome || rowOutcome(r) === journal.outcome);
+  body.replaceChildren(...rows.map((r) => {
+    const dev = state.devices.get(r.device_id);
+    const shown = Object.keys(r.desired || {}).length ? r.desired : r.params || {};
+    const what = Object.keys(shown).length ? describeDesired(shown) : r.action;
+    const cells = [
+      clock(r.t_created),
+      dev ? dev.title : r.device_id,
+      el("span", { title: `${r.action} ${JSON.stringify(r.params)}` }, what),
+      el("span", { class: `badge ${rowOutcome(r)}` }, STATUS_UK[r.status] || r.status),
+      r.attempts,
+      fmtMs(ms(r.t_created, r.t_published)),
+      fmtMs(ms(r.t_published, r.t_ack)),
+      fmtMs(ms(r.t_created, r.t_finished)),
+      r.error && !r.error.startsWith("superseded_by") ? ERROR_UK[r.error] || r.error : "",
+    ];
+    return el("tr", { class: rowOutcome(r) }, cells.map((c, i) => el("td", { class: i >= 4 && i <= 7 ? "num" : "" }, c)));
+  }));
+  if (!rows.length) body.append(el("tr", {}, el("td", { colspan: 9, class: "muted" }, "Команд ще немає.")));
+
+  const finished = journal.rows.filter((r) => !RUNNING.has(r.status));
+  const ok = finished.filter((r) => r.status === "completed");
+  const acks = journal.rows.map((r) => ms(r.t_published, r.t_ack)).filter((x) => x != null);
+  const totals = ok.map((r) => ms(r.t_created, r.t_finished)).filter((x) => x != null);
+  const stat = (label, value) => el("div", { class: "stat" }, el("div", { class: "stat-value" }, value), el("div", { class: "stat-label" }, label));
+  $("#journal-stats").replaceChildren(
+    stat("команд", journal.rows.length),
+    stat("виконано", finished.length ? `${Math.round((ok.length / finished.length) * 100)} %` : "—"),
+    stat("збоїв", finished.length - ok.length),
+    stat("медіана ack", acks.length ? `${Math.round(median(acks))} мс` : "—"),
+    stat("медіана виконання", totals.length ? `${Math.round(median(totals))} мс` : "—"),
+  );
+}
+
+const fmtMs = (v) => (v == null ? "—" : `${v} мс`);
+
+state.listeners.push(({ type }) => {
+  if (!["CommandCreated", "CommandStatusChanged", "CommandFinished"].includes(type)) return;
+  if (!$("#view-journal").classList.contains("active")) { journal.loaded = false; return; }
+  clearTimeout(journal.timer);
+  journal.timer = setTimeout(loadJournal, 250); // a group command produces many events at once
+});
+
 // ----------------------------------------------------------------------- tabs
 function showView(name) {
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.view === name));
   document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${name}`));
   try { localStorage.setItem("tkz-view", name); } catch { /* private mode */ }
+  if (name === "journal") { renderJournalShell(); loadJournal(); }
 }
 document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showView(t.dataset.view)));
 
