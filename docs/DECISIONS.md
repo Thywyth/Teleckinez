@@ -77,3 +77,20 @@
 ### ADR-011. Python 3.13
 - Встановлений у системі. Якщо vosk / piper / openwakeword не мають колесиків
   під 3.13 — переходимо на 3.12 і записуємо це сюди.
+- **Перевірено 20.10.2026** (Windows 11, Python 3.13.2, `scripts/check_deps.py`):
+  усі ключові залежності ставляться з готових колесиків і імпортуються —
+  aiomqtt 2.5.1, numpy 2.5.4, sounddevice 0.5.6, webrtcvad-wheels 2.0.14.post1,
+  vosk 0.3.45, faster-whisper 1.2.1 (ctranslate2 4.8.3), piper-tts 1.8.0,
+  onnxruntime 1.31.0, openwakeword 0.6.0, pyttsx3 2.99, pynput 1.8.2,
+  ollama 0.6.3. **Рішення: залишаємось на Python 3.13.** У `pyproject.toml`
+  стоїть `requires-python >=3.12`, щоб проєкт також працював на 3.12 (напр.
+  на Raspberry Pi OS).
+- **CUDA для faster-whisper.** ctranslate2 бачить RTX 3060 (float16/int8),
+  але для інференсу на GPU потрібні cuBLAS 12 і cuDNN 9, яких у системі
+  немає. Замість встановлення CUDA Toolkit беремо їх з pip-колесиків
+  `nvidia-cublas-cu12` і `nvidia-cudnn-cu12` (extra `cuda`, ≈1 ГБ) і
+  додаємо їхні теки `bin` у шлях пошуку DLL
+  (`teleckinez.voice.cuda.register_cuda_dlls()`). Без extra `cuda`
+  faster-whisper працює на CPU (int8).
+- openWakeWord на Windows — лише через onnxruntime (tflite-runtime для
+  Windows немає), що й передбачено у voice.md.

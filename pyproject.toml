@@ -37,6 +37,11 @@ voice = [
     "pyttsx3>=2.98",
     "pynput>=1.7",
 ]
+# CUDA 12 runtime for faster-whisper on GPU (Windows/Linux, NVIDIA only).
+cuda = [
+    "nvidia-cublas-cu12>=12.4",
+    "nvidia-cudnn-cu12>=9,<10",
+]
 llm = [
     "ollama>=0.4",
 ]

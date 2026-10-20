@@ -98,7 +98,8 @@
 # одноразово
 py -3.13 -m venv .venv
 .venv\Scripts\activate
-pip install -e ".[dev,voice]"
+pip install -e ".[dev,voice,cuda]"   # cuda — лише для NVIDIA GPU (faster-whisper)
+python scripts/check_deps.py       # перевірка, що все імпортується
 python scripts/download_models.py
 
 # брокер
