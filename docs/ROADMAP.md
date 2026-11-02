@@ -65,7 +65,7 @@
 - [x] 2.4 STT faster-whisper (CUDA, fallback CPU int8)
 - [x] 2.5 Тригери: push-to-talk (клавіша) і wake word Vosk-KWS
 - [x] 2.6 Wake word openWakeWord (P1)
-- [ ] 2.7 TTS Piper + fallback SAPI + text-only
+- [x] 2.7 TTS Piper + fallback SAPI + text-only
 - [ ] 2.8 Збирання конвеєра в `__main__`, вибір рушіїв з settings; звукові сигнали
 - [ ] 2.9 Розширення словника NLU за реальними помилками розпізнавання
 

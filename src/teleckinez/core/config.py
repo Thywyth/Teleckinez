@@ -102,6 +102,8 @@ class VoiceSettings(_Model):
     whisper_device: Literal["auto", "cuda", "cpu"] = "auto"  # auto: CUDA, else CPU int8
     whisper_beam_size: int = Field(5, ge=1, le=10)
     wake_threshold: float = Field(0.8, ge=0, le=1)  # vosk_kws: confidence of "телекінез"
+    piper_voice_uk: str = "models/piper/uk_UA-ukrainian_tts-medium/uk_UA-ukrainian_tts-medium.onnx"
+    piper_voice_en: str = "models/piper/en_US-lessac-medium/en_US-lessac-medium.onnx"
     oww_model: str = "models/openwakeword/hey_jarvis_v0.1.onnx"
     oww_threshold: float = Field(0.5, ge=0, le=1)
     ptt_key: str = "ctrl_r"  # global push-to-talk key (pynput name: ctrl_r, f9, scroll_lock ...)

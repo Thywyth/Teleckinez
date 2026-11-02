@@ -62,6 +62,8 @@ voice:
   whisper_device: auto      # auto (CUDA float16, else CPU int8) | cuda | cpu
   whisper_beam_size: 5      # 1 = greedy, faster; 5 = more accurate
   wake_threshold: 0.8       # vosk_kws: minimal confidence of the word «телекінез»
+  piper_voice_uk: models/piper/uk_UA-ukrainian_tts-medium/uk_UA-ukrainian_tts-medium.onnx
+  piper_voice_en: models/piper/en_US-lessac-medium/en_US-lessac-medium.onnx
   oww_model: models/openwakeword/hey_jarvis_v0.1.onnx   # trigger: openwakeword ("hey jarvis")
   oww_threshold: 0.5        # openWakeWord score 0..1
   ptt_key: ctrl_r           # hold to talk (Right Ctrl); f9, scroll_lock, ... also work
