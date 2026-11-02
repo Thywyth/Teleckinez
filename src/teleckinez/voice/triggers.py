@@ -10,6 +10,7 @@ import json
 import logging
 from collections.abc import AsyncIterator, Callable
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Protocol
 
 import numpy as np
@@ -201,3 +202,58 @@ class HotkeyListener:
         if self._listener is not None:
             self._listener.stop()
             self._listener = None
+
+
+# ------------------------------------------------------------------------ openWakeWord
+
+OWW_CHUNK = 1280  # openWakeWord works on 80 ms chunks of 16 kHz audio
+
+
+class OpenWakeWord:
+    """openWakeWord (ONNX) with a pre-trained English model, by default "hey jarvis".
+
+    Only the ONNX runtime is used: tflite-runtime has no Windows wheels.
+    """
+
+    name = "openwakeword"
+
+    def __init__(self, model_file: str | Path, threshold: float = 0.5) -> None:
+        from openwakeword.model import Model
+
+        model_file = Path(model_file)
+        base = model_file.parent
+        if not model_file.is_file():
+            raise FileNotFoundError(
+                f"openWakeWord model not found: {model_file} "
+                "(python scripts/download_models.py --only openwakeword)"
+            )
+        self.model = Model(
+            wakeword_models=[str(model_file)],
+            melspec_model_path=str(base / "melspectrogram.onnx"),
+            embedding_model_path=str(base / "embedding_model.onnx"),
+            inference_framework="onnx",
+        )
+        self.threshold = threshold
+        self._buffer = np.zeros(0, np.int16)
+        self.last_score = 0.0
+
+    def process(self, frame: bytes) -> WakeHit | None:
+        self._buffer = np.concatenate([self._buffer, np.frombuffer(frame, np.int16)])
+        while self._buffer.size >= OWW_CHUNK:
+            chunk, self._buffer = self._buffer[:OWW_CHUNK], self._buffer[OWW_CHUNK:]
+            self.last_score = max(self.model.predict(chunk).values())
+            if self.last_score >= self.threshold:
+                score = float(self.last_score)
+                self.reset()  # the model keeps firing on the next chunks of the same word
+                return WakeHit(self.name, round(score, 3))
+        return None
+
+    def reset(self) -> None:
+        self.model.reset()
+        self._buffer = np.zeros(0, np.int16)
+
+
+def create_openwakeword(voice: VoiceSettings) -> OpenWakeWord:
+    from teleckinez.voice.paths import model_path
+
+    return OpenWakeWord(model_path(voice.oww_model), voice.oww_threshold)

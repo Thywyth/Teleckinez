@@ -89,7 +89,7 @@ def speech():
     if not all(p.is_file() for p in PIPER_VOICES.values()):
         pytest.skip("Piper voices missing (python scripts/download_models.py)")
     import numpy as np
-    from piper import PiperVoice
+    from piper import PiperVoice, SynthesisConfig
     from piper.voice import ESPEAK_DATA_DIR
 
     from teleckinez.voice.audio_io import SAMPLE_RATE, resample
@@ -100,13 +100,18 @@ def speech():
         for lang, path in PIPER_VOICES.items()
     }
     cache: dict = {}
+    # Piper adds random noise inside the ONNX graph (not seedable): without it the
+    # audio, and so the recognition result, would differ between test runs.
+    deterministic = SynthesisConfig(noise_scale=0.0, noise_w_scale=0.0)
 
     def synth(text: str, lang: str = "uk"):
         if (text, lang) not in cache:
             voice = voices[lang]
             chunks = [
                 c.audio_int16_array
-                for c in voice.synthesize(text.lower() if lang == "uk" else text)
+                for c in voice.synthesize(
+                    text.lower() if lang == "uk" else text, syn_config=deterministic
+                )
             ]
             audio = np.concatenate(chunks)
             cache[(text, lang)] = resample(audio, voice.config.sample_rate, SAMPLE_RATE)

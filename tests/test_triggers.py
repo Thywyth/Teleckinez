@@ -104,3 +104,41 @@ def test_similar_words_are_not_the_wake_word(kws_factory, speech, phrase) -> Non
 def test_wake_word_ignores_noise(kws_factory) -> None:
     noise = np.random.default_rng(0).normal(0, 800, 3 * SAMPLE_RATE).astype(np.int16)
     assert listen(kws_factory(), noise) == []
+
+
+# ------------------------------------------------------------------------ openWakeWord
+
+
+@pytest.fixture(scope="module")
+def oww():
+    settings = VoiceSettings()
+    if not model_path(settings.oww_model).is_file():
+        pytest.skip("openWakeWord models missing (python scripts/download_models.py)")
+    from teleckinez.voice.triggers import create_openwakeword
+
+    return create_openwakeword(settings)
+
+
+@pytest.mark.models
+@pytest.mark.parametrize("phrase", ["hey jarvis", "hey jarvis, turn on the light"])
+def test_openwakeword_hey_jarvis(oww, speech, phrase) -> None:
+    oww.reset()
+    hits = listen(oww, speech(phrase, "en"))
+    assert len(hits) == 1 and hits[0].engine == "openwakeword" and hits[0].score >= 0.5
+
+
+@pytest.mark.models
+@pytest.mark.parametrize(
+    ("phrase", "lang"),
+    [("turn on the kitchen light", "en"), ("hello there", "en"), ("телекінез", "uk")],
+)
+def test_openwakeword_rejects_other_phrases(oww, speech, phrase, lang) -> None:
+    oww.reset()
+    assert listen(oww, speech(phrase, lang)) == []
+
+
+@pytest.mark.models
+def test_openwakeword_accepts_30ms_frames(oww) -> None:
+    oww.reset()
+    assert oww.process(bytes(960)) is None  # 480 samples are buffered until 1280
+    assert oww._buffer.size == 480
