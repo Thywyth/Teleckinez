@@ -1,7 +1,7 @@
 """Download offline models into models/ (run once, needs internet).
 
 Usage:
-    python scripts/download_models.py            # default set (~0.8 GB)
+    python scripts/download_models.py            # default set (~1 GB)
     python scripts/download_models.py --all      # + large optional models (~1.9 GB more)
     python scripts/download_models.py --only vosk piper
     python scripts/download_models.py --check    # only report what is present/missing
@@ -65,11 +65,22 @@ def _piper(voice_path: str, size_mb: int) -> ModelSpec:
 
 
 MODELS: list[ModelSpec] = [
+    # Grammar mode (voice.md §4) works only with the lgraph model; the small one
+    # returns random words with a grammar and stays for free-vocabulary comparison (E1).
+    ModelSpec(
+        name="vosk-model-uk-v3-lgraph",
+        group="vosk",
+        dest="vosk/vosk-model-uk-v3-lgraph",
+        size_mb=325,
+        url=VOSK_URL.format(name="vosk-model-uk-v3-lgraph"),
+        marker="am/final.mdl",
+    ),
     ModelSpec(
         name="vosk-model-small-uk-v3-small",
         group="vosk",
         dest="vosk/vosk-model-small-uk-v3-small",
         size_mb=144,
+        default=False,
         url=VOSK_URL.format(name="vosk-model-small-uk-v3-small"),
         marker="am/final.mdl",
     ),

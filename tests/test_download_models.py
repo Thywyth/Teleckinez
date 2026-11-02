@@ -12,7 +12,8 @@ _spec.loader.exec_module(dm)
 
 def test_default_selection_excludes_optional() -> None:
     names = {m.name for m in dm.select_models()}
-    assert "vosk-model-small-uk-v3-small" in names
+    assert "vosk-model-uk-v3-lgraph" in names
+    assert "vosk-model-small-uk-v3-small" not in names
     assert "uk_UA-ukrainian_tts-medium" in names
     assert "vosk-model-uk-v3" not in names
     assert "faster-whisper-medium" not in names

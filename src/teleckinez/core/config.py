@@ -94,6 +94,10 @@ class VoiceSettings(_Model):
     trigger: Literal["vosk_kws", "openwakeword", "push_to_talk"] = "vosk_kws"
     stt: Literal["vosk", "whisper"] = "vosk"
     stt_lang: Literal["uk", "en", "auto"] = "uk"
+    stt_grammar: bool = True  # Vosk: only words the NLU knows (nlu.md §2)
+    # Model paths are relative to the project root (scripts/download_models.py puts them there).
+    vosk_model_uk: str = "models/vosk/vosk-model-uk-v3-lgraph"
+    vosk_model_en: str = "models/vosk/vosk-model-small-en-us-0.15"
     tts: Literal["piper", "sapi", "text"] = "piper"
     input_device: int | str | None = None  # sounddevice index/name; None = system default
     output_device: int | str | None = None

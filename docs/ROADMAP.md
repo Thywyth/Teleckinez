@@ -61,7 +61,7 @@
 
 - [x] 2.1 `voice/audio_io.py` — потоки вводу/виводу, half-duplex
 - [x] 2.2 `voice/vad.py` + UtteranceRecorder
-- [ ] 2.3 STT-інтерфейс + Vosk (вільний режим і граматика з `nlu/grammar.py`)
+- [x] 2.3 STT-інтерфейс + Vosk (вільний режим і граматика з `nlu/grammar.py`)
 - [ ] 2.4 STT faster-whisper (CUDA, fallback CPU int8)
 - [ ] 2.5 Тригери: push-to-talk (клавіша) і wake word Vosk-KWS
 - [ ] 2.6 Wake word openWakeWord (P1)

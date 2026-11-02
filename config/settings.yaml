@@ -55,6 +55,9 @@ voice:
   trigger: vosk_kws         # vosk_kws | openwakeword | push_to_talk
   stt: vosk                 # vosk | whisper
   stt_lang: uk              # uk | en | auto
+  stt_grammar: true         # Vosk hears only words the NLU knows (much more accurate on commands)
+  vosk_model_uk: models/vosk/vosk-model-uk-v3-lgraph   # the small uk model breaks in grammar mode
+  vosk_model_en: models/vosk/vosk-model-small-en-us-0.15
   tts: piper                # piper | sapi | text
   input_device: null        # microphone: index or name (python scripts/audio_check.py --list)
   output_device: null       # speaker / headphones; null = Windows default

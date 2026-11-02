@@ -37,3 +37,11 @@ def ascii_safe_path(path: str | os.PathLike[str]) -> str:
         f"cannot build an ASCII-only path to {resolved}; move the project to a folder "
         "without non-Latin characters or run from the project root"
     )
+
+
+def model_path(path: str | os.PathLike[str]) -> Path:
+    """Model paths in settings.yaml are relative to the project root, not to the cwd."""
+    from teleckinez.core.config import ROOT
+
+    p = Path(path)
+    return p if p.is_absolute() else ROOT / p
