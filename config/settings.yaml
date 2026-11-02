@@ -61,6 +61,8 @@ voice:
   whisper_model: models/whisper/small   # models/whisper/medium: --all in download_models.py
   whisper_device: auto      # auto (CUDA float16, else CPU int8) | cuda | cpu
   whisper_beam_size: 5      # 1 = greedy, faster; 5 = more accurate
+  wake_threshold: 0.8       # vosk_kws: minimal confidence of the word «телекінез»
+  ptt_key: ctrl_r           # hold to talk (Right Ctrl); f9, scroll_lock, ... also work
   tts: piper                # piper | sapi | text
   input_device: null        # microphone: index or name (python scripts/audio_check.py --list)
   output_device: null       # speaker / headphones; null = Windows default
