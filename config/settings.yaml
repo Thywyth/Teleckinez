@@ -58,6 +58,9 @@ voice:
   stt_grammar: true         # Vosk hears only words the NLU knows (much more accurate on commands)
   vosk_model_uk: models/vosk/vosk-model-uk-v3-lgraph   # the small uk model breaks in grammar mode
   vosk_model_en: models/vosk/vosk-model-small-en-us-0.15
+  whisper_model: models/whisper/small   # models/whisper/medium: --all in download_models.py
+  whisper_device: auto      # auto (CUDA float16, else CPU int8) | cuda | cpu
+  whisper_beam_size: 5      # 1 = greedy, faster; 5 = more accurate
   tts: piper                # piper | sapi | text
   input_device: null        # microphone: index or name (python scripts/audio_check.py --list)
   output_device: null       # speaker / headphones; null = Windows default

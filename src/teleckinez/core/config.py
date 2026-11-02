@@ -98,6 +98,9 @@ class VoiceSettings(_Model):
     # Model paths are relative to the project root (scripts/download_models.py puts them there).
     vosk_model_uk: str = "models/vosk/vosk-model-uk-v3-lgraph"
     vosk_model_en: str = "models/vosk/vosk-model-small-en-us-0.15"
+    whisper_model: str = "models/whisper/small"
+    whisper_device: Literal["auto", "cuda", "cpu"] = "auto"  # auto: CUDA, else CPU int8
+    whisper_beam_size: int = Field(5, ge=1, le=10)
     tts: Literal["piper", "sapi", "text"] = "piper"
     input_device: int | str | None = None  # sounddevice index/name; None = system default
     output_device: int | str | None = None

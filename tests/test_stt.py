@@ -133,3 +133,69 @@ async def test_transcribe_async_runs_in_a_thread(vosk_uk, speech) -> None:
 
     transcript = await transcribe_async(vosk_uk, speech("увімкни світло на кухні"), "uk")
     assert transcript.text == "увімкни світло на кухні" and transcript.rtf < 1
+
+
+# ------------------------------------------------------------------ faster-whisper
+
+WHISPER_MODEL = model_path(VOICE.whisper_model)
+
+
+def test_whisper_prompt_names_this_home(registry) -> None:
+    from teleckinez.voice.stt.whisper_stt import build_prompt
+
+    prompt = build_prompt(registry, "uk")
+    assert prompt.startswith("Телекінез.") and "торшер" in prompt and "кухня" in prompt
+    assert "kitchen" in build_prompt(registry, "en")
+
+
+def _whisper(registry, device: str):
+    if not (WHISPER_MODEL / "model.bin").is_file():
+        pytest.skip(f"model missing: {WHISPER_MODEL} (python scripts/download_models.py)")
+    from teleckinez.voice.stt.whisper_stt import create_whisper
+
+    try:
+        return create_whisper(VoiceSettings(whisper_device=device), registry)
+    except Exception as exc:  # no GPU / CUDA libraries
+        pytest.skip(f"Whisper on {device} unavailable: {exc}")
+
+
+@pytest.fixture(scope="module")
+def whisper_gpu(registry):
+    return _whisper(registry, "cuda")
+
+
+@pytest.fixture(scope="module")
+def whisper_cpu(registry):
+    return _whisper(registry, "cpu")
+
+
+@pytest.mark.models
+@pytest.mark.gpu
+@pytest.mark.parametrize(("phrase", "device"), UK_COMMANDS[:4])
+def test_whisper_cuda_uk(whisper_gpu, speech, registry, phrase, device) -> None:
+    transcript = whisper_gpu.transcribe(speech(phrase, "uk"), "uk")
+    assert whisper_gpu.device == "cuda float16" and transcript.engine == "whisper"
+    assert reaches(registry, transcript.text) == [device], transcript.text
+
+
+@pytest.mark.models
+@pytest.mark.gpu
+def test_whisper_auto_language(whisper_gpu, speech, registry) -> None:
+    transcript = whisper_gpu.transcribe(speech("turn on the kitchen light", "en"), "auto")
+    assert transcript.lang == "en"
+    assert reaches(registry, transcript.text) == ["light.kitchen_main"], transcript.text
+
+
+@pytest.mark.models
+def test_whisper_cpu_int8_fallback(whisper_cpu, speech, registry) -> None:
+    transcript = whisper_cpu.transcribe(speech("відкрий штори у вітальні", "uk"), "uk")
+    assert whisper_cpu.device == "cpu int8"
+    assert reaches(registry, transcript.text) == ["curtains.living_room"], transcript.text
+
+
+@pytest.mark.models
+def test_whisper_does_not_invent_text_in_silence(whisper_cpu) -> None:
+    import numpy as np
+
+    noise = (np.random.default_rng(1).normal(0, 50, 32_000)).astype(np.int16)  # ~-56 dBFS
+    assert whisper_cpu.transcribe(noise, "uk").text == ""
