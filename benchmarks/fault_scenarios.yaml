@@ -1,0 +1,102 @@
+# E4: fault scenarios for benchmarks/run_faults.py (metrics.md E4, devices.md §4).
+#
+# Every scenario is repeated `repeats` times on a running simulator:
+#   1. the fault is injected through tkz/sim/faults (null = no fault);
+#   2. a command is sent (except `drift`, which needs no command);
+#   3. the final command status is compared with `expect`;
+#   4. the fault is cleared.
+#
+# expect     - statuses that mean "the assistant reacted correctly"
+# measure    - which time is the detection / reaction time:
+#              total  = command created -> terminal status
+#              after_ack = ack -> terminal status (stuck: how long until "not done")
+#              availability = fault injected -> DeviceAvailabilityChanged(offline)
+#              drift = fault injected -> DeviceStateChanged(source=drift)
+# control    - true: no failure is expected, anything else is a false alarm
+# recovery   - true: the fault is supposed to be overcome by a retry
+# settle_s   - pause after the repetition (default 0.4 s)
+#
+# (The simulator's own --scenario file is a different, timed format:
+#  a list of {at_s, device_id, fault, params}.)
+
+repeats: 20
+
+scenarios:
+  - name: baseline
+    title: Без збою
+    device: light.hallway
+    fault: null
+    expect: [completed]
+    measure: total
+    control: true
+
+  - name: offline
+    title: Пристрій офлайн (LWT)
+    device: lock.front_door
+    fault: offline
+    expect: [device_offline]
+    measure: availability
+
+  - name: freeze
+    title: Пристрій «завис» (мовчить)
+    device: light.hallway
+    fault: freeze
+    expect: [timeout_ack]
+    measure: total
+
+  - name: drop_50
+    title: Втрата 50 % команд
+    device: light.hallway
+    fault: drop_rate
+    params: {p: 0.5}
+    expect: [completed]
+    measure: total
+    recovery: true
+
+  - name: stuck_light
+    title: Світло не виконує (stuck)
+    device: light.hallway
+    fault: stuck
+    expect: [timeout_state]
+    measure: after_ack
+
+  - name: stuck_curtains
+    title: Штори не рухаються (stuck)
+    device: curtains.living_room
+    fault: stuck
+    expect: [timeout_state]
+    measure: after_ack
+
+  - name: slow_1000
+    title: Затримка 1 с (< ack_timeout)
+    device: light.hallway
+    fault: slow
+    params: {ms: 1000}
+    settle_s: 2.0
+    expect: [completed]
+    measure: total
+    control: true
+
+  - name: slow_3000
+    title: Затримка 3 с (> ack_timeout)
+    device: light.hallway
+    fault: slow
+    params: {ms: 3000}
+    settle_s: 8.0             # the device handles commands one by one: let the retry copies drain
+    expect: [completed]
+    measure: total
+    recovery: true
+
+  - name: reject
+    title: Пристрій відхиляє команду
+    device: light.hallway
+    fault: reject
+    expect: [rejected]
+    measure: total
+
+  - name: drift
+    title: Зміна стану без команди (drift)
+    device: light.hallway
+    fault: drift
+    expect: [drift]
+    measure: drift

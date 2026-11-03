@@ -95,7 +95,7 @@
 - [ ] 5.3 E1 STT
 - [x] 5.4 E2 NLU (rule / llm / hybrid)
 - [ ] 5.5 E3 затримки
-- [ ] 5.6 E4 збої
+- [x] 5.6 E4 збої
 - [ ] 5.7 E5 wake word
 - [ ] 5.8 E6 масштаб
 - [ ] 5.9 Зведена таблиця результатів `benchmarks/results/SUMMARY.md`
