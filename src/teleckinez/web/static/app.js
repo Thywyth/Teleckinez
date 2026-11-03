@@ -394,7 +394,7 @@ function renderVoicePanel() {
   const pttDisabled = !state.status.voice_available;
   const ptt = el("button", {
     class: "ptt", id: "ptt", disabled: pttDisabled,
-    title: pttDisabled ? "Голосовий конвеєр не запущено (етап 2 ROADMAP)" : "Тримайте, поки говорите",
+    title: pttDisabled ? "Голосовий конвеєр не запущено (python -m teleckinez без --text)" : "Тримайте, поки говорите",
   }, el("span", { class: "ptt-icon" }, "🎙"), el("span", {}, "Натисни й говори"));
   const press = (pressed) => {
     if (ptt.disabled || ptt.classList.contains("held") === pressed) return;
@@ -422,7 +422,7 @@ function renderVoicePanel() {
   }, input, el("button", { class: "btn primary", type: "submit" }, "Надіслати"));
 
   const hint = pttDisabled
-    ? el("p", { class: "hint" }, "Голосовий режим ще не підключено — працює текстовий ввід, той самий шлях, що й голос.")
+    ? el("p", { class: "hint" }, "Голос вимкнено (режим --text або немає мікрофона) — працює текстовий ввід, той самий шлях, що й голос.")
     : null;
   panel.replaceChildren(
     el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }), ptt, hint, form),
@@ -515,7 +515,8 @@ state.listeners.push(({ type, data }) => {
       setPipeline("speaking");
       break;
     }
-    case "SpeakFinished": setPipeline("idle"); break;
+    case "SpeakFinished":
+    case "ListeningStopped": setPipeline("idle"); break;
     default: return;
   }
   renderHistory();

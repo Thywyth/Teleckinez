@@ -106,6 +106,7 @@ class VoiceSettings(_Model):
     piper_voice_en: str = "models/piper/en_US-lessac-medium/en_US-lessac-medium.onnx"
     oww_model: str = "models/openwakeword/hey_jarvis_v0.1.onnx"
     oww_threshold: float = Field(0.5, ge=0, le=1)
+    beeps: bool = True  # short tones: "listening" after the wake word, "did not hear" on failure
     ptt_key: str = "ctrl_r"  # global push-to-talk key (pynput name: ctrl_r, f9, scroll_lock ...)
     tts: Literal["piper", "sapi", "text"] = "piper"
     input_device: int | str | None = None  # sounddevice index/name; None = system default

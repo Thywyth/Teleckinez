@@ -55,6 +55,13 @@ class SpeechEnded(Event):
 
 
 @dataclass(frozen=True, kw_only=True)
+class ListeningStopped(Event):
+    """The turn ended without a transcript; the pipeline is idle again."""
+
+    reason: str  # no_speech | not_recognized | error
+
+
+@dataclass(frozen=True, kw_only=True)
 class TranscriptReady(Event):
     text: str
     lang: str = "uk"

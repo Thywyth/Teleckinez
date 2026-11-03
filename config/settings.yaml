@@ -66,6 +66,7 @@ voice:
   piper_voice_en: models/piper/en_US-lessac-medium/en_US-lessac-medium.onnx
   oww_model: models/openwakeword/hey_jarvis_v0.1.onnx   # trigger: openwakeword ("hey jarvis")
   oww_threshold: 0.5        # openWakeWord score 0..1
+  beeps: true               # tone after the wake word ("слухаю") and on failure
   ptt_key: ctrl_r           # hold to talk (Right Ctrl); f9, scroll_lock, ... also work
   tts: piper                # piper | sapi | text
   input_device: null        # microphone: index or name (python scripts/audio_check.py --list)

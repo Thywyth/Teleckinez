@@ -120,7 +120,7 @@ class App:
         if use_storage:
             self.storage = Storage(connect(settings.storage.path))
             EventRecorder(self.storage, self.bus)
-        self.voice = None  # voice pipeline (stage 2); the web panel checks for it
+        self.voice = None  # VoicePipeline after build_voice(); the web panel checks for it
         # Faults injected in the simulator, mirrored for the web panel (devices.md §4).
         self.topics = topics
         self.sim_faults: dict[str, dict] = {}
@@ -205,6 +205,21 @@ class App:
             log.warning("ollama package missing: pip install -e .[llm]; using rules only")
             return None
 
+    def build_voice(self, audio_file: str | None = None):
+        """Voice pipeline on the microphone (or a WAV file played in real time)."""
+        from teleckinez.voice.audio_io import MicrophoneSource, SpeakerOutput, WavSource
+        from teleckinez.voice.pipeline import EngineCache, VoicePipeline
+
+        v = self.settings.voice
+        source = (
+            WavSource(audio_file, realtime=True, trailing_silence_s=3.0)
+            if audio_file
+            else MicrophoneSource(v.input_device)
+        )
+        output = SpeakerOutput(v.output_device)
+        self.voice = VoicePipeline(self.bus, v, source, output, EngineCache(self.registry))
+        return self.voice
+
     async def serve_web(self) -> None:
         """Run the web panel (uvicorn) in this event loop until cancelled."""
         import uvicorn
@@ -230,6 +245,8 @@ class App:
         await asyncio.sleep(settle_s)
 
     async def stop(self) -> None:
+        if self.voice is not None:
+            await self.voice.stop()
         await self.assistant.close()
         await self.dispatcher.close()
         for task in self._tasks:

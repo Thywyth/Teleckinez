@@ -144,6 +144,7 @@ sequenceDiagram
 |---|---|---|
 | `WakeDetected` / `ListeningStarted` | voice | web, metrics |
 | `SpeechEnded` | voice (VAD) | metrics |
+| `ListeningStopped(reason)` | voice: тиша / не розпізнано | web |
 | `TranscriptReady(text, lang, confidence, engine)` | STT / текстовий ввід | NLU, web, storage |
 | `IntentParsed(intent)` / `IntentFailed(reason)` | NLU | dispatcher, response, web |
 | `CommandCreated / CommandStatusChanged / CommandFinished` | tracker | response, web, storage |

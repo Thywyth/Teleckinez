@@ -1,4 +1,9 @@
-"""Teleckinez entry point: python -m teleckinez [--text]."""
+"""Teleckinez entry point.
+
+python -m teleckinez              voice (wake word + push-to-talk) + web panel
+python -m teleckinez --text       type commands instead of speaking (+ web panel)
+python -m teleckinez --no-voice   web panel only
+"""
 
 import argparse
 import contextlib
@@ -11,7 +16,11 @@ from teleckinez.core.config import load_devices, load_settings
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="python -m teleckinez", description=__doc__)
+    parser = argparse.ArgumentParser(
+        prog="python -m teleckinez",
+        description=__doc__,
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument("--text", action="store_true", help="type commands instead of speaking")
     parser.add_argument("--settings", default=None, help="settings.yaml (default: config/)")
@@ -19,6 +28,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--no-db", action="store_true", help="do not write the SQLite log")
     parser.add_argument("--quiet", action="store_true", help="hide command lifecycle lines")
     parser.add_argument("--no-web", action="store_true", help="do not start the web panel")
+    parser.add_argument("--no-voice", action="store_true", help="no microphone: web panel only")
+    parser.add_argument(
+        "--audio-file",
+        metavar="WAV",
+        default=None,
+        help="feed this WAV file to the voice pipeline instead of the microphone",
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="debug logging")
     args = parser.parse_args(argv)
 
@@ -30,13 +46,8 @@ def main(argv: list[str] | None = None) -> int:
         level=logging.DEBUG if args.verbose else logging.WARNING,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
-
-    if not args.text and args.no_web:
-        print(
-            "Голосовий конвеєр з'явиться на етапі 2 (docs/ROADMAP.md). Запустіть веб-панель\n"
-            "(python -m teleckinez) або текстовий режим (python -m teleckinez --text)."
-        )
-        return 2
+    if not args.text and args.no_web and args.no_voice:
+        parser.error("--no-voice together with --no-web leaves nothing to run")
 
     from teleckinez.app import App
     from teleckinez.repl import main_text, main_web
@@ -48,7 +59,14 @@ def main(argv: list[str] | None = None) -> int:
             if args.text:
                 aio.run(main_text(app, show_commands=not args.quiet, web=not args.no_web))
             else:
-                aio.run(main_web(app))
+                aio.run(
+                    main_web(
+                        app,
+                        voice=not args.no_voice,
+                        web=not args.no_web,
+                        audio_file=args.audio_file,
+                    )
+                )
     except MqttNotConnected as exc:
         print(f"Помилка: {exc}", file=sys.stderr)
         return 1

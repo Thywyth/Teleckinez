@@ -113,12 +113,17 @@ python -m teleckinez.broker          # запасний без Docker (pip insta
 
 # запуск (у різних терміналах)
 python -m simulator              # симулятор пристроїв
-python -m teleckinez             # асистент + веб-панель (http://localhost:8000)
-python -m teleckinez --text      # без мікрофона, команди з клавіатури
+python -m teleckinez             # голос + веб-панель (http://localhost:8000): «Телекінез» або правий Ctrl
+python -m teleckinez --text      # без мікрофона, команди з клавіатури (+ веб-панель)
+python -m teleckinez --no-voice  # лише веб-панель (текстовий ввід у ній)
+python -m teleckinez --no-web    # лише голос у консолі
+python -m teleckinez --audio-file x.wav   # WAV-файл замість мікрофона (перевірка без голосу)
 
 # перевірки
 pytest                           # інтеграційні тести потребують брокера, без нього — skip
 pytest -m "not integration"      # лише юніт-тести
 pytest -m "not llm"              # без тестів, що звертаються до справжньої Ollama
+pytest -m "not models"           # без тестів зі справжніми моделями STT/TTS/wake word (швидко)
+pytest -m "not gpu"              # без тестів, яким потрібна CUDA (faster-whisper на GPU)
 ruff check . && ruff format .
 ```

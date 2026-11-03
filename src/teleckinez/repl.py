@@ -1,8 +1,9 @@
-"""Text mode (--text): type commands, read the answers and watch execution control.
+"""Console front ends: text mode (--text) and the voice mode (default).
 
 Typed text goes through exactly the same path as recognized speech
 (TranscriptReady -> NLU -> dispatcher -> response), so the whole logic can
-be checked without a microphone.
+be checked without a microphone. In voice mode the console shows what was
+heard and answered.
 """
 
 import asyncio
@@ -10,7 +11,14 @@ import contextlib
 import threading
 
 from teleckinez.app import App
-from teleckinez.core.events import CommandFinished, SpeakRequested
+from teleckinez.core.events import (
+    CommandFinished,
+    ListeningStarted,
+    ListeningStopped,
+    SpeakRequested,
+    TranscriptReady,
+    WakeDetected,
+)
 from teleckinez.core.models import Availability
 
 HELP = """\
@@ -140,11 +148,102 @@ async def main_text(app: App, show_commands: bool = True, web: bool = True) -> N
                     await web_task
 
 
-async def main_web(app: App) -> None:
-    """Assistant + web panel (the voice pipeline joins here in stage 2)."""
+TRIGGERS = {
+    "vosk_kws": "скажіть «Телекінез», після сигналу — команду",
+    "openwakeword": "скажіть «hey jarvis», після сигналу — команду",
+    "push_to_talk": "лише push-to-talk",
+}
+NO_SPEECH = {
+    "no_speech": "(тиша — не почув команди)",
+    "not_recognized": "(не розпізнав слів)",
+    "error": "(помилка голосового конвеєра, див. лог)",
+}
+
+
+async def start_voice(app: App, audio_file: str | None = None) -> bool:
+    """Load the voice engines and start listening; False (and a hint) if voice is unavailable."""
+    v = app.settings.voice
+    print("Голос: завантажую моделі (розпізнавання ~10-20 с)...")
+    try:
+        pipeline = app.build_voice(audio_file)
+        await pipeline.prepare()
+        pipeline.start()
+    except Exception as exc:  # no microphone, missing models or the `voice` extra
+        if app.voice is not None:
+            await app.voice.stop()
+        app.voice = None
+        print(f"Голос недоступний: {type(exc).__name__}: {exc}")
+        print(
+            "  Перевірте: pip install -e .[voice], python scripts/download_models.py,\n"
+            "  python scripts/audio_check.py (мікрофон). Працюють веб-панель і текст."
+        )
+        return False
+    if audio_file is None:
+        try:
+            pipeline.enable_hotkey(v.ptt_key)
+            ptt = f"тримайте клавішу {v.ptt_key} або кнопку у веб-панелі"
+        except Exception as exc:
+            ptt = f"лише кнопка у веб-панелі (клавіша недоступна: {exc})"
+    else:
+        ptt = "кнопка у веб-панелі"
+    stt = pipeline.engines.stt(v)
+    print(f"Голос готовий: {TRIGGERS[v.trigger]}; push-to-talk: {ptt}.")
+    print(f"  розпізнавання: {stt.name} ({v.stt_lang}), відповідь: {pipeline.engines.tts(v).name}")
+    _echo_voice(app)
+    return True
+
+
+def _echo_voice(app: App) -> None:
+    """Print the voice dialogue to the console."""
+
+    def on_event(event) -> None:
+        match event:
+            case WakeDetected():
+                print(f"[wake word, {event.score:.2f}]")
+            case ListeningStarted():
+                print("[слухаю...]")
+            case ListeningStopped():
+                print(NO_SPEECH.get(event.reason, event.reason))
+            case TranscriptReady() if event.engine != "text":
+                print(f"ви ({event.engine}, {event.confidence:.2f})> {event.text}")
+            case SpeakRequested() if event.kind == "notification":
+                print(f"[сповіщення] {event.text}")
+            case SpeakRequested():
+                print(f"асистент> {event.text}")
+
+    for kind in (WakeDetected, ListeningStarted, ListeningStopped, TranscriptReady, SpeakRequested):
+        app.bus.subscribe(on_event, kind)
+
+
+async def main_web(
+    app: App, *, voice: bool = True, web: bool = True, audio_file: str | None = None
+) -> None:
+    """Assistant with the voice pipeline and/or the web panel (python -m teleckinez)."""
     async with app:
         online = sum(t.availability is Availability.ONLINE for t in app.twins)
         print(f"Teleckinez: пристроїв online {online}/{len(app.registry)}.")
-        print(f"Веб-панель: {_web_url(app)}   (Ctrl+C — зупинити)")
-        with contextlib.suppress(asyncio.CancelledError):
-            await app.serve_web()
+        if online == 0:
+            print("  (симулятор не запущено? В іншому терміналі: python -m simulator)")
+        voice_on = voice and await start_voice(app, audio_file)
+        if not (web or voice_on):
+            return
+        tasks = []
+        if web:
+            print(f"Веб-панель: {_web_url(app)}")
+            tasks.append(asyncio.create_task(app.serve_web(), name="web"))
+        if voice_on:
+            tasks.append(asyncio.create_task(app.voice.wait(), name="voice"))
+        print("Ctrl+C — зупинити.")
+        try:
+            with contextlib.suppress(asyncio.CancelledError):
+                done, _ = await asyncio.wait(tasks, return_when=asyncio.FIRST_EXCEPTION)
+                for task in done:
+                    task.result()
+                if voice_on and not web:  # an audio file ended and there is no panel
+                    await asyncio.Event().wait()
+        finally:
+            for task in tasks:
+                task.cancel()
+            for task in tasks:
+                with contextlib.suppress(asyncio.CancelledError):
+                    await task
