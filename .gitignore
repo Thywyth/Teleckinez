@@ -9,8 +9,10 @@ models/
 build/
 *.db
 *.db-journal
-benchmarks/datasets/voice/*.wav
+benchmarks/datasets/voice/**/*.wav
+benchmarks/datasets/voice_synth/**/*.wav
 benchmarks/datasets/noise/
 .vscode/
 .idea/
 data/
+.claude/settings.local.json

@@ -1,0 +1,336 @@
+# NLU benchmark set (docs/specs/metrics.md E2, docs/specs/nlu.md §4).
+#
+# Every item is the phrase and the expected *outcome* after parsing and target
+# resolution, so the rule parser and the LLM are compared on the same thing:
+#   expect.kind     command | query
+#   expect.action   canonical action (type aliases applied: "open" the lock -> unlock)
+#   expect.devices  device ids from config/devices.yaml (commands: exact set;
+#                   queries: these must be among the described devices)
+#   expect.params   concrete parameters after resolution ({brightness: 40});
+#                   a step is the signed change ({volume: -10})
+#   expect.error    ambiguous (several rooms/devices fit) | reject (nothing must be sent:
+#                   not a smart-home request or no such device)
+# cat:   basic | case | noverb | group | param | step | query | ambiguous | stt | free | reject
+# voice: true -> the phrase is also read aloud for E1 (scripts/record_dataset.py)
+#
+# Labels say what a person meant, not what any parser currently returns.
+
+# ============================================================== Ukrainian
+# ---------------------------------------------------------------- basic
+- {text: увімкни світло на кухні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: вимкни світло на кухні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.kitchen_main]}}
+- {text: увімкни світло у вітальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_main]}}
+- {text: вимкни світло у спальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+- {text: увімкни світло в коридорі, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.hallway]}}
+- {text: вимкни світло у ванній, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.bathroom]}}
+- {text: увімкни світло в дитячій, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.kids_room]}}
+- {text: увімкни світло в гаражі, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.garage]}}
+- {text: вимкни освітлення на подвір'ї, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.yard]}}
+- {text: увімкни торшер, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_floor]}}
+- {text: вимкни люстру у вітальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.living_main]}}
+- {text: увімкни нічник у спальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.bedroom_lamp]}}
+- {text: вимкни нічник у дитячій, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.kids_nightlight]}}
+- {text: відкрий штори у вітальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: закрий штори у спальні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: увімкни телевізор, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: вимкни телевізор, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [tv.living_room]}}
+- {text: увімкни кондиціонер, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [ac.living_room]}}
+- {text: вимкни кондиціонер, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [ac.living_room]}}
+- {text: запусти пилосос, lang: uk, cat: basic, voice: true, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: відправ пилосос на базу, lang: uk, cat: basic, voice: true, expect: {kind: command, action: dock, devices: [vacuum.home]}}
+- {text: увімкни зволожувач, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [humidifier.bedroom]}}
+- {text: вимкни зволожувач повітря, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [humidifier.bedroom]}}
+- {text: закип'яти чайник, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [kettle.kitchen]}}
+- {text: увімкни кавоварку, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [socket.kitchen_coffee]}}
+- {text: вимкни кавоварку, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [socket.kitchen_coffee]}}
+- {text: увімкни витяжку на кухні, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [fan.kitchen_hood]}}
+- {text: увімкни бойлер, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [boiler.bathroom]}}
+- {text: вимкни бойлер, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [boiler.bathroom]}}
+- {text: увімкни вентилятор у ванній, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [fan.bathroom]}}
+- {text: зачини двері, lang: uk, cat: basic, voice: true, expect: {kind: command, action: lock, devices: [lock.front_door]}}
+- {text: відчини вхідні двері, lang: uk, cat: basic, voice: true, expect: {kind: command, action: unlock, devices: [lock.front_door]}}
+- {text: замкни замок, lang: uk, cat: basic, voice: true, expect: {kind: command, action: lock, devices: [lock.front_door]}}
+- {text: відкрий гараж, lang: uk, cat: basic, voice: true, expect: {kind: command, action: open, devices: [gate.garage]}}
+- {text: закрий ворота, lang: uk, cat: basic, voice: true, expect: {kind: command, action: close, devices: [gate.garage]}}
+- {text: увімкни зарядку в гаражі, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [socket.garage_charger]}}
+- {text: вимкни зарядку, lang: uk, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [socket.garage_charger]}}
+- {text: зупини пилосос, lang: uk, cat: basic, expect: {kind: command, action: dock, devices: [vacuum.home]}}
+- {text: перемкни світло на кухні, lang: uk, cat: basic, expect: {kind: command, action: toggle, devices: [light.kitchen_main]}}
+- {text: включи світло в коридорі, lang: uk, cat: basic, expect: {kind: command, action: turn_on, devices: [light.hallway]}}
+- {text: погаси світло у спальні, lang: uk, cat: basic, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+- {text: запали ліхтарі на подвір'ї, lang: uk, cat: basic, expect: {kind: command, action: turn_on, devices: [light.yard]}}
+- {text: опусти жалюзі в спальні, lang: uk, cat: basic, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: підніми штори у вітальні, lang: uk, cat: basic, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: прибери в квартирі, lang: uk, cat: basic, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: "увімкніть, будь ласка, світло на кухні", lang: uk, cat: basic, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+
+# ------------------------------------------------- word forms and word order
+- {text: на кухні увімкни світло, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: у спальні штори закрий, lang: uk, cat: case, voice: true, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: світло в залі вимкни, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_off, devices: [light.living_main]}}
+- {text: увімкнути світло у передпокої, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_on, devices: [light.hallway]}}
+- {text: вимкнути світло в санвузлі, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_off, devices: [light.bathroom]}}
+- {text: увімкни лампу на кухні, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: відкрийте фіранки у вітальні, lang: uk, cat: case, voice: true, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: увімкни підсвітку у вітальні, lang: uk, cat: case, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_floor]}}
+- {text: вимкни бра в спальні, lang: uk, cat: case, expect: {kind: command, action: turn_off, devices: [light.bedroom_lamp]}}
+- {text: увімкни водонагрівач, lang: uk, cat: case, expect: {kind: command, action: turn_on, devices: [boiler.bathroom]}}
+- {text: відчини браму, lang: uk, cat: case, expect: {kind: command, action: open, devices: [gate.garage]}}
+- {text: зачини гаражні ворота, lang: uk, cat: case, expect: {kind: command, action: close, devices: [gate.garage]}}
+- {text: увімкни телик, lang: uk, cat: case, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: вимкни кондей, lang: uk, cat: case, expect: {kind: command, action: turn_off, devices: [ac.living_room]}}
+- {text: увімкни світло у дитячій кімнаті, lang: uk, cat: case, expect: {kind: command, action: turn_on, devices: [light.kids_room]}}
+- {text: вимкни світло у ванній кімнаті, lang: uk, cat: case, expect: {kind: command, action: turn_off, devices: [light.bathroom]}}
+- {text: увімкни ліхтар надворі, lang: uk, cat: case, expect: {kind: command, action: turn_on, devices: [light.yard]}}
+- {text: вимкни розетку з кавоваркою, lang: uk, cat: case, expect: {kind: command, action: turn_off, devices: [socket.kitchen_coffee]}}
+- {text: запусти робот-пилосос, lang: uk, cat: case, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: вмикни світло на кухні, lang: uk, cat: case, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+
+# ------------------------------------------------- no verb (default action)
+- {text: штори вітальня, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [curtains.living_room]}}
+- {text: штори спальня, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [curtains.bedroom]}}
+- {text: світло кухня, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [light.kitchen_main]}}
+- {text: світло коридор, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [light.hallway]}}
+- {text: торшер, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [light.living_floor]}}
+- {text: телевізор, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [tv.living_room]}}
+- {text: чайник, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: turn_on, devices: [kettle.kitchen]}}
+- {text: ворота гараж, lang: uk, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [gate.garage]}}
+- {text: пилосос, lang: uk, cat: noverb, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: витяжка кухня, lang: uk, cat: noverb, expect: {kind: command, action: toggle, devices: [fan.kitchen_hood]}}
+- {text: постав чайник, lang: uk, cat: noverb, expect: {kind: command, action: turn_on, devices: [kettle.kitchen]}}
+- {text: нічник дитяча, lang: uk, cat: noverb, expect: {kind: command, action: toggle, devices: [light.kids_nightlight]}}
+
+# ------------------------------------------------------------------ groups
+- {text: вимкни все світло, lang: uk, cat: group, voice: true, expect: {kind: command, action: turn_off, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+- {text: увімкни все світло у вітальні, lang: uk, cat: group, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_main, light.living_floor]}}
+- {text: закрий всі штори, lang: uk, cat: group, voice: true, expect: {kind: command, action: close, devices: [curtains.living_room, curtains.bedroom]}}
+- {text: відкрий усі штори, lang: uk, cat: group, voice: true, expect: {kind: command, action: open, devices: [curtains.living_room, curtains.bedroom]}}
+- {text: вимкни всі лампи, lang: uk, cat: group, voice: true, expect: {kind: command, action: turn_off, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+- {text: вимкни все світло у спальні, lang: uk, cat: group, voice: true, expect: {kind: command, action: turn_off, devices: [light.bedroom_main, light.bedroom_lamp]}}
+- {text: увімкни усе світло, lang: uk, cat: group, expect: {kind: command, action: turn_on, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+- {text: погаси всі світильники, lang: uk, cat: group, expect: {kind: command, action: turn_off, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+- {text: вимкни все світло в дитячій, lang: uk, cat: group, expect: {kind: command, action: turn_off, devices: [light.kids_room, light.kids_nightlight]}}
+- {text: всі штори наполовину, lang: uk, cat: group, expect: {kind: command, action: set, devices: [curtains.living_room, curtains.bedroom], params: {position: 50}}}
+
+# -------------------------------------------------------------- parameters
+- {text: яскравість світла у спальні 40 відсотків, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.bedroom_main], params: {brightness: 40}}}
+- {text: встанови яскравість на кухні 70 відсотків, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.kitchen_main], params: {brightness: 70}}}
+- {text: світло у вітальні на п'ятдесят відсотків, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.living_main], params: {brightness: 50}}}
+- {text: встанови термостат на 22 градуси, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [thermostat.home], params: {target_temp: 22}}}
+- {text: опалення на двадцять один градус, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [thermostat.home], params: {target_temp: 21}}}
+- {text: кондиціонер на двадцять градусів, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [ac.living_room], params: {target_temp: 20}}}
+- {text: увімкни кондиціонер на охолодження, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [ac.living_room], params: {mode: cool}}}
+- {text: кондиціонер в режим обігріву, lang: uk, cat: param, expect: {kind: command, action: set, devices: [ac.living_room], params: {mode: heat}}}
+- {text: відкрий штори у спальні на 30 відсотків, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [curtains.bedroom], params: {position: 30}}}
+- {text: закрий штори у вітальні наполовину, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [curtains.living_room], params: {position: 50}}}
+- {text: штори у спальні на сімдесят відсотків, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [curtains.bedroom], params: {position: 70}}}
+- {text: зроби торшер синім, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.living_floor], params: {color: blue}}}
+- {text: зроби світло у вітальні червоним, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.living_floor], params: {color: red}}}
+- {text: нічник у дитячій зеленим, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.kids_nightlight], params: {color: green}}}
+- {text: вентилятор у ванній на третю швидкість, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [fan.bathroom], params: {speed: 3}}}
+- {text: витяжку на кухні на другу швидкість, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [fan.kitchen_hood], params: {speed: 2}}}
+- {text: гучність телевізора на тридцять, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [tv.living_room], params: {volume: 30}}}
+- {text: зволожувач на рівень три, lang: uk, cat: param, voice: true, expect: {kind: command, action: set, devices: [humidifier.bedroom], params: {level: 3}}}
+- {text: встанови температуру на термостаті двадцять три градуси, lang: uk, cat: param, expect: {kind: command, action: set, devices: [thermostat.home], params: {target_temp: 23}}}
+- {text: яскравість нічника в спальні 10 відсотків, lang: uk, cat: param, expect: {kind: command, action: set, devices: [light.bedroom_lamp], params: {brightness: 10}}}
+- {text: зроби нічник у спальні теплим, lang: uk, cat: param, expect: {kind: command, action: set, devices: [light.bedroom_lamp], params: {color: warm}}}
+- {text: торшер фіолетовим, lang: uk, cat: param, expect: {kind: command, action: set, devices: [light.living_floor], params: {color: purple}}}
+- {text: відкрий ворота наполовину, lang: uk, cat: param, expect: {kind: command, action: set, devices: [gate.garage], params: {position: 50}}}
+- {text: кондиціонер на осушення, lang: uk, cat: param, expect: {kind: command, action: set, devices: [ac.living_room], params: {mode: dry}}}
+- {text: світло на кухні сто відсотків, lang: uk, cat: param, expect: {kind: command, action: set, devices: [light.kitchen_main], params: {brightness: 100}}}
+- {text: звук телевізора 15, lang: uk, cat: param, expect: {kind: command, action: set, devices: [tv.living_room], params: {volume: 15}}}
+
+# ------------------------------------------------------- relative changes
+- {text: гучніше телевізор, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: 10}}}
+- {text: зроби телевізор тихіше, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: -10}}}
+- {text: світло на кухні яскравіше, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [light.kitchen_main], params: {brightness: 20}}}
+- {text: зроби світло у спальні темніше, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [light.bedroom_main], params: {brightness: -20}}}
+- {text: термостат тепліше, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [thermostat.home], params: {target_temp: 1}}}
+- {text: кондиціонер холодніше, lang: uk, cat: step, voice: true, expect: {kind: command, action: step, devices: [ac.living_room], params: {target_temp: -1}}}
+- {text: вентилятор у ванній сильніше, lang: uk, cat: step, expect: {kind: command, action: step, devices: [fan.bathroom], params: {speed: 1}}}
+- {text: витяжку на кухні слабше, lang: uk, cat: step, expect: {kind: command, action: step, devices: [fan.kitchen_hood], params: {speed: -1}}}
+- {text: збільш гучність телевізора, lang: uk, cat: step, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: 10}}}
+- {text: зменш яскравість торшера, lang: uk, cat: step, expect: {kind: command, action: step, devices: [light.living_floor], params: {brightness: -20}}}
+- {text: підвищ температуру на термостаті на 2 градуси, lang: uk, cat: step, expect: {kind: command, action: step, devices: [thermostat.home], params: {target_temp: 2}}}
+- {text: зволожувач слабше, lang: uk, cat: step, expect: {kind: command, action: step, devices: [humidifier.bedroom], params: {level: -1}}}
+
+# ----------------------------------------------------------------- queries
+- {text: яка температура у спальні, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [sensor.bedroom_climate]}}
+- {text: яка температура на вулиці, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [sensor.yard_climate]}}
+- {text: яка вологість у вітальні, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [sensor.living_climate]}}
+- {text: чи зачинені двері, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [lock.front_door]}}
+- {text: чи увімкнене світло на кухні, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [light.kitchen_main]}}
+- {text: що увімкнено на кухні, lang: uk, cat: query, voice: true, expect: {kind: query}}
+- {text: який заряд пилососа, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [vacuum.home]}}
+- {text: чи відчинені ворота, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [gate.garage]}}
+- {text: яка температура на термостаті, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [thermostat.home]}}
+- {text: стан штор у спальні, lang: uk, cat: query, voice: true, expect: {kind: query, devices: [curtains.bedroom]}}
+- {text: яка температура води в бойлері, lang: uk, cat: query, expect: {kind: query, devices: [boiler.bathroom]}}
+- {text: скільки споживає кавоварка, lang: uk, cat: query, expect: {kind: query, devices: [socket.kitchen_coffee]}}
+- {text: чи є рух у коридорі, lang: uk, cat: query, expect: {kind: query, devices: [sensor.hallway_motion]}}
+- {text: що увімкнено, lang: uk, cat: query, expect: {kind: query}}
+- {text: яка вологість у спальні, lang: uk, cat: query, expect: {kind: query, devices: [sensor.bedroom_climate]}}
+- {text: яка температура на кухні, lang: uk, cat: query, expect: {kind: query, devices: [sensor.kitchen_climate]}}
+- {text: чи працює телевізор, lang: uk, cat: query, expect: {kind: query, devices: [tv.living_room]}}
+- {text: чи горить світло в гаражі, lang: uk, cat: query, expect: {kind: query, devices: [light.garage]}}
+- {text: які штори відкриті, lang: uk, cat: query, expect: {kind: query}}
+- {text: чи закриті штори у вітальні, lang: uk, cat: query, expect: {kind: query, devices: [curtains.living_room]}}
+- {text: яка температура вдома, lang: uk, cat: query, expect: {kind: query}}
+
+# --------------------------------------------- ambiguous target (must ask)
+- {text: увімкни світло, lang: uk, cat: ambiguous, voice: true, expect: {error: ambiguous}}
+- {text: закрий штори, lang: uk, cat: ambiguous, voice: true, expect: {error: ambiguous}}
+- {text: вимкни нічник, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+- {text: увімкни вентилятор, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+- {text: увімкни витяжку, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+- {text: вимкни розетку, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+- {text: яскравість 40 відсотків, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+- {text: вимкни лампу, lang: uk, cat: ambiguous, expect: {error: ambiguous}}
+
+# -------------------------------------------------- STT-like errors, typos
+- {text: увімкни свтло на кухні, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: вимкни світло на кусні, lang: uk, cat: stt, expect: {kind: command, action: turn_off, devices: [light.kitchen_main]}}
+- {text: відкрий штори у вітані, lang: uk, cat: stt, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: закрий жалюзі в спалні, lang: uk, cat: stt, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: увімкни телевізар, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: запусти пилосус, lang: uk, cat: stt, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: вимкні світло в коридорі, lang: uk, cat: stt, expect: {kind: command, action: turn_off, devices: [light.hallway]}}
+- {text: увімкни кондиционер, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [ac.living_room]}}
+- {text: увімкни світло на кухні а, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: ну вимкни світло у спальні, lang: uk, cat: stt, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+- {text: увімкни бойлір, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [boiler.bathroom]}}
+- {text: відчини вхідні двери, lang: uk, cat: stt, expect: {kind: command, action: unlock, devices: [lock.front_door]}}
+- {text: увімкни світло в дитячі, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [light.kids_room]}}
+- {text: закрий вората, lang: uk, cat: stt, expect: {kind: command, action: close, devices: [gate.garage]}}
+- {text: включи свєт на кухні, lang: uk, cat: stt, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+
+# ------------------------------- free wording (no fixed verb, implied action)
+- {text: на кухні темно, lang: uk, cat: free, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: приглуши трохи торшер, lang: uk, cat: free, expect: {kind: command, action: step, devices: [light.living_floor], params: {brightness: -20}}}
+- {text: хочу подивитися телевізор, lang: uk, cat: free, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: "у спальні занадто світло, опусти штори", lang: uk, cat: free, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: приготуй каву, lang: uk, cat: free, expect: {kind: command, action: turn_on, devices: [socket.kitchen_coffee]}}
+- {text: нагрій воду для душу, lang: uk, cat: free, expect: {kind: command, action: turn_on, devices: [boiler.bathroom]}}
+- {text: зроби в дитячій трохи світліше, lang: uk, cat: free, expect: {kind: command, action: step, devices: [light.kids_room], params: {brightness: 20}}}
+- {text: "я йду спати, вимкни світло у вітальні", lang: uk, cat: free, expect: {kind: command, action: turn_off, devices: [light.living_main]}}
+- {text: впусти сонце у вітальню, lang: uk, cat: free, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: зроби прохолодніше у вітальні, lang: uk, cat: free, expect: {kind: command, action: step, devices: [ac.living_room], params: {target_temp: -1}}}
+
+# --------------------------------------------------- must not send anything
+- {text: розкажи анекдот, lang: uk, cat: reject, expect: {error: reject}}
+- {text: яка сьогодні погода, lang: uk, cat: reject, expect: {error: reject}}
+- {text: скільки буде два плюс два, lang: uk, cat: reject, expect: {error: reject}}
+- {text: привіт як справи, lang: uk, cat: reject, expect: {error: reject}}
+- {text: увімкни телевізор на кухні, lang: uk, cat: reject, expect: {error: reject}}
+- {text: відкрий холодильник, lang: uk, cat: reject, expect: {error: reject}}
+- {text: увімкни музику, lang: uk, cat: reject, expect: {error: reject}}
+
+# ================================================================ English
+# ---------------------------------------------------------------- basic
+- {text: turn on the kitchen light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: turn off the kitchen light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.kitchen_main]}}
+- {text: turn on the light in the living room, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_main]}}
+- {text: switch off the bedroom light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+- {text: turn on the hallway light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.hallway]}}
+- {text: turn off the bathroom light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [light.bathroom]}}
+- {text: turn on the garage light, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.garage]}}
+- {text: turn on the floor lamp, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_floor]}}
+- {text: open the curtains in the living room, lang: en, cat: basic, voice: true, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: close the bedroom blinds, lang: en, cat: basic, voice: true, expect: {kind: command, action: close, devices: [curtains.bedroom]}}
+- {text: turn on the tv, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: turn off the television, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [tv.living_room]}}
+- {text: start the vacuum, lang: en, cat: basic, voice: true, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: send the vacuum home, lang: en, cat: basic, voice: true, expect: {kind: command, action: dock, devices: [vacuum.home]}}
+- {text: lock the front door, lang: en, cat: basic, voice: true, expect: {kind: command, action: lock, devices: [lock.front_door]}}
+- {text: unlock the door, lang: en, cat: basic, voice: true, expect: {kind: command, action: unlock, devices: [lock.front_door]}}
+- {text: open the garage door, lang: en, cat: basic, voice: true, expect: {kind: command, action: open, devices: [gate.garage]}}
+- {text: close the garage gate, lang: en, cat: basic, voice: true, expect: {kind: command, action: close, devices: [gate.garage]}}
+- {text: boil the kettle, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [kettle.kitchen]}}
+- {text: turn on the coffee maker, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [socket.kitchen_coffee]}}
+- {text: turn on the air conditioner, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [ac.living_room]}}
+- {text: turn off the humidifier, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_off, devices: [humidifier.bedroom]}}
+- {text: turn on the water heater, lang: en, cat: basic, voice: true, expect: {kind: command, action: turn_on, devices: [boiler.bathroom]}}
+- {text: turn on the kitchen hood, lang: en, cat: basic, expect: {kind: command, action: turn_on, devices: [fan.kitchen_hood]}}
+- {text: turn on the night light in the bedroom, lang: en, cat: basic, expect: {kind: command, action: turn_on, devices: [light.bedroom_lamp]}}
+- {text: turn off the yard lights, lang: en, cat: basic, expect: {kind: command, action: turn_off, devices: [light.yard]}}
+- {text: switch on the charger in the garage, lang: en, cat: basic, expect: {kind: command, action: turn_on, devices: [socket.garage_charger]}}
+- {text: please turn on the light in the kids room, lang: en, cat: basic, expect: {kind: command, action: turn_on, devices: [light.kids_room]}}
+- {text: stop the vacuum cleaner, lang: en, cat: basic, expect: {kind: command, action: dock, devices: [vacuum.home]}}
+- {text: kitchen light on, lang: en, cat: basic, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: bedroom light off, lang: en, cat: basic, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+
+# ---------------------------------------------------------- no verb
+- {text: living room curtains, lang: en, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [curtains.living_room]}}
+- {text: bedroom curtains, lang: en, cat: noverb, voice: true, expect: {kind: command, action: toggle, devices: [curtains.bedroom]}}
+- {text: kitchen light, lang: en, cat: noverb, expect: {kind: command, action: toggle, devices: [light.kitchen_main]}}
+- {text: garage gate, lang: en, cat: noverb, expect: {kind: command, action: toggle, devices: [gate.garage]}}
+
+# ------------------------------------------------------------------ groups
+- {text: turn off all lights, lang: en, cat: group, voice: true, expect: {kind: command, action: turn_off, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+- {text: close all the curtains, lang: en, cat: group, voice: true, expect: {kind: command, action: close, devices: [curtains.living_room, curtains.bedroom]}}
+- {text: turn on all the lights in the living room, lang: en, cat: group, voice: true, expect: {kind: command, action: turn_on, devices: [light.living_main, light.living_floor]}}
+- {text: open all blinds, lang: en, cat: group, expect: {kind: command, action: open, devices: [curtains.living_room, curtains.bedroom]}}
+- {text: switch off every light, lang: en, cat: group, expect: {kind: command, action: turn_off, devices: [light.living_main, light.living_floor, light.bedroom_main, light.bedroom_lamp, light.kitchen_main, light.bathroom, light.hallway, light.kids_room, light.kids_nightlight, light.garage, light.yard]}}
+
+# -------------------------------------------------------------- parameters
+- {text: set the bedroom light to 40 percent, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.bedroom_main], params: {brightness: 40}}}
+- {text: set the thermostat to 22 degrees, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [thermostat.home], params: {target_temp: 22}}}
+- {text: set the air conditioner to cooling, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [ac.living_room], params: {mode: cool}}}
+- {text: make the floor lamp blue, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [light.living_floor], params: {color: blue}}}
+- {text: open the bedroom curtains to 30 percent, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [curtains.bedroom], params: {position: 30}}}
+- {text: set the bathroom fan to speed 3, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [fan.bathroom], params: {speed: 3}}}
+- {text: set the tv volume to 25, lang: en, cat: param, voice: true, expect: {kind: command, action: set, devices: [tv.living_room], params: {volume: 25}}}
+- {text: kitchen light brightness 60 percent, lang: en, cat: param, expect: {kind: command, action: set, devices: [light.kitchen_main], params: {brightness: 60}}}
+- {text: set the air conditioner to 19 degrees, lang: en, cat: param, expect: {kind: command, action: set, devices: [ac.living_room], params: {target_temp: 19}}}
+- {text: make the night light in the kids room green, lang: en, cat: param, expect: {kind: command, action: set, devices: [light.kids_nightlight], params: {color: green}}}
+- {text: set the humidifier level to 1, lang: en, cat: param, expect: {kind: command, action: set, devices: [humidifier.bedroom], params: {level: 1}}}
+- {text: close the living room curtains halfway, lang: en, cat: param, expect: {kind: command, action: set, devices: [curtains.living_room], params: {position: 50}}}
+- {text: set heating to twenty degrees, lang: en, cat: param, expect: {kind: command, action: set, devices: [thermostat.home], params: {target_temp: 20}}}
+
+# ------------------------------------------------------- relative changes
+- {text: make the tv louder, lang: en, cat: step, voice: true, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: 10}}}
+- {text: turn the tv volume down, lang: en, cat: step, voice: true, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: -10}}}
+- {text: make the kitchen light brighter, lang: en, cat: step, voice: true, expect: {kind: command, action: step, devices: [light.kitchen_main], params: {brightness: 20}}}
+- {text: make the thermostat warmer, lang: en, cat: step, expect: {kind: command, action: step, devices: [thermostat.home], params: {target_temp: 1}}}
+- {text: dim the bedroom light, lang: en, cat: step, expect: {kind: command, action: step, devices: [light.bedroom_main], params: {brightness: -20}}}
+- {text: make the bathroom fan faster, lang: en, cat: step, expect: {kind: command, action: step, devices: [fan.bathroom], params: {speed: 1}}}
+
+# ----------------------------------------------------------------- queries
+- {text: what is the temperature in the bedroom, lang: en, cat: query, voice: true, expect: {kind: query, devices: [sensor.bedroom_climate]}}
+- {text: is the front door locked, lang: en, cat: query, voice: true, expect: {kind: query, devices: [lock.front_door]}}
+- {text: is the kitchen light on, lang: en, cat: query, voice: true, expect: {kind: query, devices: [light.kitchen_main]}}
+- {text: what is the humidity in the living room, lang: en, cat: query, voice: true, expect: {kind: query, devices: [sensor.living_climate]}}
+- {text: what's the vacuum battery, lang: en, cat: query, voice: true, expect: {kind: query, devices: [vacuum.home]}}
+- {text: is the garage door open, lang: en, cat: query, expect: {kind: query, devices: [gate.garage]}}
+- {text: what is the temperature outside, lang: en, cat: query, expect: {kind: query, devices: [sensor.yard_climate]}}
+- {text: is there motion in the hallway, lang: en, cat: query, expect: {kind: query, devices: [sensor.hallway_motion]}}
+- {text: what is the thermostat set to, lang: en, cat: query, expect: {kind: query, devices: [thermostat.home]}}
+- {text: how much power is the coffee maker using, lang: en, cat: query, expect: {kind: query, devices: [socket.kitchen_coffee]}}
+
+# --------------------------------------------- ambiguous target (must ask)
+- {text: turn on the light, lang: en, cat: ambiguous, voice: true, expect: {error: ambiguous}}
+- {text: close the curtains, lang: en, cat: ambiguous, expect: {error: ambiguous}}
+- {text: turn off the fan, lang: en, cat: ambiguous, expect: {error: ambiguous}}
+- {text: turn on the night light, lang: en, cat: ambiguous, expect: {error: ambiguous}}
+
+# -------------------------------------------------- STT-like errors, typos
+- {text: turn on the kitchen lite, lang: en, cat: stt, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: open the living rom curtains, lang: en, cat: stt, expect: {kind: command, action: open, devices: [curtains.living_room]}}
+- {text: lock the frond door, lang: en, cat: stt, expect: {kind: command, action: lock, devices: [lock.front_door]}}
+- {text: turn of the bedroom light, lang: en, cat: stt, expect: {kind: command, action: turn_off, devices: [light.bedroom_main]}}
+- {text: start the vacume, lang: en, cat: stt, expect: {kind: command, action: start, devices: [vacuum.home]}}
+- {text: turn on the tea vee, lang: en, cat: stt, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+
+# --------------------------------------------------------------- free wording
+- {text: it's too dark in the kitchen, lang: en, cat: free, expect: {kind: command, action: turn_on, devices: [light.kitchen_main]}}
+- {text: "it's too loud, turn the tv down a bit", lang: en, cat: free, expect: {kind: command, action: step, devices: [tv.living_room], params: {volume: -10}}}
+- {text: I want to watch some tv, lang: en, cat: free, expect: {kind: command, action: turn_on, devices: [tv.living_room]}}
+- {text: let some light into the bedroom, lang: en, cat: free, expect: {kind: command, action: open, devices: [curtains.bedroom]}}
+- {text: "I'm going to bed, turn off the living room light", lang: en, cat: free, expect: {kind: command, action: turn_off, devices: [light.living_main]}}
+
+# --------------------------------------------------- must not send anything
+- {text: tell me a joke, lang: en, cat: reject, expect: {error: reject}}
+- {text: what time is it, lang: en, cat: reject, expect: {error: reject}}
+- {text: play some music, lang: en, cat: reject, expect: {error: reject}}
+- {text: turn on the tv in the kitchen, lang: en, cat: reject, expect: {error: reject}}
+- {text: open the fridge, lang: en, cat: reject, expect: {error: reject}}
