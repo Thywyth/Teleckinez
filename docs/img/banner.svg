@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" role="img" aria-label="Teleckinez">
+  <rect width="960" height="220" rx="18" fill="#1f2433"/>
+  <g fill="none" stroke="#6c7cff" stroke-width="4" stroke-linecap="round">
+    <path d="M70 110h18M100 80v60M120 60v100M140 85v50M160 70v80M180 95v30"/>
+  </g>
+  <g fill="none" stroke="#9aa3b8" stroke-width="3" stroke-dasharray="6 8">
+    <path d="M210 110h80"/>
+  </g>
+  <circle cx="320" cy="110" r="14" fill="#6c7cff"/>
+  <text x="360" y="105" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff">Teleckinez</text>
+  <text x="362" y="148" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" fill="#c9cfdd">голосовий асистент, що перевіряє виконання команд</text>
+  <text x="362" y="180" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#8e97ad">локально · MQTT · Vosk / Whisper · Piper</text>
+</svg>
