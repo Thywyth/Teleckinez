@@ -116,6 +116,16 @@
   швидкий старт для Windows, таблиця E1–E6 з SUMMARY.md. GIF-демо —
   TODO-коментар (записати автору).
 
+- Фінальна перевірка: `pytest -m "not integration and not llm and not
+  models and not gpu"` — 488 passed; `ruff check` / `ruff format --check`
+  чисті. Інтеграційні тести з amqtt: 17 passed, 2 failed, 9 errors — у
+  логах брокера `RuntimeError: dictionary changed size during iteration`
+  (та сама гонка amqtt 0.12.1, що в E6, коли симулятор підключає 31
+  пристрій одночасно). Docker Desktop не стартує (WSL), тому прогнати їх
+  з Mosquitto не вдалося.
+
 ## Питання до автора
 
-(поки немає)
+1. Docker Desktop не запускає рушій (WSL-дистрибутив docker-desktop). Чи
+   можете відновити Docker (`wsl --update`, перезапуск), щоб прогнати
+   інтеграційні тести і повторити E4/E6 з Mosquitto?
