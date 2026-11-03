@@ -2,7 +2,6 @@
 ' Рисунок: контекстна діаграма системи (C4, рівень 1)
 !include _style.iuml
 !pragma layout smetana
-left to right direction
 
 actor "Мешканець" as user
 rectangle "**Teleckinez**\nлокальний голосовий асистент:\nрозпізнає команду, диспетчеризує її\nпристроям і контролює виконання" as tkz

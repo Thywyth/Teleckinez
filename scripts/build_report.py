@@ -180,7 +180,8 @@ EXTRA = [
            'fo:margin-bottom="0.42cm"',
            f'{TEXT14} fo:font-weight="bold" fo:text-transform="uppercase"',
            "Unnumbered Heading", "Text_20_body"),
-    _style("Reference", "Text_20_body", BODY, TEXT14, "Reference"),
+    # left-aligned: long URLs would stretch justified lines
+    _style("Reference", "Text_20_body", BODY.replace("justify", "start"), TEXT14, "Reference"),
     _style("Listing", "Preformatted_20_Text",
            'fo:text-align="start" fo:text-indent="0cm" fo:line-height="100%"',
            'style:font-name="Consolas" fo:font-size="10pt"', "Listing"),
