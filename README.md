@@ -17,7 +17,11 @@ offline, silent, stuck or rejecting commands.*
 
 </div>
 
-<!-- TODO: GIF demo (voice command -> device tile changes -> spoken answer), docs/img/demo.gif -->
+<p align="center">
+  <img src="docs/img/demo.gif" alt="Демо: текстові команди у веб-панелі, офлайн-замок і штори, що не рухаються" width="800">
+  <br><sub>Текстові команди у веб-панелі (uk/en), потім збої: замок офлайн і штори «застрягли».
+  Повне відео — <a href="presentation/demo.mp4">presentation/demo.mp4</a>, сценарій — <a href="docs/DEMO.md">docs/DEMO.md</a>.</sub>
+</p>
 
 ## Ідея
 
@@ -133,6 +137,20 @@ flowchart LR
    сигналу і скажіть команду, або тримайте правий Ctrl і говоріть.
    Без мікрофона: `python -m teleckinez --text` (команди з клавіатури).
 
+**Усе однією командою** (кроки 4–6: брокер, симулятор, асистент, відкриває
+веб-панель; Ctrl+C зупиняє все):
+
+```bash
+powershell -ExecutionPolicy Bypass -File scripts\demo.ps1
+```
+
+Перед показом варто перевірити, що все на місці (моделі, мікрофон, динамік,
+брокер, порти, відеокарта):
+
+```bash
+python scripts/preflight.py
+```
+
 ## Результати
 
 Вимірювання 03.11.2026 на Ryzen 7 6800H / RTX 3060 Laptop, повністю — у
@@ -172,6 +190,7 @@ tests/        pytest: юніт- та інтеграційні тести
 
 - [Архітектура](docs/ARCHITECTURE.md) · [Архітектурні рішення](docs/DECISIONS.md) · [Roadmap](docs/ROADMAP.md)
 - Специфікації: [протокол MQTT](docs/specs/protocol.md) · [пристрої і симулятор](docs/specs/devices.md) · [диспетчер](docs/specs/dispatcher.md) · [голос](docs/specs/voice.md) · [NLU](docs/specs/nlu.md) · [веб-панель](docs/specs/web.md) · [метрики](docs/specs/metrics.md)
+- Демо і захист: [сценарій демо](docs/DEMO.md) · [доповідь і питання](docs/DEFENSE.md) · [запис живих голосів](docs/RECORDING.md)
 - Діаграми (PlantUML): [docs/diagrams](docs/diagrams) · текст записки: [docs/report](docs/report)
 
 ---

@@ -117,7 +117,7 @@
 
 - [x] 7.1 Надійний брокер: нативний Mosquitto + виправлений amqtt (ADR-013), усі тести зелені
 - [x] 7.2 Перевимір E3/E4/E6 на Mosquitto; Whisper в E3: прогрів GPU під час слухання
-- [ ] 7.3 Демо однією командою (`scripts/demo.ps1`), `scripts/preflight.py`, `docs/DEMO.md`
+- [x] 7.3 Демо однією командою (`scripts/demo.ps1`), `scripts/preflight.py`, `docs/DEMO.md`
 - [ ] 7.4 Записка «до друку»: звірка чисел, вичитка, зміст, нумерація, розриви
 - [ ] 7.5 Презентація, відео демо + GIF, `docs/DEFENSE.md` (= 6.9)
 - [ ] 7.6 Заготовка під живі записи: `scripts/finalize_live.py`, `docs/RECORDING.md`

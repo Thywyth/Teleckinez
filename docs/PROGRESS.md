@@ -154,6 +154,20 @@
   0,29 с; Vosk 0,17 с. Оновлено SUMMARY, розділ 4, анотацію, висновки,
   README, DEFENSE. Попутно: `record_dataset.py --wake` (набір для E5 на
   живих голосах), `run_latency.py --manifest/--label`, `TKZ_RESULTS_DIR`.
+- **7.3 демо.** `scripts/demo.py` (+ `demo.ps1`): брокер (наявний на 1883 →
+  Docker → нативний Mosquitto → amqtt), симулятор, асистент, браузер;
+  Ctrl+C зупиняє все. Перевірено: панель за ~23 с, команда виконується,
+  після Ctrl+C не лишається процесів і порт 8000 вільний; жодних TCP-з'єднань
+  python поза localhost, веб-панель без CDN — офлайн. Знайдено й виправлено:
+  `Popen.wait()` на Windows не переривається Ctrl+C (замінено циклом зі
+  `sleep`); успадкований прапорець «ігнорувати Ctrl+C» скидається; демо
+  чекало 31 пристрій, а 4 (Tasmota/Z2M) мають власні топіки availability.
+  `scripts/preflight.py` — чекліст ✓/✗. `docs/DEMO.md` — сценарій з
+  реальними відповідями. Відео `presentation/demo.mp4` (74 с, 2,1 МБ) і
+  `docs/img/demo.gif` (7,6 МБ) записано `presentation/record_demo.py`
+  (Playwright + Chrome; потрібен `python -m playwright install ffmpeg`).
+  Нюанс: «Штори у спальні» — Zigbee2MQTT, для них `stuck` дає TIMEOUT_ACK,
+  тому в демо — штори у вітальні.
 
 ## Питання до автора
 
