@@ -124,8 +124,28 @@
   пристрій одночасно). Docker Desktop не стартує (WSL), тому прогнати їх
   з Mosquitto не вдалося.
 
+## Сесія E (доводка до захисту)
+
+Пункти — ROADMAP «Етап 7». Продовжувати з першого незавершеного.
+
+### 03.11.2026
+
+- **7.1 брокер.** `docker info` не відповідає (WSL). Встановлено нативний
+  Mosquitto 2.1.2 (`winget install EclipseFoundation.Mosquitto`, UAC не
+  питав); інсталятор зареєстрував службу `mosquitto` (Automatic,
+  localhost:1883, без persistence) — вона й працює як основний брокер.
+  `scripts/mosquitto.ps1` + `config/mosquitto/mosquitto-windows.conf` —
+  запуск з конфігом проєкту, якщо служби немає.
+  amqtt: знайдено дві помилки (ADR-013) — гонка ітерації підписок і повтор
+  чужих retained при підключенні; виправлено підкласом Broker у
+  `teleckinez/broker.py`, регресійний тест падає без виправлення.
+  Тести: на Mosquitto 516 passed (усе, крім llm/models/gpu) + 40 models/gpu;
+  integration на amqtt (порт 1884) — 28/28 двічі поспіль.
+- Не вдалося: дописати нові дозволи в `.claude/settings.local.json` —
+  автоматична перевірка дозволів відхилила зміну; працюю з наявними.
+
 ## Питання до автора
 
-1. Docker Desktop не запускає рушій (WSL-дистрибутив docker-desktop). Чи
-   можете відновити Docker (`wsl --update`, перезапуск), щоб прогнати
-   інтеграційні тести і повторити E4/E6 з Mosquitto?
+1. ~~Docker Desktop не запускає рушій~~ — знято: нативний Mosquitto
+   (ADR-013). Docker можна відновити пізніше (`wsl --update`), але для
+   роботи і захисту він більше не потрібен.

@@ -61,6 +61,8 @@
 - Windows 11, PowerShell/Git Bash, 16 ГБ RAM, Ryzen 7 6800H, RTX 3060 Laptop.
 - Встановлено: Python 3.13, Git, Docker Desktop, Node.js, Java, LibreOffice.
 - Немає: pandoc (ставимо через `pypandoc_binary`), ffmpeg, gh CLI.
+- Docker Desktop не запускає рушій (WSL) → брокер: нативний Mosquitto 2.1.2
+  (winget, 03.11.2026, служба Windows на localhost:1883) — ADR-013.
 - Ollama 0.40.6 встановлено 20.10.2026 (winget), модель `qwen2.5:3b`.
 - Автор знайомий з Python/Docker/git на базовому рівні → **команди запуску
   пиши повністю, з поясненням**, нічого «очевидного» не пропускай.
@@ -109,7 +111,9 @@ ollama pull qwen2.5:3b                     # модель для LlmParser (~2 �
 
 # брокер
 docker compose up -d mosquitto       # основний (Mosquitto у Docker), порт 1883
-python -m teleckinez.broker          # запасний без Docker (pip install -e ".[broker]")
+winget install EclipseFoundation.Mosquitto   # нативний Mosquitto (служба на 1883), один раз
+powershell -ExecutionPolicy Bypass -File scripts\mosquitto.ps1   # нативний з конфігом проєкту
+python -m teleckinez.broker          # запасний amqtt (pip install -e ".[broker]")
 
 # запуск (у різних терміналах)
 python -m simulator              # симулятор пристроїв

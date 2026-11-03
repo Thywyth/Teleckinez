@@ -13,6 +13,29 @@ import sys
 from typing import Any
 
 
+class _SnapshotDict(dict):
+    """Dict whose iteration walks a copy of the keys/items.
+
+    amqtt 0.12.1 loops over ``Broker._subscriptions`` with ``await`` inside the
+    loop body (retained-message replay on connect, broadcast). When another
+    client subscribes meanwhile, the loop dies with "dictionary changed size
+    during iteration" and that client's session is dropped. Iterating over a
+    snapshot makes those loops safe without patching the library (ADR-013).
+    """
+
+    def __iter__(self):  # type: ignore[override]
+        return iter(list(super().keys()))
+
+    def keys(self):  # type: ignore[override]
+        return list(super().keys())
+
+    def values(self):  # type: ignore[override]
+        return list(super().values())
+
+    def items(self):  # type: ignore[override]
+        return list(super().items())
+
+
 def broker_config(host: str, port: int) -> dict[str, Any]:
     return {
         "listeners": {"default": {"type": "tcp", "bind": f"{host}:{port}"}},
@@ -22,11 +45,29 @@ def broker_config(host: str, port: int) -> dict[str, Any]:
     }
 
 
-async def run_broker(host: str, port: int, ready: asyncio.Event | None = None) -> None:
-    """Run the broker until cancelled."""
+def _make_broker(config: dict[str, Any]) -> Any:
     from amqtt.broker import Broker
 
-    broker = Broker(broker_config(host, port))
+    class SafeBroker(Broker):
+        """amqtt Broker with two fixes for 0.12.1 (see ADR-013)."""
+
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            super().__init__(*args, **kwargs)
+            self._subscriptions = _SnapshotDict(self._subscriptions)
+
+        async def _publish_retained_messages_for_subscription(self, subscription, session) -> None:  # type: ignore[no-untyped-def]
+            # On connect amqtt replays retained messages for *every* filter any
+            # client has subscribed to; only the session's own filters are valid.
+            subscribers = self._subscriptions.get(subscription[0], [])
+            if any(s.client_id == session.client_id for s, _ in subscribers):
+                await super()._publish_retained_messages_for_subscription(subscription, session)
+
+    return SafeBroker(config)
+
+
+async def run_broker(host: str, port: int, ready: asyncio.Event | None = None) -> None:
+    """Run the broker until cancelled."""
+    broker = _make_broker(broker_config(host, port))
     await broker.start()
     if ready is not None:
         ready.set()
