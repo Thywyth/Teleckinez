@@ -1,0 +1,61 @@
+@startuml 09_er
+' Рисунок: ER-діаграма бази SQLite (storage/db.py, SCHEMA_VERSION = 1)
+!include _style.iuml
+!pragma layout smetana
+hide circle
+skinparam linetype ortho
+
+entity voice_sessions {
+  * id : TEXT <<PK>>
+  --
+  started_at : REAL
+  trigger : TEXT
+  stt_engine : TEXT
+  transcript : TEXT
+  lang : TEXT
+  confidence : REAL
+  intent_json : TEXT
+  response : TEXT
+  t_speech_end : REAL
+  t_transcript : REAL
+  t_intent : REAL
+  t_response : REAL
+}
+
+entity commands {
+  * cmd_id : TEXT <<PK>>
+  --
+  session_id : TEXT <<FK>>
+  group_id : TEXT
+  * device_id : TEXT
+  * action : TEXT
+  * params_json : TEXT
+  * desired_json : TEXT
+  * status : TEXT
+  attempts : INTEGER
+  * t_created : REAL
+  t_published : REAL
+  t_ack : REAL
+  t_finished : REAL
+  error : TEXT
+}
+
+entity state_history {
+  * id : INTEGER <<PK>>
+  --
+  * device_id : TEXT
+  * ts : REAL
+  * state_json : TEXT
+  * source : TEXT
+}
+
+entity availability_log {
+  * id : INTEGER <<PK>>
+  --
+  * device_id : TEXT
+  * ts : REAL
+  * status : TEXT
+}
+
+voice_sessions ||--o{ commands : session_id
+@enduml

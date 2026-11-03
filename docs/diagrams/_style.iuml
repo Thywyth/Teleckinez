@@ -1,0 +1,13 @@
+' Shared print style: black on white, Times New Roman like the report text.
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 14
+skinparam roundCorner 6
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam dpi 150
+skinparam padding 2
+skinparam NoteBackgroundColor white
+skinparam NoteBorderColor black

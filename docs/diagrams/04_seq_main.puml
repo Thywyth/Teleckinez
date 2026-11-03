@@ -1,0 +1,41 @@
+@startuml 04_seq_main
+' Рисунок: основний сценарій «відкрий штори у вітальні» (події EventBus, топіки tkz/dev/{id}/...)
+!include _style.iuml
+skinparam sequenceMessageAlign left
+autonumber
+
+actor "Мешканець" as U
+participant "VoicePipeline" as V
+participant "Assistant\n+ RuleParser\n+ TargetResolver" as A
+participant "Dispatcher\n+ CommandTracker" as D
+participant "TwinStore" as T
+participant "MQTT-брокер" as B
+participant "SimDevice\ncurtains.living_room" as S
+
+U -> V : «Телекінез»
+V -> V : VoskKws: WakeDetected
+V --> U : сигнал «слухаю»
+U -> V : «відкрий штори у вітальні»
+V -> V : VAD: SpeechEnded (700 мс тиші)
+V -> A : TranscriptReady(text, conf)
+A -> A : Intent(open, curtains, living_room)\n→ DeviceCommand
+A -> D : dispatch([command])
+D -> D : CREATED → PUBLISHED\ndesired = {position: 100}
+D -> B : tkz/dev/curtains.living_room/cmd\n{cmd_id, set, desired, ttl}
+B -> S : cmd
+S -> B : ack {cmd_id, accepted}
+B -> D : ack
+D -> D : PUBLISHED → ACCEPTED
+A --> U : «Відкриваю…» (довга дія)
+loop рух 25 %/с
+  S -> B : state {position: 25…75, moving: true}
+  B -> T : state
+end
+S -> B : state {position: 100, moving: false}
+B -> T : state
+T -> D : DeviceStateChanged
+D -> D : converged(desired, reported)\nACCEPTED → COMPLETED
+D -> A : group.wait() → records
+A -> V : SpeakRequested
+V --> U : «Штори у вітальні відкрито»
+@enduml

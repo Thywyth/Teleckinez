@@ -1,0 +1,37 @@
+@startuml 08_deployment
+' Рисунок: діаграма розгортання - прототип на ноутбуці і цільове розгортання
+!include _style.iuml
+!pragma layout smetana
+
+node "Ноутбук розробника (прототип)\nWindows 11, Ryzen 7 6800H, RTX 3060" as laptop {
+  artifact "python -m teleckinez\n(асистент + веб-панель :8000)" as a1
+  artifact "python -m simulator\n(31 SimDevice, 31 MQTT-з'єднання)" as s1
+  node "Docker" {
+    artifact "eclipse-mosquitto:2\n:1883" as m1
+  }
+  database "SQLite\ndata/teleckinez.db" as db1
+}
+
+node "Raspberry Pi 4/5 (цільовий хаб)" as pi {
+  artifact "teleckinez\n(Vosk замість Whisper)" as a2
+  artifact "Mosquitto :1883" as m2
+  artifact "Zigbee2MQTT" as z2m
+  database "SQLite" as db2
+  node "USB-мікрофон,\nдинамік" as audio
+  node "USB Zigbee-\nкоординатор" as coord
+}
+
+node "ESP32 + ESPHome / Tasmota\n(реле, драйвер двигуна штор)" as esp
+node "Zigbee-пристрої\n(лампи, датчики)" as zb
+
+a1 -- m1 : MQTT
+s1 -- m1 : MQTT
+a1 -- db1
+a2 -- m2 : MQTT
+z2m -- m2 : MQTT
+a2 -- db2
+a2 -- audio
+z2m -- coord
+coord -- zb : Zigbee 802.15.4
+esp -- m2 : MQTT / Wi-Fi
+@enduml

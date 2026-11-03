@@ -1,0 +1,68 @@
+@startuml 02_components
+' Рисунок: компоненти процесу асистента (C4, рівень 3) - назви модулів і класів з src/teleckinez
+!include _style.iuml
+!pragma layout smetana
+skinparam componentStyle rectangle
+
+package "voice/" {
+  [MicrophoneSource\n/ WavSource] as mic
+  [VoskKws /\nOpenWakeWord /\nPushToTalk] as trig
+  [UtteranceRecorder\n+ WebrtcVad] as vad
+  [VoskRecognizer /\nWhisperRecognizer] as stt
+  [PiperTts / SapiTts] as tts
+}
+
+package "nlu/" {
+  [RuleParser\n(+ LlmParser, ModeParser)] as nlu
+  [TargetResolver] as res
+}
+
+package "dispatch/" {
+  [Assistant] as asst
+  [Dispatcher] as disp
+  [CommandTracker\n(автомат станів)] as trk
+  [ResponseComposer] as resp
+  [Notifier] as notif
+}
+
+package "devices/" {
+  [DeviceRegistry] as reg
+  [TwinStore\n(DigitalTwin)] as twin
+  [HealthMonitor] as health
+}
+
+package "transport/" {
+  [DeviceGateway] as gw
+  [NativeAdapter / TasmotaAdapter /\nZigbee2MqttAdapter] as adp
+  [MqttClient (aiomqtt)] as mqtt
+}
+
+queue "EventBus" as bus
+[web/ FastAPI + WebSocket] as web
+[storage/ EventRecorder → SQLite] as db
+
+mic --> trig
+trig --> vad
+vad --> stt
+stt --> bus : TranscriptReady
+bus --> asst
+asst --> nlu
+asst --> res
+res --> reg
+asst --> disp
+disp --> trk
+disp --> gw
+gw --> adp
+adp --> mqtt
+mqtt --> twin : state, availability
+mqtt --> disp : ack
+twin --> bus : DeviceStateChanged
+health --> twin
+trk --> bus : CommandStatusChanged
+asst --> resp
+asst --> bus : SpeakRequested
+bus --> tts
+bus --> web
+bus --> db
+bus --> notif
+@enduml

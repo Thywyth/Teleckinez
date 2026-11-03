@@ -1,0 +1,76 @@
+@startuml 07_device_classes
+' Рисунок: спрощена діаграма класів моделі пристроїв (devices/, dispatch/tracker.py)
+!include _style.iuml
+!pragma layout smetana
+hide circle
+skinparam classAttributeIconSize 0
+
+class DeviceRegistry {
+  + get(device_id): Device
+  + find(type, name, room, group): list[Device]
+  + names(): dict
+}
+class Device {
+  + config: DeviceConfig
+  + type: DeviceType
+  + id, room, groups, critical
+  + title(lang): str
+}
+class DeviceConfig <<pydantic>> {
+  id, type, room
+  names: {uk, en}
+  groups, protocol, critical
+  heartbeat_s
+}
+class DeviceType {
+  + name: str
+  + capabilities: tuple[Capability]
+  + actions: dict[str, ActionFn]
+  + aliases, default_action, steps
+  + supports(action): bool
+  + desired_for(action, params, reported): dict
+  + converged(desired, reported): bool
+  + state_timeout(...): float
+}
+class Capability {
+  + name, kind, min, max, unit
+  + readonly: bool
+  + coerce(value)
+  + equal(a, b): bool
+}
+class TwinStore {
+  + get(device_id): DigitalTwin
+  + on_message(DeviceMessage)
+  + set_desired(device_id, desired)
+}
+class DigitalTwin {
+  + reported: dict
+  + desired: dict | None
+  + availability: Availability
+  + last_seen, seq
+  + converged(): bool
+}
+class CommandRecord {
+  + cmd_id, device_id, action
+  + desired: dict
+  + status: CommandStatus
+  + attempts
+  + t_created, t_published,
+    t_ack, t_finished
+}
+enum Availability {
+  UNKNOWN
+  ONLINE
+  STALE
+  OFFLINE
+}
+
+DeviceRegistry "1" *-- "*" Device
+Device --> DeviceConfig
+Device --> "1" DeviceType
+DeviceType "1" *-- "1..*" Capability
+TwinStore "1" *-- "*" DigitalTwin
+DigitalTwin --> Device
+DigitalTwin --> Availability
+CommandRecord ..> Device : device_id
+@enduml

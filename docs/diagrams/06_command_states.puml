@@ -1,0 +1,40 @@
+@startuml 06_command_states
+' Рисунок: діаграма станів команди - точно таблиця TRANSITIONS з dispatch/tracker.py
+!include _style.iuml
+!pragma layout smetana
+hide empty description
+
+[*] --> CREATED
+CREATED --> PUBLISHED : publish QoS 1
+CREATED --> REJECTED_LOCAL : дія / значення\nнедопустимі,\nброкер недоступний
+CREATED --> DEVICE_OFFLINE : пристрій офлайн
+
+PUBLISHED --> ACCEPTED : ack accepted
+PUBLISHED --> REJECTED : ack rejected
+PUBLISHED --> RETRYING : ack_timeout,\nспроб < max
+PUBLISHED --> TIMEOUT_ACK : ack_timeout,\nспроб = max
+PUBLISHED --> COMPLETED : стан збігся\nраніше за ack
+PUBLISHED --> DEVICE_OFFLINE : LWT
+PUBLISHED --> SUPERSEDED : нова команда\nтому ж атрибуту
+
+RETRYING --> PUBLISHED : повтор з тим\nсамим cmd_id
+RETRYING --> ACCEPTED : спізнілий ack
+RETRYING --> REJECTED
+RETRYING --> COMPLETED
+RETRYING --> TIMEOUT_ACK : остання спроба\nне опублікована
+RETRYING --> DEVICE_OFFLINE
+RETRYING --> SUPERSEDED
+
+ACCEPTED --> COMPLETED : reported збігся\nз desired
+ACCEPTED --> TIMEOUT_STATE : state_timeout
+ACCEPTED --> DEVICE_OFFLINE
+ACCEPTED --> SUPERSEDED
+
+COMPLETED --> [*]
+REJECTED --> [*]
+REJECTED_LOCAL --> [*]
+TIMEOUT_ACK --> [*]
+TIMEOUT_STATE --> [*]
+DEVICE_OFFLINE --> [*]
+SUPERSEDED --> [*]
+@enduml

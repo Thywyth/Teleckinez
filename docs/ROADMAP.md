@@ -102,7 +102,7 @@
 
 ## Етап 6. Документація, записка, презентація
 
-- [ ] 6.1 Діаграми PlantUML (перелік у REPORT_PLAN §3) + `scripts/render_diagrams.py`
+- [x] 6.1 Діаграми PlantUML (перелік у REPORT_PLAN §3) + `scripts/render_diagrams.py`
 - [ ] 6.2 `reference.odt` зі стилями попередньої курсової + `scripts/build_report.py`
 - [ ] 6.3 Розділ 1 · 6.4 Розділ 2 · 6.5 Розділ 3 · 6.6 Розділ 4
 - [ ] 6.7 Вступ, висновки, анотація/abstract, скорочення, список джерел, додатки

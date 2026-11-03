@@ -1,0 +1,40 @@
+@startuml 03_usecases
+' Рисунок: діаграма варіантів використання
+!include _style.iuml
+!pragma layout smetana
+left to right direction
+
+actor "Мешканець" as user
+actor "Розробник /\nдослідник" as dev
+actor "Пристрій IoT" as device
+
+rectangle "Teleckinez" {
+  usecase "Активувати асистента\n(слово «Телекінез» / PTT)" as UC1
+  usecase "Віддати голосову команду" as UC2
+  usecase "Ввести команду текстом" as UC3
+  usecase "Запитати стан пристрою" as UC4
+  usecase "Керувати групою пристроїв" as UC5
+  usecase "Отримати звіт про виконання\n(успіх / збій)" as UC6
+  usecase "Отримати сповіщення\nпро відключення / drift" as UC7
+  usecase "Переглянути дашборд\nі журнал команд" as UC8
+  usecase "Змінити налаштування\n(рушії, таймаути)" as UC9
+  usecase "Ввімкнути збій симулятора" as UC10
+  usecase "Підтвердити команду (ack)\nі звітувати стан" as UC11
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC8
+UC6 <-- user
+UC7 <-- user
+UC2 ..> UC6 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC5 ..> UC2 : <<extend>>
+dev --> UC9
+dev --> UC10
+dev --> UC8
+UC11 <-- device
+@enduml

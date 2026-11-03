@@ -1,0 +1,25 @@
+@startuml 01_context
+' Рисунок: контекстна діаграма системи (C4, рівень 1)
+!include _style.iuml
+!pragma layout smetana
+left to right direction
+
+actor "Мешканець" as user
+rectangle "**Teleckinez**\nлокальний голосовий асистент:\nрозпізнає команду, диспетчеризує її\nпристроям і контролює виконання" as tkz
+rectangle "MQTT-брокер\n(Mosquitto)" as broker
+rectangle "Виконавчі пристрої і сенсори\n(симулятор або ESPHome / Tasmota /\nZigbee2MQTT)" as devices
+rectangle "Браузер\n(веб-панель)" as browser
+
+user --> tkz : голосова команда /\nвідповідь голосом
+user --> browser : стан, журнал,\nкерування збоями
+browser --> tkz : HTTP + WebSocket
+tkz --> broker : cmd (QoS 1)
+broker --> tkz : ack, state,\navailability (LWT)
+broker --> devices : cmd
+devices --> broker : ack, state,\nheartbeat, LWT
+
+note bottom of tkz
+  Без хмари: мікрофон, динамік, моделі STT/TTS,
+  брокер і база даних — на одному вузлі
+end note
+@enduml
