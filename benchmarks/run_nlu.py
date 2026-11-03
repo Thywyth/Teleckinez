@@ -10,6 +10,7 @@ otherwise the latency measures the CPU, not the method (metrics.md).
 """
 
 import argparse
+import json
 import math
 import subprocess
 import time
@@ -24,6 +25,7 @@ from common import (
     bar_style,
     conditions,
     fmt,
+    fmt_uk,
     out_path,
     setup_plot,
     summary,
@@ -42,9 +44,9 @@ DATASET = DATASETS / "nlu_commands.yaml"
 MODES = ("rule", "llm", "hybrid")
 MODE_UK = {"rule": "Правила", "llm": "LLM", "hybrid": "Гібрид"}
 CATEGORY_UK = {
-    "basic": "базові", "case": "відмінки", "noverb": "без дієслова", "group": "групові",
-    "param": "параметри", "step": "відносні", "query": "запити", "ambiguous": "неоднозначні",
-    "stt": "помилки STT", "free": "вільні", "reject": "сторонні",
+    "basic": "базові", "case": "відмінки", "noverb": "без\nдієслова", "group": "групові",
+    "param": "параметри", "step": "відносні", "query": "запити", "ambiguous": "неодно-\nзначні",
+    "stt": "помилки\nSTT", "free": "вільні", "reject": "сторонні",
 }  # fmt: skip
 AMBIGUOUS = {"ambiguous_target", "ambiguous_device"}
 
@@ -239,10 +241,10 @@ def plot(stats: dict[str, Any], name: str) -> list[Path]:
         ax.bar(xs, ys, width, label=MODE_UK[mode], **bar_style(i))
     n = next(iter(stats.values()))["category_n"]
     ax.set_xticks(range(len(cats)))
-    ax.set_xticklabels([f"{CATEGORY_UK.get(c, c)}\n(n={n[c]})" for c in cats], fontsize=9)
+    ax.set_xticklabels([f"{CATEGORY_UK.get(c, c)}\n(n={n[c]})" for c in cats], fontsize=8.5)
     ax.set_ylabel("Точність повного збігу, %")
     ax.set_ylim(0, 105)
-    ax.legend(loc="lower left")
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=len(modes))
     accuracy_png = out_path(f"{name}_accuracy", ".png")
     fig.savefig(accuracy_png)
     plt.close(fig)
@@ -258,8 +260,8 @@ def plot(stats: dict[str, Any], name: str) -> list[Path]:
     ax.set_xticklabels([MODE_UK[m] for m in modes])
     ax.set_ylabel("Затримка розбору, мс (лог. шкала)")
     for x, a, b in zip(xs, p50, p95, strict=True):
-        ax.text(x - 0.18, a * 1.15, fmt(a, 2 if a < 10 else 0), ha="center", fontsize=9)
-        ax.text(x + 0.18, b * 1.15, fmt(b, 2 if b < 10 else 0), ha="center", fontsize=9)
+        ax.text(x - 0.18, a * 1.15, fmt_uk(a, 2 if a < 10 else 0), ha="center", fontsize=9)
+        ax.text(x + 0.18, b * 1.15, fmt_uk(b, 2 if b < 10 else 0), ha="center", fontsize=9)
     ax.legend(loc="upper left")
     latency_png = out_path(f"{name}_latency", ".png")
     fig.savefig(latency_png)
@@ -318,7 +320,13 @@ def main() -> None:
     ap.add_argument("--limit", type=int, default=0, help="first N phrases only (smoke test)")
     ap.add_argument("--repeats", type=int, default=20, help="rule mode: timing repeats")
     ap.add_argument("--name", default="e2_nlu")
-    run(main_async(ap.parse_args()))
+    ap.add_argument("--replot", metavar="JSON", help="only redraw the plots of an earlier run")
+    args = ap.parse_args()
+    if args.replot:
+        stats = json.loads(Path(args.replot).read_text(encoding="utf-8"))["results"]
+        print(*plot(stats, args.name), sep="\n")
+        return
+    run(main_async(args))
 
 
 if __name__ == "__main__":

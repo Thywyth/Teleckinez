@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-03T02:23:48",
+  "os": "Windows 11 (10.0.26200)",
+  "cpu": "AMD Ryzen 7 6800H with Radeon Graphics",
+  "cpu_count": 16,
+  "ram_gb": 15.2,
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 1432 MiB, 6144 MiB, 617.14",
+  "python": "3.13.2",
+  "packages": {
+    "aiomqtt": "2.5.1",
+    "amqtt": "0.12.1",
+    "rapidfuzz": "3.14.6",
+    "ollama": "0.6.3",
+    "vosk": "0.3.45",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.8.3",
+    "piper-tts": "1.8.0",
+    "openwakeword": "0.6.0",
+    "onnxruntime": "1.31.0",
+    "webrtcvad-wheels": "2.0.14.post1",
+    "fastapi": "0.155.0"
+  },
+  "experiment": "E2 NLU",
+  "dataset": "benchmarks\\datasets\\nlu_commands.yaml",
+  "phrases": 276,
+  "rule_repeats": 20,
+  "nlu_settings": {
+    "mode": "rule",
+    "fuzzy_threshold": 85,
+    "min_confidence": 0.6,
+    "llm_model": "qwen2.5:3b",
+    "ollama_host": "http://127.0.0.1:11434",
+    "llm_timeout_s": 10.0,
+    "llm_keep_alive": "10m",
+    "hybrid_threshold": 0.8
+  },
+  "ollama_ps": "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              \nqwen2.5:3b    357c53fb659c    2.2 GB    100% GPU     4096       llamacpp    9 minutes from now    \n",
+  "results": {
+    "rule": {
+      "n": 276,
+      "full_accuracy": 90.57971014492753,
+      "intent_accuracy": 91.30434782608695,
+      "device_accuracy": 93.54838709677419,
+      "params_accuracy": 88.70967741935483,
+      "latency_ms": {
+        "n": 276,
+        "mean": 0.07960507246376812,
+        "p50": 0.035,
+        "p95": 0.2835,
+        "max": 0.591
+      },
+      "llm_used": 0,
+      "llm_errors": 0,
+      "by_category": {
+        "basic": 97.40259740259741,
+        "case": 90.0,
+        "noverb": 100.0,
+        "group": 100.0,
+        "param": 100.0,
+        "step": 83.33333333333333,
+        "query": 100.0,
+        "ambiguous": 91.66666666666667,
+        "stt": 76.19047619047619,
+        "free": 13.333333333333334,
+        "reject": 100.0
+      },
+      "category_n": {
+        "basic": 77,
+        "case": 20,
+        "noverb": 16,
+        "group": 15,
+        "param": 39,
+        "step": 18,
+        "query": 31,
+        "ambiguous": 12,
+        "stt": 21,
+        "free": 15,
+        "reject": 12
+      },
+      "by_lang": {
+        "uk": 90.9090909090909,
+        "en": 89.88764044943821
+      }
+    },
+    "llm": {
+      "n": 276,
+      "full_accuracy": 64.4927536231884,
+      "intent_accuracy": 69.92753623188406,
+      "device_accuracy": 77.8225806451613,
+      "params_accuracy": 75.80645161290323,
+      "latency_ms": {
+        "n": 276,
+        "mean": 335.04613043478264,
+        "p50": 331.3025,
+        "p95": 451.81775,
+        "max": 818.963
+      },
+      "llm_used": 262,
+      "llm_errors": 0,
+      "by_category": {
+        "basic": 74.02597402597402,
+        "case": 65.0,
+        "noverb": 18.75,
+        "group": 40.0,
+        "param": 79.48717948717949,
+        "step": 61.111111111111114,
+        "query": 83.87096774193549,
+        "ambiguous": 8.333333333333334,
+        "stt": 71.42857142857143,
+        "free": 40.0,
+        "reject": 75.0
+      },
+      "category_n": {
+        "basic": 77,
+        "case": 20,
+        "noverb": 16,
+        "group": 15,
+        "param": 39,
+        "step": 18,
+        "query": 31,
+        "ambiguous": 12,
+        "stt": 21,
+        "free": 15,
+        "reject": 12
+      },
+      "by_lang": {
+        "uk": 62.5668449197861,
+        "en": 68.53932584269663
+      }
+    },
+    "hybrid": {
+      "n": 276,
+      "full_accuracy": 91.66666666666667,
+      "intent_accuracy": 92.02898550724638,
+      "device_accuracy": 93.14516129032258,
+      "params_accuracy": 93.54838709677419,
+      "latency_ms": {
+        "n": 276,
+        "mean": 46.51226086956522,
+        "p50": 0.053,
+        "p95": 362.50800000000004,
+        "max": 648.488
+      },
+      "llm_used": 32,
+      "llm_errors": 0,
+      "by_category": {
+        "basic": 97.40259740259741,
+        "case": 95.0,
+        "noverb": 100.0,
+        "group": 100.0,
+        "param": 100.0,
+        "step": 88.88888888888889,
+        "query": 93.54838709677419,
+        "ambiguous": 91.66666666666667,
+        "stt": 85.71428571428571,
+        "free": 40.0,
+        "reject": 75.0
+      },
+      "category_n": {
+        "basic": 77,
+        "case": 20,
+        "noverb": 16,
+        "group": 15,
+        "param": 39,
+        "step": 18,
+        "query": 31,
+        "ambiguous": 12,
+        "stt": 21,
+        "free": 15,
+        "reject": 12
+      },
+      "by_lang": {
+        "uk": 90.9090909090909,
+        "en": 93.25842696629213
+      }
+    }
+  }
+}

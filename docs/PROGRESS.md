@@ -7,7 +7,7 @@
 
 - [x] 5.2 `benchmarks/datasets/nlu_commands.yaml`
 - [x] 5.1 `scripts/record_dataset.py` (запис — за автором)
-- [ ] 5.4 E2 NLU (rule / llm / hybrid)
+- [x] 5.4 E2 NLU (rule / llm / hybrid)
 - [ ] 5.5 E3 затримки (текст + синтетичний голос)
 - [ ] 5.6 E4 збої (`fault_scenarios.yaml`, N ≥ 20)
 - [ ] 5.8 E6 масштаб (10/25/50/100)
@@ -38,6 +38,12 @@
   (devices.yaml) → без кімнати це неоднозначно.
 - 5.1: фрази для запису — `voice: true` у nlu_commands.yaml (94 uk + 44 en),
   маніфест `benchmarks/datasets/voice/manifest.csv`.
+
+- 5.4 E2: rule 90,6 % / llm 64,5 % / hybrid 91,7 % (повний збіг, 276 фраз);
+  p50 0,04 / 331 / 0,05 мс; `ollama ps` = 100 % GPU. Hybrid викликав LLM для
+  32 фраз. Типові помилки qwen2.5:3b: «вимкни» → turn_on, домислює кімнату
+  там, де її не названо (неоднозначні 8 %), фрази без дієслова → query.
+  Графік перемальовується без повторного прогону: `run_nlu.py --replot <json>`.
 
 ## Питання до автора
 

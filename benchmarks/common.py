@@ -168,3 +168,8 @@ def bar_style(i: int) -> dict[str, Any]:
 
 def fmt(value: float | None, digits: int = 1) -> str:
     return "—" if value is None else f"{value:.{digits}f}"
+
+
+def fmt_uk(value: float | None, digits: int = 1) -> str:
+    """Decimal comma for Ukrainian labels: 0,28."""
+    return fmt(value, digits).replace(".", ",")
