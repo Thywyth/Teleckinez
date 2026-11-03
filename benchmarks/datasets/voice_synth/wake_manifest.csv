@@ -1,0 +1,1393 @@
+file,engine,wake,text,command,command_id,intent,speaker,duration_s,source
+voice_synth/wake/vosk_kws_piper-lada-1_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lada-1,5.28,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_001.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-lada-1,5.73,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_003.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.15,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lada-1,7.04,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_005.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.20,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-lada-1,5.52,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_007.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.10,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-lada-1,5.84,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_009.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-lada-1,6.20,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_011.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-lada-1,5.34,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_013.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-lada-1,5.37,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_015.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-lada-1,5.05,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_017.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-lada-1,5.07,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_019.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.13,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-lada-1,5.33,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_021.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.11,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-lada-1,5.56,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_023.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.07,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-lada-1,4.93,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_025.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-lada-1,5.30,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_027.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-lada-1,4.91,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_029.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.19,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lada-1,4.78,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_031.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lada-1,4.68,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_033.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.08,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-lada-1,4.86,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_035.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-lada-1,4.80,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_037.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.20,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-lada-1,5.27,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_039.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lada-1,5.76,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_041.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lada-1,5.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_043.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-lada-1,5.59,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_045.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.10,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-lada-1,4.65,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_047.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.19,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-lada-1,4.73,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_049.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-lada-1,4.60,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_051.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-lada-1,4.87,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_053.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.25,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-lada-1,6.00,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_055.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.26,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-lada-1,5.12,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_057.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.13,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-lada-1,5.69,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_059.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.19,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-lada-1,6.64,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_061.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-lada-1,6.81,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_063.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-lada-1,5.99,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_065.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-lada-1,6.38,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_067.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-lada-1,6.00,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_069.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-lada-1,5.93,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_071.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-lada-1,6.12,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_073.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.15,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-lada-1,5.92,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_075.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.20,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-lada-1,5.16,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_077.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-lada-1,5.59,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_079.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.15,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-lada-1,4.92,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_081.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.22,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-lada-1,5.51,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_083.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.13,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-lada-1,5.38,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_085.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.19,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-lada-1,6.89,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_087.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-lada-1,5.59,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_089.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-lada-1,6.17,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_091.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.18,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-lada-1,4.98,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1_093.wav,vosk_kws,1,Телекінез,,,,piper-lada-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lada-1.25,5.96,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_001.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-lada-1.25,6.06,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_003.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.38,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lada-1.25,5.88,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_005.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-lada-1.25,6.08,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_007.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-lada-1.25,6.29,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_009.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-lada-1.25,5.98,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_011.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-lada-1.25,6.13,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_013.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.39,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-lada-1.25,5.78,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_015.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-lada-1.25,5.56,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_017.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-lada-1.25,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_019.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-lada-1.25,5.90,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_021.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-lada-1.25,6.19,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_023.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-lada-1.25,5.35,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_025.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-lada-1.25,5.86,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_027.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-lada-1.25,5.20,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_029.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.38,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lada-1.25,5.16,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_031.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lada-1.25,5.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_033.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-lada-1.25,5.02,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_035.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-lada-1.25,5.16,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_037.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-lada-1.25,5.78,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_039.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.39,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lada-1.25,6.49,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_041.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lada-1.25,5.63,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_043.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-lada-1.25,6.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_045.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,4.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-lada-1.25,5.00,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_047.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-lada-1.25,5.26,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_049.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.51,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-lada-1.25,4.79,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_051.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-lada-1.25,5.14,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_053.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-lada-1.25,6.29,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_055.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-lada-1.25,5.88,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_057.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-lada-1.25,6.08,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_059.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-lada-1.25,7.52,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_061.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-lada-1.25,7.00,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_063.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-lada-1.25,6.34,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_065.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-lada-1.25,7.37,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_067.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-lada-1.25,6.55,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_069.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-lada-1.25,6.67,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_071.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-lada-1.25,6.79,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_073.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-lada-1.25,6.56,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_075.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-lada-1.25,5.59,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_077.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.26,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-lada-1.25,6.13,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_079.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-lada-1.25,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_081.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-lada-1.25,6.05,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_083.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-lada-1.25,5.99,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_085.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-lada-1.25,5.99,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_087.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-lada-1.25,6.15,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_089.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-lada-1.25,6.39,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_091.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.25,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-lada-1.25,5.25,synthetic
+voice_synth/wake/vosk_kws_piper-lada-1.25_093.wav,vosk_kws,1,Телекінез,,,,piper-lada-1.25,2.38,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1,6.13,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_001.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-mykyta-1,6.21,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_003.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.46,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-mykyta-1,6.03,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_005.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-mykyta-1,6.12,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_007.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-mykyta-1,6.53,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_009.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.41,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-mykyta-1,6.13,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_011.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-mykyta-1,6.05,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_013.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1,6.01,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_015.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-mykyta-1,5.41,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_017.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.41,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-mykyta-1,6.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_019.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.39,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-mykyta-1,5.95,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_021.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-mykyta-1,6.01,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_023.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-mykyta-1,5.43,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_025.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-mykyta-1,5.99,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_027.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-mykyta-1,5.31,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_029.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-mykyta-1,5.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_031.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-mykyta-1,5.19,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_033.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-mykyta-1,5.27,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_035.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-mykyta-1,5.29,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_037.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1,5.91,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_039.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-mykyta-1,6.72,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_041.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1,5.79,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_043.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-mykyta-1,6.24,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_045.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.38,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1,5.01,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_047.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-mykyta-1,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_049.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-mykyta-1,4.82,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_051.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-mykyta-1,5.16,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_053.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-mykyta-1,7.52,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_055.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-mykyta-1,5.74,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_057.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-mykyta-1,6.48,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_059.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-mykyta-1,8.90,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_061.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-mykyta-1,7.45,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_063.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-mykyta-1,6.77,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_065.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-mykyta-1,7.88,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_067.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-mykyta-1,7.16,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_069.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.41,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-mykyta-1,6.82,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_071.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-mykyta-1,7.01,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_073.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-mykyta-1,6.87,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_075.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-mykyta-1,6.38,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_077.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-mykyta-1,6.15,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_079.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-mykyta-1,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_081.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-mykyta-1,6.95,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_083.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.26,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-mykyta-1,6.16,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_085.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1,6.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_087.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-mykyta-1,5.79,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_089.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-mykyta-1,6.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_091.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-mykyta-1,5.28,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1_093.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1.25,6.75,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_001.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.63,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-mykyta-1.25,6.94,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_003.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.60,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-mykyta-1.25,7.89,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_005.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.63,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-mykyta-1.25,7.04,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_007.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-mykyta-1.25,7.44,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_009.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-mykyta-1.25,6.86,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_011.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.62,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-mykyta-1.25,6.96,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_013.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.56,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1.25,6.79,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_015.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.64,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-mykyta-1.25,6.09,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_017.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.54,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-mykyta-1.25,6.17,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_019.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-mykyta-1.25,6.62,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_021.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-mykyta-1.25,6.92,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_023.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.61,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-mykyta-1.25,6.05,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_025.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-mykyta-1.25,6.70,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_027.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.51,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-mykyta-1.25,5.71,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_029.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.62,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-mykyta-1.25,5.58,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_031.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-mykyta-1.25,5.86,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_033.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.71,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-mykyta-1.25,6.20,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_035.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.58,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-mykyta-1.25,5.99,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_037.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1.25,6.46,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_039.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-mykyta-1.25,8.07,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_041.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1.25,6.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_043.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-mykyta-1.25,7.27,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_045.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.60,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-mykyta-1.25,5.65,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_047.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.56,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-mykyta-1.25,7.06,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_049.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.62,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-mykyta-1.25,5.22,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_051.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-mykyta-1.25,6.27,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_053.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.57,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-mykyta-1.25,7.09,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_055.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-mykyta-1.25,6.34,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_057.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.57,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-mykyta-1.25,7.37,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_059.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-mykyta-1.25,9.03,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_061.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-mykyta-1.25,8.40,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_063.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-mykyta-1.25,7.51,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_065.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-mykyta-1.25,8.67,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_067.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.61,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-mykyta-1.25,8.10,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_069.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-mykyta-1.25,7.49,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_071.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.74,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-mykyta-1.25,8.04,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_073.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.58,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-mykyta-1.25,7.59,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_075.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.79,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-mykyta-1.25,6.15,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_077.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.68,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-mykyta-1.25,6.64,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_079.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.62,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-mykyta-1.25,6.10,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_081.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.61,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-mykyta-1.25,7.08,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_083.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-mykyta-1.25,6.93,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_085.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.68,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-mykyta-1.25,7.14,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_087.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.54,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-mykyta-1.25,7.35,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_089.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.69,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-mykyta-1.25,8.21,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_091.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.56,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-mykyta-1.25,5.95,synthetic
+voice_synth/wake/vosk_kws_piper-mykyta-1.25_093.wav,vosk_kws,1,Телекінез,,,,piper-mykyta-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1,5.62,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_001.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-tetiana-1,5.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_003.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-tetiana-1,5.64,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_005.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-tetiana-1,5.84,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_007.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-tetiana-1,6.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_009.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.26,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-tetiana-1,5.79,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_011.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-tetiana-1,5.80,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_013.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1,5.66,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_015.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-tetiana-1,5.15,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_017.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.20,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-tetiana-1,6.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_019.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-tetiana-1,5.56,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_021.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-tetiana-1,5.72,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_023.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-tetiana-1,5.18,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_025.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-tetiana-1,5.59,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_027.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-tetiana-1,5.02,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_029.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-tetiana-1,4.97,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_031.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-tetiana-1,5.06,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_033.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-tetiana-1,4.90,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_035.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-tetiana-1,4.99,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_037.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.26,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_039.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-tetiana-1,5.93,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_041.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.25,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1,5.45,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_043.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.25,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-tetiana-1,6.15,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_045.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1,4.79,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_047.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-tetiana-1,5.07,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_049.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-tetiana-1,4.75,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_051.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.28,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-tetiana-1,4.99,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_053.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-tetiana-1,5.84,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_055.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-tetiana-1,5.38,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_057.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-tetiana-1,5.96,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_059.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-tetiana-1,6.96,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_061.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-tetiana-1,6.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_063.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-tetiana-1,6.35,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_065.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.31,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-tetiana-1,6.72,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_067.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-tetiana-1,6.52,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_069.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.22,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-tetiana-1,6.20,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_071.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-tetiana-1,6.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_073.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.35,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-tetiana-1,6.39,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_075.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-tetiana-1,5.33,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_077.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.21,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-tetiana-1,5.71,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_079.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-tetiana-1,5.20,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_081.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-tetiana-1,5.86,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_083.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-tetiana-1,5.71,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_085.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.24,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1,5.87,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_087.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.36,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-tetiana-1,5.56,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_089.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.32,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-tetiana-1,6.16,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_091.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-tetiana-1,5.22,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1_093.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1,2.34,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_000.wav,vosk_kws,1,Телекінез. увімкни світло на кухні,увімкни світло на кухні,uk_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1.25,6.19,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_001.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_002.wav,vosk_kws,1,Телекінез. увімкни світло у вітальні,увімкни світло у вітальні,uk_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-tetiana-1.25,6.31,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_003.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_004.wav,vosk_kws,1,Телекінез. увімкни світло в коридорі,увімкни світло в коридорі,uk_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-tetiana-1.25,6.07,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_005.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_006.wav,vosk_kws,1,Телекінез. увімкни світло в дитячій,увімкни світло в дитячій,uk_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kids_room""]}",piper-tetiana-1.25,6.38,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_007.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.51,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_008.wav,vosk_kws,1,Телекінез. вимкни освітлення на подвір'ї,вимкни освітлення на подвір'ї,uk_009,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.yard""]}",piper-tetiana-1.25,6.85,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_009.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.55,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_010.wav,vosk_kws,1,Телекінез. вимкни люстру у вітальні,вимкни люстру у вітальні,uk_011,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.living_main""]}",piper-tetiana-1.25,6.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_011.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_012.wav,vosk_kws,1,Телекінез. вимкни нічник у дитячій,вимкни нічник у дитячій,uk_013,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.kids_nightlight""]}",piper-tetiana-1.25,6.55,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_013.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_014.wav,vosk_kws,1,Телекінез. закрий штори у спальні,закрий штори у спальні,uk_015,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1.25,6.09,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_015.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_016.wav,vosk_kws,1,Телекінез. вимкни телевізор,вимкни телевізор,uk_017,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""tv.living_room""]}",piper-tetiana-1.25,5.79,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_017.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.54,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_018.wav,vosk_kws,1,Телекінез. вимкни кондиціонер,вимкни кондиціонер,uk_019,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""ac.living_room""]}",piper-tetiana-1.25,5.76,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_019.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_020.wav,vosk_kws,1,Телекінез. відправ пилосос на базу,відправ пилосос на базу,uk_021,"{""kind"": ""command"", ""action"": ""dock"", ""devices"": [""vacuum.home""]}",piper-tetiana-1.25,6.22,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_021.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_022.wav,vosk_kws,1,Телекінез. вимкни зволожувач повітря,вимкни зволожувач повітря,uk_023,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""humidifier.bedroom""]}",piper-tetiana-1.25,6.23,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_023.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.46,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_024.wav,vosk_kws,1,Телекінез. увімкни кавоварку,увімкни кавоварку,uk_025,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""socket.kitchen_coffee""]}",piper-tetiana-1.25,5.69,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_025.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.58,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_026.wav,vosk_kws,1,Телекінез. увімкни витяжку на кухні,увімкни витяжку на кухні,uk_027,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""fan.kitchen_hood""]}",piper-tetiana-1.25,6.30,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_027.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_028.wav,vosk_kws,1,Телекінез. вимкни бойлер,вимкни бойлер,uk_029,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""boiler.bathroom""]}",piper-tetiana-1.25,6.63,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_029.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.57,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_030.wav,vosk_kws,1,Телекінез. зачини двері,зачини двері,uk_031,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-tetiana-1.25,5.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_031.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_032.wav,vosk_kws,1,Телекінез. замкни замок,замкни замок,uk_033,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-tetiana-1.25,5.62,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_033.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.69,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_034.wav,vosk_kws,1,Телекінез. закрий ворота,закрий ворота,uk_035,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""gate.garage""]}",piper-tetiana-1.25,5.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_035.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.57,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_036.wav,vosk_kws,1,Телекінез. вимкни зарядку,вимкни зарядку,uk_037,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""socket.garage_charger""]}",piper-tetiana-1.25,5.54,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_037.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_038.wav,vosk_kws,1,Телекінез. у спальні штори закрий,у спальні штори закрий,uk_039,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1.25,6.08,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_039.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_040.wav,vosk_kws,1,Телекінез. увімкнути світло у передпокої,увімкнути світло у передпокої,uk_041,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-tetiana-1.25,6.57,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_041.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.51,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_042.wav,vosk_kws,1,Телекінез. увімкни лампу на кухні,увімкни лампу на кухні,uk_043,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1.25,6.28,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_043.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.64,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_044.wav,vosk_kws,1,Телекінез. увімкни підсвітку у вітальні,увімкни підсвітку у вітальні,uk_045,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_floor""]}",piper-tetiana-1.25,6.62,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_045.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_046.wav,vosk_kws,1,Телекінез. штори спальня,штори спальня,uk_047,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-tetiana-1.25,5.22,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_047.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_048.wav,vosk_kws,1,Телекінез. світло коридор,світло коридор,uk_049,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""light.hallway""]}",piper-tetiana-1.25,5.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_049.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_050.wav,vosk_kws,1,Телекінез. телевізор,телевізор,uk_051,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""tv.living_room""]}",piper-tetiana-1.25,5.30,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_051.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_052.wav,vosk_kws,1,Телекінез. ворота гараж,ворота гараж,uk_053,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""gate.garage""]}",piper-tetiana-1.25,5.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_053.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_054.wav,vosk_kws,1,Телекінез. увімкни все світло у вітальні,увімкни все світло у вітальні,uk_055,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main"", ""light.living_floor""]}",piper-tetiana-1.25,6.63,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_055.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_056.wav,vosk_kws,1,Телекінез. відкрий усі штори,відкрий усі штори,uk_057,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-tetiana-1.25,5.74,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_057.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.43,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_058.wav,vosk_kws,1,Телекінез. вимкни все світло у спальні,вимкни все світло у спальні,uk_059,"{""kind"": ""command"", ""action"": ""turn_off"", ""devices"": [""light.bedroom_main"", ""light.bedroom_lamp""]}",piper-tetiana-1.25,6.71,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_059.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.65,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_060.wav,vosk_kws,1,Телекінез. встанови яскравість на кухні 70 відсотків,встанови яскравість на кухні 70 відсотків,uk_061,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 70}}",piper-tetiana-1.25,7.83,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_061.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_062.wav,vosk_kws,1,Телекінез. встанови термостат на 22 градуси,встанови термостат на 22 градуси,uk_063,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 22}}",piper-tetiana-1.25,7.60,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_063.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.44,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_064.wav,vosk_kws,1,Телекінез. кондиціонер на двадцять градусів,кондиціонер на двадцять градусів,uk_065,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""target_temp"": 20}}",piper-tetiana-1.25,7.38,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_065.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.51,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_066.wav,vosk_kws,1,Телекінез. відкрий штори у спальні на 30 відсотків,відкрий штори у спальні на 30 відсотків,uk_067,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-tetiana-1.25,7.86,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_067.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_068.wav,vosk_kws,1,Телекінез. штори у спальні на сімдесят відсотків,штори у спальні на сімдесят відсотків,uk_069,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 70}}",piper-tetiana-1.25,7.38,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_069.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_070.wav,vosk_kws,1,Телекінез. зроби світло у вітальні червоним,зроби світло у вітальні червоним,uk_071,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.living_floor""], ""params"": {""color"": ""red""}}",piper-tetiana-1.25,6.88,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_071.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.48,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_072.wav,vosk_kws,1,Телекінез. вентилятор у ванній на третю швидкість,вентилятор у ванній на третю швидкість,uk_073,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""fan.bathroom""], ""params"": {""speed"": 3}}",piper-tetiana-1.25,7.32,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_073.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_074.wav,vosk_kws,1,Телекінез. гучність телевізора на тридцять,гучність телевізора на тридцять,uk_075,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 30}}",piper-tetiana-1.25,7.20,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_075.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_076.wav,vosk_kws,1,Телекінез. гучніше телевізор,гучніше телевізор,uk_077,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 10}}",piper-tetiana-1.25,5.94,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_077.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.47,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_078.wav,vosk_kws,1,Телекінез. світло на кухні яскравіше,світло на кухні яскравіше,uk_079,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""light.kitchen_main""], ""params"": {""brightness"": 20}}",piper-tetiana-1.25,6.27,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_079.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.53,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_080.wav,vosk_kws,1,Телекінез. термостат тепліше,термостат тепліше,uk_081,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""thermostat.home""], ""params"": {""target_temp"": 1}}",piper-tetiana-1.25,5.84,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_081.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.42,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_082.wav,vosk_kws,1,Телекінез. яка температура у спальні,яка температура у спальні,uk_083,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-tetiana-1.25,6.43,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_083.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_084.wav,vosk_kws,1,Телекінез. яка вологість у вітальні,яка вологість у вітальні,uk_085,"{""kind"": ""query"", ""devices"": [""sensor.living_climate""]}",piper-tetiana-1.25,6.38,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_085.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.50,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_086.wav,vosk_kws,1,Телекінез. чи увімкнене світло на кухні,чи увімкнене світло на кухні,uk_087,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-tetiana-1.25,6.45,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_087.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_088.wav,vosk_kws,1,Телекінез. який заряд пилососа,який заряд пилососа,uk_089,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-tetiana-1.25,6.02,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_089.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.40,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_090.wav,vosk_kws,1,Телекінез. яка температура на термостаті,яка температура на термостаті,uk_091,"{""kind"": ""query"", ""devices"": [""thermostat.home""]}",piper-tetiana-1.25,6.99,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_091.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.49,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_092.wav,vosk_kws,1,Телекінез. увімкни світло,увімкни світло,uk_093,"{""error"": ""ambiguous""}",piper-tetiana-1.25,5.62,synthetic
+voice_synth/wake/vosk_kws_piper-tetiana-1.25_093.wav,vosk_kws,1,Телекінез,,,,piper-tetiana-1.25,2.49,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_000.wav,openwakeword,1,Hey Jarvis. turn on the kitchen light,turn on the kitchen light,en_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lessac-0.9,4.98,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_001.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.26,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_002.wav,openwakeword,1,Hey Jarvis. turn on the light in the living room,turn on the light in the living room,en_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-lessac-0.9,5.43,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_003.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.33,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_004.wav,openwakeword,1,Hey Jarvis. turn on the hallway light,turn on the hallway light,en_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lessac-0.9,5.04,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_005.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.20,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_006.wav,openwakeword,1,Hey Jarvis. turn on the garage light,turn on the garage light,en_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.garage""]}",piper-lessac-0.9,5.01,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_007.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.26,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_008.wav,openwakeword,1,Hey Jarvis. open the curtains in the living room,open the curtains in the living room,en_009,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room""]}",piper-lessac-0.9,5.64,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_009.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.42,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_010.wav,openwakeword,1,Hey Jarvis. turn on the tv,turn on the tv,en_011,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""tv.living_room""]}",piper-lessac-0.9,4.76,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_011.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.25,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_012.wav,openwakeword,1,Hey Jarvis. start the vacuum,start the vacuum,en_013,"{""kind"": ""command"", ""action"": ""start"", ""devices"": [""vacuum.home""]}",piper-lessac-0.9,4.65,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_013.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.33,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_014.wav,openwakeword,1,Hey Jarvis. lock the front door,lock the front door,en_015,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lessac-0.9,4.90,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_015.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_016.wav,openwakeword,1,Hey Jarvis. open the garage door,open the garage door,en_017,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""gate.garage""]}",piper-lessac-0.9,5.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_017.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.27,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_018.wav,openwakeword,1,Hey Jarvis. boil the kettle,boil the kettle,en_019,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""kettle.kitchen""]}",piper-lessac-0.9,4.65,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_019.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.21,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_020.wav,openwakeword,1,Hey Jarvis. turn on the air conditioner,turn on the air conditioner,en_021,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""ac.living_room""]}",piper-lessac-0.9,5.13,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_021.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.25,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_022.wav,openwakeword,1,Hey Jarvis. turn on the water heater,turn on the water heater,en_023,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""boiler.bathroom""]}",piper-lessac-0.9,4.90,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_023.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_024.wav,openwakeword,1,Hey Jarvis. bedroom curtains,bedroom curtains,en_025,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-lessac-0.9,4.90,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_025.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.31,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_026.wav,openwakeword,1,Hey Jarvis. close all the curtains,close all the curtains,en_027,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-lessac-0.9,5.00,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_027.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_028.wav,openwakeword,1,Hey Jarvis. set the bedroom light to 40 percent,set the bedroom light to 40 percent,en_029,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.bedroom_main""], ""params"": {""brightness"": 40}}",piper-lessac-0.9,5.61,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_029.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.32,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_030.wav,openwakeword,1,Hey Jarvis. set the air conditioner to cooling,set the air conditioner to cooling,en_031,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""mode"": ""cool""}}",piper-lessac-0.9,5.50,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_031.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.28,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_032.wav,openwakeword,1,Hey Jarvis. open the bedroom curtains to 30 percent,open the bedroom curtains to 30 percent,en_033,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-lessac-0.9,5.93,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_033.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_034.wav,openwakeword,1,Hey Jarvis. set the tv volume to 25,set the tv volume to 25,en_035,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 25}}",piper-lessac-0.9,5.78,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_035.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_036.wav,openwakeword,1,Hey Jarvis. turn the tv volume down,turn the tv volume down,en_037,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": -10}}",piper-lessac-0.9,5.31,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_037.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_038.wav,openwakeword,1,Hey Jarvis. what is the temperature in the bedroom,what is the temperature in the bedroom,en_039,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-lessac-0.9,5.35,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_039.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_040.wav,openwakeword,1,Hey Jarvis. is the kitchen light on,is the kitchen light on,en_041,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-lessac-0.9,5.07,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_041.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.38,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_042.wav,openwakeword,1,Hey Jarvis. what's the vacuum battery,what's the vacuum battery,en_043,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-lessac-0.9,5.19,synthetic
+voice_synth/wake/openwakeword_piper-lessac-0.9_043.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-0.9,2.28,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_000.wav,openwakeword,1,Hey Jarvis. turn on the kitchen light,turn on the kitchen light,en_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lessac-1,4.99,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_001.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_002.wav,openwakeword,1,Hey Jarvis. turn on the light in the living room,turn on the light in the living room,en_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-lessac-1,5.55,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_003.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.27,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_004.wav,openwakeword,1,Hey Jarvis. turn on the hallway light,turn on the hallway light,en_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lessac-1,5.00,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_005.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.42,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_006.wav,openwakeword,1,Hey Jarvis. turn on the garage light,turn on the garage light,en_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.garage""]}",piper-lessac-1,5.14,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_007.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.39,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_008.wav,openwakeword,1,Hey Jarvis. open the curtains in the living room,open the curtains in the living room,en_009,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room""]}",piper-lessac-1,5.70,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_009.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.24,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_010.wav,openwakeword,1,Hey Jarvis. turn on the tv,turn on the tv,en_011,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""tv.living_room""]}",piper-lessac-1,4.87,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_011.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.33,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_012.wav,openwakeword,1,Hey Jarvis. start the vacuum,start the vacuum,en_013,"{""kind"": ""command"", ""action"": ""start"", ""devices"": [""vacuum.home""]}",piper-lessac-1,4.66,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_013.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_014.wav,openwakeword,1,Hey Jarvis. lock the front door,lock the front door,en_015,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lessac-1,4.80,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_015.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.33,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_016.wav,openwakeword,1,Hey Jarvis. open the garage door,open the garage door,en_017,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""gate.garage""]}",piper-lessac-1,5.19,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_017.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.44,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_018.wav,openwakeword,1,Hey Jarvis. boil the kettle,boil the kettle,en_019,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""kettle.kitchen""]}",piper-lessac-1,4.73,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_019.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.32,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_020.wav,openwakeword,1,Hey Jarvis. turn on the air conditioner,turn on the air conditioner,en_021,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""ac.living_room""]}",piper-lessac-1,5.28,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_021.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.34,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_022.wav,openwakeword,1,Hey Jarvis. turn on the water heater,turn on the water heater,en_023,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""boiler.bathroom""]}",piper-lessac-1,5.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_023.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.32,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_024.wav,openwakeword,1,Hey Jarvis. bedroom curtains,bedroom curtains,en_025,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-lessac-1,4.99,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_025.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.34,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_026.wav,openwakeword,1,Hey Jarvis. close all the curtains,close all the curtains,en_027,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-lessac-1,5.22,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_027.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_028.wav,openwakeword,1,Hey Jarvis. set the bedroom light to 40 percent,set the bedroom light to 40 percent,en_029,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.bedroom_main""], ""params"": {""brightness"": 40}}",piper-lessac-1,5.84,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_029.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.26,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_030.wav,openwakeword,1,Hey Jarvis. set the air conditioner to cooling,set the air conditioner to cooling,en_031,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""mode"": ""cool""}}",piper-lessac-1,5.70,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_031.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.34,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_032.wav,openwakeword,1,Hey Jarvis. open the bedroom curtains to 30 percent,open the bedroom curtains to 30 percent,en_033,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-lessac-1,6.24,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_033.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_034.wav,openwakeword,1,Hey Jarvis. set the tv volume to 25,set the tv volume to 25,en_035,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 25}}",piper-lessac-1,6.07,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_035.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_036.wav,openwakeword,1,Hey Jarvis. turn the tv volume down,turn the tv volume down,en_037,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": -10}}",piper-lessac-1,5.54,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_037.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.29,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_038.wav,openwakeword,1,Hey Jarvis. what is the temperature in the bedroom,what is the temperature in the bedroom,en_039,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-lessac-1,5.67,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_039.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.33,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_040.wav,openwakeword,1,Hey Jarvis. is the kitchen light on,is the kitchen light on,en_041,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-lessac-1,5.28,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_041.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.31,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_042.wav,openwakeword,1,Hey Jarvis. what's the vacuum battery,what's the vacuum battery,en_043,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-lessac-1,5.19,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1_043.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1,2.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_000.wav,openwakeword,1,Hey Jarvis. turn on the kitchen light,turn on the kitchen light,en_001,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.kitchen_main""]}",piper-lessac-1.25,5.37,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_001.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.48,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_002.wav,openwakeword,1,Hey Jarvis. turn on the light in the living room,turn on the light in the living room,en_003,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.living_main""]}",piper-lessac-1.25,6.00,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_003.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_004.wav,openwakeword,1,Hey Jarvis. turn on the hallway light,turn on the hallway light,en_005,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.hallway""]}",piper-lessac-1.25,5.71,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_005.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.44,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_006.wav,openwakeword,1,Hey Jarvis. turn on the garage light,turn on the garage light,en_007,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""light.garage""]}",piper-lessac-1.25,5.57,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_007.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.62,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_008.wav,openwakeword,1,Hey Jarvis. open the curtains in the living room,open the curtains in the living room,en_009,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""curtains.living_room""]}",piper-lessac-1.25,6.17,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_009.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.43,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_010.wav,openwakeword,1,Hey Jarvis. turn on the tv,turn on the tv,en_011,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""tv.living_room""]}",piper-lessac-1.25,5.18,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_011.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.53,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_012.wav,openwakeword,1,Hey Jarvis. start the vacuum,start the vacuum,en_013,"{""kind"": ""command"", ""action"": ""start"", ""devices"": [""vacuum.home""]}",piper-lessac-1.25,5.04,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_013.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.43,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_014.wav,openwakeword,1,Hey Jarvis. lock the front door,lock the front door,en_015,"{""kind"": ""command"", ""action"": ""lock"", ""devices"": [""lock.front_door""]}",piper-lessac-1.25,5.36,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_015.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.41,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_016.wav,openwakeword,1,Hey Jarvis. open the garage door,open the garage door,en_017,"{""kind"": ""command"", ""action"": ""open"", ""devices"": [""gate.garage""]}",piper-lessac-1.25,5.54,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_017.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.53,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_018.wav,openwakeword,1,Hey Jarvis. boil the kettle,boil the kettle,en_019,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""kettle.kitchen""]}",piper-lessac-1.25,5.08,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_019.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.61,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_020.wav,openwakeword,1,Hey Jarvis. turn on the air conditioner,turn on the air conditioner,en_021,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""ac.living_room""]}",piper-lessac-1.25,5.74,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_021.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.54,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_022.wav,openwakeword,1,Hey Jarvis. turn on the water heater,turn on the water heater,en_023,"{""kind"": ""command"", ""action"": ""turn_on"", ""devices"": [""boiler.bathroom""]}",piper-lessac-1.25,5.34,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_023.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.41,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_024.wav,openwakeword,1,Hey Jarvis. bedroom curtains,bedroom curtains,en_025,"{""kind"": ""command"", ""action"": ""toggle"", ""devices"": [""curtains.bedroom""]}",piper-lessac-1.25,5.62,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_025.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.44,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_026.wav,openwakeword,1,Hey Jarvis. close all the curtains,close all the curtains,en_027,"{""kind"": ""command"", ""action"": ""close"", ""devices"": [""curtains.living_room"", ""curtains.bedroom""]}",piper-lessac-1.25,5.52,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_027.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.51,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_028.wav,openwakeword,1,Hey Jarvis. set the bedroom light to 40 percent,set the bedroom light to 40 percent,en_029,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""light.bedroom_main""], ""params"": {""brightness"": 40}}",piper-lessac-1.25,6.15,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_029.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.39,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_030.wav,openwakeword,1,Hey Jarvis. set the air conditioner to cooling,set the air conditioner to cooling,en_031,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""ac.living_room""], ""params"": {""mode"": ""cool""}}",piper-lessac-1.25,6.15,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_031.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.44,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_032.wav,openwakeword,1,Hey Jarvis. open the bedroom curtains to 30 percent,open the bedroom curtains to 30 percent,en_033,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""curtains.bedroom""], ""params"": {""position"": 30}}",piper-lessac-1.25,6.58,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_033.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.48,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_034.wav,openwakeword,1,Hey Jarvis. set the tv volume to 25,set the tv volume to 25,en_035,"{""kind"": ""command"", ""action"": ""set"", ""devices"": [""tv.living_room""], ""params"": {""volume"": 25}}",piper-lessac-1.25,6.44,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_035.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.46,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_036.wav,openwakeword,1,Hey Jarvis. turn the tv volume down,turn the tv volume down,en_037,"{""kind"": ""command"", ""action"": ""step"", ""devices"": [""tv.living_room""], ""params"": {""volume"": -10}}",piper-lessac-1.25,5.91,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_037.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.46,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_038.wav,openwakeword,1,Hey Jarvis. what is the temperature in the bedroom,what is the temperature in the bedroom,en_039,"{""kind"": ""query"", ""devices"": [""sensor.bedroom_climate""]}",piper-lessac-1.25,6.12,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_039.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.43,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_040.wav,openwakeword,1,Hey Jarvis. is the kitchen light on,is the kitchen light on,en_041,"{""kind"": ""query"", ""devices"": [""light.kitchen_main""]}",piper-lessac-1.25,5.55,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_041.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.56,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_042.wav,openwakeword,1,Hey Jarvis. what's the vacuum battery,what's the vacuum battery,en_043,"{""kind"": ""query"", ""devices"": [""vacuum.home""]}",piper-lessac-1.25,5.56,synthetic
+voice_synth/wake/openwakeword_piper-lessac-1.25_043.wav,openwakeword,1,Hey Jarvis,,,,piper-lessac-1.25,2.42,synthetic
+voice_synth/piper-lada-1/uk_001.wav,,0,увімкни світло на кухні,,,,piper-lada-1,2.43,synthetic
+voice_synth/piper-lada-1/uk_002.wav,,0,вимкни світло на кухні,,,,piper-lada-1,2.40,synthetic
+voice_synth/piper-lada-1/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-lada-1,2.67,synthetic
+voice_synth/piper-lada-1/uk_004.wav,,0,вимкни світло у спальні,,,,piper-lada-1,2.51,synthetic
+voice_synth/piper-lada-1/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-lada-1,2.48,synthetic
+voice_synth/piper-lada-1/uk_006.wav,,0,вимкни світло у ванній,,,,piper-lada-1,2.54,synthetic
+voice_synth/piper-lada-1/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-lada-1,2.58,synthetic
+voice_synth/piper-lada-1/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-lada-1,2.41,synthetic
+voice_synth/piper-lada-1/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-lada-1,2.96,synthetic
+voice_synth/piper-lada-1/uk_010.wav,,0,увімкни торшер,,,,piper-lada-1,1.96,synthetic
+voice_synth/piper-lada-1/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-lada-1,2.48,synthetic
+voice_synth/piper-lada-1/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-lada-1,2.54,synthetic
+voice_synth/piper-lada-1/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-lada-1,2.56,synthetic
+voice_synth/piper-lada-1/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-lada-1,2.59,synthetic
+voice_synth/piper-lada-1/uk_015.wav,,0,закрий штори у спальні,,,,piper-lada-1,2.51,synthetic
+voice_synth/piper-lada-1/uk_016.wav,,0,увімкни телевізор,,,,piper-lada-1,2.31,synthetic
+voice_synth/piper-lada-1/uk_017.wav,,0,вимкни телевізор,,,,piper-lada-1,2.19,synthetic
+voice_synth/piper-lada-1/uk_018.wav,,0,увімкни кондиціонер,,,,piper-lada-1,2.29,synthetic
+voice_synth/piper-lada-1/uk_019.wav,,0,вимкни кондиціонер,,,,piper-lada-1,2.15,synthetic
+voice_synth/piper-lada-1/uk_020.wav,,0,запусти пилосос,,,,piper-lada-1,2.00,synthetic
+voice_synth/piper-lada-1/uk_021.wav,,0,відправ пилосос на базу,,,,piper-lada-1,2.45,synthetic
+voice_synth/piper-lada-1/uk_022.wav,,0,увімкни зволожувач,,,,piper-lada-1,2.20,synthetic
+voice_synth/piper-lada-1/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-lada-1,2.69,synthetic
+voice_synth/piper-lada-1/uk_024.wav,,0,закип'яти чайник,,,,piper-lada-1,2.04,synthetic
+voice_synth/piper-lada-1/uk_025.wav,,0,увімкни кавоварку,,,,piper-lada-1,1.95,synthetic
+voice_synth/piper-lada-1/uk_026.wav,,0,вимкни кавоварку,,,,piper-lada-1,2.04,synthetic
+voice_synth/piper-lada-1/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-lada-1,2.41,synthetic
+voice_synth/piper-lada-1/uk_028.wav,,0,увімкни бойлер,,,,piper-lada-1,1.97,synthetic
+voice_synth/piper-lada-1/uk_029.wav,,0,вимкни бойлер,,,,piper-lada-1,1.81,synthetic
+voice_synth/piper-lada-1/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-lada-1,2.73,synthetic
+voice_synth/piper-lada-1/uk_031.wav,,0,зачини двері,,,,piper-lada-1,1.90,synthetic
+voice_synth/piper-lada-1/uk_032.wav,,0,відчини вхідні двері,,,,piper-lada-1,2.22,synthetic
+voice_synth/piper-lada-1/uk_033.wav,,0,замкни замок,,,,piper-lada-1,1.79,synthetic
+voice_synth/piper-lada-1/uk_034.wav,,0,відкрий гараж,,,,piper-lada-1,1.87,synthetic
+voice_synth/piper-lada-1/uk_035.wav,,0,закрий ворота,,,,piper-lada-1,1.98,synthetic
+voice_synth/piper-lada-1/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-lada-1,2.58,synthetic
+voice_synth/piper-lada-1/uk_037.wav,,0,вимкни зарядку,,,,piper-lada-1,1.91,synthetic
+voice_synth/piper-lada-1/uk_038.wav,,0,на кухні увімкни світло,,,,piper-lada-1,2.65,synthetic
+voice_synth/piper-lada-1/uk_039.wav,,0,у спальні штори закрий,,,,piper-lada-1,2.34,synthetic
+voice_synth/piper-lada-1/uk_040.wav,,0,світло в залі вимкни,,,,piper-lada-1,2.20,synthetic
+voice_synth/piper-lada-1/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-lada-1,2.99,synthetic
+voice_synth/piper-lada-1/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-lada-1,2.67,synthetic
+voice_synth/piper-lada-1/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-lada-1,2.26,synthetic
+voice_synth/piper-lada-1/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-lada-1,2.81,synthetic
+voice_synth/piper-lada-1/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-lada-1,2.65,synthetic
+voice_synth/piper-lada-1/uk_046.wav,,0,штори вітальня,,,,piper-lada-1,1.80,synthetic
+voice_synth/piper-lada-1/uk_047.wav,,0,штори спальня,,,,piper-lada-1,1.81,synthetic
+voice_synth/piper-lada-1/uk_048.wav,,0,світло кухня,,,,piper-lada-1,1.81,synthetic
+voice_synth/piper-lada-1/uk_049.wav,,0,світло коридор,,,,piper-lada-1,1.96,synthetic
+voice_synth/piper-lada-1/uk_050.wav,,0,торшер,,,,piper-lada-1,1.44,synthetic
+voice_synth/piper-lada-1/uk_051.wav,,0,телевізор,,,,piper-lada-1,1.67,synthetic
+voice_synth/piper-lada-1/uk_052.wav,,0,чайник,,,,piper-lada-1,1.31,synthetic
+voice_synth/piper-lada-1/uk_053.wav,,0,ворота гараж,,,,piper-lada-1,1.87,synthetic
+voice_synth/piper-lada-1/uk_054.wav,,0,вимкни все світло,,,,piper-lada-1,2.07,synthetic
+voice_synth/piper-lada-1/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-lada-1,2.95,synthetic
+voice_synth/piper-lada-1/uk_056.wav,,0,закрий всі штори,,,,piper-lada-1,2.14,synthetic
+voice_synth/piper-lada-1/uk_057.wav,,0,відкрий усі штори,,,,piper-lada-1,2.11,synthetic
+voice_synth/piper-lada-1/uk_058.wav,,0,вимкни всі лампи,,,,piper-lada-1,1.94,synthetic
+voice_synth/piper-lada-1/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-lada-1,2.72,synthetic
+voice_synth/piper-lada-1/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-lada-1,3.68,synthetic
+voice_synth/piper-lada-1/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-lada-1,3.92,synthetic
+voice_synth/piper-lada-1/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-lada-1,3.44,synthetic
+voice_synth/piper-lada-1/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-lada-1,3.75,synthetic
+voice_synth/piper-lada-1/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-lada-1,3.08,synthetic
+voice_synth/piper-lada-1/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-lada-1,3.02,synthetic
+voice_synth/piper-lada-1/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-lada-1,3.06,synthetic
+voice_synth/piper-lada-1/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-lada-1,3.41,synthetic
+voice_synth/piper-lada-1/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-lada-1,3.16,synthetic
+voice_synth/piper-lada-1/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-lada-1,3.20,synthetic
+voice_synth/piper-lada-1/uk_070.wav,,0,зроби торшер синім,,,,piper-lada-1,2.25,synthetic
+voice_synth/piper-lada-1/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-lada-1,2.98,synthetic
+voice_synth/piper-lada-1/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-lada-1,2.53,synthetic
+voice_synth/piper-lada-1/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-lada-1,3.30,synthetic
+voice_synth/piper-lada-1/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-lada-1,3.23,synthetic
+voice_synth/piper-lada-1/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-lada-1,2.95,synthetic
+voice_synth/piper-lada-1/uk_076.wav,,0,зволожувач на рівень три,,,,piper-lada-1,2.51,synthetic
+voice_synth/piper-lada-1/uk_077.wav,,0,гучніше телевізор,,,,piper-lada-1,2.29,synthetic
+voice_synth/piper-lada-1/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-lada-1,2.56,synthetic
+voice_synth/piper-lada-1/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-lada-1,2.56,synthetic
+voice_synth/piper-lada-1/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-lada-1,3.04,synthetic
+voice_synth/piper-lada-1/uk_081.wav,,0,термостат тепліше,,,,piper-lada-1,2.12,synthetic
+voice_synth/piper-lada-1/uk_082.wav,,0,кондиціонер холодніше,,,,piper-lada-1,2.65,synthetic
+voice_synth/piper-lada-1/uk_083.wav,,0,яка температура у спальні,,,,piper-lada-1,2.58,synthetic
+voice_synth/piper-lada-1/uk_084.wav,,0,яка температура на вулиці,,,,piper-lada-1,2.62,synthetic
+voice_synth/piper-lada-1/uk_085.wav,,0,яка вологість у вітальні,,,,piper-lada-1,2.65,synthetic
+voice_synth/piper-lada-1/uk_086.wav,,0,чи зачинені двері,,,,piper-lada-1,2.23,synthetic
+voice_synth/piper-lada-1/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-lada-1,2.61,synthetic
+voice_synth/piper-lada-1/uk_088.wav,,0,що увімкнено на кухні,,,,piper-lada-1,2.63,synthetic
+voice_synth/piper-lada-1/uk_089.wav,,0,який заряд пилососа,,,,piper-lada-1,2.43,synthetic
+voice_synth/piper-lada-1/uk_090.wav,,0,чи відчинені ворота,,,,piper-lada-1,2.09,synthetic
+voice_synth/piper-lada-1/uk_091.wav,,0,яка температура на термостаті,,,,piper-lada-1,3.28,synthetic
+voice_synth/piper-lada-1/uk_092.wav,,0,стан штор у спальні,,,,piper-lada-1,3.13,synthetic
+voice_synth/piper-lada-1/uk_093.wav,,0,увімкни світло,,,,piper-lada-1,1.89,synthetic
+voice_synth/piper-lada-1/uk_094.wav,,0,закрий штори,,,,piper-lada-1,2.00,synthetic
+voice_synth/piper-lada-1.25/uk_001.wav,,0,увімкни світло на кухні,,,,piper-lada-1.25,2.68,synthetic
+voice_synth/piper-lada-1.25/uk_002.wav,,0,вимкни світло на кухні,,,,piper-lada-1.25,2.83,synthetic
+voice_synth/piper-lada-1.25/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-lada-1.25,2.99,synthetic
+voice_synth/piper-lada-1.25/uk_004.wav,,0,вимкни світло у спальні,,,,piper-lada-1.25,2.88,synthetic
+voice_synth/piper-lada-1.25/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-lada-1.25,2.76,synthetic
+voice_synth/piper-lada-1.25/uk_006.wav,,0,вимкни світло у ванній,,,,piper-lada-1.25,2.79,synthetic
+voice_synth/piper-lada-1.25/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-lada-1.25,2.89,synthetic
+voice_synth/piper-lada-1.25/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-lada-1.25,2.72,synthetic
+voice_synth/piper-lada-1.25/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-lada-1.25,3.55,synthetic
+voice_synth/piper-lada-1.25/uk_010.wav,,0,увімкни торшер,,,,piper-lada-1.25,2.14,synthetic
+voice_synth/piper-lada-1.25/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-lada-1.25,2.91,synthetic
+voice_synth/piper-lada-1.25/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-lada-1.25,2.97,synthetic
+voice_synth/piper-lada-1.25/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-lada-1.25,2.88,synthetic
+voice_synth/piper-lada-1.25/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-lada-1.25,2.88,synthetic
+voice_synth/piper-lada-1.25/uk_015.wav,,0,закрий штори у спальні,,,,piper-lada-1.25,2.88,synthetic
+voice_synth/piper-lada-1.25/uk_016.wav,,0,увімкни телевізор,,,,piper-lada-1.25,2.56,synthetic
+voice_synth/piper-lada-1.25/uk_017.wav,,0,вимкни телевізор,,,,piper-lada-1.25,2.38,synthetic
+voice_synth/piper-lada-1.25/uk_018.wav,,0,увімкни кондиціонер,,,,piper-lada-1.25,2.44,synthetic
+voice_synth/piper-lada-1.25/uk_019.wav,,0,вимкни кондиціонер,,,,piper-lada-1.25,2.52,synthetic
+voice_synth/piper-lada-1.25/uk_020.wav,,0,запусти пилосос,,,,piper-lada-1.25,2.18,synthetic
+voice_synth/piper-lada-1.25/uk_021.wav,,0,відправ пилосос на базу,,,,piper-lada-1.25,2.91,synthetic
+voice_synth/piper-lada-1.25/uk_022.wav,,0,увімкни зволожувач,,,,piper-lada-1.25,2.59,synthetic
+voice_synth/piper-lada-1.25/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-lada-1.25,2.98,synthetic
+voice_synth/piper-lada-1.25/uk_024.wav,,0,закип'яти чайник,,,,piper-lada-1.25,2.39,synthetic
+voice_synth/piper-lada-1.25/uk_025.wav,,0,увімкни кавоварку,,,,piper-lada-1.25,2.33,synthetic
+voice_synth/piper-lada-1.25/uk_026.wav,,0,вимкни кавоварку,,,,piper-lada-1.25,2.26,synthetic
+voice_synth/piper-lada-1.25/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-lada-1.25,2.81,synthetic
+voice_synth/piper-lada-1.25/uk_028.wav,,0,увімкни бойлер,,,,piper-lada-1.25,2.12,synthetic
+voice_synth/piper-lada-1.25/uk_029.wav,,0,вимкни бойлер,,,,piper-lada-1.25,2.09,synthetic
+voice_synth/piper-lada-1.25/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-lada-1.25,3.08,synthetic
+voice_synth/piper-lada-1.25/uk_031.wav,,0,зачини двері,,,,piper-lada-1.25,2.03,synthetic
+voice_synth/piper-lada-1.25/uk_032.wav,,0,відчини вхідні двері,,,,piper-lada-1.25,2.38,synthetic
+voice_synth/piper-lada-1.25/uk_033.wav,,0,замкни замок,,,,piper-lada-1.25,1.93,synthetic
+voice_synth/piper-lada-1.25/uk_034.wav,,0,відкрий гараж,,,,piper-lada-1.25,2.14,synthetic
+voice_synth/piper-lada-1.25/uk_035.wav,,0,закрий ворота,,,,piper-lada-1.25,2.30,synthetic
+voice_synth/piper-lada-1.25/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-lada-1.25,2.91,synthetic
+voice_synth/piper-lada-1.25/uk_037.wav,,0,вимкни зарядку,,,,piper-lada-1.25,2.27,synthetic
+voice_synth/piper-lada-1.25/uk_038.wav,,0,на кухні увімкни світло,,,,piper-lada-1.25,2.85,synthetic
+voice_synth/piper-lada-1.25/uk_039.wav,,0,у спальні штори закрий,,,,piper-lada-1.25,2.62,synthetic
+voice_synth/piper-lada-1.25/uk_040.wav,,0,світло в залі вимкни,,,,piper-lada-1.25,2.36,synthetic
+voice_synth/piper-lada-1.25/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-lada-1.25,3.25,synthetic
+voice_synth/piper-lada-1.25/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-lada-1.25,3.08,synthetic
+voice_synth/piper-lada-1.25/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-lada-1.25,2.51,synthetic
+voice_synth/piper-lada-1.25/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-lada-1.25,3.27,synthetic
+voice_synth/piper-lada-1.25/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-lada-1.25,3.03,synthetic
+voice_synth/piper-lada-1.25/uk_046.wav,,0,штори вітальня,,,,piper-lada-1.25,2.22,synthetic
+voice_synth/piper-lada-1.25/uk_047.wav,,0,штори спальня,,,,piper-lada-1.25,2.01,synthetic
+voice_synth/piper-lada-1.25/uk_048.wav,,0,світло кухня,,,,piper-lada-1.25,2.07,synthetic
+voice_synth/piper-lada-1.25/uk_049.wav,,0,світло коридор,,,,piper-lada-1.25,2.01,synthetic
+voice_synth/piper-lada-1.25/uk_050.wav,,0,торшер,,,,piper-lada-1.25,1.47,synthetic
+voice_synth/piper-lada-1.25/uk_051.wav,,0,телевізор,,,,piper-lada-1.25,1.74,synthetic
+voice_synth/piper-lada-1.25/uk_052.wav,,0,чайник,,,,piper-lada-1.25,1.46,synthetic
+voice_synth/piper-lada-1.25/uk_053.wav,,0,ворота гараж,,,,piper-lada-1.25,2.00,synthetic
+voice_synth/piper-lada-1.25/uk_054.wav,,0,вимкни все світло,,,,piper-lada-1.25,2.39,synthetic
+voice_synth/piper-lada-1.25/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-lada-1.25,3.30,synthetic
+voice_synth/piper-lada-1.25/uk_056.wav,,0,закрий всі штори,,,,piper-lada-1.25,2.43,synthetic
+voice_synth/piper-lada-1.25/uk_057.wav,,0,відкрий усі штори,,,,piper-lada-1.25,2.43,synthetic
+voice_synth/piper-lada-1.25/uk_058.wav,,0,вимкни всі лампи,,,,piper-lada-1.25,2.17,synthetic
+voice_synth/piper-lada-1.25/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-lada-1.25,3.10,synthetic
+voice_synth/piper-lada-1.25/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-lada-1.25,4.16,synthetic
+voice_synth/piper-lada-1.25/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-lada-1.25,4.36,synthetic
+voice_synth/piper-lada-1.25/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-lada-1.25,3.85,synthetic
+voice_synth/piper-lada-1.25/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-lada-1.25,3.61,synthetic
+voice_synth/piper-lada-1.25/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-lada-1.25,3.53,synthetic
+voice_synth/piper-lada-1.25/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-lada-1.25,3.45,synthetic
+voice_synth/piper-lada-1.25/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-lada-1.25,3.47,synthetic
+voice_synth/piper-lada-1.25/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-lada-1.25,3.89,synthetic
+voice_synth/piper-lada-1.25/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-lada-1.25,3.70,synthetic
+voice_synth/piper-lada-1.25/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-lada-1.25,3.61,synthetic
+voice_synth/piper-lada-1.25/uk_070.wav,,0,зроби торшер синім,,,,piper-lada-1.25,2.53,synthetic
+voice_synth/piper-lada-1.25/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-lada-1.25,3.85,synthetic
+voice_synth/piper-lada-1.25/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-lada-1.25,3.47,synthetic
+voice_synth/piper-lada-1.25/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-lada-1.25,3.66,synthetic
+voice_synth/piper-lada-1.25/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-lada-1.25,3.78,synthetic
+voice_synth/piper-lada-1.25/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-lada-1.25,3.27,synthetic
+voice_synth/piper-lada-1.25/uk_076.wav,,0,зволожувач на рівень три,,,,piper-lada-1.25,2.96,synthetic
+voice_synth/piper-lada-1.25/uk_077.wav,,0,гучніше телевізор,,,,piper-lada-1.25,2.66,synthetic
+voice_synth/piper-lada-1.25/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-lada-1.25,2.92,synthetic
+voice_synth/piper-lada-1.25/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-lada-1.25,2.94,synthetic
+voice_synth/piper-lada-1.25/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-lada-1.25,3.51,synthetic
+voice_synth/piper-lada-1.25/uk_081.wav,,0,термостат тепліше,,,,piper-lada-1.25,2.47,synthetic
+voice_synth/piper-lada-1.25/uk_082.wav,,0,кондиціонер холодніше,,,,piper-lada-1.25,2.54,synthetic
+voice_synth/piper-lada-1.25/uk_083.wav,,0,яка температура у спальні,,,,piper-lada-1.25,3.41,synthetic
+voice_synth/piper-lada-1.25/uk_084.wav,,0,яка температура на вулиці,,,,piper-lada-1.25,3.03,synthetic
+voice_synth/piper-lada-1.25/uk_085.wav,,0,яка вологість у вітальні,,,,piper-lada-1.25,3.26,synthetic
+voice_synth/piper-lada-1.25/uk_086.wav,,0,чи зачинені двері,,,,piper-lada-1.25,2.22,synthetic
+voice_synth/piper-lada-1.25/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-lada-1.25,3.03,synthetic
+voice_synth/piper-lada-1.25/uk_088.wav,,0,що увімкнено на кухні,,,,piper-lada-1.25,2.72,synthetic
+voice_synth/piper-lada-1.25/uk_089.wav,,0,який заряд пилососа,,,,piper-lada-1.25,2.63,synthetic
+voice_synth/piper-lada-1.25/uk_090.wav,,0,чи відчинені ворота,,,,piper-lada-1.25,2.15,synthetic
+voice_synth/piper-lada-1.25/uk_091.wav,,0,яка температура на термостаті,,,,piper-lada-1.25,3.41,synthetic
+voice_synth/piper-lada-1.25/uk_092.wav,,0,стан штор у спальні,,,,piper-lada-1.25,2.55,synthetic
+voice_synth/piper-lada-1.25/uk_093.wav,,0,увімкни світло,,,,piper-lada-1.25,2.26,synthetic
+voice_synth/piper-lada-1.25/uk_094.wav,,0,закрий штори,,,,piper-lada-1.25,2.02,synthetic
+voice_synth/piper-lessac-0.9/en_001.wav,,0,turn on the kitchen light,,,,piper-lessac-0.9,1.83,synthetic
+voice_synth/piper-lessac-0.9/en_002.wav,,0,turn off the kitchen light,,,,piper-lessac-0.9,2.05,synthetic
+voice_synth/piper-lessac-0.9/en_003.wav,,0,turn on the light in the living room,,,,piper-lessac-0.9,2.37,synthetic
+voice_synth/piper-lessac-0.9/en_004.wav,,0,switch off the bedroom light,,,,piper-lessac-0.9,2.19,synthetic
+voice_synth/piper-lessac-0.9/en_005.wav,,0,turn on the hallway light,,,,piper-lessac-0.9,2.05,synthetic
+voice_synth/piper-lessac-0.9/en_006.wav,,0,turn off the bathroom light,,,,piper-lessac-0.9,2.14,synthetic
+voice_synth/piper-lessac-0.9/en_007.wav,,0,turn on the garage light,,,,piper-lessac-0.9,2.03,synthetic
+voice_synth/piper-lessac-0.9/en_008.wav,,0,turn on the floor lamp,,,,piper-lessac-0.9,1.93,synthetic
+voice_synth/piper-lessac-0.9/en_009.wav,,0,open the curtains in the living room,,,,piper-lessac-0.9,2.47,synthetic
+voice_synth/piper-lessac-0.9/en_010.wav,,0,close the bedroom blinds,,,,piper-lessac-0.9,2.39,synthetic
+voice_synth/piper-lessac-0.9/en_011.wav,,0,turn on the tv,,,,piper-lessac-0.9,1.88,synthetic
+voice_synth/piper-lessac-0.9/en_012.wav,,0,turn off the television,,,,piper-lessac-0.9,2.03,synthetic
+voice_synth/piper-lessac-0.9/en_013.wav,,0,start the vacuum,,,,piper-lessac-0.9,1.68,synthetic
+voice_synth/piper-lessac-0.9/en_014.wav,,0,send the vacuum home,,,,piper-lessac-0.9,2.02,synthetic
+voice_synth/piper-lessac-0.9/en_015.wav,,0,lock the front door,,,,piper-lessac-0.9,1.98,synthetic
+voice_synth/piper-lessac-0.9/en_016.wav,,0,unlock the door,,,,piper-lessac-0.9,1.76,synthetic
+voice_synth/piper-lessac-0.9/en_017.wav,,0,open the garage door,,,,piper-lessac-0.9,2.23,synthetic
+voice_synth/piper-lessac-0.9/en_018.wav,,0,close the garage gate,,,,piper-lessac-0.9,1.93,synthetic
+voice_synth/piper-lessac-0.9/en_019.wav,,0,boil the kettle,,,,piper-lessac-0.9,1.73,synthetic
+voice_synth/piper-lessac-0.9/en_020.wav,,0,turn on the coffee maker,,,,piper-lessac-0.9,2.07,synthetic
+voice_synth/piper-lessac-0.9/en_021.wav,,0,turn on the air conditioner,,,,piper-lessac-0.9,2.19,synthetic
+voice_synth/piper-lessac-0.9/en_022.wav,,0,turn off the humidifier,,,,piper-lessac-0.9,2.18,synthetic
+voice_synth/piper-lessac-0.9/en_023.wav,,0,turn on the water heater,,,,piper-lessac-0.9,1.95,synthetic
+voice_synth/piper-lessac-0.9/en_024.wav,,0,living room curtains,,,,piper-lessac-0.9,2.00,synthetic
+voice_synth/piper-lessac-0.9/en_025.wav,,0,bedroom curtains,,,,piper-lessac-0.9,1.83,synthetic
+voice_synth/piper-lessac-0.9/en_026.wav,,0,turn off all lights,,,,piper-lessac-0.9,2.03,synthetic
+voice_synth/piper-lessac-0.9/en_027.wav,,0,close all the curtains,,,,piper-lessac-0.9,1.98,synthetic
+voice_synth/piper-lessac-0.9/en_028.wav,,0,turn on all the lights in the living room,,,,piper-lessac-0.9,2.82,synthetic
+voice_synth/piper-lessac-0.9/en_029.wav,,0,set the bedroom light to 40 percent,,,,piper-lessac-0.9,2.61,synthetic
+voice_synth/piper-lessac-0.9/en_030.wav,,0,set the thermostat to 22 degrees,,,,piper-lessac-0.9,2.85,synthetic
+voice_synth/piper-lessac-0.9/en_031.wav,,0,set the air conditioner to cooling,,,,piper-lessac-0.9,2.67,synthetic
+voice_synth/piper-lessac-0.9/en_032.wav,,0,make the floor lamp blue,,,,piper-lessac-0.9,2.31,synthetic
+voice_synth/piper-lessac-0.9/en_033.wav,,0,open the bedroom curtains to 30 percent,,,,piper-lessac-0.9,3.13,synthetic
+voice_synth/piper-lessac-0.9/en_034.wav,,0,set the bathroom fan to speed 3,,,,piper-lessac-0.9,2.79,synthetic
+voice_synth/piper-lessac-0.9/en_035.wav,,0,set the tv volume to 25,,,,piper-lessac-0.9,2.82,synthetic
+voice_synth/piper-lessac-0.9/en_036.wav,,0,make the tv louder,,,,piper-lessac-0.9,2.26,synthetic
+voice_synth/piper-lessac-0.9/en_037.wav,,0,turn the tv volume down,,,,piper-lessac-0.9,2.32,synthetic
+voice_synth/piper-lessac-0.9/en_038.wav,,0,make the kitchen light brighter,,,,piper-lessac-0.9,2.36,synthetic
+voice_synth/piper-lessac-0.9/en_039.wav,,0,what is the temperature in the bedroom,,,,piper-lessac-0.9,2.51,synthetic
+voice_synth/piper-lessac-0.9/en_040.wav,,0,is the front door locked,,,,piper-lessac-0.9,1.96,synthetic
+voice_synth/piper-lessac-0.9/en_041.wav,,0,is the kitchen light on,,,,piper-lessac-0.9,2.03,synthetic
+voice_synth/piper-lessac-0.9/en_042.wav,,0,what is the humidity in the living room,,,,piper-lessac-0.9,2.68,synthetic
+voice_synth/piper-lessac-0.9/en_043.wav,,0,what's the vacuum battery,,,,piper-lessac-0.9,2.22,synthetic
+voice_synth/piper-lessac-0.9/en_044.wav,,0,turn on the light,,,,piper-lessac-0.9,1.73,synthetic
+voice_synth/piper-lessac-1/en_001.wav,,0,turn on the kitchen light,,,,piper-lessac-1,2.04,synthetic
+voice_synth/piper-lessac-1/en_002.wav,,0,turn off the kitchen light,,,,piper-lessac-1,2.08,synthetic
+voice_synth/piper-lessac-1/en_003.wav,,0,turn on the light in the living room,,,,piper-lessac-1,2.61,synthetic
+voice_synth/piper-lessac-1/en_004.wav,,0,switch off the bedroom light,,,,piper-lessac-1,2.22,synthetic
+voice_synth/piper-lessac-1/en_005.wav,,0,turn on the hallway light,,,,piper-lessac-1,2.07,synthetic
+voice_synth/piper-lessac-1/en_006.wav,,0,turn off the bathroom light,,,,piper-lessac-1,2.12,synthetic
+voice_synth/piper-lessac-1/en_007.wav,,0,turn on the garage light,,,,piper-lessac-1,2.12,synthetic
+voice_synth/piper-lessac-1/en_008.wav,,0,turn on the floor lamp,,,,piper-lessac-1,2.04,synthetic
+voice_synth/piper-lessac-1/en_009.wav,,0,open the curtains in the living room,,,,piper-lessac-1,2.81,synthetic
+voice_synth/piper-lessac-1/en_010.wav,,0,close the bedroom blinds,,,,piper-lessac-1,2.43,synthetic
+voice_synth/piper-lessac-1/en_011.wav,,0,turn on the tv,,,,piper-lessac-1,1.83,synthetic
+voice_synth/piper-lessac-1/en_012.wav,,0,turn off the television,,,,piper-lessac-1,2.19,synthetic
+voice_synth/piper-lessac-1/en_013.wav,,0,start the vacuum,,,,piper-lessac-1,1.66,synthetic
+voice_synth/piper-lessac-1/en_014.wav,,0,send the vacuum home,,,,piper-lessac-1,2.23,synthetic
+voice_synth/piper-lessac-1/en_015.wav,,0,lock the front door,,,,piper-lessac-1,2.00,synthetic
+voice_synth/piper-lessac-1/en_016.wav,,0,unlock the door,,,,piper-lessac-1,1.71,synthetic
+voice_synth/piper-lessac-1/en_017.wav,,0,open the garage door,,,,piper-lessac-1,2.23,synthetic
+voice_synth/piper-lessac-1/en_018.wav,,0,close the garage gate,,,,piper-lessac-1,2.09,synthetic
+voice_synth/piper-lessac-1/en_019.wav,,0,boil the kettle,,,,piper-lessac-1,1.80,synthetic
+voice_synth/piper-lessac-1/en_020.wav,,0,turn on the coffee maker,,,,piper-lessac-1,2.08,synthetic
+voice_synth/piper-lessac-1/en_021.wav,,0,turn on the air conditioner,,,,piper-lessac-1,2.26,synthetic
+voice_synth/piper-lessac-1/en_022.wav,,0,turn off the humidifier,,,,piper-lessac-1,2.29,synthetic
+voice_synth/piper-lessac-1/en_023.wav,,0,turn on the water heater,,,,piper-lessac-1,2.00,synthetic
+voice_synth/piper-lessac-1/en_024.wav,,0,living room curtains,,,,piper-lessac-1,2.16,synthetic
+voice_synth/piper-lessac-1/en_025.wav,,0,bedroom curtains,,,,piper-lessac-1,2.03,synthetic
+voice_synth/piper-lessac-1/en_026.wav,,0,turn off all lights,,,,piper-lessac-1,2.09,synthetic
+voice_synth/piper-lessac-1/en_027.wav,,0,close all the curtains,,,,piper-lessac-1,2.17,synthetic
+voice_synth/piper-lessac-1/en_028.wav,,0,turn on all the lights in the living room,,,,piper-lessac-1,3.03,synthetic
+voice_synth/piper-lessac-1/en_029.wav,,0,set the bedroom light to 40 percent,,,,piper-lessac-1,2.80,synthetic
+voice_synth/piper-lessac-1/en_030.wav,,0,set the thermostat to 22 degrees,,,,piper-lessac-1,2.99,synthetic
+voice_synth/piper-lessac-1/en_031.wav,,0,set the air conditioner to cooling,,,,piper-lessac-1,2.52,synthetic
+voice_synth/piper-lessac-1/en_032.wav,,0,make the floor lamp blue,,,,piper-lessac-1,2.30,synthetic
+voice_synth/piper-lessac-1/en_033.wav,,0,open the bedroom curtains to 30 percent,,,,piper-lessac-1,3.15,synthetic
+voice_synth/piper-lessac-1/en_034.wav,,0,set the bathroom fan to speed 3,,,,piper-lessac-1,2.83,synthetic
+voice_synth/piper-lessac-1/en_035.wav,,0,set the tv volume to 25,,,,piper-lessac-1,2.95,synthetic
+voice_synth/piper-lessac-1/en_036.wav,,0,make the tv louder,,,,piper-lessac-1,2.18,synthetic
+voice_synth/piper-lessac-1/en_037.wav,,0,turn the tv volume down,,,,piper-lessac-1,2.40,synthetic
+voice_synth/piper-lessac-1/en_038.wav,,0,make the kitchen light brighter,,,,piper-lessac-1,2.46,synthetic
+voice_synth/piper-lessac-1/en_039.wav,,0,what is the temperature in the bedroom,,,,piper-lessac-1,2.75,synthetic
+voice_synth/piper-lessac-1/en_040.wav,,0,is the front door locked,,,,piper-lessac-1,2.30,synthetic
+voice_synth/piper-lessac-1/en_041.wav,,0,is the kitchen light on,,,,piper-lessac-1,2.18,synthetic
+voice_synth/piper-lessac-1/en_042.wav,,0,what is the humidity in the living room,,,,piper-lessac-1,2.74,synthetic
+voice_synth/piper-lessac-1/en_043.wav,,0,what's the vacuum battery,,,,piper-lessac-1,2.32,synthetic
+voice_synth/piper-lessac-1/en_044.wav,,0,turn on the light,,,,piper-lessac-1,1.76,synthetic
+voice_synth/piper-lessac-1.25/en_001.wav,,0,turn on the kitchen light,,,,piper-lessac-1.25,2.22,synthetic
+voice_synth/piper-lessac-1.25/en_002.wav,,0,turn off the kitchen light,,,,piper-lessac-1.25,2.27,synthetic
+voice_synth/piper-lessac-1.25/en_003.wav,,0,turn on the light in the living room,,,,piper-lessac-1.25,2.92,synthetic
+voice_synth/piper-lessac-1.25/en_004.wav,,0,switch off the bedroom light,,,,piper-lessac-1.25,2.48,synthetic
+voice_synth/piper-lessac-1.25/en_005.wav,,0,turn on the hallway light,,,,piper-lessac-1.25,2.34,synthetic
+voice_synth/piper-lessac-1.25/en_006.wav,,0,turn off the bathroom light,,,,piper-lessac-1.25,2.50,synthetic
+voice_synth/piper-lessac-1.25/en_007.wav,,0,turn on the garage light,,,,piper-lessac-1.25,2.32,synthetic
+voice_synth/piper-lessac-1.25/en_008.wav,,0,turn on the floor lamp,,,,piper-lessac-1.25,2.24,synthetic
+voice_synth/piper-lessac-1.25/en_009.wav,,0,open the curtains in the living room,,,,piper-lessac-1.25,3.17,synthetic
+voice_synth/piper-lessac-1.25/en_010.wav,,0,close the bedroom blinds,,,,piper-lessac-1.25,2.65,synthetic
+voice_synth/piper-lessac-1.25/en_011.wav,,0,turn on the tv,,,,piper-lessac-1.25,2.14,synthetic
+voice_synth/piper-lessac-1.25/en_012.wav,,0,turn off the television,,,,piper-lessac-1.25,2.14,synthetic
+voice_synth/piper-lessac-1.25/en_013.wav,,0,start the vacuum,,,,piper-lessac-1.25,1.81,synthetic
+voice_synth/piper-lessac-1.25/en_014.wav,,0,send the vacuum home,,,,piper-lessac-1.25,2.55,synthetic
+voice_synth/piper-lessac-1.25/en_015.wav,,0,lock the front door,,,,piper-lessac-1.25,2.09,synthetic
+voice_synth/piper-lessac-1.25/en_016.wav,,0,unlock the door,,,,piper-lessac-1.25,1.98,synthetic
+voice_synth/piper-lessac-1.25/en_017.wav,,0,open the garage door,,,,piper-lessac-1.25,2.46,synthetic
+voice_synth/piper-lessac-1.25/en_018.wav,,0,close the garage gate,,,,piper-lessac-1.25,2.22,synthetic
+voice_synth/piper-lessac-1.25/en_019.wav,,0,boil the kettle,,,,piper-lessac-1.25,1.87,synthetic
+voice_synth/piper-lessac-1.25/en_020.wav,,0,turn on the coffee maker,,,,piper-lessac-1.25,2.47,synthetic
+voice_synth/piper-lessac-1.25/en_021.wav,,0,turn on the air conditioner,,,,piper-lessac-1.25,2.54,synthetic
+voice_synth/piper-lessac-1.25/en_022.wav,,0,turn off the humidifier,,,,piper-lessac-1.25,2.38,synthetic
+voice_synth/piper-lessac-1.25/en_023.wav,,0,turn on the water heater,,,,piper-lessac-1.25,2.31,synthetic
+voice_synth/piper-lessac-1.25/en_024.wav,,0,living room curtains,,,,piper-lessac-1.25,2.29,synthetic
+voice_synth/piper-lessac-1.25/en_025.wav,,0,bedroom curtains,,,,piper-lessac-1.25,2.22,synthetic
+voice_synth/piper-lessac-1.25/en_026.wav,,0,turn off all lights,,,,piper-lessac-1.25,2.15,synthetic
+voice_synth/piper-lessac-1.25/en_027.wav,,0,close all the curtains,,,,piper-lessac-1.25,2.26,synthetic
+voice_synth/piper-lessac-1.25/en_028.wav,,0,turn on all the lights in the living room,,,,piper-lessac-1.25,3.19,synthetic
+voice_synth/piper-lessac-1.25/en_029.wav,,0,set the bedroom light to 40 percent,,,,piper-lessac-1.25,3.49,synthetic
+voice_synth/piper-lessac-1.25/en_030.wav,,0,set the thermostat to 22 degrees,,,,piper-lessac-1.25,3.03,synthetic
+voice_synth/piper-lessac-1.25/en_031.wav,,0,set the air conditioner to cooling,,,,piper-lessac-1.25,2.89,synthetic
+voice_synth/piper-lessac-1.25/en_032.wav,,0,make the floor lamp blue,,,,piper-lessac-1.25,2.63,synthetic
+voice_synth/piper-lessac-1.25/en_033.wav,,0,open the bedroom curtains to 30 percent,,,,piper-lessac-1.25,3.27,synthetic
+voice_synth/piper-lessac-1.25/en_034.wav,,0,set the bathroom fan to speed 3,,,,piper-lessac-1.25,3.17,synthetic
+voice_synth/piper-lessac-1.25/en_035.wav,,0,set the tv volume to 25,,,,piper-lessac-1.25,3.15,synthetic
+voice_synth/piper-lessac-1.25/en_036.wav,,0,make the tv louder,,,,piper-lessac-1.25,2.54,synthetic
+voice_synth/piper-lessac-1.25/en_037.wav,,0,turn the tv volume down,,,,piper-lessac-1.25,2.56,synthetic
+voice_synth/piper-lessac-1.25/en_038.wav,,0,make the kitchen light brighter,,,,piper-lessac-1.25,2.77,synthetic
+voice_synth/piper-lessac-1.25/en_039.wav,,0,what is the temperature in the bedroom,,,,piper-lessac-1.25,2.94,synthetic
+voice_synth/piper-lessac-1.25/en_040.wav,,0,is the front door locked,,,,piper-lessac-1.25,2.20,synthetic
+voice_synth/piper-lessac-1.25/en_041.wav,,0,is the kitchen light on,,,,piper-lessac-1.25,2.34,synthetic
+voice_synth/piper-lessac-1.25/en_042.wav,,0,what is the humidity in the living room,,,,piper-lessac-1.25,3.18,synthetic
+voice_synth/piper-lessac-1.25/en_043.wav,,0,what's the vacuum battery,,,,piper-lessac-1.25,2.54,synthetic
+voice_synth/piper-lessac-1.25/en_044.wav,,0,turn on the light,,,,piper-lessac-1.25,1.81,synthetic
+voice_synth/piper-mykyta-1/uk_001.wav,,0,увімкни світло на кухні,,,,piper-mykyta-1,2.96,synthetic
+voice_synth/piper-mykyta-1/uk_002.wav,,0,вимкни світло на кухні,,,,piper-mykyta-1,2.74,synthetic
+voice_synth/piper-mykyta-1/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-mykyta-1,3.05,synthetic
+voice_synth/piper-mykyta-1/uk_004.wav,,0,вимкни світло у спальні,,,,piper-mykyta-1,3.01,synthetic
+voice_synth/piper-mykyta-1/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-mykyta-1,2.90,synthetic
+voice_synth/piper-mykyta-1/uk_006.wav,,0,вимкни світло у ванній,,,,piper-mykyta-1,3.03,synthetic
+voice_synth/piper-mykyta-1/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-mykyta-1,3.13,synthetic
+voice_synth/piper-mykyta-1/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-mykyta-1,3.04,synthetic
+voice_synth/piper-mykyta-1/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-mykyta-1,3.45,synthetic
+voice_synth/piper-mykyta-1/uk_010.wav,,0,увімкни торшер,,,,piper-mykyta-1,2.23,synthetic
+voice_synth/piper-mykyta-1/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-mykyta-1,2.88,synthetic
+voice_synth/piper-mykyta-1/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-mykyta-1,3.08,synthetic
+voice_synth/piper-mykyta-1/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-mykyta-1,3.11,synthetic
+voice_synth/piper-mykyta-1/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-mykyta-1,3.02,synthetic
+voice_synth/piper-mykyta-1/uk_015.wav,,0,закрий штори у спальні,,,,piper-mykyta-1,3.04,synthetic
+voice_synth/piper-mykyta-1/uk_016.wav,,0,увімкни телевізор,,,,piper-mykyta-1,2.43,synthetic
+voice_synth/piper-mykyta-1/uk_017.wav,,0,вимкни телевізор,,,,piper-mykyta-1,2.39,synthetic
+voice_synth/piper-mykyta-1/uk_018.wav,,0,увімкни кондиціонер,,,,piper-mykyta-1,2.56,synthetic
+voice_synth/piper-mykyta-1/uk_019.wav,,0,вимкни кондиціонер,,,,piper-mykyta-1,2.29,synthetic
+voice_synth/piper-mykyta-1/uk_020.wav,,0,запусти пилосос,,,,piper-mykyta-1,2.33,synthetic
+voice_synth/piper-mykyta-1/uk_021.wav,,0,відправ пилосос на базу,,,,piper-mykyta-1,2.94,synthetic
+voice_synth/piper-mykyta-1/uk_022.wav,,0,увімкни зволожувач,,,,piper-mykyta-1,2.52,synthetic
+voice_synth/piper-mykyta-1/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-mykyta-1,3.12,synthetic
+voice_synth/piper-mykyta-1/uk_024.wav,,0,закип'яти чайник,,,,piper-mykyta-1,3.24,synthetic
+voice_synth/piper-mykyta-1/uk_025.wav,,0,увімкни кавоварку,,,,piper-mykyta-1,2.30,synthetic
+voice_synth/piper-mykyta-1/uk_026.wav,,0,вимкни кавоварку,,,,piper-mykyta-1,2.36,synthetic
+voice_synth/piper-mykyta-1/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-mykyta-1,2.99,synthetic
+voice_synth/piper-mykyta-1/uk_028.wav,,0,увімкни бойлер,,,,piper-mykyta-1,2.38,synthetic
+voice_synth/piper-mykyta-1/uk_029.wav,,0,вимкни бойлер,,,,piper-mykyta-1,2.14,synthetic
+voice_synth/piper-mykyta-1/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-mykyta-1,3.31,synthetic
+voice_synth/piper-mykyta-1/uk_031.wav,,0,зачини двері,,,,piper-mykyta-1,2.14,synthetic
+voice_synth/piper-mykyta-1/uk_032.wav,,0,відчини вхідні двері,,,,piper-mykyta-1,2.75,synthetic
+voice_synth/piper-mykyta-1/uk_033.wav,,0,замкни замок,,,,piper-mykyta-1,2.26,synthetic
+voice_synth/piper-mykyta-1/uk_034.wav,,0,відкрий гараж,,,,piper-mykyta-1,2.05,synthetic
+voice_synth/piper-mykyta-1/uk_035.wav,,0,закрий ворота,,,,piper-mykyta-1,2.20,synthetic
+voice_synth/piper-mykyta-1/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-mykyta-1,2.85,synthetic
+voice_synth/piper-mykyta-1/uk_037.wav,,0,вимкни зарядку,,,,piper-mykyta-1,2.33,synthetic
+voice_synth/piper-mykyta-1/uk_038.wav,,0,на кухні увімкни світло,,,,piper-mykyta-1,2.98,synthetic
+voice_synth/piper-mykyta-1/uk_039.wav,,0,у спальні штори закрий,,,,piper-mykyta-1,2.73,synthetic
+voice_synth/piper-mykyta-1/uk_040.wav,,0,світло в залі вимкни,,,,piper-mykyta-1,2.63,synthetic
+voice_synth/piper-mykyta-1/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-mykyta-1,4.26,synthetic
+voice_synth/piper-mykyta-1/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-mykyta-1,3.16,synthetic
+voice_synth/piper-mykyta-1/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-mykyta-1,2.70,synthetic
+voice_synth/piper-mykyta-1/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-mykyta-1,3.52,synthetic
+voice_synth/piper-mykyta-1/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-mykyta-1,3.28,synthetic
+voice_synth/piper-mykyta-1/uk_046.wav,,0,штори вітальня,,,,piper-mykyta-1,1.91,synthetic
+voice_synth/piper-mykyta-1/uk_047.wav,,0,штори спальня,,,,piper-mykyta-1,2.00,synthetic
+voice_synth/piper-mykyta-1/uk_048.wav,,0,світло кухня,,,,piper-mykyta-1,1.97,synthetic
+voice_synth/piper-mykyta-1/uk_049.wav,,0,світло коридор,,,,piper-mykyta-1,3.21,synthetic
+voice_synth/piper-mykyta-1/uk_050.wav,,0,торшер,,,,piper-mykyta-1,1.72,synthetic
+voice_synth/piper-mykyta-1/uk_051.wav,,0,телевізор,,,,piper-mykyta-1,1.87,synthetic
+voice_synth/piper-mykyta-1/uk_052.wav,,0,чайник,,,,piper-mykyta-1,1.61,synthetic
+voice_synth/piper-mykyta-1/uk_053.wav,,0,ворота гараж,,,,piper-mykyta-1,2.14,synthetic
+voice_synth/piper-mykyta-1/uk_054.wav,,0,вимкни все світло,,,,piper-mykyta-1,2.44,synthetic
+voice_synth/piper-mykyta-1/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-mykyta-1,3.95,synthetic
+voice_synth/piper-mykyta-1/uk_056.wav,,0,закрий всі штори,,,,piper-mykyta-1,2.31,synthetic
+voice_synth/piper-mykyta-1/uk_057.wav,,0,відкрий усі штори,,,,piper-mykyta-1,2.55,synthetic
+voice_synth/piper-mykyta-1/uk_058.wav,,0,вимкни всі лампи,,,,piper-mykyta-1,2.33,synthetic
+voice_synth/piper-mykyta-1/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-mykyta-1,3.33,synthetic
+voice_synth/piper-mykyta-1/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-mykyta-1,5.27,synthetic
+voice_synth/piper-mykyta-1/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-mykyta-1,4.72,synthetic
+voice_synth/piper-mykyta-1/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-mykyta-1,4.17,synthetic
+voice_synth/piper-mykyta-1/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-mykyta-1,5.19,synthetic
+voice_synth/piper-mykyta-1/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-mykyta-1,3.66,synthetic
+voice_synth/piper-mykyta-1/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-mykyta-1,3.71,synthetic
+voice_synth/piper-mykyta-1/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-mykyta-1,3.90,synthetic
+voice_synth/piper-mykyta-1/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-mykyta-1,4.58,synthetic
+voice_synth/piper-mykyta-1/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-mykyta-1,3.59,synthetic
+voice_synth/piper-mykyta-1/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-mykyta-1,4.25,synthetic
+voice_synth/piper-mykyta-1/uk_070.wav,,0,зроби торшер синім,,,,piper-mykyta-1,2.67,synthetic
+voice_synth/piper-mykyta-1/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-mykyta-1,3.62,synthetic
+voice_synth/piper-mykyta-1/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-mykyta-1,3.32,synthetic
+voice_synth/piper-mykyta-1/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-mykyta-1,3.98,synthetic
+voice_synth/piper-mykyta-1/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-mykyta-1,3.78,synthetic
+voice_synth/piper-mykyta-1/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-mykyta-1,3.44,synthetic
+voice_synth/piper-mykyta-1/uk_076.wav,,0,зволожувач на рівень три,,,,piper-mykyta-1,2.98,synthetic
+voice_synth/piper-mykyta-1/uk_077.wav,,0,гучніше телевізор,,,,piper-mykyta-1,2.69,synthetic
+voice_synth/piper-mykyta-1/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-mykyta-1,2.87,synthetic
+voice_synth/piper-mykyta-1/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-mykyta-1,3.05,synthetic
+voice_synth/piper-mykyta-1/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-mykyta-1,3.52,synthetic
+voice_synth/piper-mykyta-1/uk_081.wav,,0,термостат тепліше,,,,piper-mykyta-1,2.55,synthetic
+voice_synth/piper-mykyta-1/uk_082.wav,,0,кондиціонер холодніше,,,,piper-mykyta-1,2.74,synthetic
+voice_synth/piper-mykyta-1/uk_083.wav,,0,яка температура у спальні,,,,piper-mykyta-1,3.12,synthetic
+voice_synth/piper-mykyta-1/uk_084.wav,,0,яка температура на вулиці,,,,piper-mykyta-1,3.10,synthetic
+voice_synth/piper-mykyta-1/uk_085.wav,,0,яка вологість у вітальні,,,,piper-mykyta-1,2.89,synthetic
+voice_synth/piper-mykyta-1/uk_086.wav,,0,чи зачинені двері,,,,piper-mykyta-1,2.45,synthetic
+voice_synth/piper-mykyta-1/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-mykyta-1,3.27,synthetic
+voice_synth/piper-mykyta-1/uk_088.wav,,0,що увімкнено на кухні,,,,piper-mykyta-1,2.59,synthetic
+voice_synth/piper-mykyta-1/uk_089.wav,,0,який заряд пилососа,,,,piper-mykyta-1,2.83,synthetic
+voice_synth/piper-mykyta-1/uk_090.wav,,0,чи відчинені ворота,,,,piper-mykyta-1,2.38,synthetic
+voice_synth/piper-mykyta-1/uk_091.wav,,0,яка температура на термостаті,,,,piper-mykyta-1,3.42,synthetic
+voice_synth/piper-mykyta-1/uk_092.wav,,0,стан штор у спальні,,,,piper-mykyta-1,2.56,synthetic
+voice_synth/piper-mykyta-1/uk_093.wav,,0,увімкни світло,,,,piper-mykyta-1,2.17,synthetic
+voice_synth/piper-mykyta-1/uk_094.wav,,0,закрий штори,,,,piper-mykyta-1,2.10,synthetic
+voice_synth/piper-mykyta-1.25/uk_001.wav,,0,увімкни світло на кухні,,,,piper-mykyta-1.25,3.28,synthetic
+voice_synth/piper-mykyta-1.25/uk_002.wav,,0,вимкни світло на кухні,,,,piper-mykyta-1.25,3.28,synthetic
+voice_synth/piper-mykyta-1.25/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-mykyta-1.25,4.71,synthetic
+voice_synth/piper-mykyta-1.25/uk_004.wav,,0,вимкни світло у спальні,,,,piper-mykyta-1.25,3.69,synthetic
+voice_synth/piper-mykyta-1.25/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-mykyta-1.25,3.47,synthetic
+voice_synth/piper-mykyta-1.25/uk_006.wav,,0,вимкни світло у ванній,,,,piper-mykyta-1.25,3.53,synthetic
+voice_synth/piper-mykyta-1.25/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-mykyta-1.25,3.56,synthetic
+voice_synth/piper-mykyta-1.25/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-mykyta-1.25,3.32,synthetic
+voice_synth/piper-mykyta-1.25/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-mykyta-1.25,4.03,synthetic
+voice_synth/piper-mykyta-1.25/uk_010.wav,,0,увімкни торшер,,,,piper-mykyta-1.25,2.63,synthetic
+voice_synth/piper-mykyta-1.25/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-mykyta-1.25,3.23,synthetic
+voice_synth/piper-mykyta-1.25/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-mykyta-1.25,3.54,synthetic
+voice_synth/piper-mykyta-1.25/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-mykyta-1.25,3.64,synthetic
+voice_synth/piper-mykyta-1.25/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-mykyta-1.25,3.41,synthetic
+voice_synth/piper-mykyta-1.25/uk_015.wav,,0,закрий штори у спальні,,,,piper-mykyta-1.25,3.34,synthetic
+voice_synth/piper-mykyta-1.25/uk_016.wav,,0,увімкни телевізор,,,,piper-mykyta-1.25,2.81,synthetic
+voice_synth/piper-mykyta-1.25/uk_017.wav,,0,вимкни телевізор,,,,piper-mykyta-1.25,2.77,synthetic
+voice_synth/piper-mykyta-1.25/uk_018.wav,,0,увімкни кондиціонер,,,,piper-mykyta-1.25,2.87,synthetic
+voice_synth/piper-mykyta-1.25/uk_019.wav,,0,вимкни кондиціонер,,,,piper-mykyta-1.25,2.91,synthetic
+voice_synth/piper-mykyta-1.25/uk_020.wav,,0,запусти пилосос,,,,piper-mykyta-1.25,3.08,synthetic
+voice_synth/piper-mykyta-1.25/uk_021.wav,,0,відправ пилосос на базу,,,,piper-mykyta-1.25,3.30,synthetic
+voice_synth/piper-mykyta-1.25/uk_022.wav,,0,увімкни зволожувач,,,,piper-mykyta-1.25,3.01,synthetic
+voice_synth/piper-mykyta-1.25/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-mykyta-1.25,3.73,synthetic
+voice_synth/piper-mykyta-1.25/uk_024.wav,,0,закип'яти чайник,,,,piper-mykyta-1.25,3.75,synthetic
+voice_synth/piper-mykyta-1.25/uk_025.wav,,0,увімкни кавоварку,,,,piper-mykyta-1.25,2.83,synthetic
+voice_synth/piper-mykyta-1.25/uk_026.wav,,0,вимкни кавоварку,,,,piper-mykyta-1.25,2.65,synthetic
+voice_synth/piper-mykyta-1.25/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-mykyta-1.25,3.56,synthetic
+voice_synth/piper-mykyta-1.25/uk_028.wav,,0,увімкни бойлер,,,,piper-mykyta-1.25,2.60,synthetic
+voice_synth/piper-mykyta-1.25/uk_029.wav,,0,вимкни бойлер,,,,piper-mykyta-1.25,2.41,synthetic
+voice_synth/piper-mykyta-1.25/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-mykyta-1.25,4.00,synthetic
+voice_synth/piper-mykyta-1.25/uk_031.wav,,0,зачини двері,,,,piper-mykyta-1.25,2.53,synthetic
+voice_synth/piper-mykyta-1.25/uk_032.wav,,0,відчини вхідні двері,,,,piper-mykyta-1.25,3.26,synthetic
+voice_synth/piper-mykyta-1.25/uk_033.wav,,0,замкни замок,,,,piper-mykyta-1.25,2.50,synthetic
+voice_synth/piper-mykyta-1.25/uk_034.wav,,0,відкрий гараж,,,,piper-mykyta-1.25,2.45,synthetic
+voice_synth/piper-mykyta-1.25/uk_035.wav,,0,закрий ворота,,,,piper-mykyta-1.25,2.73,synthetic
+voice_synth/piper-mykyta-1.25/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-mykyta-1.25,3.40,synthetic
+voice_synth/piper-mykyta-1.25/uk_037.wav,,0,вимкни зарядку,,,,piper-mykyta-1.25,2.54,synthetic
+voice_synth/piper-mykyta-1.25/uk_038.wav,,0,на кухні увімкни світло,,,,piper-mykyta-1.25,3.42,synthetic
+voice_synth/piper-mykyta-1.25/uk_039.wav,,0,у спальні штори закрий,,,,piper-mykyta-1.25,3.37,synthetic
+voice_synth/piper-mykyta-1.25/uk_040.wav,,0,світло в залі вимкни,,,,piper-mykyta-1.25,2.89,synthetic
+voice_synth/piper-mykyta-1.25/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-mykyta-1.25,4.21,synthetic
+voice_synth/piper-mykyta-1.25/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-mykyta-1.25,3.74,synthetic
+voice_synth/piper-mykyta-1.25/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-mykyta-1.25,3.12,synthetic
+voice_synth/piper-mykyta-1.25/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-mykyta-1.25,3.96,synthetic
+voice_synth/piper-mykyta-1.25/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-mykyta-1.25,3.88,synthetic
+voice_synth/piper-mykyta-1.25/uk_046.wav,,0,штори вітальня,,,,piper-mykyta-1.25,2.32,synthetic
+voice_synth/piper-mykyta-1.25/uk_047.wav,,0,штори спальня,,,,piper-mykyta-1.25,2.26,synthetic
+voice_synth/piper-mykyta-1.25/uk_048.wav,,0,світло кухня,,,,piper-mykyta-1.25,2.34,synthetic
+voice_synth/piper-mykyta-1.25/uk_049.wav,,0,світло коридор,,,,piper-mykyta-1.25,2.48,synthetic
+voice_synth/piper-mykyta-1.25/uk_050.wav,,0,торшер,,,,piper-mykyta-1.25,1.94,synthetic
+voice_synth/piper-mykyta-1.25/uk_051.wav,,0,телевізор,,,,piper-mykyta-1.25,1.84,synthetic
+voice_synth/piper-mykyta-1.25/uk_052.wav,,0,чайник,,,,piper-mykyta-1.25,1.76,synthetic
+voice_synth/piper-mykyta-1.25/uk_053.wav,,0,ворота гараж,,,,piper-mykyta-1.25,2.31,synthetic
+voice_synth/piper-mykyta-1.25/uk_054.wav,,0,вимкни все світло,,,,piper-mykyta-1.25,2.76,synthetic
+voice_synth/piper-mykyta-1.25/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-mykyta-1.25,3.82,synthetic
+voice_synth/piper-mykyta-1.25/uk_056.wav,,0,закрий всі штори,,,,piper-mykyta-1.25,2.83,synthetic
+voice_synth/piper-mykyta-1.25/uk_057.wav,,0,відкрий усі штори,,,,piper-mykyta-1.25,3.05,synthetic
+voice_synth/piper-mykyta-1.25/uk_058.wav,,0,вимкни всі лампи,,,,piper-mykyta-1.25,2.82,synthetic
+voice_synth/piper-mykyta-1.25/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-mykyta-1.25,4.19,synthetic
+voice_synth/piper-mykyta-1.25/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-mykyta-1.25,5.35,synthetic
+voice_synth/piper-mykyta-1.25/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-mykyta-1.25,5.72,synthetic
+voice_synth/piper-mykyta-1.25/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-mykyta-1.25,6.01,synthetic
+voice_synth/piper-mykyta-1.25/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-mykyta-1.25,5.12,synthetic
+voice_synth/piper-mykyta-1.25/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-mykyta-1.25,4.25,synthetic
+voice_synth/piper-mykyta-1.25/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-mykyta-1.25,3.99,synthetic
+voice_synth/piper-mykyta-1.25/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-mykyta-1.25,4.48,synthetic
+voice_synth/piper-mykyta-1.25/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-mykyta-1.25,5.41,synthetic
+voice_synth/piper-mykyta-1.25/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-mykyta-1.25,4.40,synthetic
+voice_synth/piper-mykyta-1.25/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-mykyta-1.25,4.86,synthetic
+voice_synth/piper-mykyta-1.25/uk_070.wav,,0,зроби торшер синім,,,,piper-mykyta-1.25,3.04,synthetic
+voice_synth/piper-mykyta-1.25/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-mykyta-1.25,4.25,synthetic
+voice_synth/piper-mykyta-1.25/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-mykyta-1.25,3.73,synthetic
+voice_synth/piper-mykyta-1.25/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-mykyta-1.25,5.62,synthetic
+voice_synth/piper-mykyta-1.25/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-mykyta-1.25,4.28,synthetic
+voice_synth/piper-mykyta-1.25/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-mykyta-1.25,4.11,synthetic
+voice_synth/piper-mykyta-1.25/uk_076.wav,,0,зволожувач на рівень три,,,,piper-mykyta-1.25,3.40,synthetic
+voice_synth/piper-mykyta-1.25/uk_077.wav,,0,гучніше телевізор,,,,piper-mykyta-1.25,2.94,synthetic
+voice_synth/piper-mykyta-1.25/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-mykyta-1.25,3.25,synthetic
+voice_synth/piper-mykyta-1.25/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-mykyta-1.25,3.57,synthetic
+voice_synth/piper-mykyta-1.25/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-mykyta-1.25,4.21,synthetic
+voice_synth/piper-mykyta-1.25/uk_081.wav,,0,термостат тепліше,,,,piper-mykyta-1.25,2.94,synthetic
+voice_synth/piper-mykyta-1.25/uk_082.wav,,0,кондиціонер холодніше,,,,piper-mykyta-1.25,3.38,synthetic
+voice_synth/piper-mykyta-1.25/uk_083.wav,,0,яка температура у спальні,,,,piper-mykyta-1.25,3.66,synthetic
+voice_synth/piper-mykyta-1.25/uk_084.wav,,0,яка температура на вулиці,,,,piper-mykyta-1.25,4.36,synthetic
+voice_synth/piper-mykyta-1.25/uk_085.wav,,0,яка вологість у вітальні,,,,piper-mykyta-1.25,3.56,synthetic
+voice_synth/piper-mykyta-1.25/uk_086.wav,,0,чи зачинені двері,,,,piper-mykyta-1.25,2.80,synthetic
+voice_synth/piper-mykyta-1.25/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-mykyta-1.25,3.92,synthetic
+voice_synth/piper-mykyta-1.25/uk_088.wav,,0,що увімкнено на кухні,,,,piper-mykyta-1.25,3.06,synthetic
+voice_synth/piper-mykyta-1.25/uk_089.wav,,0,який заряд пилососа,,,,piper-mykyta-1.25,3.26,synthetic
+voice_synth/piper-mykyta-1.25/uk_090.wav,,0,чи відчинені ворота,,,,piper-mykyta-1.25,2.63,synthetic
+voice_synth/piper-mykyta-1.25/uk_091.wav,,0,яка температура на термостаті,,,,piper-mykyta-1.25,3.84,synthetic
+voice_synth/piper-mykyta-1.25/uk_092.wav,,0,стан штор у спальні,,,,piper-mykyta-1.25,2.99,synthetic
+voice_synth/piper-mykyta-1.25/uk_093.wav,,0,увімкни світло,,,,piper-mykyta-1.25,2.46,synthetic
+voice_synth/piper-mykyta-1.25/uk_094.wav,,0,закрий штори,,,,piper-mykyta-1.25,2.34,synthetic
+voice_synth/piper-tetiana-1/uk_001.wav,,0,увімкни світло на кухні,,,,piper-tetiana-1,2.56,synthetic
+voice_synth/piper-tetiana-1/uk_002.wav,,0,вимкни світло на кухні,,,,piper-tetiana-1,2.54,synthetic
+voice_synth/piper-tetiana-1/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-tetiana-1,2.72,synthetic
+voice_synth/piper-tetiana-1/uk_004.wav,,0,вимкни світло у спальні,,,,piper-tetiana-1,2.77,synthetic
+voice_synth/piper-tetiana-1/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-tetiana-1,2.76,synthetic
+voice_synth/piper-tetiana-1/uk_006.wav,,0,вимкни світло у ванній,,,,piper-tetiana-1,2.44,synthetic
+voice_synth/piper-tetiana-1/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-tetiana-1,2.80,synthetic
+voice_synth/piper-tetiana-1/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-tetiana-1,2.53,synthetic
+voice_synth/piper-tetiana-1/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-tetiana-1,3.21,synthetic
+voice_synth/piper-tetiana-1/uk_010.wav,,0,увімкни торшер,,,,piper-tetiana-1,2.14,synthetic
+voice_synth/piper-tetiana-1/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-tetiana-1,2.75,synthetic
+voice_synth/piper-tetiana-1/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-tetiana-1,2.83,synthetic
+voice_synth/piper-tetiana-1/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-tetiana-1,2.90,synthetic
+voice_synth/piper-tetiana-1/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-tetiana-1,2.62,synthetic
+voice_synth/piper-tetiana-1/uk_015.wav,,0,закрий штори у спальні,,,,piper-tetiana-1,2.61,synthetic
+voice_synth/piper-tetiana-1/uk_016.wav,,0,увімкни телевізор,,,,piper-tetiana-1,2.46,synthetic
+voice_synth/piper-tetiana-1/uk_017.wav,,0,вимкни телевізор,,,,piper-tetiana-1,2.39,synthetic
+voice_synth/piper-tetiana-1/uk_018.wav,,0,увімкни кондиціонер,,,,piper-tetiana-1,2.55,synthetic
+voice_synth/piper-tetiana-1/uk_019.wav,,0,вимкни кондиціонер,,,,piper-tetiana-1,2.38,synthetic
+voice_synth/piper-tetiana-1/uk_020.wav,,0,запусти пилосос,,,,piper-tetiana-1,2.19,synthetic
+voice_synth/piper-tetiana-1/uk_021.wav,,0,відправ пилосос на базу,,,,piper-tetiana-1,2.54,synthetic
+voice_synth/piper-tetiana-1/uk_022.wav,,0,увімкни зволожувач,,,,piper-tetiana-1,2.19,synthetic
+voice_synth/piper-tetiana-1/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-tetiana-1,2.79,synthetic
+voice_synth/piper-tetiana-1/uk_024.wav,,0,закип'яти чайник,,,,piper-tetiana-1,2.23,synthetic
+voice_synth/piper-tetiana-1/uk_025.wav,,0,увімкни кавоварку,,,,piper-tetiana-1,2.16,synthetic
+voice_synth/piper-tetiana-1/uk_026.wav,,0,вимкни кавоварку,,,,piper-tetiana-1,2.15,synthetic
+voice_synth/piper-tetiana-1/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-tetiana-1,2.68,synthetic
+voice_synth/piper-tetiana-1/uk_028.wav,,0,увімкни бойлер,,,,piper-tetiana-1,2.22,synthetic
+voice_synth/piper-tetiana-1/uk_029.wav,,0,вимкни бойлер,,,,piper-tetiana-1,2.04,synthetic
+voice_synth/piper-tetiana-1/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-tetiana-1,2.87,synthetic
+voice_synth/piper-tetiana-1/uk_031.wav,,0,зачини двері,,,,piper-tetiana-1,1.97,synthetic
+voice_synth/piper-tetiana-1/uk_032.wav,,0,відчини вхідні двері,,,,piper-tetiana-1,2.34,synthetic
+voice_synth/piper-tetiana-1/uk_033.wav,,0,замкни замок,,,,piper-tetiana-1,1.91,synthetic
+voice_synth/piper-tetiana-1/uk_034.wav,,0,відкрий гараж,,,,piper-tetiana-1,1.97,synthetic
+voice_synth/piper-tetiana-1/uk_035.wav,,0,закрий ворота,,,,piper-tetiana-1,2.52,synthetic
+voice_synth/piper-tetiana-1/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-tetiana-1,2.74,synthetic
+voice_synth/piper-tetiana-1/uk_037.wav,,0,вимкни зарядку,,,,piper-tetiana-1,2.12,synthetic
+voice_synth/piper-tetiana-1/uk_038.wav,,0,на кухні увімкни світло,,,,piper-tetiana-1,2.94,synthetic
+voice_synth/piper-tetiana-1/uk_039.wav,,0,у спальні штори закрий,,,,piper-tetiana-1,2.45,synthetic
+voice_synth/piper-tetiana-1/uk_040.wav,,0,світло в залі вимкни,,,,piper-tetiana-1,2.29,synthetic
+voice_synth/piper-tetiana-1/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-tetiana-1,3.02,synthetic
+voice_synth/piper-tetiana-1/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-tetiana-1,2.76,synthetic
+voice_synth/piper-tetiana-1/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-tetiana-1,2.59,synthetic
+voice_synth/piper-tetiana-1/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-tetiana-1,3.16,synthetic
+voice_synth/piper-tetiana-1/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-tetiana-1,2.99,synthetic
+voice_synth/piper-tetiana-1/uk_046.wav,,0,штори вітальня,,,,piper-tetiana-1,2.03,synthetic
+voice_synth/piper-tetiana-1/uk_047.wav,,0,штори спальня,,,,piper-tetiana-1,1.83,synthetic
+voice_synth/piper-tetiana-1/uk_048.wav,,0,світло кухня,,,,piper-tetiana-1,1.79,synthetic
+voice_synth/piper-tetiana-1/uk_049.wav,,0,світло коридор,,,,piper-tetiana-1,1.96,synthetic
+voice_synth/piper-tetiana-1/uk_050.wav,,0,торшер,,,,piper-tetiana-1,1.59,synthetic
+voice_synth/piper-tetiana-1/uk_051.wav,,0,телевізор,,,,piper-tetiana-1,1.93,synthetic
+voice_synth/piper-tetiana-1/uk_052.wav,,0,чайник,,,,piper-tetiana-1,1.55,synthetic
+voice_synth/piper-tetiana-1/uk_053.wav,,0,ворота гараж,,,,piper-tetiana-1,1.98,synthetic
+voice_synth/piper-tetiana-1/uk_054.wav,,0,вимкни все світло,,,,piper-tetiana-1,2.20,synthetic
+voice_synth/piper-tetiana-1/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-tetiana-1,3.12,synthetic
+voice_synth/piper-tetiana-1/uk_056.wav,,0,закрий всі штори,,,,piper-tetiana-1,2.20,synthetic
+voice_synth/piper-tetiana-1/uk_057.wav,,0,відкрий усі штори,,,,piper-tetiana-1,2.45,synthetic
+voice_synth/piper-tetiana-1/uk_058.wav,,0,вимкни всі лампи,,,,piper-tetiana-1,2.11,synthetic
+voice_synth/piper-tetiana-1/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-tetiana-1,3.10,synthetic
+voice_synth/piper-tetiana-1/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-tetiana-1,3.89,synthetic
+voice_synth/piper-tetiana-1/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-tetiana-1,3.91,synthetic
+voice_synth/piper-tetiana-1/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-tetiana-1,3.52,synthetic
+voice_synth/piper-tetiana-1/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-tetiana-1,3.57,synthetic
+voice_synth/piper-tetiana-1/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-tetiana-1,3.21,synthetic
+voice_synth/piper-tetiana-1/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-tetiana-1,4.35,synthetic
+voice_synth/piper-tetiana-1/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-tetiana-1,3.38,synthetic
+voice_synth/piper-tetiana-1/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-tetiana-1,3.97,synthetic
+voice_synth/piper-tetiana-1/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-tetiana-1,3.37,synthetic
+voice_synth/piper-tetiana-1/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-tetiana-1,3.56,synthetic
+voice_synth/piper-tetiana-1/uk_070.wav,,0,зроби торшер синім,,,,piper-tetiana-1,2.58,synthetic
+voice_synth/piper-tetiana-1/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-tetiana-1,3.26,synthetic
+voice_synth/piper-tetiana-1/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-tetiana-1,3.12,synthetic
+voice_synth/piper-tetiana-1/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-tetiana-1,3.42,synthetic
+voice_synth/piper-tetiana-1/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-tetiana-1,3.35,synthetic
+voice_synth/piper-tetiana-1/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-tetiana-1,3.31,synthetic
+voice_synth/piper-tetiana-1/uk_076.wav,,0,зволожувач на рівень три,,,,piper-tetiana-1,2.87,synthetic
+voice_synth/piper-tetiana-1/uk_077.wav,,0,гучніше телевізор,,,,piper-tetiana-1,2.50,synthetic
+voice_synth/piper-tetiana-1/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-tetiana-1,2.66,synthetic
+voice_synth/piper-tetiana-1/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-tetiana-1,2.88,synthetic
+voice_synth/piper-tetiana-1/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-tetiana-1,3.03,synthetic
+voice_synth/piper-tetiana-1/uk_081.wav,,0,термостат тепліше,,,,piper-tetiana-1,2.25,synthetic
+voice_synth/piper-tetiana-1/uk_082.wav,,0,кондиціонер холодніше,,,,piper-tetiana-1,2.44,synthetic
+voice_synth/piper-tetiana-1/uk_083.wav,,0,яка температура у спальні,,,,piper-tetiana-1,2.72,synthetic
+voice_synth/piper-tetiana-1/uk_084.wav,,0,яка температура на вулиці,,,,piper-tetiana-1,2.77,synthetic
+voice_synth/piper-tetiana-1/uk_085.wav,,0,яка вологість у вітальні,,,,piper-tetiana-1,2.74,synthetic
+voice_synth/piper-tetiana-1/uk_086.wav,,0,чи зачинені двері,,,,piper-tetiana-1,2.20,synthetic
+voice_synth/piper-tetiana-1/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-tetiana-1,2.87,synthetic
+voice_synth/piper-tetiana-1/uk_088.wav,,0,що увімкнено на кухні,,,,piper-tetiana-1,2.60,synthetic
+voice_synth/piper-tetiana-1/uk_089.wav,,0,який заряд пилососа,,,,piper-tetiana-1,2.82,synthetic
+voice_synth/piper-tetiana-1/uk_090.wav,,0,чи відчинені ворота,,,,piper-tetiana-1,2.15,synthetic
+voice_synth/piper-tetiana-1/uk_091.wav,,0,яка температура на термостаті,,,,piper-tetiana-1,3.05,synthetic
+voice_synth/piper-tetiana-1/uk_092.wav,,0,стан штор у спальні,,,,piper-tetiana-1,2.47,synthetic
+voice_synth/piper-tetiana-1/uk_093.wav,,0,увімкни світло,,,,piper-tetiana-1,2.05,synthetic
+voice_synth/piper-tetiana-1/uk_094.wav,,0,закрий штори,,,,piper-tetiana-1,1.91,synthetic
+voice_synth/piper-tetiana-1.25/uk_001.wav,,0,увімкни світло на кухні,,,,piper-tetiana-1.25,2.99,synthetic
+voice_synth/piper-tetiana-1.25/uk_002.wav,,0,вимкни світло на кухні,,,,piper-tetiana-1.25,2.92,synthetic
+voice_synth/piper-tetiana-1.25/uk_003.wav,,0,увімкни світло у вітальні,,,,piper-tetiana-1.25,3.08,synthetic
+voice_synth/piper-tetiana-1.25/uk_004.wav,,0,вимкни світло у спальні,,,,piper-tetiana-1.25,3.16,synthetic
+voice_synth/piper-tetiana-1.25/uk_005.wav,,0,увімкни світло в коридорі,,,,piper-tetiana-1.25,3.01,synthetic
+voice_synth/piper-tetiana-1.25/uk_006.wav,,0,вимкни світло у ванній,,,,piper-tetiana-1.25,3.11,synthetic
+voice_synth/piper-tetiana-1.25/uk_007.wav,,0,увімкни світло в дитячій,,,,piper-tetiana-1.25,3.20,synthetic
+voice_synth/piper-tetiana-1.25/uk_008.wav,,0,увімкни світло в гаражі,,,,piper-tetiana-1.25,2.94,synthetic
+voice_synth/piper-tetiana-1.25/uk_009.wav,,0,вимкни освітлення на подвір'ї,,,,piper-tetiana-1.25,3.74,synthetic
+voice_synth/piper-tetiana-1.25/uk_010.wav,,0,увімкни торшер,,,,piper-tetiana-1.25,2.34,synthetic
+voice_synth/piper-tetiana-1.25/uk_011.wav,,0,вимкни люстру у вітальні,,,,piper-tetiana-1.25,3.19,synthetic
+voice_synth/piper-tetiana-1.25/uk_012.wav,,0,увімкни нічник у спальні,,,,piper-tetiana-1.25,3.26,synthetic
+voice_synth/piper-tetiana-1.25/uk_013.wav,,0,вимкни нічник у дитячій,,,,piper-tetiana-1.25,3.41,synthetic
+voice_synth/piper-tetiana-1.25/uk_014.wav,,0,відкрий штори у вітальні,,,,piper-tetiana-1.25,3.04,synthetic
+voice_synth/piper-tetiana-1.25/uk_015.wav,,0,закрий штори у спальні,,,,piper-tetiana-1.25,2.99,synthetic
+voice_synth/piper-tetiana-1.25/uk_016.wav,,0,увімкни телевізор,,,,piper-tetiana-1.25,2.67,synthetic
+voice_synth/piper-tetiana-1.25/uk_017.wav,,0,вимкни телевізор,,,,piper-tetiana-1.25,2.53,synthetic
+voice_synth/piper-tetiana-1.25/uk_018.wav,,0,увімкни кондиціонер,,,,piper-tetiana-1.25,2.81,synthetic
+voice_synth/piper-tetiana-1.25/uk_019.wav,,0,вимкни кондиціонер,,,,piper-tetiana-1.25,2.55,synthetic
+voice_synth/piper-tetiana-1.25/uk_020.wav,,0,запусти пилосос,,,,piper-tetiana-1.25,2.43,synthetic
+voice_synth/piper-tetiana-1.25/uk_021.wav,,0,відправ пилосос на базу,,,,piper-tetiana-1.25,2.91,synthetic
+voice_synth/piper-tetiana-1.25/uk_022.wav,,0,увімкни зволожувач,,,,piper-tetiana-1.25,2.69,synthetic
+voice_synth/piper-tetiana-1.25/uk_023.wav,,0,вимкни зволожувач повітря,,,,piper-tetiana-1.25,3.13,synthetic
+voice_synth/piper-tetiana-1.25/uk_024.wav,,0,закип'яти чайник,,,,piper-tetiana-1.25,2.41,synthetic
+voice_synth/piper-tetiana-1.25/uk_025.wav,,0,увімкни кавоварку,,,,piper-tetiana-1.25,2.41,synthetic
+voice_synth/piper-tetiana-1.25/uk_026.wav,,0,вимкни кавоварку,,,,piper-tetiana-1.25,2.37,synthetic
+voice_synth/piper-tetiana-1.25/uk_027.wav,,0,увімкни витяжку на кухні,,,,piper-tetiana-1.25,2.96,synthetic
+voice_synth/piper-tetiana-1.25/uk_028.wav,,0,увімкни бойлер,,,,piper-tetiana-1.25,2.24,synthetic
+voice_synth/piper-tetiana-1.25/uk_029.wav,,0,вимкни бойлер,,,,piper-tetiana-1.25,2.40,synthetic
+voice_synth/piper-tetiana-1.25/uk_030.wav,,0,увімкни вентилятор у ванній,,,,piper-tetiana-1.25,3.52,synthetic
+voice_synth/piper-tetiana-1.25/uk_031.wav,,0,зачини двері,,,,piper-tetiana-1.25,2.23,synthetic
+voice_synth/piper-tetiana-1.25/uk_032.wav,,0,відчини вхідні двері,,,,piper-tetiana-1.25,2.59,synthetic
+voice_synth/piper-tetiana-1.25/uk_033.wav,,0,замкни замок,,,,piper-tetiana-1.25,2.14,synthetic
+voice_synth/piper-tetiana-1.25/uk_034.wav,,0,відкрий гараж,,,,piper-tetiana-1.25,2.25,synthetic
+voice_synth/piper-tetiana-1.25/uk_035.wav,,0,закрий ворота,,,,piper-tetiana-1.25,2.33,synthetic
+voice_synth/piper-tetiana-1.25/uk_036.wav,,0,увімкни зарядку в гаражі,,,,piper-tetiana-1.25,2.98,synthetic
+voice_synth/piper-tetiana-1.25/uk_037.wav,,0,вимкни зарядку,,,,piper-tetiana-1.25,2.32,synthetic
+voice_synth/piper-tetiana-1.25/uk_038.wav,,0,на кухні увімкни світло,,,,piper-tetiana-1.25,3.15,synthetic
+voice_synth/piper-tetiana-1.25/uk_039.wav,,0,у спальні штори закрий,,,,piper-tetiana-1.25,2.98,synthetic
+voice_synth/piper-tetiana-1.25/uk_040.wav,,0,світло в залі вимкни,,,,piper-tetiana-1.25,2.60,synthetic
+voice_synth/piper-tetiana-1.25/uk_041.wav,,0,увімкнути світло у передпокої,,,,piper-tetiana-1.25,3.44,synthetic
+voice_synth/piper-tetiana-1.25/uk_042.wav,,0,вимкнути світло в санвузлі,,,,piper-tetiana-1.25,5.33,synthetic
+voice_synth/piper-tetiana-1.25/uk_043.wav,,0,увімкни лампу на кухні,,,,piper-tetiana-1.25,2.92,synthetic
+voice_synth/piper-tetiana-1.25/uk_044.wav,,0,відкрийте фіранки у вітальні,,,,piper-tetiana-1.25,3.59,synthetic
+voice_synth/piper-tetiana-1.25/uk_045.wav,,0,увімкни підсвітку у вітальні,,,,piper-tetiana-1.25,3.30,synthetic
+voice_synth/piper-tetiana-1.25/uk_046.wav,,0,штори вітальня,,,,piper-tetiana-1.25,2.24,synthetic
+voice_synth/piper-tetiana-1.25/uk_047.wav,,0,штори спальня,,,,piper-tetiana-1.25,2.05,synthetic
+voice_synth/piper-tetiana-1.25/uk_048.wav,,0,світло кухня,,,,piper-tetiana-1.25,2.11,synthetic
+voice_synth/piper-tetiana-1.25/uk_049.wav,,0,світло коридор,,,,piper-tetiana-1.25,2.36,synthetic
+voice_synth/piper-tetiana-1.25/uk_050.wav,,0,торшер,,,,piper-tetiana-1.25,1.74,synthetic
+voice_synth/piper-tetiana-1.25/uk_051.wav,,0,телевізор,,,,piper-tetiana-1.25,2.17,synthetic
+voice_synth/piper-tetiana-1.25/uk_052.wav,,0,чайник,,,,piper-tetiana-1.25,1.55,synthetic
+voice_synth/piper-tetiana-1.25/uk_053.wav,,0,ворота гараж,,,,piper-tetiana-1.25,2.26,synthetic
+voice_synth/piper-tetiana-1.25/uk_054.wav,,0,вимкни все світло,,,,piper-tetiana-1.25,2.60,synthetic
+voice_synth/piper-tetiana-1.25/uk_055.wav,,0,увімкни все світло у вітальні,,,,piper-tetiana-1.25,3.51,synthetic
+voice_synth/piper-tetiana-1.25/uk_056.wav,,0,закрий всі штори,,,,piper-tetiana-1.25,2.38,synthetic
+voice_synth/piper-tetiana-1.25/uk_057.wav,,0,відкрий усі штори,,,,piper-tetiana-1.25,2.69,synthetic
+voice_synth/piper-tetiana-1.25/uk_058.wav,,0,вимкни всі лампи,,,,piper-tetiana-1.25,2.32,synthetic
+voice_synth/piper-tetiana-1.25/uk_059.wav,,0,вимкни все світло у спальні,,,,piper-tetiana-1.25,3.32,synthetic
+voice_synth/piper-tetiana-1.25/uk_060.wav,,0,яскравість світла у спальні 40 відсотків,,,,piper-tetiana-1.25,4.45,synthetic
+voice_synth/piper-tetiana-1.25/uk_061.wav,,0,встанови яскравість на кухні 70 відсотків,,,,piper-tetiana-1.25,4.92,synthetic
+voice_synth/piper-tetiana-1.25/uk_062.wav,,0,світло у вітальні на п'ятдесят відсотків,,,,piper-tetiana-1.25,4.00,synthetic
+voice_synth/piper-tetiana-1.25/uk_063.wav,,0,встанови термостат на 22 градуси,,,,piper-tetiana-1.25,4.11,synthetic
+voice_synth/piper-tetiana-1.25/uk_064.wav,,0,опалення на двадцять один градус,,,,piper-tetiana-1.25,3.83,synthetic
+voice_synth/piper-tetiana-1.25/uk_065.wav,,0,кондиціонер на двадцять градусів,,,,piper-tetiana-1.25,3.99,synthetic
+voice_synth/piper-tetiana-1.25/uk_066.wav,,0,увімкни кондиціонер на охолодження,,,,piper-tetiana-1.25,4.27,synthetic
+voice_synth/piper-tetiana-1.25/uk_067.wav,,0,відкрий штори у спальні на 30 відсотків,,,,piper-tetiana-1.25,4.48,synthetic
+voice_synth/piper-tetiana-1.25/uk_068.wav,,0,закрий штори у вітальні наполовину,,,,piper-tetiana-1.25,3.82,synthetic
+voice_synth/piper-tetiana-1.25/uk_069.wav,,0,штори у спальні на сімдесят відсотків,,,,piper-tetiana-1.25,3.92,synthetic
+voice_synth/piper-tetiana-1.25/uk_070.wav,,0,зроби торшер синім,,,,piper-tetiana-1.25,2.81,synthetic
+voice_synth/piper-tetiana-1.25/uk_071.wav,,0,зроби світло у вітальні червоним,,,,piper-tetiana-1.25,3.84,synthetic
+voice_synth/piper-tetiana-1.25/uk_072.wav,,0,нічник у дитячій зеленим,,,,piper-tetiana-1.25,3.24,synthetic
+voice_synth/piper-tetiana-1.25/uk_073.wav,,0,вентилятор у ванній на третю швидкість,,,,piper-tetiana-1.25,4.18,synthetic
+voice_synth/piper-tetiana-1.25/uk_074.wav,,0,витяжку на кухні на другу швидкість,,,,piper-tetiana-1.25,3.88,synthetic
+voice_synth/piper-tetiana-1.25/uk_075.wav,,0,гучність телевізора на тридцять,,,,piper-tetiana-1.25,4.12,synthetic
+voice_synth/piper-tetiana-1.25/uk_076.wav,,0,зволожувач на рівень три,,,,piper-tetiana-1.25,3.21,synthetic
+voice_synth/piper-tetiana-1.25/uk_077.wav,,0,гучніше телевізор,,,,piper-tetiana-1.25,2.92,synthetic
+voice_synth/piper-tetiana-1.25/uk_078.wav,,0,зроби телевізор тихіше,,,,piper-tetiana-1.25,3.12,synthetic
+voice_synth/piper-tetiana-1.25/uk_079.wav,,0,світло на кухні яскравіше,,,,piper-tetiana-1.25,2.99,synthetic
+voice_synth/piper-tetiana-1.25/uk_080.wav,,0,зроби світло у спальні темніше,,,,piper-tetiana-1.25,3.54,synthetic
+voice_synth/piper-tetiana-1.25/uk_081.wav,,0,термостат тепліше,,,,piper-tetiana-1.25,2.54,synthetic
+voice_synth/piper-tetiana-1.25/uk_082.wav,,0,кондиціонер холодніше,,,,piper-tetiana-1.25,3.16,synthetic
+voice_synth/piper-tetiana-1.25/uk_083.wav,,0,яка температура у спальні,,,,piper-tetiana-1.25,3.25,synthetic
+voice_synth/piper-tetiana-1.25/uk_084.wav,,0,яка температура на вулиці,,,,piper-tetiana-1.25,3.11,synthetic
+voice_synth/piper-tetiana-1.25/uk_085.wav,,0,яка вологість у вітальні,,,,piper-tetiana-1.25,3.06,synthetic
+voice_synth/piper-tetiana-1.25/uk_086.wav,,0,чи зачинені двері,,,,piper-tetiana-1.25,2.61,synthetic
+voice_synth/piper-tetiana-1.25/uk_087.wav,,0,чи увімкнене світло на кухні,,,,piper-tetiana-1.25,3.41,synthetic
+voice_synth/piper-tetiana-1.25/uk_088.wav,,0,що увімкнено на кухні,,,,piper-tetiana-1.25,2.95,synthetic
+voice_synth/piper-tetiana-1.25/uk_089.wav,,0,який заряд пилососа,,,,piper-tetiana-1.25,3.15,synthetic
+voice_synth/piper-tetiana-1.25/uk_090.wav,,0,чи відчинені ворота,,,,piper-tetiana-1.25,2.46,synthetic
+voice_synth/piper-tetiana-1.25/uk_091.wav,,0,яка температура на термостаті,,,,piper-tetiana-1.25,3.55,synthetic
+voice_synth/piper-tetiana-1.25/uk_092.wav,,0,стан штор у спальні,,,,piper-tetiana-1.25,2.56,synthetic
+voice_synth/piper-tetiana-1.25/uk_093.wav,,0,увімкни світло,,,,piper-tetiana-1.25,2.52,synthetic
+voice_synth/piper-tetiana-1.25/uk_094.wav,,0,закрий штори,,,,piper-tetiana-1.25,2.26,synthetic
