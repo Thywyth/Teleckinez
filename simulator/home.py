@@ -51,10 +51,19 @@ class SimHome:
         self._control: aiomqtt.Client | None = None
         self._control_ready = asyncio.Event()
 
-    async def start(self, wait_s: float = 10.0) -> None:
+    async def start(self, wait_s: float = 10.0, stagger_s: float = 0.0) -> None:
+        """Connect all devices; stagger_s spreads the connects in time (like a real home
+        after a power cut, and gentler on small brokers such as amqtt)."""
+
+        async def run(dev: SimDevice, delay: float) -> None:
+            await asyncio.sleep(delay)
+            await dev.run()
+
         self._tasks = [
-            asyncio.create_task(dev.run(), name=f"sim:{dev.id}") for dev in self.devices.values()
+            asyncio.create_task(run(dev, i * stagger_s), name=f"sim:{dev.id}")
+            for i, dev in enumerate(self.devices.values())
         ]
+        wait_s += len(self.devices) * stagger_s
         self._tasks.append(asyncio.create_task(self._control_loop(), name="sim:faults"))
         waits = [d.connected.wait() for d in self.devices.values()]
         await asyncio.wait_for(asyncio.gather(*waits, self._control_ready.wait()), wait_s)

@@ -25,7 +25,7 @@ async def _main(args: argparse.Namespace) -> None:
         f"simulator: starting {len(home.devices)} devices on "
         f"{settings.mqtt.host}:{settings.mqtt.port} (prefix {settings.mqtt.prefix!r})"
     )
-    await home.start()
+    await home.start(stagger_s=args.stagger_ms / 1000)
     for spec in args.fault or []:
         home.apply_fault(_cli_fault(spec))
     if args.scenario:
@@ -70,6 +70,12 @@ def main(argv: list[str] | None = None) -> int:
         help="inject a fault at start: lock.front_door=offline, light.kitchen_main=slow:ms=3000",
     )
     parser.add_argument("--scenario", default=None, help="YAML fault scenario (devices.md §4)")
+    parser.add_argument(
+        "--stagger-ms",
+        type=float,
+        default=0.0,
+        help="pause between device connects at start (0 = all at once)",
+    )
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args(argv)
     logging.basicConfig(
