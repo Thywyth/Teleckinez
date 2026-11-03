@@ -16,6 +16,12 @@ Usage:
     python scripts/record_dataset.py --speaker roman --redo uk_017 uk_020
     python scripts/record_dataset.py --speaker roman --list       # progress only
     python scripts/record_dataset.py --speaker anna --input 1     # another microphone
+    python scripts/record_dataset.py --speaker roman --wake       # wake word set (E5, E3)
+
+--wake records a separate set into benchmarks/datasets/voice/wake_manifest.csv
+(the format of voice_synth/wake_manifest.csv): «Телекінез» alone, «Телекінез»
++ a pause of about a second + a command to an instant device (these clips are
+also the E3 voice input), and «Hey Jarvis» for openWakeWord.
 
 Keys while recording: Enter - start, Enter - stop; then
 Enter = save and next, r = record again, p = play back, s = skip, q = quit.
@@ -39,6 +45,13 @@ DATASETS = ROOT / "benchmarks" / "datasets"
 PHRASES = DATASETS / "nlu_commands.yaml"
 VOICE_DIR = DATASETS / "voice"
 SAMPLE_RATE = 16_000
+WAKE_FIELDS = [
+    "file", "engine", "wake", "text", "command", "command_id", "intent", "speaker", "duration_s",
+    "source",
+]  # fmt: skip
+WAKE_ALONE, WAKE_COMMANDS, JARVIS = 10, 15, 5
+# devices that change state at once (run_latency.INSTANT): E3 measures these only
+INSTANT = {"light", "rgb_light", "socket", "tv", "fan", "boiler", "humidifier", "air_conditioner"}
 FIELDS = [
     "file", "phrase_id", "text", "lang", "speaker", "cat", "intent", "source", "duration_s",
     "recorded_at",
@@ -70,6 +83,48 @@ def load_phrases(path: Path = PHRASES, lang: str = "all") -> list[Phrase]:
     return [p for p in phrases if lang in ("all", p.lang)]
 
 
+def load_wake_phrases(path: Path = PHRASES) -> list[tuple[Phrase, str, str]]:
+    """(phrase, engine, command) of the wake word set, ids wake_001..."""
+    from teleckinez.core.config import load_devices
+
+    types = {d.id: d.type for d in load_devices().devices}
+    commands = [
+        p
+        for p in load_phrases(path, "uk")
+        if p.cat == "basic"
+        and p.expect.get("kind") == "command"
+        and p.expect.get("devices")
+        and all(types.get(d) in INSTANT for d in p.expect["devices"])
+    ][:WAKE_COMMANDS]
+    word = {"kind": "wake"}
+    items = [(Phrase("", "Телекінез", "uk", "wake", word), "vosk_kws", "")] * WAKE_ALONE
+    items += [
+        (Phrase("", f"Телекінез … {p.text}", "uk", "wake_command", p.expect), "vosk_kws", p.text)
+        for p in commands
+    ]
+    items += [(Phrase("", "Hey Jarvis", "en", "wake", word), "openwakeword", "")] * JARVIS
+    return [
+        (Phrase(f"wake_{i:03d}", p.text, p.lang, p.cat, p.expect), engine, command)
+        for i, (p, engine, command) in enumerate(items, 1)
+    ]
+
+
+def wake_row(item: tuple[Phrase, str, str], speaker: str, wav: Path, pcm: bytes) -> dict:
+    phrase, engine, command = item
+    return {
+        "file": wav.relative_to(DATASETS).as_posix() if wav.is_relative_to(DATASETS) else str(wav),
+        "engine": engine,
+        "wake": "1",
+        "text": phrase.text.replace(" … ", ". "),
+        "command": command,
+        "command_id": phrase.phrase_id if command else "",
+        "intent": json.dumps(phrase.expect, ensure_ascii=False, sort_keys=True) if command else "",
+        "speaker": speaker,
+        "duration_s": f"{len(pcm) / 2 / SAMPLE_RATE:.2f}",
+        "source": "real",
+    }
+
+
 def safe_name(speaker: str) -> str:
     name = re.sub(r"[^\w-]+", "_", speaker.strip().lower(), flags=re.UNICODE).strip("_")
     if not name:
@@ -84,27 +139,26 @@ def read_manifest(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def write_manifest(path: Path, rows: list[dict[str, str]]) -> None:
+def write_manifest(path: Path, rows: list[dict[str, str]], fields: list[str] = FIELDS) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    rows = sorted(rows, key=lambda r: (r["speaker"], r["phrase_id"]))
+    rows = sorted(rows, key=lambda r: (r["speaker"], r["file"]))
     tmp = path.with_suffix(".tmp")
     with tmp.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
     tmp.replace(path)  # never a half-written manifest, even on Ctrl+C
 
 
 def upsert(rows: list[dict[str, str]], row: dict[str, str]) -> list[dict[str, str]]:
-    """Replace the row of the same speaker + phrase (a redone take) or append it."""
-    key = (row["speaker"], row["phrase_id"])
-    return [r for r in rows if (r["speaker"], r["phrase_id"]) != key] + [row]
+    """Replace the row of the same file (a redone take) or append it."""
+    return [r for r in rows if r["file"] != row["file"]] + [row]
 
 
 def done_ids(rows: list[dict[str, str]], speaker: str, voice_dir: Path) -> set[str]:
     """Phrases of this speaker whose WAV file really exists."""
     return {
-        r["phrase_id"]
+        Path(r["file"]).stem
         for r in rows
         if r["speaker"] == speaker and (voice_dir.parent / r["file"]).exists()
     }
@@ -188,12 +242,19 @@ def session(
     play: Callable[[bytes], None],
     ask: Callable[[str], str] = input,
     out: Callable[[str], None] = print,
+    wake: dict[str, tuple[Phrase, str, str]] | None = None,
 ) -> int:
-    """Record the phrases one by one; returns how many takes were saved."""
+    """Record the phrases one by one; returns how many takes were saved.
+
+    With `wake` (phrase_id -> wake item) the rows go to the wake manifest format.
+    """
     voice_dir = manifest.parent
+    folder = "wake/" if wake else ""
     saved = 0
     for i, phrase in enumerate(phrases, 1):
         out(f"\n[{i}/{len(phrases)}] {phrase.phrase_id} ({phrase.lang})")
+        if wake and " … " in phrase.text:
+            out("   (скажіть «Телекінез», зачекайте ~1 с, потім команду)")
         out(f"   >>> {phrase.text} <<<")
         while True:
             pcm = record()
@@ -211,10 +272,14 @@ def session(
                 continue
             if choice in ("s", "q"):
                 break
-            wav = voice_dir / speaker / f"{phrase.phrase_id}.wav"
+            wav = voice_dir / f"{folder}{speaker}" / f"{phrase.phrase_id}.wav"
             save_wav(wav, pcm)
-            rows = upsert(read_manifest(manifest), manifest_row(phrase, speaker, wav, pcm, "real"))
-            write_manifest(manifest, rows)
+            if wake:
+                row = wake_row(wake[phrase.phrase_id], speaker, wav, pcm)
+                write_manifest(manifest, upsert(read_manifest(manifest), row), WAKE_FIELDS)
+            else:
+                row = manifest_row(phrase, speaker, wav, pcm, "real")
+                write_manifest(manifest, upsert(read_manifest(manifest), row))
             saved += 1
             break
         if choice == "q":
@@ -229,13 +294,22 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--input", type=int, default=None, help="microphone index (audio_check --list)")
     ap.add_argument("--redo", nargs="+", metavar="ID", help="record these phrase ids again")
     ap.add_argument("--list", action="store_true", help="show progress and exit")
-    ap.add_argument("--manifest", type=Path, default=VOICE_DIR / "manifest.csv")
+    ap.add_argument("--manifest", type=Path, default=None, help="default: voice/manifest.csv")
+    ap.add_argument("--wake", action="store_true", help="record the wake word set (E5, E3)")
     args = ap.parse_args(argv)
 
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     speaker = safe_name(args.speaker)
-    phrases = load_phrases(lang=args.lang)
+    wake = None
+    if args.wake:
+        items = load_wake_phrases()
+        wake = {item[0].phrase_id: item for item in items}
+        phrases = [item[0] for item in items]
+        args.manifest = args.manifest or VOICE_DIR / "wake_manifest.csv"
+    else:
+        phrases = load_phrases(lang=args.lang)
+        args.manifest = args.manifest or VOICE_DIR / "manifest.csv"
     done = done_ids(read_manifest(args.manifest), speaker, args.manifest.parent)
     if args.redo:
         todo = [p for p in phrases if p.phrase_id in set(args.redo)]
@@ -246,7 +320,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.list or not todo:
         return 0
     mic = MicRecorder(args.input)
-    saved = session(todo, speaker, args.manifest, mic.record, mic.play)
+    saved = session(todo, speaker, args.manifest, mic.record, mic.play, wake=wake)
     print(f"\nЗбережено {saved}. Маніфест: {args.manifest}")
     return 0
 

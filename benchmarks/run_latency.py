@@ -176,8 +176,9 @@ async def voice_mode(app: App, timeline: Timeline, clips, stt: str) -> list[dict
     return rows
 
 
-def voice_clips(limit: int) -> list[dict[str, str]]:
-    path = DATASETS / "voice_synth" / "wake_manifest.csv"
+def voice_clips(
+    limit: int, path: Path = DATASETS / "voice_synth" / "wake_manifest.csv"
+) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as f:
         rows = [r for r in csv.DictReader(f) if r["engine"] == "vosk_kws" and r["command"]]
     devices = {d.id: d.type for d in load_devices().devices}
@@ -239,9 +240,9 @@ async def main_async(args) -> None:
             print(f"E3 text: {args.n} requests", flush=True)
             rows += await text_mode(app, timeline, args.n, tts)
         if "voice" in args.modes:
-            clips = voice_clips(args.voice_limit)
+            clips = voice_clips(args.voice_limit, Path(args.manifest))
             for stt in args.stt:
-                print(f"E3 voice ({stt}): {len(clips)} synthetic clips", flush=True)
+                print(f"E3 voice ({stt}): {len(clips)} {args.label} clips", flush=True)
                 rows += await voice_mode(app, timeline, clips, stt)
     finally:
         await app.stop()
@@ -259,7 +260,7 @@ async def main_async(args) -> None:
     csv_path = write_csv(args.name, rows)
     png = plot(rows, args.name)
     write_json(args.name, conditions(
-        experiment="E3 latency", voice_label="synthetic", broker=args.broker,
+        experiment="E3 latency", voice_label=args.label, broker=args.broker,
         vad_end_silence_ms=settings.voice.vad_end_silence_ms,
         simulator_latency_ms=settings.simulator.latency_ms, results=stats))  # fmt: skip
     for key, s in stats.items():
@@ -276,6 +277,12 @@ def main() -> None:
     ap.add_argument("--stt", nargs="+", choices=("vosk", "whisper"), default=["vosk", "whisper"])
     ap.add_argument("--voice-limit", type=int, default=30, help="voice clips per STT engine")
     ap.add_argument("--broker", default="mosquitto")
+    ap.add_argument(
+        "--manifest",
+        default=str(DATASETS / "voice_synth" / "wake_manifest.csv"),
+        help="wake manifest whose «Телекінез + команда» clips are the voice input",
+    )
+    ap.add_argument("--label", default="synthetic", help="synthetic | real")
     ap.add_argument("--name", default="e3_latency")
     run(main_async(ap.parse_args()))
 

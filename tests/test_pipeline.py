@@ -152,6 +152,33 @@ async def test_wake_word_then_command(running) -> None:
     assert 0.6 <= speech.duration_s <= 1.4
 
 
+class WarmStt(FakeStt):
+    """Like Whisper on a GPU: has warm_up(), which must run only while listening."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.warm_ups = 0
+
+    def warm_up(self) -> None:
+        self.warm_ups += 1
+
+    def transcribe(self, audio: np.ndarray, lang: str = "uk") -> Transcript:
+        self.warm_ups_before_transcribe = self.warm_ups
+        return super().transcribe(audio, lang)
+
+
+async def test_gpu_recognizer_is_kept_warm_while_listening(running) -> None:
+    stt = WarmStt()
+    audio = np.concatenate([WAKE_THEN_COMMAND, silence(1.5)])
+    pipeline, rec, _ = make(audio, FakeEngines(wake=FakeWake(), stt=stt), realtime=True)
+    running(pipeline)
+    await rec.wait_for(TranscriptReady)
+    assert stt.warm_ups_before_transcribe >= 1
+    after = stt.warm_ups
+    await asyncio.sleep(0.8)  # idle again: no more warm-ups
+    assert stt.warm_ups == after
+
+
 async def test_command_in_the_same_breath_skips_recording(running) -> None:
     stt = FakeStt()
     pipeline, rec, output = make(

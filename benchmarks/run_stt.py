@@ -221,7 +221,9 @@ def main() -> None:
         conditions(
             experiment="E1 STT",
             label=args.label,
-            manifest=manifest.relative_to(DATASETS).as_posix(),
+            manifest=manifest.relative_to(DATASETS).as_posix()
+            if manifest.is_relative_to(DATASETS)
+            else str(manifest),
             clips=len(clips),
             speakers=sorted({c["speaker"] for c in clips}),
             voice_settings=load_settings().voice.model_dump(),

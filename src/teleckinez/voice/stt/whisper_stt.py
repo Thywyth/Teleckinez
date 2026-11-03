@@ -24,6 +24,7 @@ LOW_LOGPROB = -1.0
 # With an initial_prompt, silence or faint noise comes back as a piece of the prompt
 # ("Датчик клімату у спальні."), so near-silent audio is not decoded at all.
 SILENCE_RMS_DBFS = -50.0
+WARM_UP_EVERY_S = 0.5
 
 
 def build_prompt(registry: DeviceRegistry, lang: str) -> str:
@@ -96,6 +97,21 @@ class WhisperRecognizer:
         text = " ".join(s.text.strip() for s in kept).strip()
         logprob = float(np.mean([s.avg_logprob for s in kept])) if kept else -math.inf
         return text, math.exp(logprob) if kept else 0.0, info.language
+
+    def warm_up(self) -> None:
+        """Keep a laptop GPU at working clocks while the user is speaking.
+
+        After 1-3 s without work the GPU lowers its clocks, and the next phrase
+        took ~400 ms instead of ~150 ms (benchmarks/diag_whisper_idle.py). The
+        pipeline calls this every WARM_UP_EVERY_S while listening. Skipped on CPU
+        (a call costs as much as a real phrase there) and while a phrase is decoded.
+        """
+        if not self.device.startswith("cuda") or not self._lock.acquire(blocking=False):
+            return
+        try:
+            self._run(np.zeros(SAMPLE_RATE // 2, np.float32), "en")
+        finally:
+            self._lock.release()
 
     def transcribe(self, audio: np.ndarray, lang: str = "uk") -> Transcript:
         started = time.perf_counter()

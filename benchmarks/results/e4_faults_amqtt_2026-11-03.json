@@ -1,0 +1,256 @@
+{
+  "date": "2026-11-03T02:42:58",
+  "os": "Windows 11 (10.0.26200)",
+  "cpu": "AMD Ryzen 7 6800H with Radeon Graphics",
+  "cpu_count": 16,
+  "ram_gb": 15.2,
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU, 933 MiB, 6144 MiB, 617.14",
+  "python": "3.13.2",
+  "packages": {
+    "aiomqtt": "2.5.1",
+    "amqtt": "0.12.1",
+    "rapidfuzz": "3.14.6",
+    "ollama": "0.6.3",
+    "vosk": "0.3.45",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.8.3",
+    "piper-tts": "1.8.0",
+    "openwakeword": "0.6.0",
+    "onnxruntime": "1.31.0",
+    "webrtcvad-wheels": "2.0.14.post1",
+    "fastapi": "0.155.0"
+  },
+  "experiment": "E4 faults",
+  "repeats": 20,
+  "broker": "amqtt",
+  "dispatcher": {
+    "ack_timeout_s": 2.0,
+    "max_attempts": 3,
+    "retry_backoff_s": [
+      0.5,
+      1.0
+    ],
+    "cmd_ttl_s": 5.0,
+    "state_timeout_s": {
+      "default": 3.0,
+      "light": 2.0,
+      "garage_gate": 12.0
+    },
+    "state_margin_s": 2.0,
+    "progress_messages": true,
+    "progress_min_s": 3.0
+  },
+  "health": {
+    "heartbeat_s": 10.0,
+    "stale_factor": 3.0,
+    "check_interval_s": 1.0,
+    "fresh_s": 30.0
+  },
+  "simulator_latency_ms": [
+    20,
+    80
+  ],
+  "results": {
+    "baseline": {
+      "title": "Без збою",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "completed": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 59.720000000000006,
+        "p50": 63.349999999999994,
+        "p95": 82.01,
+        "max": 95.5
+      },
+      "attempts_mean": 1.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": 0
+    },
+    "offline": {
+      "title": "Пристрій офлайн (LWT)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "device_offline": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 2.645,
+        "p50": 2.6500000000000004,
+        "p95": 2.9250000000000003,
+        "max": 3.4
+      },
+      "attempts_mean": 0.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    },
+    "freeze": {
+      "title": "Пристрій «завис» (мовчить)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "timeout_ack": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 7552.685,
+        "p50": 7552.1,
+        "p95": 7563.425,
+        "max": 7565.8
+      },
+      "attempts_mean": 3.0,
+      "retried": 20,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    },
+    "drop_50": {
+      "title": "Втрата 50 % команд",
+      "n": 20,
+      "correct": 18,
+      "correct_pct": 90.0,
+      "statuses": {
+        "timeout_ack": 2,
+        "completed": 18
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 2144.025,
+        "p50": 87.05000000000001,
+        "p95": 7551.73,
+        "max": 7558.0
+      },
+      "attempts_mean": 1.7,
+      "retried": 9,
+      "recovered_by_retry": 7,
+      "false_alarms": null
+    },
+    "stuck_light": {
+      "title": "Світло не виконує (stuck)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "timeout_state": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 2007.83,
+        "p50": 2008.0,
+        "p95": 2012.785,
+        "max": 2014.4
+      },
+      "attempts_mean": 1.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    },
+    "stuck_curtains": {
+      "title": "Штори не рухаються (stuck)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "timeout_state": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 6007.8150000000005,
+        "p50": 6006.9,
+        "p95": 6013.44,
+        "max": 6014.2
+      },
+      "attempts_mean": 1.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    },
+    "slow_1000": {
+      "title": "Затримка 1 с (< ack_timeout)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "completed": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 1060.47,
+        "p50": 1062.05,
+        "p95": 1080.695,
+        "max": 1093.9
+      },
+      "attempts_mean": 1.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": 0
+    },
+    "slow_3000": {
+      "title": "Затримка 3 с (> ack_timeout)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "completed": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 3070.0299999999997,
+        "p50": 3070.5,
+        "p95": 3088.345,
+        "max": 3091.1
+      },
+      "attempts_mean": 2.0,
+      "retried": 20,
+      "recovered_by_retry": 20,
+      "false_alarms": null
+    },
+    "reject": {
+      "title": "Пристрій відхиляє команду",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "rejected": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 57.98,
+        "p50": 49.3,
+        "p95": 95.145,
+        "max": 96.0
+      },
+      "attempts_mean": 1.0,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    },
+    "drift": {
+      "title": "Зміна стану без команди (drift)",
+      "n": 20,
+      "correct": 20,
+      "correct_pct": 100.0,
+      "statuses": {
+        "drift": 20
+      },
+      "detect_ms": {
+        "n": 20,
+        "mean": 3.1100000000000003,
+        "p50": 3.1,
+        "p95": 3.705,
+        "max": 3.8
+      },
+      "attempts_mean": null,
+      "retried": 0,
+      "recovered_by_retry": 0,
+      "false_alarms": null
+    }
+  }
+}

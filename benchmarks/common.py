@@ -9,6 +9,7 @@ import csv
 import datetime as dt
 import importlib.metadata
 import json
+import os
 import platform
 import statistics
 import subprocess
@@ -20,7 +21,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 BENCH = ROOT / "benchmarks"
 DATASETS = BENCH / "datasets"
-RESULTS = BENCH / "results"
+# TKZ_RESULTS_DIR: write somewhere else (finalize_live.py --selftest uses a temp folder)
+RESULTS = Path(os.environ.get("TKZ_RESULTS_DIR") or BENCH / "results")
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT))
 

@@ -1,4 +1,6 @@
-# АНОТАЦІЯ
+::: {custom-style="UnnumberedHeading"}
+АНОТАЦІЯ
+:::
 
 Ціздин Р. Р. Розробка архітектури голосового асистента для
 диспетчеризації та контролю станів виконавчих пристроїв IoT. Курсова
@@ -15,7 +17,7 @@
 розпізнаванням мовлення Vosk і faster-whisper, розбором команд правилами
 та локальною мовною моделлю, синтезом Piper, веб-панеллю і симулятором
 31 пристрою з ін'єкцією збоїв. Експерименти показали точність розбору
-команд 90,6 %, затримку від кінця фрази до відповіді 0,18 с (без
+команд 90,6 %, затримку від кінця фрази до відповіді 0,17 с (без
 очікування паузи), правильну реакцію на 198 із 200 змодельованих збоїв і
 відсутність деградації при 100 пристроях.
 
@@ -23,7 +25,9 @@
 MQTT, контроль виконання команд, цифровий двійник, розпізнавання
 мовлення, скінченний автомат.
 
-# ABSTRACT
+::: {custom-style="UnnumberedHeading"}
+ABSTRACT
+:::
 
 Tsizdyn R. R. Architecture of a voice assistant for dispatching and
 monitoring the states of IoT actuators. Course work. Ivan Franko National
@@ -40,7 +44,7 @@ device offline and superseded by a newer command. The prototype includes
 speech recognition with Vosk and faster-whisper, rule-based and local LLM
 command parsing, Piper speech synthesis, a web panel and a simulator of 31
 devices with fault injection. Experiments showed 90.6 % command parsing
-accuracy, 0.18 s from the end of speech to the start of the answer
+accuracy, 0.17 s from the end of speech to the start of the answer
 (excluding the end-of-speech pause), a correct reaction to 198 of 200
 simulated faults and no degradation with 100 devices.
 

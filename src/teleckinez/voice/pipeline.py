@@ -263,6 +263,24 @@ class VoicePipeline:
                 )
                 return
         self._set_state(PipelineState.LISTENING)
+        stt = await asyncio.to_thread(self.engines.stt, v)
+        warm = asyncio.create_task(_keep_warm(stt)) if hasattr(stt, "warm_up") else None
+        try:
+            await self._record_and_recognize(frames, session_id, trigger, first, stt, warm)
+        finally:
+            if warm:
+                warm.cancel()
+
+    async def _record_and_recognize(
+        self,
+        frames: AsyncIterator[bytes],
+        session_id: str,
+        trigger: str,
+        first: bytes | None,
+        stt: SpeechRecognizer,
+        warm: asyncio.Task | None,
+    ) -> None:
+        v = self.voice
         if trigger == "wake" and v.beeps:
             await self._beep(*LISTEN_TONE)  # muted: the beep is not recorded
         self.bus.publish(ListeningStarted(session_id=session_id, trigger=trigger))
@@ -287,7 +305,8 @@ class VoicePipeline:
         self.bus.publish(SpeechEnded(session_id=session_id, duration_s=utterance.duration_s))
 
         self._set_state(PipelineState.RECOGNIZING)
-        stt = await asyncio.to_thread(self.engines.stt, v)
+        if warm:
+            warm.cancel()
         transcript = await transcribe_async(stt, utterance.audio, v.stt_lang)
         log.info(
             "heard %r (%s, conf %.2f, %.2f s for %.1f s of audio)",
@@ -348,6 +367,15 @@ class VoicePipeline:
         self._set_state(PipelineState.SPEAKING)
         await self.speaker.play(speech.samples, speech.rate)
         self._wake_dirty = True
+
+
+async def _keep_warm(stt: Any) -> None:
+    """Call stt.warm_up() in a loop until cancelled (see WhisperRecognizer.warm_up)."""
+    from teleckinez.voice.stt.whisper_stt import WARM_UP_EVERY_S
+
+    while True:
+        await asyncio.to_thread(stt.warm_up)
+        await asyncio.sleep(WARM_UP_EVERY_S)
 
 
 async def _relay(frames: AsyncIterator[bytes]) -> AsyncIterator[bytes]:

@@ -63,3 +63,30 @@ def test_session_saves_redo_skip_and_resume(tmp_path) -> None:
     assert done == {phrases[0].phrase_id, phrases[1].phrase_id}
     run_session(tmp_path, [""], phrases[:1])
     assert len(rd.read_manifest(manifest)) == 2
+
+
+def test_wake_set_and_session(tmp_path) -> None:
+    items = rd.load_wake_phrases()
+    assert len(items) == rd.WAKE_ALONE + rd.WAKE_COMMANDS + rd.JARVIS
+    engines = {engine for _, engine, _ in items}
+    assert engines == {"vosk_kws", "openwakeword"}
+    with_command = [item for item in items if item[2]]
+    assert len(with_command) == rd.WAKE_COMMANDS
+    assert all(p.text.startswith("Телекінез … ") for p, _, _ in with_command)
+
+    manifest = tmp_path / "voice" / "wake_manifest.csv"
+    chosen = [items[0], with_command[0]]
+    replies = iter(["", ""])
+    saved = rd.session(
+        [p for p, _, _ in chosen], "roman", manifest, lambda: PCM, lambda pcm: None,
+        ask=lambda _: next(replies), out=lambda _: None,
+        wake={p.phrase_id: item for item in chosen for p in [item[0]]},
+    )  # fmt: skip
+    assert saved == 2
+    rows = rd.read_manifest(manifest)
+    assert list(rows[0]) == rd.WAKE_FIELDS
+    alone, command = rows
+    assert (alone["engine"], alone["wake"], alone["command"]) == ("vosk_kws", "1", "")
+    assert Path(alone["file"]).parts[-3:-1] == ("wake", "roman")
+    assert command["command"] == with_command[0][2]
+    assert command["intent"]
