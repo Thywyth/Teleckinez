@@ -142,6 +142,25 @@ def test_progress_messages(rc) -> None:
     assert rc.progress(curtains, "en") == "Opening the living room curtains…"
 
 
+def test_progress_follows_the_direction_of_travel(rc) -> None:
+    """«Відкрий штори на 30 %» from fully open curtains moves them closed."""
+    partly = rec("curtains.bedroom", "open", {"position": 30}, S.ACCEPTED)
+    assert rc.progress(partly, "uk") == "Відкриваю штори у спальні…"  # position unknown yet
+    rc.twins_.on_message(StateReport("curtains.bedroom", {"position": 100}, None, 1))
+    assert rc.progress(partly, "uk") == "Закриваю штори у спальні…"
+    rc.twins_.on_message(StateReport("curtains.bedroom", {"position": 0}, None, 2))
+    assert rc.progress(partly, "uk") == "Відкриваю штори у спальні…"
+    assert rc.progress(partly, "en") == "Opening the bedroom curtains…"
+
+
+def test_already_with_an_attribute_reads_naturally(rc) -> None:
+    brightest = rec(
+        "light.kitchen_main", "set", {"on": True, "brightness": 100}, S.COMPLETED, already=True
+    )
+    assert rc.command_result([brightest], "uk") == "Світло на кухні: вже яскравість 100 %."
+    assert rc.command_result([brightest], "en") == "Kitchen light: already brightness 100 %."
+
+
 def test_failures(rc, registry) -> None:
     two = {"rooms": ["living_room", "bedroom"]}
     assert rc.failure("ambiguous_target", two, "uk", name="штори") == (

@@ -52,6 +52,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "completed": "{title} {what}",
         "completed_attr": "{title}: {what}",
         "already": "{title} вже {what}",
+        "already_attr": "{title}: вже {what}",
         "timeout_ack": "{title} не відповіда{v}",
         "timeout_state": "{title}: команду прийнято, але стан не змінився",
         "offline": "{title} зараз не в мережі",
@@ -97,6 +98,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "completed": "{title} {be} {what}",
         "completed_attr": "{title}: {what}",
         "already": "{title} {be} already {what}",
+        "already_attr": "{title}: already {what}",
         "timeout_ack": "{title} {be} not responding",
         "timeout_state": "{title}: the command was accepted, but the state did not change",
         "offline": "{title} {be} offline",
@@ -330,8 +332,14 @@ class ResponseComposer:
         """Interim message for long actions right after ACCEPTED: "Відкриваю штори…"."""
         kind = record.action
         pos = record.desired.get("position")
-        if kind not in ("open", "close", "start") and isinstance(pos, int):
-            kind = "open" if pos >= 50 else "close"
+        if isinstance(pos, int | float):
+            # the direction of travel, not the target: 100 % -> 30 % is closing
+            # even if the user said "відкрий на 30 %"; the twin still holds the old position
+            now = self.twins.get(record.device_id).reported.get("position")
+            if isinstance(now, int | float) and now != pos:
+                kind = "open" if pos > now else "close"
+            elif kind not in ("open", "close", "start"):
+                kind = "open" if pos >= 50 else "close"
         verbs = PROGRESS_VERBS[lang]
         title = lower_first(self.registry.get(record.device_id).title(lang))
         return self.t(lang, "progress", verb=verbs.get(kind, verbs["*"]), title=title)
@@ -346,9 +354,10 @@ class ResponseComposer:
         }
         if r.status is S.COMPLETED:
             what = self._describe_desired(r.desired, lang)
+            state = is_state_phrase(what, lang)
             if r.already:
-                return self.t(lang, "already", what=what, **kw)
-            key = "completed" if is_state_phrase(what, lang) else "completed_attr"
+                return self.t(lang, "already" if state else "already_attr", what=what, **kw)
+            key = "completed" if state else "completed_attr"
             return self.t(lang, key, what=what, **kw)
         if r.error == "broker_unavailable":
             return self.t(lang, "broker")

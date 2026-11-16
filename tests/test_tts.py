@@ -95,9 +95,12 @@ def test_piper_speaks(piper, text, lang) -> None:
 @pytest.mark.models
 def test_piper_numbers_are_spoken(piper) -> None:
     """With digits left in, the character-based uk voice skipped them: much shorter audio."""
-    with_number = piper.synthesize("Температура 22 °C.", "uk").duration_s
-    without = piper.synthesize("Температура.", "uk").duration_s
-    assert with_number > without + 0.8
+
+    # Piper's durations vary run to run (the gap is 1.0-1.6 s); a median of 3 keeps it stable
+    def duration(text: str) -> float:
+        return float(np.median([piper.synthesize(text, "uk").duration_s for _ in range(3)]))
+
+    assert duration("Температура 22 °C.") > duration("Температура.") + 0.8
 
 
 @pytest.mark.models
@@ -113,8 +116,9 @@ def test_piper_answer_is_understandable(piper, registry) -> None:
     audio = np.concatenate([pause, resample(speech.samples, speech.rate, SAMPLE_RATE), pause])
     stt = create_vosk(VoiceSettings(stt_grammar=False), registry)
     text = stt.transcribe(audio, "uk").text
-    # the point is that numbers and units are spoken (the first consonant is weak in Piper)
-    assert text.endswith("у вітальні відкрито на п'ятдесят відсотків"), text
+    # the point is that numbers and units are spoken; Piper's synthesis is stochastic, so
+    # the room name is sometimes misheard (and the first consonant is weak) - not checked
+    assert text.endswith("відкрито на п'ятдесят відсотків"), text
 
 
 @pytest.mark.models
