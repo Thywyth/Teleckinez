@@ -810,8 +810,8 @@ function applyTheme(theme) {
   $("#theme-toggle").textContent = theme === "dark" ? "☀" : "☾";
   $("#theme-toggle").title = theme === "dark" ? "Світла тема" : "Темна тема";
 }
-const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-applyTheme(storage("tkz-theme") || (systemDark ? "dark" : "light"));
+// dark is the default look of the panel; light stays one click away
+applyTheme(storage("tkz-theme") || "dark");
 $("#theme-toggle").addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   applyTheme(next);
