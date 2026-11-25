@@ -408,8 +408,10 @@ function renderVoicePanel() {
   ptt.addEventListener("pointerleave", () => press(false));
 
   const standby = el("button", {
-    type: "button", class: "standby-toggle", id: "standby-toggle", disabled: pttDisabled,
-    title: "Кожна сказана фраза — команда, без слова «Телекінез». Голосом: «режим очікування» / «вимкни режим очікування»",
+    type: "button", class: "standby-btn", id: "standby-toggle", disabled: pttDisabled,
+    title: pttDisabled
+      ? "Голосовий конвеєр не запущено (python -m teleckinez без --text)"
+      : "Кожна сказана фраза — команда, без слова «Телекінез». Голосом: «режим очікування» / «вимкни режим очікування»",
     onclick: () => {
       const enabled = !state.status.standby;
       api("/api/voice/standby", { method: "POST", body: { enabled } })
@@ -437,7 +439,8 @@ function renderVoicePanel() {
     ? el("p", { class: "hint" }, "Голос вимкнено (режим --text або немає мікрофона) — працює текстовий ввід, той самий шлях, що й голос.")
     : null;
   panel.replaceChildren(
-    el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }), ptt, standby, hint, form),
+    el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }),
+      el("div", { class: "voice-buttons" }, ptt, standby), hint, form),
     el("div", { class: "panel-card" }, el("h2", {}, "Останні запити"), el("div", { id: "history", class: "history" })),
   );
   renderPipeline();
@@ -452,9 +455,10 @@ function renderStandby() {
   btn.classList.toggle("on", on);
   btn.setAttribute("aria-pressed", String(on));
   btn.replaceChildren(
-    el("span", { class: "standby-dot" }),
-    el("span", {}, on ? "Режим очікування увімкнено" : "Режим очікування"),
-    el("span", { class: "standby-state" }, on ? "вимкнути" : "увімкнути"),
+    el("span", { class: "ptt-icon" }, on ? "👂" : "💤"),
+    el("span", { class: "standby-text" },
+      el("span", {}, on ? "Чекаю команду…" : "Режим очікування"),
+      el("small", {}, on ? "натисніть, щоб вимкнути" : "команди без «Телекінез»")),
   );
 }
 
