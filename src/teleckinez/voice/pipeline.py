@@ -4,6 +4,11 @@ One task reads microphone frames and walks through the states
 
     IDLE -> LISTENING -> RECOGNIZING -> IDLE
 
+In standby mode (ADR-014) the wake word is not needed: while IDLE the frames
+go to a VAD recorder instead of the wake word detector, and the turn starts
+when speech starts. Waiting for speech is not LISTENING on purpose, so
+answers and notifications are still spoken between commands.
+
 and publishes the same events the web panel and the database already know
 (WakeDetected, ListeningStarted, SpeechEnded, TranscriptReady). The text
 then goes through exactly the same path as typed text. A second task speaks
@@ -19,6 +24,7 @@ import asyncio
 import contextlib
 import logging
 import threading
+import time
 from collections.abc import AsyncIterator, Callable
 from enum import StrEnum
 from typing import Any
@@ -27,25 +33,29 @@ from teleckinez.assistant import new_session_id
 from teleckinez.core.config import VoiceSettings
 from teleckinez.core.events import (
     EventBus,
+    IntentParsed,
     ListeningStarted,
     ListeningStopped,
     SpeakFinished,
     SpeakRequested,
     SpeechEnded,
+    StandbyChanged,
     TranscriptReady,
     WakeDetected,
 )
 from teleckinez.devices.registry import DeviceRegistry
+from teleckinez.nlu.standby import strip_wake_word
 from teleckinez.voice.audio_io import AudioOutput, AudioSource, HalfDuplex, tone
 from teleckinez.voice.stt.base import SpeechRecognizer, transcribe_async
 from teleckinez.voice.triggers import PushToTalk, WakeHit, WakeWordDetector, record_while_held
 from teleckinez.voice.tts.base import SpeechSynthesizer
-from teleckinez.voice.vad import UtteranceRecorder, Vad, WebrtcVad
+from teleckinez.voice.vad import RecorderState, UtteranceRecorder, Vad, WebrtcVad
 
 log = logging.getLogger(__name__)
 
 LISTEN_TONE = (880.0, 0.12)  # "слухаю" after the wake word
 ERROR_TONE = (330.0, 0.25)  # nothing heard / nothing recognized
+NEVER_S = 1e9  # standby waits for speech without a no-speech timeout
 
 
 class PipelineState(StrEnum):
@@ -112,6 +122,7 @@ class VoicePipeline:
         engines: EngineCache | Any,
         *,
         vad: Vad | None = None,
+        clock: Callable[[], float] = time.monotonic,
     ) -> None:
         self.bus = bus
         self.voice = voice  # the live settings object: the web panel changes it in place
@@ -127,7 +138,12 @@ class VoicePipeline:
         self._wake_dirty = False  # the wake detector saw half a phrase before a mute
         self._tasks: list[asyncio.Task] = []
         self._hotkey = None
+        self.clock = clock
+        self.standby = False  # every phrase is a command, no wake word (ADR-014)
+        self._standby_rec: UtteranceRecorder | None = None
+        self._last_command = clock()
         bus.subscribe(self._on_speak, SpeakRequested)
+        bus.subscribe(self._on_intent, IntentParsed)
 
     # ------------------------------------------------------------------ public
 
@@ -170,6 +186,20 @@ class VoicePipeline:
         """Web panel button / hotkey: hold to talk."""
         self.ptt.set(pressed)
 
+    def set_standby(
+        self, enabled: bool, reason: str = "user", session_id: str | None = None
+    ) -> bool:
+        """Switch standby mode; False if it already was in that state (no event then)."""
+        if enabled == self.standby:
+            return False
+        self.standby = enabled
+        self._standby_rec = None
+        self._wake_dirty = True  # neither detector may continue on old audio
+        self._last_command = self.clock()
+        log.info("standby mode %s (%s)", "on" if enabled else "off", reason)
+        self.bus.publish(StandbyChanged(session_id=session_id, enabled=enabled, reason=reason))
+        return True
+
     async def wait(self) -> None:
         """Until a pipeline task ends (an unexpected error); re-raises it."""
         done, _ = await asyncio.wait(self._tasks, return_when=asyncio.FIRST_COMPLETED)
@@ -211,6 +241,9 @@ class VoicePipeline:
                     log.error("wake word engine unavailable (%s); push-to-talk only", exc)
                     wake = None
                 self._wake_dirty = True
+            if self.standby:
+                await self._standby_frame(frames, frame)
+                continue
             if wake is None:
                 continue
             if self._wake_dirty:  # audio before a mute (our own speech) is not a phrase
@@ -220,6 +253,31 @@ class VoicePipeline:
                 await self._turn(frames, trigger="wake", hit=hit)
                 self._wake_dirty = True
 
+    async def _standby_frame(self, frames: AsyncIterator[bytes], frame: bytes) -> None:
+        """Standby mode: wait for speech with the VAD (still IDLE), then run a turn."""
+        timeout_min = self.voice.standby_timeout_min
+        if timeout_min and self.clock() - self._last_command > timeout_min * 60:
+            self.set_standby(False, "timeout")
+            return
+        if self._standby_rec is None or self._wake_dirty:  # audio before a mute is not a phrase
+            v = self.voice
+            self._standby_rec = UtteranceRecorder(
+                self.vad,
+                start_frames=v.vad_start_frames,
+                end_silence_ms=v.vad_end_silence_ms,
+                max_utterance_s=v.max_utterance_s,
+                no_speech_timeout_s=NEVER_S,
+                pre_roll_ms=v.vad_pre_roll_ms,
+            )
+            self._wake_dirty = False
+        if self._standby_rec.feed(frame) is RecorderState.SPEECH:
+            recorder, self._standby_rec = self._standby_rec, None
+            await self._turn(frames, trigger="standby", recorder=recorder)
+            self._wake_dirty = True
+
+    def _on_intent(self, _event: IntentParsed) -> None:
+        self._last_command = self.clock()  # a real command keeps standby mode alive
+
     async def _turn(
         self,
         frames: AsyncIterator[bytes],
@@ -227,10 +285,11 @@ class VoicePipeline:
         trigger: str,
         hit: WakeHit | None = None,
         first: bytes | None = None,
+        recorder: UtteranceRecorder | None = None,
     ) -> None:
         session_id = new_session_id()
         try:
-            await self._listen(frames, session_id, trigger, hit, first)
+            await self._listen(frames, session_id, trigger, hit, first, recorder)
         except Exception:
             log.exception("voice turn %s failed", session_id)
             self.bus.publish(ListeningStopped(session_id=session_id, reason="error"))
@@ -244,6 +303,7 @@ class VoicePipeline:
         trigger: str,
         hit: WakeHit | None,
         first: bytes | None,
+        recorder: UtteranceRecorder | None = None,
     ) -> None:
         v = self.voice
         if hit is not None:
@@ -266,7 +326,9 @@ class VoicePipeline:
         stt = await asyncio.to_thread(self.engines.stt, v)
         warm = asyncio.create_task(_keep_warm(stt)) if hasattr(stt, "warm_up") else None
         try:
-            await self._record_and_recognize(frames, session_id, trigger, first, stt, warm)
+            await self._record_and_recognize(
+                frames, session_id, trigger, first, stt, warm, recorder
+            )
         finally:
             if warm:
                 warm.cancel()
@@ -279,13 +341,17 @@ class VoicePipeline:
         first: bytes | None,
         stt: SpeechRecognizer,
         warm: asyncio.Task | None,
+        recorder: UtteranceRecorder | None = None,
     ) -> None:
         v = self.voice
+        quiet = trigger == "standby"  # no "did not hear" tone for every cough in standby
         if trigger == "wake" and v.beeps:
             await self._beep(*LISTEN_TONE)  # muted: the beep is not recorded
         self.bus.publish(ListeningStarted(session_id=session_id, trigger=trigger))
 
-        if trigger == "ptt":
+        if recorder is not None:  # standby: speech has already started
+            utterance = await recorder.record(_relay(frames), resume=True)
+        elif trigger == "ptt":
             utterance = await record_while_held(
                 _prepend(first, frames), self.ptt, self.vad, max_utterance_s=v.max_utterance_s
             )
@@ -300,7 +366,7 @@ class VoicePipeline:
             )
             utterance = await recorder.record(_relay(frames))
         if utterance is None:
-            await self._give_up(session_id, "no_speech")
+            await self._give_up(session_id, "no_speech", beep=not quiet)
             return
         self.bus.publish(SpeechEnded(session_id=session_id, duration_s=utterance.duration_s))
 
@@ -316,13 +382,14 @@ class VoicePipeline:
             transcript.elapsed_s,
             transcript.audio_s,
         )
-        if not transcript.text:
-            await self._give_up(session_id, "not_recognized")
+        text = strip_wake_word(transcript.text) if trigger == "standby" else transcript.text
+        if not text:
+            await self._give_up(session_id, "not_recognized", beep=not quiet)
             return
         self.bus.publish(
             TranscriptReady(
                 session_id=session_id,
-                text=transcript.text,
+                text=text,
                 lang=transcript.lang,
                 confidence=transcript.confidence,
                 engine="vosk" if transcript.engine.startswith("vosk") else transcript.engine,
@@ -330,10 +397,10 @@ class VoicePipeline:
             )
         )
 
-    async def _give_up(self, session_id: str, reason: str) -> None:
+    async def _give_up(self, session_id: str, reason: str, *, beep: bool = True) -> None:
         self._set_state(PipelineState.IDLE)
         self.bus.publish(ListeningStopped(session_id=session_id, reason=reason))
-        if self.voice.beeps:
+        if beep and self.voice.beeps:
             await self._beep(*ERROR_TONE)
 
     async def _beep(self, freq: float, duration_s: float) -> None:

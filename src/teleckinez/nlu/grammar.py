@@ -12,7 +12,7 @@ from pathlib import Path
 
 from teleckinez.core.text import normalize_name
 from teleckinez.devices.registry import DeviceRegistry
-from teleckinez.nlu import lexicon, numbers
+from teleckinez.nlu import lexicon, numbers, standby
 from teleckinez.nlu.normalizer import DEGREE_WORDS, PERCENT_WORDS
 
 WAKE_WORDS = {"uk": ["телекінез"], "en": []}
@@ -62,6 +62,7 @@ def command_words(registry: DeviceRegistry, lang: str) -> list[str]:
     sources += lexicon.STATE_ADJECTIVES + sorted(lexicon.STOPWORDS)
     sources += [*numbers.UNITS, *numbers.TENS, *numbers.SPECIAL, *numbers.ORDINALS, *numbers.HALF]
     sources += [*PERCENT_WORDS, *DEGREE_WORDS]
+    sources += [*standby.ON, *standby.OFF]  # "режим очікування" (ADR-014)
     words = [w for w in _words(sources) if _lang_of(w) == lang and w.replace("'", "").isalpha()]
     return sorted(set(words))
 

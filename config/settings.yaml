@@ -77,6 +77,7 @@ voice:
   vad_pre_roll_ms: 300      # audio kept from before the detected start
   max_utterance_s: 8        # hard limit of one phrase
   no_speech_timeout_s: 5    # nobody spoke after the trigger -> back to idle
+  standby_timeout_min: 15   # standby mode (no wake word) turns off after N min without commands; 0 = never
 
 web:
   host: 127.0.0.1

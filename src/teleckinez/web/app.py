@@ -44,6 +44,10 @@ class PttBody(BaseModel):
     pressed: bool
 
 
+class StandbyBody(BaseModel):
+    enabled: bool
+
+
 SIM_FAULTS = ("offline", "freeze", "drop_rate", "stuck", "slow", "reject", "drift", "clear")
 
 
@@ -73,6 +77,7 @@ def create_app(core: "App") -> FastAPI:
             "devices": len(twins),
             "online": sum(t.availability is Availability.ONLINE for t in twins),
             "voice_available": core.voice is not None,
+            "standby": core.voice is not None and core.voice.standby,
             "language": lang(),
         }
 
@@ -115,6 +120,14 @@ def create_app(core: "App") -> FastAPI:
             raise HTTPException(503, "голосовий конвеєр не запущено")
         await core.voice.push_to_talk(body.pressed)
         return {"pressed": body.pressed}
+
+    @api.post("/api/voice/standby")
+    async def voice_standby(body: StandbyBody) -> dict[str, Any]:
+        """Standby mode: every phrase is a command, no wake word (ADR-014)."""
+        if core.voice is None:
+            raise HTTPException(503, "голосовий конвеєр не запущено")
+        core.voice.set_standby(body.enabled, "user")
+        return {"standby": core.voice.standby}
 
     # ---------------------------------------------------------------- journal
 
@@ -189,6 +202,14 @@ def create_app(core: "App") -> FastAPI:
 
     if STATIC.is_dir():
         api.mount("/static", StaticFiles(directory=STATIC), name="static")
+
+        @api.middleware("http")
+        async def revalidate_static(request, call_next):
+            # the panel has no build step: make the browser check for a newer app.js
+            response = await call_next(request)
+            if request.url.path == "/" or request.url.path.startswith("/static/"):
+                response.headers["Cache-Control"] = "no-cache"
+            return response
 
         @api.get("/", include_in_schema=False)
         async def index() -> FileResponse:

@@ -55,6 +55,14 @@ class SpeechEnded(Event):
 
 
 @dataclass(frozen=True, kw_only=True)
+class StandbyChanged(Event):
+    """Standby mode (every phrase is a command, no wake word) switched on/off (ADR-014)."""
+
+    enabled: bool
+    reason: str = "user"  # user (panel/API) | voice | timeout
+
+
+@dataclass(frozen=True, kw_only=True)
 class ListeningStopped(Event):
     """The turn ended without a transcript; the pipeline is idle again."""
 

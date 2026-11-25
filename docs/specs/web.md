@@ -31,6 +31,7 @@ FastAPI на `http://localhost:8000`, фронтенд — статичні `ind
 | POST | `/api/devices/{id}/command` | ручна команда `{action, params}` |
 | POST | `/api/text-command` | текстова команда `{text}` → той самий шлях, що й голос |
 | POST | `/api/voice/ptt` | `{pressed: true/false}` — push-to-talk з браузера |
+| POST | `/api/voice/standby` | `{enabled: true/false}` — режим очікування без ключового слова (voice.md §2); 503 без голосового конвеєра; стан — у `/api/status.standby` і подіях `StandbyChanged` |
 | GET | `/api/commands?limit=` | журнал команд |
 | GET/PUT | `/api/settings` | поточні налаштування / зміна |
 | POST | `/api/sim/faults` | `{device_id, fault, params}` |

@@ -218,6 +218,18 @@ h2 { font-size: 15px; margin: 0; }
 .ptt.held { transform: scale(.98); filter: brightness(1.1); box-shadow: 0 0 0 4px var(--accent-soft); }
 .ptt:disabled { background: var(--surface-2); color: var(--muted); cursor: not-allowed; }
 .ptt-icon { font-size: 20px; }
+.standby-toggle {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+  font-weight: 600; font-size: 14px; cursor: pointer; text-align: left;
+}
+.standby-toggle:disabled { color: var(--muted); cursor: not-allowed; }
+.standby-toggle .standby-state { margin-left: auto; font-size: 12px; font-weight: 500; color: var(--muted); }
+.standby-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex: none; }
+.standby-toggle.on { border-color: var(--ok); background: var(--ok-soft); }
+.standby-toggle.on .standby-dot { background: var(--ok); animation: blink 1s infinite alternate; }
+.pipeline.standby .pulse { background: var(--ok-soft); }
+.pipeline.standby .pulse::after { background: var(--ok); animation: blink 1.4s infinite alternate; }
 .hint { font-size: 12px; color: var(--muted); margin: -4px 0 0; }
 .text-form { display: flex; gap: 6px; }
 .text-form input {

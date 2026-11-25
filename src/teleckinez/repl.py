@@ -172,6 +172,7 @@ async def start_voice(app: App, audio_file: str | None = None) -> bool:
         if app.voice is not None:
             await app.voice.stop()
         app.voice = None
+        app.assistant.standby_control = None
         print(f"Голос недоступний: {type(exc).__name__}: {exc}")
         print(
             "  Перевірте: pip install -e .[voice], python scripts/download_models.py,\n"

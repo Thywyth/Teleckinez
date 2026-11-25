@@ -135,9 +135,16 @@ class UtteranceRecorder:
         self,
         frames: AsyncIterator[bytes],
         on_speech_start: Callable[[], None] | None = None,
+        *,
+        resume: bool = False,
     ) -> Utterance | None:
-        """Consume frames until the utterance ends; None if nobody spoke."""
-        self.reset()
+        """Consume frames until the utterance ends; None if nobody spoke.
+
+        `resume=True` continues a recording already fed frame by frame (standby mode
+        detects the start of speech itself, then hands the rest over to this loop).
+        """
+        if not resume:
+            self.reset()
         async for frame in frames:
             before = self.state
             state = self.feed(frame)

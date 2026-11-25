@@ -117,6 +117,7 @@ class VoiceSettings(_Model):
     vad_pre_roll_ms: int = Field(300, ge=0)
     max_utterance_s: float = Field(8.0, gt=0)
     no_speech_timeout_s: float = Field(5.0, gt=0)
+    standby_timeout_min: float = Field(15.0, ge=0)  # standby off after N min w/o command; 0 = never
 
 
 class WebSettings(_Model):

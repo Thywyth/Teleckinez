@@ -373,6 +373,8 @@ const PIPELINE = {
   processing: ["Обробляю…", "розбір наміру і виконання команди"],
   speaking: ["Відповідаю…", ""],
 };
+// idle in standby mode (ADR-014): every phrase is a command
+const STANDBY_IDLE = ["Режим очікування", "говоріть команду — без «Телекінез»"];
 const REASONS_UK = {
   not_understood: "не зрозумів", low_confidence: "низька впевненість", unknown_device: "невідомий пристрій",
   ambiguous_target: "неоднозначно: назвіть кімнату", ambiguous_device: "неоднозначно: кілька пристроїв",
@@ -405,6 +407,16 @@ function renderVoicePanel() {
   ptt.addEventListener("pointerup", () => press(false));
   ptt.addEventListener("pointerleave", () => press(false));
 
+  const standby = el("button", {
+    type: "button", class: "standby-toggle", id: "standby-toggle", disabled: pttDisabled,
+    title: "Кожна сказана фраза — команда, без слова «Телекінез». Голосом: «режим очікування» / «вимкни режим очікування»",
+    onclick: () => {
+      const enabled = !state.status.standby;
+      api("/api/voice/standby", { method: "POST", body: { enabled } })
+        .catch((e) => toast(`Помилка: ${e.message}`, "bad"));
+    },
+  });
+
   const input = el("input", {
     type: "text", id: "text-input", autocomplete: "off",
     placeholder: "Напишіть команду, напр. «увімкни світло на кухні»",
@@ -425,19 +437,34 @@ function renderVoicePanel() {
     ? el("p", { class: "hint" }, "Голос вимкнено (режим --text або немає мікрофона) — працює текстовий ввід, той самий шлях, що й голос.")
     : null;
   panel.replaceChildren(
-    el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }), ptt, hint, form),
+    el("div", { class: "panel-card" }, el("div", { class: "pipeline", id: "pipeline" }), ptt, standby, hint, form),
     el("div", { class: "panel-card" }, el("h2", {}, "Останні запити"), el("div", { id: "history", class: "history" })),
   );
   renderPipeline();
+  renderStandby();
   renderHistory();
+}
+
+function renderStandby() {
+  const btn = $("#standby-toggle");
+  if (!btn) return;
+  const on = Boolean(state.status.standby);
+  btn.classList.toggle("on", on);
+  btn.setAttribute("aria-pressed", String(on));
+  btn.replaceChildren(
+    el("span", { class: "standby-dot" }),
+    el("span", {}, on ? "Режим очікування увімкнено" : "Режим очікування"),
+    el("span", { class: "standby-state" }, on ? "вимкнути" : "увімкнути"),
+  );
 }
 
 function renderPipeline() {
   const box = $("#pipeline");
   if (!box) return;
-  const [title, sub] = PIPELINE[voice.state];
+  const standbyIdle = voice.state === "idle" && state.status.standby;
+  const [title, sub] = standbyIdle ? STANDBY_IDLE : PIPELINE[voice.state];
   const steps = ["listening", "recognizing", "processing", "speaking"];
-  box.className = `pipeline state-${voice.state}`;
+  box.className = `pipeline state-${voice.state}${standbyIdle ? " standby" : ""}`;
   box.replaceChildren(
     el("div", { class: "pulse" }),
     el("div", {}, el("div", { class: "pipeline-title" }, title), el("div", { class: "pipeline-sub" }, sub)),
@@ -502,7 +529,17 @@ state.listeners.push(({ type, data }) => {
       setPipeline("processing");
       break;
     case "IntentParsed": { const h = exchange(data.session_id); if (h) h.intent = data.intent; break; }
-    case "IntentFailed": { const h = exchange(data.session_id); if (h) h.failed = data.reason; break; }
+    case "IntentFailed": {
+      const h = exchange(data.session_id);
+      if (h) h.failed = data.reason;
+      if (state.status.standby) setPipeline("idle"); // not understood in standby: no answer follows
+      break;
+    }
+    case "StandbyChanged":
+      state.status.standby = data.enabled;
+      renderStandby();
+      renderPipeline();
+      break;
     case "SpeakRequested": {
       if (data.kind === "notification") {
         voice.history.unshift({ notification: data.text, progress: [] });

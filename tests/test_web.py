@@ -207,8 +207,10 @@ def test_event_serialization() -> None:
 async def test_static_frontend_is_served(client) -> None:
     index = await client.get("/")
     assert index.status_code == 200 and "Teleckinez" in index.text
+    assert index.headers["cache-control"] == "no-cache"  # a new app.js is picked up at once
     for asset in ("/static/app.js", "/static/style.css"):
-        assert (await client.get(asset)).status_code == 200
+        r = await client.get(asset)
+        assert r.status_code == 200 and r.headers["cache-control"] == "no-cache"
     assert "cdn" not in index.text.lower()  # works offline (web.md)
 
 

@@ -108,6 +108,7 @@ class App:
             self.tracker,
             self.composer,
             settings.dispatcher,
+            language=lambda: self.settings.language,
         )
         self.notifier = Notifier(
             self.registry,
@@ -218,6 +219,7 @@ class App:
         )
         output = SpeakerOutput(v.output_device)
         self.voice = VoicePipeline(self.bus, v, source, output, EngineCache(self.registry))
+        self.assistant.standby_control = self.voice.set_standby  # "режим очікування" (ADR-014)
         return self.voice
 
     async def serve_web(self) -> None:
