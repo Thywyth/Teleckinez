@@ -7,16 +7,20 @@ Roman 14, line spacing 1.5, first-line indent 1.25 cm, justified; chapter
 headings in capitals, centred, each on a new page; figure captions below the
 figure, table captions above the table; listings in Consolas.
 
-    python scripts/build_report.py                  # .odt
-    python scripts/build_report.py --pdf            # + PDF through LibreOffice
+    python scripts/build_report.py                  # .odt + .pdf (LibreOffice)
+    python scripts/build_report.py --no-pdf         # .odt only (fast; TOC without pages)
     python scripts/build_report.py --reference      # regenerate reference.odt only
 
 Captions are written in the Markdown itself ("Рисунок 3.2 – …", "Table: Таблиця 2.1 – …"),
-pandoc numbering is off. Table of contents and page numbers are finished in
-LibreOffice by hand (REPORT_PLAN §4).
+pandoc numbering is off. Page numbers are a header field (not shown on the
+title page, which still counts as page 1). The table of contents is a real
+LibreOffice index (Tools → Update → Update All refreshes it) placed where
+02_toc.md has its placeholder; its page numbers are filled in by a second
+pass: build -> PDF -> find the page of every heading -> build again.
 """
 
 import argparse
+import html
 import re
 import shutil
 import subprocess
@@ -182,6 +186,19 @@ EXTRA = [
            "Unnumbered Heading", "Text_20_body"),
     # left-aligned: long URLs would stretch justified lines
     _style("Reference", "Text_20_body", BODY.replace("justify", "start"), TEXT14, "Reference"),
+    # table of contents: right tab with a dotted leader at the text width (17 cm)
+    '<style:style style:name="Contents_20_1" style:display-name="Contents 1" '
+    'style:family="paragraph" style:parent-style-name="Standard" style:class="index">'
+    '<style:paragraph-properties fo:text-align="start" fo:text-indent="0cm" '
+    'fo:margin-left="0cm" fo:line-height="150%"><style:tab-stops><style:tab-stop '
+    'style:position="17cm" style:type="right" style:leader-style="dotted" '
+    'style:leader-text="."/></style:tab-stops></style:paragraph-properties>'
+    f"<style:text-properties {TEXT14}/></style:style>",
+    '<style:style style:name="Contents_20_2" style:display-name="Contents 2" '
+    'style:family="paragraph" style:parent-style-name="Contents_20_1" style:class="index">'
+    '<style:paragraph-properties fo:margin-left="0.5cm"><style:tab-stops><style:tab-stop '
+    'style:position="16.5cm" style:type="right" style:leader-style="dotted" '
+    'style:leader-text="."/></style:tab-stops></style:paragraph-properties></style:style>',
     _style("Listing", "Preformatted_20_Text",
            'fo:text-align="start" fo:text-indent="0cm" fo:line-height="100%"',
            'style:font-name="Consolas" fo:font-size="10pt"', "Listing"),
@@ -263,11 +280,88 @@ CELL = (
 )
 
 
-def postprocess(path: Path) -> None:
-    """Table borders and full-width tables (pandoc writes borderless cells)."""
+TOC_PLACEHOLDER = "TKZ-TOC-PLACEHOLDER"
+HEADING = re.compile(
+    r'<text:h text:style-name="Heading_20_[12]" text:outline-level="([12])">(.*?)</text:h>', re.S
+)
+
+
+def heading_text(xml: str) -> str:
+    return html.unescape(re.sub(r"<[^>]+>", "", xml)).strip()
+
+
+def toc_xml(content: str, pages: dict[str, int] | None) -> str:
+    """A LibreOffice table-of-contents index, pre-filled with the headings after it."""
+    start = content.find(TOC_PLACEHOLDER)
+    entries = []
+    for m in HEADING.finditer(content, start):
+        title = heading_text(m.group(2))
+        page = str((pages or {}).get(title, "00"))
+        style = f"Contents_20_{m.group(1)}"
+        entries.append(
+            f'<text:p text:style-name="{style}">{html.escape(title)}<text:tab/>{page}</text:p>'
+        )
+    template = "".join(
+        f'<text:table-of-content-entry-template text:outline-level="{lvl}" '
+        f'text:style-name="Contents_20_{lvl}"><text:index-entry-text/>'
+        '<text:index-entry-tab-stop style:type="right" style:leader-char="."/>'
+        "<text:index-entry-page-number/></text:table-of-content-entry-template>"
+        for lvl in (1, 2)
+    )
+    return (
+        '<text:table-of-content text:protected="true" text:name="Зміст">'
+        '<text:table-of-content-source text:outline-level="2" text:use-index-marks="false">'
+        '<text:index-title-template text:style-name="UnnumberedHeading">ЗМІСТ'
+        f"</text:index-title-template>{template}</text:table-of-content-source>"
+        '<text:index-body><text:index-title text:name="Зміст_Head">'
+        '<text:p text:style-name="UnnumberedHeading">ЗМІСТ</text:p></text:index-title>'
+        + "".join(entries)
+        + "</text:index-body></text:table-of-content>"
+    )
+
+
+def toc_titles(odt: Path) -> list[str]:
+    with zipfile.ZipFile(odt) as z:
+        content = z.read("content.xml").decode("utf-8")
+    body = content.split('text:name="Зміст"', 1)[-1].split("</text:table-of-content>", 1)[-1]
+    return [heading_text(m.group(2)) for m in HEADING.finditer(body)]
+
+
+def find_pages(pdf: Path, titles: list[str]) -> dict[str, int]:
+    """Page (1-based, the title page counts) where each heading appears, in order."""
+    import pymupdf
+
+    def norm(text: str) -> str:
+        return re.sub(r"\s+", " ", text).strip().upper()
+
+    doc = pymupdf.open(pdf)
+    texts = [norm(page.get_text()) for page in doc]
+    # the page number is printed above the heading, so "ЗМІСТ" is not at the very start
+    toc_end = next((i for i, t in enumerate(texts) if "ЗМІСТ" in t[:20]), 0)
+    while toc_end + 1 < len(texts) and "....." in texts[toc_end + 1]:  # TOC continues
+        toc_end += 1
+    pages, current = {}, toc_end + 1
+    for title in titles:
+        needle = norm(title)[:40]
+        for i in range(current, len(texts)):
+            if needle in texts[i]:
+                pages[title] = i + 1
+                current = i
+                break
+    return pages
+
+
+def postprocess(path: Path, pages: dict[str, int] | None = None) -> None:
+    """Table borders, full-width tables (pandoc writes borderless cells), the TOC."""
     with zipfile.ZipFile(path) as z:
         files = {n: z.read(n) for n in z.namelist()}
     content = files["content.xml"].decode("utf-8")
+    content = re.sub(
+        rf"<text:p [^>]*>{TOC_PLACEHOLDER}</text:p>",
+        lambda _m: toc_xml(content, pages),
+        content,
+        count=1,
+    )
     content = re.sub(
         r'(<style:style style:name="Table(?:Header)?RowCell" style:family="table-cell">\s*)'
         r'<style:table-cell-properties fo:border="none" />',
@@ -288,7 +382,7 @@ def sources() -> list[Path]:
     return sorted(p for p in REPORT.glob("[0-9][0-9]_*.md"))
 
 
-def build(output: Path = OUTPUT) -> Path:
+def build(output: Path = OUTPUT, pages: dict[str, int] | None = None) -> Path:
     import pypandoc
 
     if not REFERENCE.exists():
@@ -313,7 +407,7 @@ def build(output: Path = OUTPUT) -> Path:
             "--dpi=200",
         ],
     )
-    postprocess(output)
+    postprocess(output, pages)
     return output
 
 
@@ -340,7 +434,7 @@ def to_pdf(odt: Path) -> Path:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--reference", action="store_true", help="regenerate reference.odt only")
-    ap.add_argument("--pdf", action="store_true", help="also convert to PDF with LibreOffice")
+    ap.add_argument("--no-pdf", action="store_true", help="only .odt, TOC pages left as 00")
     args = ap.parse_args()
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -349,9 +443,16 @@ def main() -> None:
         return
     make_reference()
     odt = build()
+    if not args.no_pdf:
+        # pass 2: the same layout (same TOC lines), now with the real page numbers
+        pages = find_pages(to_pdf(odt), toc_titles(odt))
+        odt = build(pages=pages)
+        pdf = to_pdf(odt)
+        missing = [t for t in toc_titles(odt) if t not in pages]
+        if missing:
+            print("TOC: page not found for", missing)
+        print(pdf)
     print(odt)
-    if args.pdf:
-        print(to_pdf(odt))
 
 
 if __name__ == "__main__":
